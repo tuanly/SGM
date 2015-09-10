@@ -66,6 +66,12 @@
     <Compile Include="src\frm\frmSGMRechargeCard.Designer.cs">
       <DependentUpon>frmSGMRechargeCard.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\frm\frmSGMReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMReport.Designer.cs">
+      <DependentUpon>frmSGMReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\frm\frmSGMUpdateAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="src\frm\frmSGMRechargeCard.resx">
       <DependentUpon>frmSGMRechargeCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\frm\frmSGMReport.resx">
+      <DependentUpon>frmSGMReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\frm\frmSGMUpdateAccount.resx">
       <DependentUpon>frmSGMUpdateAccount.cs</DependentUpon>

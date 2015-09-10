@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace SGM_Management.src.frm
+namespace SGM_Management
 {
     public partial class frmSGMReport : Form
     {
