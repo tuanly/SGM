@@ -38,22 +38,22 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnCardDetail = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.rbGas92 = new System.Windows.Forms.RadioButton();
-            this.rbGas95 = new System.Windows.Forms.RadioButton();
-            this.rbGasDO = new System.Windows.Forms.RadioButton();
-            this.txtMoney = new System.Windows.Forms.TextBox();
             this.btnBuy = new System.Windows.Forms.Button();
+            this.txtMoney = new System.Windows.Forms.TextBox();
+            this.rbGasDO = new System.Windows.Forms.RadioButton();
+            this.rbGas95 = new System.Windows.Forms.RadioButton();
+            this.rbGas92 = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtMoneyBuying = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtMoneyAfter = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtGasBuying = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtGasType = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.txtPrice = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtGasType = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtGasBuying = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtMoneyAfter = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtMoneyBuying = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -84,7 +84,7 @@
             this.label1.Padding = new System.Windows.Forms.Padding(20, 5, 0, 0);
             this.label1.Size = new System.Drawing.Size(818, 41);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Giá xăng hiện tại";
+            this.label1.Text = "Giá xăng hiện tại: DO : 25 000, X92: 23 000, X95: 27 000";
             // 
             // groupBox1
             // 
@@ -169,33 +169,24 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Giao dịch:";
             // 
-            // rbGas92
+            // btnBuy
             // 
-            this.rbGas92.AutoSize = true;
-            this.rbGas92.Checked = true;
-            this.rbGas92.Location = new System.Drawing.Point(196, 46);
-            this.rbGas92.Name = "rbGas92";
-            this.rbGas92.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.rbGas92.Size = new System.Drawing.Size(120, 33);
-            this.rbGas92.TabIndex = 0;
-            this.rbGas92.TabStop = true;
-            this.rbGas92.Text = "Xăng 92";
-            this.rbGas92.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.rbGas92.UseVisualStyleBackColor = true;
-            this.rbGas92.CheckedChanged += new System.EventHandler(this.rbGas92_CheckedChanged);
+            this.btnBuy.Location = new System.Drawing.Point(318, 208);
+            this.btnBuy.Name = "btnBuy";
+            this.btnBuy.Size = new System.Drawing.Size(158, 40);
+            this.btnBuy.TabIndex = 4;
+            this.btnBuy.Text = "Mua";
+            this.btnBuy.UseVisualStyleBackColor = true;
             // 
-            // rbGas95
+            // txtMoney
             // 
-            this.rbGas95.AutoSize = true;
-            this.rbGas95.Location = new System.Drawing.Point(332, 46);
-            this.rbGas95.Name = "rbGas95";
-            this.rbGas95.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.rbGas95.Size = new System.Drawing.Size(120, 33);
-            this.rbGas95.TabIndex = 1;
-            this.rbGas95.Text = "Xăng 95";
-            this.rbGas95.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.rbGas95.UseVisualStyleBackColor = true;
-            this.rbGas95.CheckedChanged += new System.EventHandler(this.rbGas95_CheckedChanged);
+            this.txtMoney.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMoney.Location = new System.Drawing.Point(62, 93);
+            this.txtMoney.Name = "txtMoney";
+            this.txtMoney.Size = new System.Drawing.Size(673, 98);
+            this.txtMoney.TabIndex = 3;
+            this.txtMoney.Text = "20. 000";
+            this.txtMoney.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // rbGasDO
             // 
@@ -210,24 +201,33 @@
             this.rbGasDO.UseVisualStyleBackColor = true;
             this.rbGasDO.CheckedChanged += new System.EventHandler(this.rbGasDO_CheckedChanged);
             // 
-            // txtMoney
+            // rbGas95
             // 
-            this.txtMoney.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMoney.Location = new System.Drawing.Point(62, 93);
-            this.txtMoney.Name = "txtMoney";
-            this.txtMoney.Size = new System.Drawing.Size(673, 98);
-            this.txtMoney.TabIndex = 3;
-            this.txtMoney.Text = "20. 000";
-            this.txtMoney.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.rbGas95.AutoSize = true;
+            this.rbGas95.Location = new System.Drawing.Point(332, 46);
+            this.rbGas95.Name = "rbGas95";
+            this.rbGas95.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.rbGas95.Size = new System.Drawing.Size(120, 33);
+            this.rbGas95.TabIndex = 1;
+            this.rbGas95.Text = "Xăng 95";
+            this.rbGas95.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.rbGas95.UseVisualStyleBackColor = true;
+            this.rbGas95.CheckedChanged += new System.EventHandler(this.rbGas95_CheckedChanged);
             // 
-            // btnBuy
+            // rbGas92
             // 
-            this.btnBuy.Location = new System.Drawing.Point(318, 208);
-            this.btnBuy.Name = "btnBuy";
-            this.btnBuy.Size = new System.Drawing.Size(158, 40);
-            this.btnBuy.TabIndex = 4;
-            this.btnBuy.Text = "Mua";
-            this.btnBuy.UseVisualStyleBackColor = true;
+            this.rbGas92.AutoSize = true;
+            this.rbGas92.Checked = true;
+            this.rbGas92.Location = new System.Drawing.Point(196, 46);
+            this.rbGas92.Name = "rbGas92";
+            this.rbGas92.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.rbGas92.Size = new System.Drawing.Size(120, 33);
+            this.rbGas92.TabIndex = 0;
+            this.rbGas92.TabStop = true;
+            this.rbGas92.Text = "Xăng 92";
+            this.rbGas92.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.rbGas92.UseVisualStyleBackColor = true;
+            this.rbGas92.CheckedChanged += new System.EventHandler(this.rbGas92_CheckedChanged);
             // 
             // groupBox3
             // 
@@ -250,75 +250,25 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Thanh toán:";
             // 
-            // label5
+            // txtPrice
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(34, 113);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 29);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Trừ:";
+            this.txtPrice.Enabled = false;
+            this.txtPrice.Location = new System.Drawing.Point(525, 54);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.ReadOnly = true;
+            this.txtPrice.Size = new System.Drawing.Size(243, 35);
+            this.txtPrice.TabIndex = 15;
+            this.txtPrice.Text = "50. 000";
+            this.txtPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // txtMoneyBuying
+            // label4
             // 
-            this.txtMoneyBuying.Enabled = false;
-            this.txtMoneyBuying.Location = new System.Drawing.Point(134, 113);
-            this.txtMoneyBuying.Name = "txtMoneyBuying";
-            this.txtMoneyBuying.ReadOnly = true;
-            this.txtMoneyBuying.Size = new System.Drawing.Size(634, 35);
-            this.txtMoneyBuying.TabIndex = 7;
-            this.txtMoneyBuying.Text = "20. 000";
-            this.txtMoneyBuying.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(34, 171);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(94, 29);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Còn lại:";
-            // 
-            // txtMoneyAfter
-            // 
-            this.txtMoneyAfter.Enabled = false;
-            this.txtMoneyAfter.Location = new System.Drawing.Point(134, 165);
-            this.txtMoneyAfter.Name = "txtMoneyAfter";
-            this.txtMoneyAfter.ReadOnly = true;
-            this.txtMoneyAfter.Size = new System.Drawing.Size(634, 35);
-            this.txtMoneyAfter.TabIndex = 9;
-            this.txtMoneyAfter.Text = "30. 000";
-            this.txtMoneyAfter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(34, 54);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(73, 29);
-            this.label7.TabIndex = 10;
-            this.label7.Text = "Số lít:";
-            // 
-            // txtGasBuying
-            // 
-            this.txtGasBuying.Enabled = false;
-            this.txtGasBuying.Location = new System.Drawing.Point(133, 54);
-            this.txtGasBuying.Name = "txtGasBuying";
-            this.txtGasBuying.ReadOnly = true;
-            this.txtGasBuying.Size = new System.Drawing.Size(109, 35);
-            this.txtGasBuying.TabIndex = 11;
-            this.txtGasBuying.Text = "5.5";
-            this.txtGasBuying.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(252, 54);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(65, 29);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "Loại:";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(455, 56);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 29);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Giá:";
             // 
             // txtGasType
             // 
@@ -332,25 +282,75 @@
             this.txtGasType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtGasType.TextChanged += new System.EventHandler(this.txtGasType_TextChanged);
             // 
-            // label4
+            // label8
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(455, 56);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 29);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Giá:";
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(252, 54);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 29);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "Loại:";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
-            // txtPrice
+            // txtGasBuying
             // 
-            this.txtPrice.Enabled = false;
-            this.txtPrice.Location = new System.Drawing.Point(525, 54);
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.ReadOnly = true;
-            this.txtPrice.Size = new System.Drawing.Size(243, 35);
-            this.txtPrice.TabIndex = 15;
-            this.txtPrice.Text = "50. 000";
-            this.txtPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtGasBuying.Enabled = false;
+            this.txtGasBuying.Location = new System.Drawing.Point(133, 54);
+            this.txtGasBuying.Name = "txtGasBuying";
+            this.txtGasBuying.ReadOnly = true;
+            this.txtGasBuying.Size = new System.Drawing.Size(109, 35);
+            this.txtGasBuying.TabIndex = 11;
+            this.txtGasBuying.Text = "5.5";
+            this.txtGasBuying.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(34, 54);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(73, 29);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "Số lít:";
+            // 
+            // txtMoneyAfter
+            // 
+            this.txtMoneyAfter.Enabled = false;
+            this.txtMoneyAfter.Location = new System.Drawing.Point(134, 165);
+            this.txtMoneyAfter.Name = "txtMoneyAfter";
+            this.txtMoneyAfter.ReadOnly = true;
+            this.txtMoneyAfter.Size = new System.Drawing.Size(634, 35);
+            this.txtMoneyAfter.TabIndex = 9;
+            this.txtMoneyAfter.Text = "30. 000";
+            this.txtMoneyAfter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(34, 171);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(94, 29);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Còn lại:";
+            // 
+            // txtMoneyBuying
+            // 
+            this.txtMoneyBuying.Enabled = false;
+            this.txtMoneyBuying.Location = new System.Drawing.Point(134, 113);
+            this.txtMoneyBuying.Name = "txtMoneyBuying";
+            this.txtMoneyBuying.ReadOnly = true;
+            this.txtMoneyBuying.Size = new System.Drawing.Size(634, 35);
+            this.txtMoneyBuying.TabIndex = 7;
+            this.txtMoneyBuying.Text = "20. 000";
+            this.txtMoneyBuying.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(34, 113);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(56, 29);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Trừ:";
             // 
             // frmSGMSaleGas
             // 

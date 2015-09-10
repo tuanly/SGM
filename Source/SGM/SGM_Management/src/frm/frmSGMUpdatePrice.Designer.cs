@@ -1,4 +1,4 @@
-﻿namespace SGM_Management.src.frm
+﻿namespace SGM_Management
 {
     partial class frmSGMUpdatePrice
     {
@@ -123,7 +123,6 @@
             // 
             // txtGasDONewPrice
             // 
-            this.txtGasDONewPrice.Enabled = false;
             this.txtGasDONewPrice.Location = new System.Drawing.Point(344, 81);
             this.txtGasDONewPrice.Name = "txtGasDONewPrice";
             this.txtGasDONewPrice.Size = new System.Drawing.Size(98, 20);
@@ -132,7 +131,6 @@
             // 
             // txtGas95NewPrice
             // 
-            this.txtGas95NewPrice.Enabled = false;
             this.txtGas95NewPrice.Location = new System.Drawing.Point(215, 81);
             this.txtGas95NewPrice.Name = "txtGas95NewPrice";
             this.txtGas95NewPrice.Size = new System.Drawing.Size(98, 20);
@@ -141,7 +139,6 @@
             // 
             // txtGas92NewPrice
             // 
-            this.txtGas92NewPrice.Enabled = false;
             this.txtGas92NewPrice.Location = new System.Drawing.Point(89, 81);
             this.txtGas92NewPrice.Name = "txtGas92NewPrice";
             this.txtGas92NewPrice.Size = new System.Drawing.Size(98, 20);
@@ -208,6 +205,7 @@
             this.Name = "frmSGMUpdatePrice";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SGM - Cập Nhật Giá Xăng";
+            this.Load += new System.EventHandler(this.frmSGMUpdatePrice_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

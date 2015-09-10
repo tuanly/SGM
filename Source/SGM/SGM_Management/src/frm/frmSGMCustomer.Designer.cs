@@ -32,6 +32,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgvCusList = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnBuyCard = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.txtCusAddress = new System.Windows.Forms.TextBox();
             this.txtCusPhone = new System.Windows.Forms.TextBox();
@@ -55,7 +56,10 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.dgvCardList = new System.Windows.Forms.DataGridView();
-            this.btnBuyCard = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCusList)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -63,10 +67,12 @@
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardList)).BeginInit();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.groupBox6);
             this.groupBox1.Controls.Add(this.dgvCusList);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
@@ -112,6 +118,16 @@
             this.groupBox2.Text = "Thông tin Khách Hàng:";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
+            // btnBuyCard
+            // 
+            this.btnBuyCard.Location = new System.Drawing.Point(254, 221);
+            this.btnBuyCard.Name = "btnBuyCard";
+            this.btnBuyCard.Size = new System.Drawing.Size(79, 23);
+            this.btnBuyCard.TabIndex = 14;
+            this.btnBuyCard.Text = "Mua Thẻ";
+            this.btnBuyCard.UseVisualStyleBackColor = true;
+            this.btnBuyCard.Click += new System.EventHandler(this.btnBuyCard_Click);
+            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(82, 170);
@@ -122,7 +138,7 @@
             // 
             // txtCusAddress
             // 
-            this.txtCusAddress.Location = new System.Drawing.Point(82, 134);
+            this.txtCusAddress.Location = new System.Drawing.Point(82, 133);
             this.txtCusAddress.Name = "txtCusAddress";
             this.txtCusAddress.Size = new System.Drawing.Size(471, 20);
             this.txtCusAddress.TabIndex = 12;
@@ -320,15 +336,43 @@
             this.dgvCardList.TabIndex = 0;
             this.dgvCardList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCardList_CellContentClick);
             // 
-            // btnBuyCard
+            // groupBox6
             // 
-            this.btnBuyCard.Location = new System.Drawing.Point(254, 221);
-            this.btnBuyCard.Name = "btnBuyCard";
-            this.btnBuyCard.Size = new System.Drawing.Size(79, 23);
-            this.btnBuyCard.TabIndex = 14;
-            this.btnBuyCard.Text = "Mua Thẻ";
-            this.btnBuyCard.UseVisualStyleBackColor = true;
-            this.btnBuyCard.Click += new System.EventHandler(this.btnBuyCard_Click);
+            this.groupBox6.Controls.Add(this.btnSearch);
+            this.groupBox6.Controls.Add(this.txtSearch);
+            this.groupBox6.Controls.Add(this.label8);
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox6.Location = new System.Drawing.Point(3, 16);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(281, 55);
+            this.groupBox6.TabIndex = 1;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Tìm kiếm:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(17, 25);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Tên/Mã KH:";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(84, 22);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(141, 20);
+            this.txtSearch.TabIndex = 2;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(231, 20);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(44, 23);
+            this.btnSearch.TabIndex = 3;
+            this.btnSearch.Text = "Tìm";
+            this.btnSearch.UseVisualStyleBackColor = true;
             // 
             // frmSGMCustomer
             // 
@@ -351,6 +395,8 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardList)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -384,5 +430,9 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnBuyCard;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label label8;
     }
 }

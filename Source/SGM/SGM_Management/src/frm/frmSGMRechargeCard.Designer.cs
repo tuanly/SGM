@@ -30,30 +30,22 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMRechargeCard));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtRechargeNote = new System.Windows.Forms.TextBox();
+            this.txtRechargeGasPrice = new System.Windows.Forms.TextBox();
+            this.txtRechargeMoney = new System.Windows.Forms.TextBox();
+            this.dtpRechargeDate = new System.Windows.Forms.DateTimePicker();
+            this.txtCardMoney = new System.Windows.Forms.TextBox();
+            this.txtCardID = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cbCardLocked = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtCardID = new System.Windows.Forms.TextBox();
-            this.txtCardMoney = new System.Windows.Forms.TextBox();
-            this.dtpRechargeDate = new System.Windows.Forms.DateTimePicker();
-            this.txtRechargeMoney = new System.Windows.Forms.TextBox();
-            this.txtRechargeGasPrice = new System.Windows.Forms.TextBox();
-            this.txtRechargeNote = new System.Windows.Forms.TextBox();
-            this.dgvCardList = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCardList)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -80,14 +72,78 @@
             this.groupBox1.Text = "Thông tin thẻ:";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // txtRechargeNote
+            // 
+            this.txtRechargeNote.Location = new System.Drawing.Point(82, 156);
+            this.txtRechargeNote.Multiline = true;
+            this.txtRechargeNote.Name = "txtRechargeNote";
+            this.txtRechargeNote.Size = new System.Drawing.Size(496, 49);
+            this.txtRechargeNote.TabIndex = 13;
+            // 
+            // txtRechargeGasPrice
+            // 
+            this.txtRechargeGasPrice.Enabled = false;
+            this.txtRechargeGasPrice.Location = new System.Drawing.Point(125, 119);
+            this.txtRechargeGasPrice.Name = "txtRechargeGasPrice";
+            this.txtRechargeGasPrice.Size = new System.Drawing.Size(453, 20);
+            this.txtRechargeGasPrice.TabIndex = 12;
+            // 
+            // txtRechargeMoney
+            // 
+            this.txtRechargeMoney.Location = new System.Drawing.Point(76, 90);
+            this.txtRechargeMoney.Name = "txtRechargeMoney";
+            this.txtRechargeMoney.Size = new System.Drawing.Size(133, 20);
+            this.txtRechargeMoney.TabIndex = 11;
+            // 
+            // dtpRechargeDate
+            // 
+            this.dtpRechargeDate.CustomFormat = "dd/MM/yyyy";
+            this.dtpRechargeDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpRechargeDate.Location = new System.Drawing.Point(314, 56);
+            this.dtpRechargeDate.Name = "dtpRechargeDate";
+            this.dtpRechargeDate.Size = new System.Drawing.Size(101, 20);
+            this.dtpRechargeDate.TabIndex = 10;
+            // 
+            // txtCardMoney
+            // 
+            this.txtCardMoney.Location = new System.Drawing.Point(76, 56);
+            this.txtCardMoney.Name = "txtCardMoney";
+            this.txtCardMoney.Size = new System.Drawing.Size(133, 20);
+            this.txtCardMoney.TabIndex = 9;
+            // 
+            // txtCardID
+            // 
+            this.txtCardID.Location = new System.Drawing.Point(76, 23);
+            this.txtCardID.Name = "txtCardID";
+            this.txtCardID.Size = new System.Drawing.Size(133, 20);
+            this.txtCardID.TabIndex = 8;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(28, 172);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(48, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Ghi Chú:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(27, 122);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(92, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Giá xăng khi mua:";
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(227, 59);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(58, 13);
+            this.label5.Size = new System.Drawing.Size(81, 13);
             this.label5.TabIndex = 5;
-            this.label5.Text = "Ngày mua:";
+            this.label5.Text = "Ngày mua/nạp:";
             // 
             // label4
             // 
@@ -135,154 +191,30 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Mã thẻ:";
             // 
-            // label6
+            // button1
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(27, 122);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(92, 13);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Giá xăng khi mua:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(28, 172);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(48, 13);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Ghi Chú:";
-            // 
-            // txtCardID
-            // 
-            this.txtCardID.Location = new System.Drawing.Point(76, 23);
-            this.txtCardID.Name = "txtCardID";
-            this.txtCardID.Size = new System.Drawing.Size(133, 20);
-            this.txtCardID.TabIndex = 8;
-            // 
-            // txtCardMoney
-            // 
-            this.txtCardMoney.Location = new System.Drawing.Point(76, 56);
-            this.txtCardMoney.Name = "txtCardMoney";
-            this.txtCardMoney.Size = new System.Drawing.Size(133, 20);
-            this.txtCardMoney.TabIndex = 9;
-            // 
-            // dtpRechargeDate
-            // 
-            this.dtpRechargeDate.CustomFormat = "dd/MM/yyyy";
-            this.dtpRechargeDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpRechargeDate.Location = new System.Drawing.Point(288, 56);
-            this.dtpRechargeDate.Name = "dtpRechargeDate";
-            this.dtpRechargeDate.Size = new System.Drawing.Size(101, 20);
-            this.dtpRechargeDate.TabIndex = 10;
-            // 
-            // txtRechargeMoney
-            // 
-            this.txtRechargeMoney.Location = new System.Drawing.Point(76, 90);
-            this.txtRechargeMoney.Name = "txtRechargeMoney";
-            this.txtRechargeMoney.Size = new System.Drawing.Size(133, 20);
-            this.txtRechargeMoney.TabIndex = 11;
-            // 
-            // txtRechargeGasPrice
-            // 
-            this.txtRechargeGasPrice.Enabled = false;
-            this.txtRechargeGasPrice.Location = new System.Drawing.Point(125, 119);
-            this.txtRechargeGasPrice.Name = "txtRechargeGasPrice";
-            this.txtRechargeGasPrice.Size = new System.Drawing.Size(453, 20);
-            this.txtRechargeGasPrice.TabIndex = 12;
-            // 
-            // txtRechargeNote
-            // 
-            this.txtRechargeNote.Location = new System.Drawing.Point(82, 156);
-            this.txtRechargeNote.Multiline = true;
-            this.txtRechargeNote.Name = "txtRechargeNote";
-            this.txtRechargeNote.Size = new System.Drawing.Size(496, 49);
-            this.txtRechargeNote.TabIndex = 13;
-            // 
-            // dgvCardList
-            // 
-            this.dgvCardList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCardList.Location = new System.Drawing.Point(7, 231);
-            this.dgvCardList.Name = "dgvCardList";
-            this.dgvCardList.Size = new System.Drawing.Size(595, 150);
-            this.dgvCardList.TabIndex = 1;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnEdit);
-            this.groupBox2.Controls.Add(this.btnCancel);
-            this.groupBox2.Controls.Add(this.btnAdd);
-            this.groupBox2.Controls.Add(this.btnDelete);
-            this.groupBox2.Location = new System.Drawing.Point(179, 387);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(423, 55);
-            this.groupBox2.TabIndex = 9;
-            this.groupBox2.TabStop = false;
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Location = new System.Drawing.Point(121, 19);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnEdit.TabIndex = 7;
-            this.btnEdit.Text = "Sửa";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(333, 19);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 9;
-            this.btnCancel.Text = "Bỏ Qua";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(16, 19);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 6;
-            this.btnAdd.Text = "Thêm";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(232, 19);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 8;
-            this.btnDelete.Text = "Xóa";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel2.BackgroundImage")));
-            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panel2.Location = new System.Drawing.Point(7, 393);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(166, 49);
-            this.panel2.TabIndex = 10;
+            this.button1.Location = new System.Drawing.Point(267, 231);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "Cập nhật";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // frmSGMRechargeCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(608, 448);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.dgvCardList);
+            this.ClientSize = new System.Drawing.Size(608, 267);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
             this.Name = "frmSGMRechargeCard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "SGM - Mua Thẻ";
+            this.Text = "SGM - Mua/Nạp Thẻ";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCardList)).EndInit();
-            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -304,12 +236,6 @@
         private System.Windows.Forms.TextBox txtRechargeMoney;
         private System.Windows.Forms.TextBox txtRechargeNote;
         private System.Windows.Forms.TextBox txtRechargeGasPrice;
-        private System.Windows.Forms.DataGridView dgvCardList;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button button1;
     }
 }
