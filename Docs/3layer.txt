@@ -1,0 +1,15 @@
+C?u trúc mô hình 3 class:
++ GUI ( presentation layer): nh?n d? li?u ngu?i dùng, ki?m tra tính h?p l?, chuy?n cho BLL
+				nh?n d? li?u t? BLL, hi?n th? cho ngu?i dùng
++ BLL (bussiness logic layer): nh?n và g?i d? li?u t? GUI, chuy?n d?i d? li?u sang DTO d? g?i sang DAL truy xu?t db.
++ DAL (data access layer): class data access select,insert,update data transfer vào database
+DTO (data transfer object) class data transfer ~ table
+
+
+Service bán xang:
+- Server : 
+ + Process1: get mã th? -> check to db to validate -> return result to client (if th? h?p l? -> tr? v? thông tin th?, else tr? v? thông báo ko h?p l?).
+ + Process2: get thông tin c?p nh?t th? t? client -> c?p nh?t vào csdl -> tr? k?t qu? c?p nh?t v? cho client.
+- Client : 
+ + Process1: get mã th? -> send to server to validate -> waiting result from server -> display result for user.
+ + Process2: get s? ti?n c?n mua -> ki?m tra tính h?p l? (s? ti?n <= s? ti?n trong th?) -> if ok -> send to server d? c?p nh?t th? -> waiting result from server -> display result.
