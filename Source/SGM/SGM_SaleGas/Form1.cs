@@ -86,7 +86,7 @@ namespace SGM_SaleGas
         private void ShowDB()
         {
             DataSet dsReturn = new DataSet();
-            dsReturn = service.GetSampleDataDT();
+            dsReturn = service.ViewDB("SALE_GAS");
             DataTable dt = new DataTable();
             dt = dsReturn.Tables[0];
             dataGridView1.DataSource = dt;
