@@ -139,18 +139,23 @@ public class Service : System.Web.Services.WebService
       // getting connection string
       string conStr = connectionStr;
 
-      //string queryText = @"SELECT ISNULL(GASSTATION_MACADDRESS,@GASSTATION_MACADDRESS) FROM GAS_STATION WHERE GASSTATION_ID = @GASSTATION_ID AND GASSTATION_MACADDRESS= @GASSTATION_MACADDRESS";
-string queryText = @"SELECT GASSTATION_ID FROM GAS_STATION WHERE GASSTATION_ID = @GASSTATION_ID";
+	  string queryText1 = @"update GAS_STATION set GASSTATION_MACADDRESS = COALESCE(GASSTATION_MACADDRESS,@GASSTATION_MACADDRESS) where GASSTATION_ID = @GASSTATION_ID";
+	  string queryText = @"SELECT GASSTATION_ID FROM GAS_STATION WHERE GASSTATION_ID = @GASSTATION_ID AND GASSTATION_MACADDRESS= @GASSTATION_MACADDRESS";
 
         DataTable dt = new DataTable();
         SqlDataReader dr = null;
         using(SqlConnection cn = new SqlConnection(conStr))
+		using(SqlCommand cmd1 = new SqlCommand(queryText1, cn))
         using(SqlCommand cmd = new SqlCommand(queryText, cn))
         {
             cn.Open();  
+			
+			cmd1.Parameters.AddWithValue("@GASSTATION_MACADDRESS", GASSTATION_MACADDRESS);
+			cmd1.Parameters.AddWithValue("@GASSTATION_ID", GASSTATION_ID);
+			cmd1.ExecuteNonQuery();
+			
             cmd.Parameters.AddWithValue("@GASSTATION_ID", GASSTATION_ID);
-            //cmd.Parameters.AddWithValue("@GASSTATION_MACADDRESS", GASSTATION_MACADDRESS);
-
+            cmd.Parameters.AddWithValue("@GASSTATION_MACADDRESS", GASSTATION_MACADDRESS);
             dr = cmd.ExecuteReader();
             dt.Load(dr); 
             cn.Close();
