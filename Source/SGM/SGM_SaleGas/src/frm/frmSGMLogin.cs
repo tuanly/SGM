@@ -62,7 +62,7 @@ namespace SGM_SaleGas
                 this.Close();
             }
             else
-                MessageBox.Show("Đăng nhập thất bại : " + dataResponse.ResponseData);
+                MessageBox.Show("Đăng nhập thất bại : " + dataResponse.ResponseErrorMsg);
         }
 
         private bool ValidateLoginCode()

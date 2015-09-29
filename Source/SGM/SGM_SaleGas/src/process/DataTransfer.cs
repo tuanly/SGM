@@ -15,12 +15,15 @@ namespace SGM_SaleGas
         public static int RESPONSE_CODE_FAIL = 1;
 
         private int m_stResponseCode;
-        private string m_stResponseData;
+        private string m_stResponseErrorMsg;
+        private string m_stResponseDataString;
+        
+
 
         public DataTransfer()
         {
             m_stResponseCode = RESPONSE_CODE_NONE;
-            m_stResponseData = "";
+            m_stResponseErrorMsg = "";
         }
         public DataTransfer(string json)
         {
@@ -32,10 +35,16 @@ namespace SGM_SaleGas
             set { m_stResponseCode = value; }
         }
 
-        public string ResponseData
+        public string ResponseErrorMsg
         {
-            get { return m_stResponseData; }
-            set { m_stResponseData = value; }
+            get { return m_stResponseErrorMsg; }
+            set { m_stResponseErrorMsg = value; }
+        }
+
+        public string ResponseDataString
+        {
+            get { return m_stResponseDataString; }
+            set { m_stResponseDataString = value; }
         }
 
         public string createJSON()
@@ -56,7 +65,7 @@ namespace SGM_SaleGas
             using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString)))
             {
                 var data = (DataTransfer)serializer.ReadObject(stream);
-                m_stResponseData = data.ResponseData;
+                m_stResponseErrorMsg = data.ResponseErrorMsg;
                 m_stResponseCode = data.ResponseCode;
             }
         }
