@@ -9,36 +9,87 @@
 //------------------------------------------------------------------------------
 
 namespace SGM_SaleGas.ServiceReference1 {
-    using System.Data;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.ServiceSoap")]
     public interface ServiceSoap {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Add", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        int Add(int x, int y);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Subtract", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        int Subtract(int x, int y);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/Multiply", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        int Multiply(int x, int y);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/WB_HR_InsertMethod", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        void WB_HR_InsertMethod(string id, bool state, int money, int rechargeid);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ViewDB", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.Data.DataSet ViewDB(string tableName);
-        
+        // CODEGEN: Generating message contract since element name GASSTATION_ID from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ValidateGasStationLoginCode", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        bool ValidateGasStationLoginCode(string GASSTATION_ID, string GASSTATION_MACADDRESS);
+        SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeResponse ValidateGasStationLoginCode(SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ValidateGasStationLoginCodeRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ValidateGasStationLoginCode", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeRequestBody Body;
+        
+        public ValidateGasStationLoginCodeRequest() {
+        }
+        
+        public ValidateGasStationLoginCodeRequest(SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ValidateGasStationLoginCodeRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string GASSTATION_ID;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string GASSTATION_MACADDRESS;
+        
+        public ValidateGasStationLoginCodeRequestBody() {
+        }
+        
+        public ValidateGasStationLoginCodeRequestBody(string GASSTATION_ID, string GASSTATION_MACADDRESS) {
+            this.GASSTATION_ID = GASSTATION_ID;
+            this.GASSTATION_MACADDRESS = GASSTATION_MACADDRESS;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ValidateGasStationLoginCodeResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ValidateGasStationLoginCodeResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeResponseBody Body;
+        
+        public ValidateGasStationLoginCodeResponse() {
+        }
+        
+        public ValidateGasStationLoginCodeResponse(SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ValidateGasStationLoginCodeResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string ValidateGasStationLoginCodeResult;
+        
+        public ValidateGasStationLoginCodeResponseBody() {
+        }
+        
+        public ValidateGasStationLoginCodeResponseBody(string ValidateGasStationLoginCodeResult) {
+            this.ValidateGasStationLoginCodeResult = ValidateGasStationLoginCodeResult;
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -68,28 +119,18 @@ namespace SGM_SaleGas.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public int Add(int x, int y) {
-            return base.Channel.Add(x, y);
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeResponse SGM_SaleGas.ServiceReference1.ServiceSoap.ValidateGasStationLoginCode(SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeRequest request) {
+            return base.Channel.ValidateGasStationLoginCode(request);
         }
         
-        public int Subtract(int x, int y) {
-            return base.Channel.Subtract(x, y);
-        }
-        
-        public int Multiply(int x, int y) {
-            return base.Channel.Multiply(x, y);
-        }
-        
-        public void WB_HR_InsertMethod(string id, bool state, int money, int rechargeid) {
-            base.Channel.WB_HR_InsertMethod(id, state, money, rechargeid);
-        }
-        
-        public System.Data.DataSet ViewDB(string tableName) {
-            return base.Channel.ViewDB(tableName);
-        }
-        
-        public bool ValidateGasStationLoginCode(string GASSTATION_ID, string GASSTATION_MACADDRESS) {
-            return base.Channel.ValidateGasStationLoginCode(GASSTATION_ID, GASSTATION_MACADDRESS);
+        public string ValidateGasStationLoginCode(string GASSTATION_ID, string GASSTATION_MACADDRESS) {
+            SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeRequest inValue = new SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeRequest();
+            inValue.Body = new SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeRequestBody();
+            inValue.Body.GASSTATION_ID = GASSTATION_ID;
+            inValue.Body.GASSTATION_MACADDRESS = GASSTATION_MACADDRESS;
+            SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeResponse retVal = ((SGM_SaleGas.ServiceReference1.ServiceSoap)(this)).ValidateGasStationLoginCode(inValue);
+            return retVal.Body.ValidateGasStationLoginCodeResult;
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Net.NetworkInformation;
 using System.Resources;
 
+
 namespace SGM_SaleGas
 {
     public partial class frmSGMLogin : Form
@@ -31,7 +32,7 @@ namespace SGM_SaleGas
             // validate user input
             if (ValidateLoginCode() == false)
                 return;
-
+            
             // request server
 
             /*******
@@ -52,15 +53,16 @@ namespace SGM_SaleGas
             string GASSTATION_ID = txtLoginCode.Text;
             string GASSTATION_MACADDRESS = GetMacAddress();
 
-            bool loginCheck = service.ValidateGasStationLoginCode(GASSTATION_ID, GASSTATION_MACADDRESS); // DTO ??
-            if (loginCheck == true)
+            String stResponse = service.ValidateGasStationLoginCode(GASSTATION_ID, GASSTATION_MACADDRESS); // DTO ??
+            DataTransfer dataResponse = new DataTransfer(stResponse);          
+            if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
                 this.Hide();
                 new frmSGMSaleGas().ShowDialog();
                 this.Close();
             }
             else
-                MessageBox.Show("Đăng nhập thất bại !");
+                MessageBox.Show("Đăng nhập thất bại : " + dataResponse.ResponseData);
         }
 
         private bool ValidateLoginCode()
