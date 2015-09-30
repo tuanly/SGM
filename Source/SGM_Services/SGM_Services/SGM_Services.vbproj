@@ -91,6 +91,7 @@
     <Content Include="Account\ChangePasswordSuccess.aspx" />
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
+    <Content Include="SGM_SRC\BLL\DataTransfer.cs" />
     <Content Include="SGM_SRC\DAL\CardDAL.cs" />
     <Content Include="SGM_SRC\DAL\CustomerDAL.cs" />
     <Content Include="SGM_SRC\DAL\DBConnetionDAL.cs" />
