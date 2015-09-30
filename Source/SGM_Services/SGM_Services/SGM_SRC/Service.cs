@@ -6,7 +6,7 @@ using System.Collections.Generic;
 //using System.Web.Configuration;
 using System.Data.SqlClient;
 using System.Data;
-using SGM.ServicesCore.DataTransfer;
+using SGM.ServicesCore.BLL;
 
 
 

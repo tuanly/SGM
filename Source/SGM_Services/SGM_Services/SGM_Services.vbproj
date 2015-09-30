@@ -98,6 +98,7 @@
     <Content Include="SGM_SRC\DAL\RechargeDAL.cs" />
     <Content Include="SGM_SRC\DAL\SaleGasDAL.cs" />
     <Content Include="SGM_SRC\DAL\SystemAdminDAL.cs" />
+    <Content Include="SGM_SRC\DataTransfer.cs" />
     <Content Include="SGM_SRC\DTO\CardDTO.cs" />
     <Content Include="SGM_SRC\DTO\CustomerDTO.cs" />
     <Content Include="SGM_SRC\DTO\GasStationDTO.cs" />

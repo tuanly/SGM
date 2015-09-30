@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace SGM.ServicesCore.DTO
 {
-    class CardDTO
+    public class CardDTO
     {
         private string m_stCardID; //private key
         private bool m_bCardState; //false: lock, true: unlock

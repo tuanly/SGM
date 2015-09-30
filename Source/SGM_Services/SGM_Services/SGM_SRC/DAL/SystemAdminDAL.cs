@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
@@ -8,7 +7,7 @@ using SGM.ServicesCore.DTO;
 
 namespace SGM.ServicesCore.DAL
 {
-    class SystemAdminDAL
+    public class SystemAdminDAL
     {
         private DBConnetionDAL m_dbConnection;
 

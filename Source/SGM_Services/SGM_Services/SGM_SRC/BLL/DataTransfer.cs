@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Runtime.Serialization.Json;
 using System.IO;
 
 
-namespace SGM.ServicesCore
+namespace SGM.ServicesCore.BLL
 {
-    class DataTransfer
+    public class DataTransfer
     {
         public static int RESPONSE_CODE_NONE = -1;
         public static int RESPONSE_CODE_SUCCESS = 0;
@@ -49,9 +48,9 @@ namespace SGM.ServicesCore
 
         public string createJSON()
         {
-            var serializer = new DataContractJsonSerializer(typeof(DataTransfer));
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DataTransfer));
             string jsonString = "";
-            using (var stream = new MemoryStream())
+            using (MemoryStream stream = new MemoryStream())
             {
                 serializer.WriteObject(stream, this);
                 jsonString = Encoding.UTF8.GetString(stream.ToArray());
@@ -61,10 +60,10 @@ namespace SGM.ServicesCore
 
         public void parseJSON(String jsonString)
         {
-            var serializer = new DataContractJsonSerializer(typeof(DataTransfer));
-            using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString)))
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DataTransfer));
+            using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString)))
             {
-                var data = (DataTransfer)serializer.ReadObject(stream);
+                DataTransfer data = (DataTransfer)serializer.ReadObject(stream);
                 m_stResponseErrorMsg = data.ResponseErrorMsg;
                 m_stResponseCode = data.ResponseCode;
             }

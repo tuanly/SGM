@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace SGM.ServicesCore.DTO
 {
-    class SystemAdminDTO
+    public class SystemAdminDTO
     {
         private string m_stSysAdmin;    //admin account, primate key
         private string m_stSysPwd;      //admin password

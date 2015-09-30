@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace SGM.ServicesCore.DTO
 {
-    class SaleGasDTO
+    public class SaleGasDTO
     {
         public static string GAS_TYPE_95 = "95";
         public static string GAS_TYPE_92 = "92";

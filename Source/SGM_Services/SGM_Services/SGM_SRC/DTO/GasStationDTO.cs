@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace SGM.ServicesCore.DTO
 {
-    class GasStationDTO
+    public class GasStationDTO
     {
         private string m_stGasStationID;        //primate key
         private string m_stGasStationName;

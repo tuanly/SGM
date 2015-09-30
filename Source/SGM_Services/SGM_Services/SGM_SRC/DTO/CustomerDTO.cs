@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace SGM.ServicesCore.DTO
 {
-    class CustomerDTO
+    public class CustomerDTO
     {
         private string m_iCustomerID;      
         private string m_stCustomerName;

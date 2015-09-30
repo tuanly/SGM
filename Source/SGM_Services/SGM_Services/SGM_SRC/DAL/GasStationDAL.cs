@@ -8,7 +8,7 @@ using SGM.ServicesCore.DTO;
 
 namespace SGM.ServicesCore.DAL
 {
-    class GasStationDAL
+    public class GasStationDAL
     {
         private DBConnetionDAL m_dbConnection;
 

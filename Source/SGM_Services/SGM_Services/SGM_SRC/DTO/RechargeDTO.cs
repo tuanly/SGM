@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace SGM.ServicesCore.DTO
 {
-    class RechargeDTO
+    public class RechargeDTO
     {
         private int m_iRechargeID;  //primey key
         private DateTime m_dRechargeDate;       //sale date
