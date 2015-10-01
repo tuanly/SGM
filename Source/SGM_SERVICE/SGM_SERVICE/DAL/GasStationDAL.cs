@@ -103,12 +103,18 @@ namespace SGM.ServicesCore.DAL
                 DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
                 if (tblResult.Rows.Count > 0)
                 {
-                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;                    
-                    string result = tblResult.Rows[0].ToString();
+                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+                    DataRow dr = tblResult.Rows[0];
+                    string result = dr["RESULT"].ToString();                   
                     if (result.Equals("NULL")) //insert mac address
                     {
+                        SqlParameter[] sqlParametersUpdate = new SqlParameter[2];
+                        sqlParametersUpdate[0] = new SqlParameter("@GASSTATION_MACADDRESS", SqlDbType.NVarChar);
+                        sqlParametersUpdate[0].Value = Convert.ToString(stGasStationMacAddress);
+                        sqlParametersUpdate[1] = new SqlParameter("@GASSTATION_ID", SqlDbType.NVarChar);
+                        sqlParametersUpdate[1].Value = Convert.ToString(stGasStationID);
                         query = string.Format("UPDATE GAS_STATION SET GASSTATION_MACADDRESS = @GASSTATION_MACADDRESS WHERE GASSTATION_ID = @GASSTATION_ID");
-                        if (!m_dbConnection.ExecuteUpdateQuery(query, sqlParameters))
+                        if (!m_dbConnection.ExecuteUpdateQuery(query, sqlParametersUpdate))
                         {
                             dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
                             dataResult.ResponseErrorMsg = Text.GAS_STATION_LOGON_UPDATE_MACADR_ERR;
@@ -125,7 +131,7 @@ namespace SGM.ServicesCore.DAL
             {
                 dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
                 dataResult.ResponseErrorMsg = Text.GAS_STATION_LOGON_ERR;
-                dataResult.ResponseErrorMsgDetail = ex.StackTrace;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
             }
             
             

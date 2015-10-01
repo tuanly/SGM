@@ -74,6 +74,8 @@ namespace SGM.ServicesCore.BLL
             {
                 DataTransfer data = (DataTransfer)serializer.ReadObject(stream);
                 m_stResponseErrorMsg = data.ResponseErrorMsg;
+                m_stResponseDataString = data.ResponseDataString;
+                m_stResponseErrorMsgDetail = data.ResponseErrorMsgDetail;
                 m_stResponseCode = data.ResponseCode;
             }
         }
