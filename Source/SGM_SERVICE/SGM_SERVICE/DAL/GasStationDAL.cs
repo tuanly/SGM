@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using SGM.ServicesCore.DTO;
+using SGM.ServicesCore.BLL;
 
 namespace SGM.ServicesCore.DAL
 {
@@ -78,7 +78,7 @@ namespace SGM.ServicesCore.DAL
             return result;
         }
 
-        public bool DeleteCard(string stGasStationID)
+        public bool DeleteGasStation(string stGasStationID)
         {
             bool result = true;
             string query = string.Format("DELETE FROM GASSTATION_NAME WHERE GASSTATION_ID = @GASSTATION_ID");
@@ -87,6 +87,49 @@ namespace SGM.ServicesCore.DAL
             sqlParameters[0].Value = Convert.ToString(stGasStationID);            
             result = m_dbConnection.ExecuteDeleteQuery(query, sqlParameters);
             return result;
+        }
+
+        public DataTransfer ValidateGasStationLogin(string stGasStationID, string stGasStationMacAddress)
+        {
+            DataTransfer dataResult = new DataTransfer();
+            try
+            {
+                string query = string.Format("SELECT ISNULL(GASSTATION_MACADDRESS,'NULL') AS RESULT FROM GAS_STATION WHERE (GASSTATION_MACADDRESS IS NULL OR GASSTATION_MACADDRESS = @GASSTATION_MACADDRESS) AND GASSTATION_ID = @GASSTATION_ID");
+                SqlParameter[] sqlParameters = new SqlParameter[2];               
+                sqlParameters[0] = new SqlParameter("@GASSTATION_MACADDRESS", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(stGasStationMacAddress);
+                sqlParameters[1] = new SqlParameter("@GASSTATION_ID", SqlDbType.NVarChar);
+                sqlParameters[1].Value = Convert.ToString(stGasStationID);
+                DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
+                if (tblResult.Rows.Count > 0)
+                {
+                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;                    
+                    string result = tblResult.Rows[0].ToString();
+                    if (result.Equals("NULL")) //insert mac address
+                    {
+                        query = string.Format("UPDATE GAS_STATION SET GASSTATION_MACADDRESS = @GASSTATION_MACADDRESS WHERE GASSTATION_ID = @GASSTATION_ID");
+                        if (!m_dbConnection.ExecuteUpdateQuery(query, sqlParameters))
+                        {
+                            dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                            dataResult.ResponseErrorMsg = Text.GAS_STATION_LOGON_UPDATE_MACADR_ERR;
+                        }
+                    }                    
+                }
+                else
+                {
+                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                    dataResult.ResponseErrorMsg = Text.GAS_STATION_LOGON_ID_INVALID;
+                }
+            }
+            catch (Exception ex)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = Text.GAS_STATION_LOGON_ERR;
+                dataResult.ResponseErrorMsgDetail = ex.StackTrace;
+            }
+            
+            
+            return dataResult;
         }
     }
 }

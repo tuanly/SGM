@@ -15,6 +15,7 @@ namespace SGM.ServicesCore.BLL
 
         private int m_stResponseCode;
         private string m_stResponseErrorMsg;
+        private string m_stResponseErrorMsgDetail;
         private string m_stResponseDataString;
 
 
@@ -23,6 +24,8 @@ namespace SGM.ServicesCore.BLL
         {
             m_stResponseCode = RESPONSE_CODE_NONE;
             m_stResponseErrorMsg = "";
+            m_stResponseErrorMsgDetail = "";
+            m_stResponseDataString = "";
         }
         public DataTransfer(string json)
         {
@@ -38,6 +41,12 @@ namespace SGM.ServicesCore.BLL
         {
             get { return m_stResponseErrorMsg; }
             set { m_stResponseErrorMsg = value; }
+        }
+
+        public string ResponseErrorMsgDetail
+        {
+            get { return m_stResponseErrorMsgDetail; }
+            set { m_stResponseErrorMsgDetail = value; }
         }
 
         public string ResponseDataString

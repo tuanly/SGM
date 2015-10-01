@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\DataTransfer.cs" />
+    <Compile Include="BLL\Text.cs" />
     <Compile Include="DAL\CardDAL.cs" />
     <Compile Include="DAL\CustomerDAL.cs" />
     <Compile Include="DAL\DBConnetionDAL.cs" />
