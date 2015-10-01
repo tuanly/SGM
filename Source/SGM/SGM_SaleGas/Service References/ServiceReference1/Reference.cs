@@ -15,24 +15,24 @@ namespace SGM_SaleGas.ServiceReference1 {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.ServiceSoap")]
     public interface ServiceSoap {
         
-        // CODEGEN: Generating message contract since element name GASSTATION_ID from namespace http://tempuri.org/ is not marked nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ValidateGasStationLoginCode", ReplyAction="*")]
-        SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeResponse ValidateGasStationLoginCode(SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeRequest request);
+        // CODEGEN: Generating message contract since element name stGasStationID from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ValidateGasStationLogin", ReplyAction="*")]
+        SGM_SaleGas.ServiceReference1.ValidateGasStationLoginResponse ValidateGasStationLogin(SGM_SaleGas.ServiceReference1.ValidateGasStationLoginRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class ValidateGasStationLoginCodeRequest {
+    public partial class ValidateGasStationLoginRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ValidateGasStationLoginCode", Namespace="http://tempuri.org/", Order=0)]
-        public SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ValidateGasStationLogin", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.ServiceReference1.ValidateGasStationLoginRequestBody Body;
         
-        public ValidateGasStationLoginCodeRequest() {
+        public ValidateGasStationLoginRequest() {
         }
         
-        public ValidateGasStationLoginCodeRequest(SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeRequestBody Body) {
+        public ValidateGasStationLoginRequest(SGM_SaleGas.ServiceReference1.ValidateGasStationLoginRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -41,20 +41,20 @@ namespace SGM_SaleGas.ServiceReference1 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class ValidateGasStationLoginCodeRequestBody {
+    public partial class ValidateGasStationLoginRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string GASSTATION_ID;
+        public string stGasStationID;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string GASSTATION_MACADDRESS;
+        public string stGasStationMacAddress;
         
-        public ValidateGasStationLoginCodeRequestBody() {
+        public ValidateGasStationLoginRequestBody() {
         }
         
-        public ValidateGasStationLoginCodeRequestBody(string GASSTATION_ID, string GASSTATION_MACADDRESS) {
-            this.GASSTATION_ID = GASSTATION_ID;
-            this.GASSTATION_MACADDRESS = GASSTATION_MACADDRESS;
+        public ValidateGasStationLoginRequestBody(string stGasStationID, string stGasStationMacAddress) {
+            this.stGasStationID = stGasStationID;
+            this.stGasStationMacAddress = stGasStationMacAddress;
         }
     }
     
@@ -62,15 +62,15 @@ namespace SGM_SaleGas.ServiceReference1 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class ValidateGasStationLoginCodeResponse {
+    public partial class ValidateGasStationLoginResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="ValidateGasStationLoginCodeResponse", Namespace="http://tempuri.org/", Order=0)]
-        public SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ValidateGasStationLoginResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.ServiceReference1.ValidateGasStationLoginResponseBody Body;
         
-        public ValidateGasStationLoginCodeResponse() {
+        public ValidateGasStationLoginResponse() {
         }
         
-        public ValidateGasStationLoginCodeResponse(SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeResponseBody Body) {
+        public ValidateGasStationLoginResponse(SGM_SaleGas.ServiceReference1.ValidateGasStationLoginResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -79,16 +79,16 @@ namespace SGM_SaleGas.ServiceReference1 {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
-    public partial class ValidateGasStationLoginCodeResponseBody {
+    public partial class ValidateGasStationLoginResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string ValidateGasStationLoginCodeResult;
+        public string ValidateGasStationLoginResult;
         
-        public ValidateGasStationLoginCodeResponseBody() {
+        public ValidateGasStationLoginResponseBody() {
         }
         
-        public ValidateGasStationLoginCodeResponseBody(string ValidateGasStationLoginCodeResult) {
-            this.ValidateGasStationLoginCodeResult = ValidateGasStationLoginCodeResult;
+        public ValidateGasStationLoginResponseBody(string ValidateGasStationLoginResult) {
+            this.ValidateGasStationLoginResult = ValidateGasStationLoginResult;
         }
     }
     
@@ -120,17 +120,17 @@ namespace SGM_SaleGas.ServiceReference1 {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeResponse SGM_SaleGas.ServiceReference1.ServiceSoap.ValidateGasStationLoginCode(SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeRequest request) {
-            return base.Channel.ValidateGasStationLoginCode(request);
+        SGM_SaleGas.ServiceReference1.ValidateGasStationLoginResponse SGM_SaleGas.ServiceReference1.ServiceSoap.ValidateGasStationLogin(SGM_SaleGas.ServiceReference1.ValidateGasStationLoginRequest request) {
+            return base.Channel.ValidateGasStationLogin(request);
         }
         
-        public string ValidateGasStationLoginCode(string GASSTATION_ID, string GASSTATION_MACADDRESS) {
-            SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeRequest inValue = new SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeRequest();
-            inValue.Body = new SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeRequestBody();
-            inValue.Body.GASSTATION_ID = GASSTATION_ID;
-            inValue.Body.GASSTATION_MACADDRESS = GASSTATION_MACADDRESS;
-            SGM_SaleGas.ServiceReference1.ValidateGasStationLoginCodeResponse retVal = ((SGM_SaleGas.ServiceReference1.ServiceSoap)(this)).ValidateGasStationLoginCode(inValue);
-            return retVal.Body.ValidateGasStationLoginCodeResult;
+        public string ValidateGasStationLogin(string stGasStationID, string stGasStationMacAddress) {
+            SGM_SaleGas.ServiceReference1.ValidateGasStationLoginRequest inValue = new SGM_SaleGas.ServiceReference1.ValidateGasStationLoginRequest();
+            inValue.Body = new SGM_SaleGas.ServiceReference1.ValidateGasStationLoginRequestBody();
+            inValue.Body.stGasStationID = stGasStationID;
+            inValue.Body.stGasStationMacAddress = stGasStationMacAddress;
+            SGM_SaleGas.ServiceReference1.ValidateGasStationLoginResponse retVal = ((SGM_SaleGas.ServiceReference1.ServiceSoap)(this)).ValidateGasStationLogin(inValue);
+            return retVal.Body.ValidateGasStationLoginResult;
         }
     }
 }
