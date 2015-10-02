@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Runtime.Serialization.Json;
 using System.IO;
-
+using System.Data;
+using System.Data.SqlClient;
 
 namespace SGM.ServicesCore.BLL
 {
@@ -17,7 +18,7 @@ namespace SGM.ServicesCore.BLL
         private string m_stResponseErrorMsg;
         private string m_stResponseErrorMsgDetail;
         private string m_stResponseDataString;
-
+        private DataSet m_dsResponseDataSet;
 
 
         public DataTransfer()
@@ -26,6 +27,7 @@ namespace SGM.ServicesCore.BLL
             m_stResponseErrorMsg = "";
             m_stResponseErrorMsgDetail = "";
             m_stResponseDataString = "";
+            m_dsResponseDataSet = null;
         }
         public DataTransfer(string json)
         {
@@ -55,6 +57,12 @@ namespace SGM.ServicesCore.BLL
             set { m_stResponseDataString = value; }
         }
 
+        public DataSet ResponseDataSet
+        {
+            get { return m_dsResponseDataSet; }
+            set { m_dsResponseDataSet = value; }
+        }
+
         public string createJSON()
         {
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DataTransfer));
@@ -77,6 +85,7 @@ namespace SGM.ServicesCore.BLL
                 m_stResponseDataString = data.ResponseDataString;
                 m_stResponseErrorMsgDetail = data.ResponseErrorMsgDetail;
                 m_stResponseCode = data.ResponseCode;
+                m_dsResponseDataSet = data.ResponseDataSet;
             }
         }
     }
