@@ -3,39 +3,35 @@ using System.Web;
 using System.Web.Services;
 using System.Web.Services.Protocols;
 using System.Collections.Generic;
-//using System.Web.Configuration;
-using System.Data.SqlClient;
-using System.Data;
 using SGM.ServicesCore.BLL;
-using SGM.ServicesCore.DAL;
-using SGM.ServicesCore.DTO;
+
 
 
 [WebService(Namespace = "http://tempuri.org/")]
 [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
 public class Service : System.Web.Services.WebService
 {
+    private SaleGasServiceBLL m_bllSaleGasService;
+    private SaleGasManagerServiceBLL m_bSaleGasManagerService;
     public Service()
     {
         //Uncomment the following line if using designed components
         //InitializeComponent();
+        m_bllSaleGasService = new SaleGasServiceBLL();
+        m_bSaleGasManagerService = new SaleGasManagerServiceBLL();
     }
-       
+        
       
     [WebMethod]
     public string ValidateGasStationLogin(string stGasStationID, string stGasStationMacAddress)
     {
-        GasStationDAL dalGasStation = new GasStationDAL();
-        DataTransfer response = dalGasStation.ValidateGasStationLogin(stGasStationID, stGasStationMacAddress);       
-        return response.createJSON();
+        return m_bllSaleGasService.ValidateGasStationLogin(stGasStationID, stGasStationMacAddress);
     }
 
     [WebMethod]
     public string ValidateCardId(string strCardId)
     {
-        CardDAL dalCard = new CardDAL();
-        DataTransfer response = dalCard.ValidateCardID(strCardId);
-        return response.createJSON();
+        return m_bllSaleGasService.ValidateCardId(strCardId);
     }
 }
     
