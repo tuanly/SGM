@@ -53,7 +53,7 @@ namespace SGM.ServicesCore.DAL
             {
                 dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
                 DataSet ds = new DataSet();
-                ds.Tables.Add(tblCard);
+                ds.Tables.Add(tblCard.Copy());
                 CardDTO dtoCard = new CardDTO();
                 foreach (DataRow dr in tblCard.Rows)
                 {
@@ -68,13 +68,14 @@ namespace SGM.ServicesCore.DAL
                 DataTable tblRecharge = rechargeDal.GetRechargeTable(dtoCard.RechargeID);
                 if (tblRecharge.Rows.Count > 0)
                 {
-                    ds.Tables.Add(tblRecharge);
+                    ds.Tables.Add(tblRecharge.Copy());
                 }
-                else 
+                else
                 {
                     dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
                     dataResult.ResponseErrorMsg = Text.RECHARGE_ID_NOT_EXIST;
                 }
+                dataResult.ResponseDataSet = ds;
             }
             else
             {

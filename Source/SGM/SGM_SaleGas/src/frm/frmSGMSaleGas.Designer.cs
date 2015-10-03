@@ -132,7 +132,7 @@
             this.txtCardID.ReadOnly = true;
             this.txtCardID.Size = new System.Drawing.Size(181, 35);
             this.txtCardID.TabIndex = 2;
-            this.txtCardID.Text = "12352421358";
+            this.txtCardID.Text = "card0001";
             this.txtCardID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
