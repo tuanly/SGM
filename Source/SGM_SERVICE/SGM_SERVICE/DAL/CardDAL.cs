@@ -4,7 +4,7 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using SGM.ServicesCore.DTO;
-
+using SGM.ServicesCore.BLL;
 
 namespace SGM.ServicesCore.DAL
 {
@@ -39,6 +39,49 @@ namespace SGM.ServicesCore.DAL
                 }
             }
             return dtoCard;
+        }
+
+        public DataTransfer ValidateCardID(string stCardID)
+        {
+            DataTransfer dataResult = new DataTransfer();
+            string query = string.Format("SELECT * FROM CARD WHERE CARD_ID = @CARD_ID");
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
+            sqlParameters[0].Value = Convert.ToString(stCardID);
+            DataTable tblCard = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
+            if (tblCard.Rows.Count > 0)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+                DataSet ds = new DataSet();
+                ds.Tables.Add(tblCard);
+                CardDTO dtoCard = new CardDTO();
+                foreach (DataRow dr in tblCard.Rows)
+                {
+                    dtoCard.CardID = dr["CARD_ID"].ToString(); ;
+                    dtoCard.CardUnlockState = Boolean.Parse(dr["CARD_STATE"].ToString());
+                    dtoCard.CardRemainingMoney = Int32.Parse(dr["CARD_MONEY"].ToString());
+                    dtoCard.CardBuyDate = DateTime.Parse(dr["CARD_BUY_DATE"].ToString());
+                    dtoCard.RechargeID = Int32.Parse(dr["RECHARGE_ID"].ToString());
+                    dtoCard.CustomerID = dr["CUS_ID"].ToString();
+                }
+                RechargeDAL rechargeDal = new RechargeDAL();
+                DataTable tblRecharge = rechargeDal.GetRechargeTable(dtoCard.RechargeID);
+                if (tblRecharge.Rows.Count > 0)
+                {
+                    ds.Tables.Add(tblRecharge);
+                }
+                else 
+                {
+                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                    dataResult.ResponseErrorMsg = Text.RECHARGE_ID_NOT_EXIST;
+                }
+            }
+            else
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = Text.CARD_ID_NOT_EXIST;
+            }
+            return dataResult;
         }
 
         public bool AddNewCard(CardDTO dtoCard)

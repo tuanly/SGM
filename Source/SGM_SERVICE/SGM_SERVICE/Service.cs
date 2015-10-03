@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Data;
 using SGM.ServicesCore.BLL;
 using SGM.ServicesCore.DAL;
+using SGM.ServicesCore.DTO;
 
 
 [WebService(Namespace = "http://tempuri.org/")]
@@ -26,6 +27,14 @@ public class Service : System.Web.Services.WebService
     {
         GasStationDAL dalGasStation = new GasStationDAL();
         DataTransfer response = dalGasStation.ValidateGasStationLogin(stGasStationID, stGasStationMacAddress);       
+        return response.createJSON();
+    }
+
+    [WebMethod]
+    public string ValidateCardId(string strCardId)
+    {
+        CardDAL dalCard = new CardDAL();
+        DataTransfer response = dalCard.ValidateCardID(strCardId);
         return response.createJSON();
     }
 }

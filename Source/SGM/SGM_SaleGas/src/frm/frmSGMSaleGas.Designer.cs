@@ -152,6 +152,7 @@
             this.btnCardDetail.TabIndex = 0;
             this.btnCardDetail.Text = "+";
             this.btnCardDetail.UseVisualStyleBackColor = true;
+            this.btnCardDetail.Click += new System.EventHandler(this.btnCardDetail_Click);
             // 
             // groupBox2
             // 

@@ -18,6 +18,10 @@ namespace SGM_SaleGas.ServiceReference1 {
         // CODEGEN: Generating message contract since element name stGasStationID from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ValidateGasStationLogin", ReplyAction="*")]
         SGM_SaleGas.ServiceReference1.ValidateGasStationLoginResponse ValidateGasStationLogin(SGM_SaleGas.ServiceReference1.ValidateGasStationLoginRequest request);
+        
+        // CODEGEN: Generating message contract since element name strCardId from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ValidateCardId", ReplyAction="*")]
+        SGM_SaleGas.ServiceReference1.ValidateCardIdResponse ValidateCardId(SGM_SaleGas.ServiceReference1.ValidateCardIdRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -92,6 +96,74 @@ namespace SGM_SaleGas.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ValidateCardIdRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ValidateCardId", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.ServiceReference1.ValidateCardIdRequestBody Body;
+        
+        public ValidateCardIdRequest() {
+        }
+        
+        public ValidateCardIdRequest(SGM_SaleGas.ServiceReference1.ValidateCardIdRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ValidateCardIdRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string strCardId;
+        
+        public ValidateCardIdRequestBody() {
+        }
+        
+        public ValidateCardIdRequestBody(string strCardId) {
+            this.strCardId = strCardId;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class ValidateCardIdResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ValidateCardIdResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.ServiceReference1.ValidateCardIdResponseBody Body;
+        
+        public ValidateCardIdResponse() {
+        }
+        
+        public ValidateCardIdResponse(SGM_SaleGas.ServiceReference1.ValidateCardIdResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class ValidateCardIdResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string ValidateCardIdResult;
+        
+        public ValidateCardIdResponseBody() {
+        }
+        
+        public ValidateCardIdResponseBody(string ValidateCardIdResult) {
+            this.ValidateCardIdResult = ValidateCardIdResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ServiceSoapChannel : SGM_SaleGas.ServiceReference1.ServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -131,6 +203,19 @@ namespace SGM_SaleGas.ServiceReference1 {
             inValue.Body.stGasStationMacAddress = stGasStationMacAddress;
             SGM_SaleGas.ServiceReference1.ValidateGasStationLoginResponse retVal = ((SGM_SaleGas.ServiceReference1.ServiceSoap)(this)).ValidateGasStationLogin(inValue);
             return retVal.Body.ValidateGasStationLoginResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.ServiceReference1.ValidateCardIdResponse SGM_SaleGas.ServiceReference1.ServiceSoap.ValidateCardId(SGM_SaleGas.ServiceReference1.ValidateCardIdRequest request) {
+            return base.Channel.ValidateCardId(request);
+        }
+        
+        public string ValidateCardId(string strCardId) {
+            SGM_SaleGas.ServiceReference1.ValidateCardIdRequest inValue = new SGM_SaleGas.ServiceReference1.ValidateCardIdRequest();
+            inValue.Body = new SGM_SaleGas.ServiceReference1.ValidateCardIdRequestBody();
+            inValue.Body.strCardId = strCardId;
+            SGM_SaleGas.ServiceReference1.ValidateCardIdResponse retVal = ((SGM_SaleGas.ServiceReference1.ServiceSoap)(this)).ValidateCardId(inValue);
+            return retVal.Body.ValidateCardIdResult;
         }
     }
 }
