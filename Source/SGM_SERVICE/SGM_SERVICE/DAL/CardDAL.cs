@@ -105,7 +105,7 @@ namespace SGM.ServicesCore.DAL
             {
                 dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
                 DataSet ds = new DataSet();
-                ds.Tables.Add(tblCard.Copy());
+                //ds.Tables.Add(tblCard.Copy());
                 CardDTO dtoCard = new CardDTO();
                 foreach (DataRow dr in tblCard.Rows)
                 {
@@ -120,7 +120,8 @@ namespace SGM.ServicesCore.DAL
                 DataTable tblRecharge = rechargeDal.GetRechargeTable(dtoCard.RechargeID);
                 if (tblRecharge.Rows.Count > 0)
                 {
-                    ds.Tables.Add(tblRecharge.Copy());
+                    //ds.Tables.Add(tblRecharge.Copy());
+                    ds.Tables.AddRange(new DataTable[] { tblCard, tblRecharge });
                 }
                 else
                 {
