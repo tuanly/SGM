@@ -4,7 +4,6 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using SGM.ServicesCore.DTO;
-using SGM.ServicesCore.BLL;
 
 namespace SGM.ServicesCore.DAL
 {

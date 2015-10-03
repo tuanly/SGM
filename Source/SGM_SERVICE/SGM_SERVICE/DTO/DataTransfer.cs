@@ -6,7 +6,7 @@ using System.IO;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace SGM.ServicesCore.BLL
+namespace SGM.ServicesCore.DTO
 {
     public class DataTransfer
     {
