@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO.Ports;
 
 namespace SGM_SaleGas
 {
@@ -20,7 +21,8 @@ namespace SGM_SaleGas
 
         private void frmSGMSaleGas_Load(object sender, EventArgs e)
         {
-
+            if (Program.ReaderPort != null)
+                Program.ReaderPort.DataReceived += new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
         }
 
         private void rbGas95_CheckedChanged(object sender, EventArgs e)
@@ -93,6 +95,13 @@ namespace SGM_SaleGas
             }
             else
                 MessageBox.Show("Lỗi : " + dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+        private void CardReaderReceivedHandler(
+                        object sender,
+                        SerialDataReceivedEventArgs e)
+        {
+            SerialPort sp = (SerialPort)sender;
+            String readData = sp.ReadExisting();
         }
     }
 }

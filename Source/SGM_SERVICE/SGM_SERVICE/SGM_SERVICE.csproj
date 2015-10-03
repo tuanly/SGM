@@ -62,8 +62,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\DataTransfer.cs" />
-    <Compile Include="BLL\Text.cs" />
+    <Compile Include="DTO\DataTransfer.cs" />
+    <Compile Include="BLL\SaleGasManagerServiceBLL.cs" />
+    <Compile Include="BLL\SaleGasServiceBLL.cs" />
+    <Compile Include="DTO\Text.cs" />
     <Compile Include="DAL\CardDAL.cs" />
     <Compile Include="DAL\CustomerDAL.cs" />
     <Compile Include="DAL\DBConnetionDAL.cs" />

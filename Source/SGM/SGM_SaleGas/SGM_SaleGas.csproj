@@ -49,6 +49,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>sgm_icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -62,6 +65,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\frm\frmSGMConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMConfig.Designer.cs">
+      <DependentUpon>frmSGMConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\process\DataTransfer.cs" />
     <Compile Include="src\frm\frmSGMLogin.cs">
       <SubType>Form</SubType>
@@ -77,6 +86,10 @@
     <Compile Include="src\frm\frmSGMSaleGas.Designer.cs">
       <DependentUpon>frmSGMSaleGas.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\process\SGMText.cs" />
+    <EmbeddedResource Include="src\frm\frmSGMConfig.resx">
+      <DependentUpon>frmSGMConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\frm\frmSGMLogin.resx">
       <DependentUpon>frmSGMLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,7 +172,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="sgm_icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

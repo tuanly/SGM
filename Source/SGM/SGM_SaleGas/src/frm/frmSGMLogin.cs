@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Net.NetworkInformation;
 using System.Resources;
-
+using System.IO.Ports;
 
 namespace SGM_SaleGas
 {
@@ -24,6 +24,8 @@ namespace SGM_SaleGas
 
         private void frmSGMLogin_Load(object sender, EventArgs e)
         {
+            if (Program.ReaderPort != null)
+                Program.ReaderPort.DataReceived += new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
             errorProvider.SetIconAlignment(txtLoginCode, ErrorIconAlignment.TopRight);
         }
 
@@ -96,6 +98,14 @@ namespace SGM_SaleGas
             }
 
             return macAddresses;
+        }
+
+        private void CardReaderReceivedHandler(
+                        object sender,
+                        SerialDataReceivedEventArgs e)
+        {
+            SerialPort sp = (SerialPort)sender;           
+            txtLoginCode.Text = sp.ReadExisting();
         }
     }
 }
