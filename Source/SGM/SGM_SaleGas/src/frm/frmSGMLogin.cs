@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Net.NetworkInformation;
 using System.Resources;
 using System.IO.Ports;
+using SGM_Core.DTO;
 
 namespace SGM_SaleGas
 {

@@ -6,7 +6,7 @@ using System.IO;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace SGM_SaleGas
+namespace SGM_Core.DTO
 {
     public class DataTransfer
     {

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using System.Xml;
 using System.Xml.XPath;
+using SGM_Core.DTO;
 
 namespace SGM_SaleGas
 {
@@ -143,7 +144,7 @@ namespace SGM_SaleGas
                     while (xpathNodeIterator.Current.MoveToNextAttribute());
                 }   
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 //MessageBox.Show(SGMText.FRM_CONFIG_LOAD_CONFIG_ERR + "\n" + ex.Message + " : " + ex.StackTrace);
             }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SGM.ServicesCore.DTO
+namespace SGM_Core.DTO
 {
     public class SystemAdminDTO
     {

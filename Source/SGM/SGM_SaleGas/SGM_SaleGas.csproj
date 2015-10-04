@@ -71,7 +71,6 @@
     <Compile Include="src\frm\frmSGMConfig.Designer.cs">
       <DependentUpon>frmSGMConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\process\DataTransfer.cs" />
     <Compile Include="src\frm\frmSGMLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,7 +85,6 @@
     <Compile Include="src\frm\frmSGMSaleGas.Designer.cs">
       <DependentUpon>frmSGMSaleGas.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\process\SGMText.cs" />
     <EmbeddedResource Include="src\frm\frmSGMConfig.resx">
       <DependentUpon>frmSGMConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -174,6 +172,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="sgm_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SGM_DTO\SGM_DTO.csproj">
+      <Project>{5ABD34AF-902B-408F-85B5-12E0F96E60CF}</Project>
+      <Name>SGM_DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="src\process\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

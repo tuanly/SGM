@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using SGM.ServicesCore.DTO;
+using SGM_Core.DTO;
 
 namespace SGM.ServicesCore.DAL
 {
@@ -125,14 +125,14 @@ namespace SGM.ServicesCore.DAL
                 else
                 {
                     dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                    dataResult.ResponseErrorMsg = Text.GAS_STATION_RECHARGE_ID_NOT_EXIST;
+                    dataResult.ResponseErrorMsg = SGMText.GAS_STATION_RECHARGE_ID_NOT_EXIST;
                 }
                 dataResult.ResponseDataSet = ds;
             }
             else
             {
                 dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                dataResult.ResponseErrorMsg = Text.GAS_STATION_CARD_ID_NOT_EXIST;
+                dataResult.ResponseErrorMsg = SGMText.GAS_STATION_CARD_ID_NOT_EXIST;
             }
             return dataResult;
         }

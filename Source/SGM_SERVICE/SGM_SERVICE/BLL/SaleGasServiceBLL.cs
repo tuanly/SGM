@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Web;
 using SGM.ServicesCore.DAL;
-using SGM.ServicesCore.DTO;
+using SGM_Core.DTO;
 using System.Data;
 
 namespace SGM.ServicesCore.BLL

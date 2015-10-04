@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using SGM.ServicesCore.DTO;
+using SGM_Core.DTO;
 
 namespace SGM.ServicesCore.DAL
 {

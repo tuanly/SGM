@@ -33,6 +33,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="SGM_DTO">
+      <HintPath>..\..\SGM\SGM_DTO\bin\Debug\SGM_DTO.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -62,10 +65,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\DataTransfer.cs" />
     <Compile Include="BLL\SaleGasManagerServiceBLL.cs" />
     <Compile Include="BLL\SaleGasServiceBLL.cs" />
-    <Compile Include="DTO\Text.cs" />
     <Compile Include="DAL\CardDAL.cs" />
     <Compile Include="DAL\CustomerDAL.cs" />
     <Compile Include="DAL\DBConnetionDAL.cs" />
@@ -73,12 +74,6 @@
     <Compile Include="DAL\RechargeDAL.cs" />
     <Compile Include="DAL\SaleGasDAL.cs" />
     <Compile Include="DAL\SystemAdminDAL.cs" />
-    <Compile Include="DTO\CardDTO.cs" />
-    <Compile Include="DTO\CustomerDTO.cs" />
-    <Compile Include="DTO\GasStationDTO.cs" />
-    <Compile Include="DTO\RechargeDTO.cs" />
-    <Compile Include="DTO\SaleGasDTO.cs" />
-    <Compile Include="DTO\SystemAdminDTO.cs" />
     <Compile Include="Service.cs">
       <SubType>Component</SubType>
     </Compile>

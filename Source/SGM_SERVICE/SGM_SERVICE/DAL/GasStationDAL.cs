@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
-using SGM.ServicesCore.DTO;
+using SGM_Core.DTO;
 
 namespace SGM.ServicesCore.DAL
 {
@@ -116,20 +116,20 @@ namespace SGM.ServicesCore.DAL
                         if (!m_dbConnection.ExecuteUpdateQuery(query, sqlParametersUpdate))
                         {
                             dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                            dataResult.ResponseErrorMsg = Text.GAS_STATION_LOGON_UPDATE_MACADR_ERR;
+                            dataResult.ResponseErrorMsg = SGMText.GAS_STATION_LOGON_UPDATE_MACADR_ERR;
                         }
                     }                    
                 }
                 else
                 {
                     dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                    dataResult.ResponseErrorMsg = Text.GAS_STATION_LOGON_ID_INVALID;
+                    dataResult.ResponseErrorMsg = SGMText.GAS_STATION_LOGON_ID_INVALID;
                 }
             }
             catch (Exception ex)
             {
                 dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                dataResult.ResponseErrorMsg = Text.GAS_STATION_LOGON_ERR;
+                dataResult.ResponseErrorMsg = SGMText.GAS_STATION_LOGON_ERR;
                 dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
             }
             
