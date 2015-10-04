@@ -162,6 +162,7 @@ namespace SGM_SaleGas
 
                         txtCardID.Text = _cardDTO.CardID;
                         txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
+                        updateGasChoice(rbGas92.Checked ? gasTransactType.gas92 : rbGas95.Checked ? gasTransactType.gas95 : gasTransactType.gasDO);
                         if (_cardDTO.CardUnlockState == false)
                         {
                             MessageBox.Show(SGMText.GAS_CARD_LOCK, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -178,7 +179,7 @@ namespace SGM_SaleGas
             }
             else
             {
-                MessageBox.Show("Lỗi : " + dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 EnableTransaction(false, true);
             }
         }
@@ -198,17 +199,18 @@ namespace SGM_SaleGas
 
         private void btnBuy_Click(object sender, EventArgs e)
         {
-             String stResponse = service.GasBuying(_cardId, _moneyBuying);
+            String stResponse = service.GasBuying(_cardId, _cardDTO.CardRemainingMoney - _moneyBuying);
             DataTransfer dataResponse = new DataTransfer(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
                 MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _cardDTO.CardRemainingMoney = _cardDTO.CardRemainingMoney - _moneyBuying;
                 txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
+                calculatePay();
             }
             else
             {
-                MessageBox.Show("Lỗi : " + dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
