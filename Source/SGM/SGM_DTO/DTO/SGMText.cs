@@ -16,5 +16,9 @@ namespace SGM_Core.DTO
         public static string FRM_CONFIG_LOAD_CONFIG_ERR = "Lỗi! Không thể lấy thông tin cấu hình.";
         public static string FRM_CONFIG_CANT_CONNECT_READER = "Lỗi! Không thể kết nối với máy quét thẻ.";
         public static string FRM_CONFIG_SAVE_CONFIG_SUCCESS = "Đã lưu thông tin cấu hình.";
+        public static string GAS_92_TEXT = "Xăng 92";
+        public static string GAS_95_TEXT = "Xăng 95";
+        public static string GAS_DO_TEXT = "Dầu DO";
+        public static string GAS_CARD_LOCK = "Thẻ xăng đã bị khóa.";
     }
 }

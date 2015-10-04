@@ -111,7 +111,7 @@
             this.txtCardMoney.ReadOnly = true;
             this.txtCardMoney.Size = new System.Drawing.Size(275, 35);
             this.txtCardMoney.TabIndex = 4;
-            this.txtCardMoney.Text = "300. 000";
+            this.txtCardMoney.Text = "0,000";
             this.txtCardMoney.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label3
@@ -132,7 +132,7 @@
             this.txtCardID.ReadOnly = true;
             this.txtCardID.Size = new System.Drawing.Size(181, 35);
             this.txtCardID.TabIndex = 2;
-            this.txtCardID.Text = "card0001";
+            this.txtCardID.Text = "N/A";
             this.txtCardID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
@@ -178,6 +178,7 @@
             this.btnBuy.TabIndex = 4;
             this.btnBuy.Text = "Mua";
             this.btnBuy.UseVisualStyleBackColor = true;
+            this.btnBuy.Click += new System.EventHandler(this.btnBuy_Click);
             // 
             // txtMoney
             // 
@@ -186,8 +187,9 @@
             this.txtMoney.Name = "txtMoney";
             this.txtMoney.Size = new System.Drawing.Size(673, 98);
             this.txtMoney.TabIndex = 3;
-            this.txtMoney.Text = "20. 000";
+            this.txtMoney.Text = "20,000";
             this.txtMoney.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtMoney.TextChanged += new System.EventHandler(this.txtMoney_TextChanged);
             // 
             // rbGasDO
             // 

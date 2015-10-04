@@ -52,7 +52,7 @@
             this.txtLoginCode.Name = "txtLoginCode";
             this.txtLoginCode.Size = new System.Drawing.Size(216, 20);
             this.txtLoginCode.TabIndex = 1;
-            this.txtLoginCode.Text = "000002";
+            this.txtLoginCode.Text = "000003";
             // 
             // btnLogin
             // 

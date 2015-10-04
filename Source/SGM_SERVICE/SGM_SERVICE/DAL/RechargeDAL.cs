@@ -42,15 +42,6 @@ namespace SGM.ServicesCore.DAL
             return dtoRecharge;
         }
 
-        public DataTable GetRechargeTable(int iRechargeID)
-        {
-            string query = string.Format("SELECT * FROM RECHARGE WHERE RECHARGE_ID = @RECHARGE_ID");
-            SqlParameter[] sqlParameters = new SqlParameter[1];
-            sqlParameters[0] = new SqlParameter("@RECHARGE_ID", SqlDbType.Int);
-            sqlParameters[0].Value = Convert.ToInt32(iRechargeID);
-            DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
-            return tblResult;
-        }
         public bool AddRecharge(RechargeDTO dtoRecharge)
         {
             bool result = true;
