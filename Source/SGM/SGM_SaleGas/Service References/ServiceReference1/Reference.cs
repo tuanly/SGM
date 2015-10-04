@@ -22,6 +22,10 @@ namespace SGM_SaleGas.ServiceReference1 {
         // CODEGEN: Generating message contract since element name strCardId from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ValidateCardId", ReplyAction="*")]
         SGM_SaleGas.ServiceReference1.ValidateCardIdResponse ValidateCardId(SGM_SaleGas.ServiceReference1.ValidateCardIdRequest request);
+        
+        // CODEGEN: Generating message contract since element name strCardId from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/GasBuying", ReplyAction="*")]
+        SGM_SaleGas.ServiceReference1.GasBuyingResponse GasBuying(SGM_SaleGas.ServiceReference1.GasBuyingRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -164,6 +168,78 @@ namespace SGM_SaleGas.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GasBuyingRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GasBuying", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.ServiceReference1.GasBuyingRequestBody Body;
+        
+        public GasBuyingRequest() {
+        }
+        
+        public GasBuyingRequest(SGM_SaleGas.ServiceReference1.GasBuyingRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GasBuyingRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string strCardId;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public int money;
+        
+        public GasBuyingRequestBody() {
+        }
+        
+        public GasBuyingRequestBody(string strCardId, int money) {
+            this.strCardId = strCardId;
+            this.money = money;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GasBuyingResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GasBuyingResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.ServiceReference1.GasBuyingResponseBody Body;
+        
+        public GasBuyingResponse() {
+        }
+        
+        public GasBuyingResponse(SGM_SaleGas.ServiceReference1.GasBuyingResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class GasBuyingResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string GasBuyingResult;
+        
+        public GasBuyingResponseBody() {
+        }
+        
+        public GasBuyingResponseBody(string GasBuyingResult) {
+            this.GasBuyingResult = GasBuyingResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ServiceSoapChannel : SGM_SaleGas.ServiceReference1.ServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -216,6 +292,20 @@ namespace SGM_SaleGas.ServiceReference1 {
             inValue.Body.strCardId = strCardId;
             SGM_SaleGas.ServiceReference1.ValidateCardIdResponse retVal = ((SGM_SaleGas.ServiceReference1.ServiceSoap)(this)).ValidateCardId(inValue);
             return retVal.Body.ValidateCardIdResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.ServiceReference1.GasBuyingResponse SGM_SaleGas.ServiceReference1.ServiceSoap.GasBuying(SGM_SaleGas.ServiceReference1.GasBuyingRequest request) {
+            return base.Channel.GasBuying(request);
+        }
+        
+        public string GasBuying(string strCardId, int money) {
+            SGM_SaleGas.ServiceReference1.GasBuyingRequest inValue = new SGM_SaleGas.ServiceReference1.GasBuyingRequest();
+            inValue.Body = new SGM_SaleGas.ServiceReference1.GasBuyingRequestBody();
+            inValue.Body.strCardId = strCardId;
+            inValue.Body.money = money;
+            SGM_SaleGas.ServiceReference1.GasBuyingResponse retVal = ((SGM_SaleGas.ServiceReference1.ServiceSoap)(this)).GasBuying(inValue);
+            return retVal.Body.GasBuyingResult;
         }
     }
 }

@@ -33,6 +33,12 @@ public class Service : System.Web.Services.WebService
     {
         return m_bllSaleGasService.ValidateCardId(strCardId);
     }
+
+    [WebMethod]
+    public string GasBuying(string strCardId, int money)
+    {
+        return m_bllSaleGasService.GasBuying(strCardId, money);
+    }
 }
     
 

@@ -26,6 +26,8 @@ namespace SGM_SaleGas
         }
 
         private string MONEY_FORMAT = "#,##0";
+        private string _cardId = "card0001";
+        private int _moneyBuying = 20000;
 
         public frmSGMSaleGas()
         {
@@ -40,12 +42,15 @@ namespace SGM_SaleGas
             _cardDTO = null;
             _rechargeDTO = null;
 
-            EnableTransaction(false);
+            EnableTransaction(false, true);
+            txtMoney.Text = _moneyBuying.ToString(MONEY_FORMAT);
         }
 
-        private void EnableTransaction(bool yes)
+        private void EnableTransaction(bool yes, bool choice)
         {
-            rbGas92.Enabled = rbGas95.Enabled = rbGasDO.Enabled = btnBuy.Enabled = yes;
+            if (choice)
+                rbGas92.Enabled = rbGas95.Enabled = rbGasDO.Enabled = yes;
+            btnBuy.Enabled = yes;
         }
 
         private void updateGasChoice(gasTransactType t)
@@ -74,13 +79,18 @@ namespace SGM_SaleGas
 
         private void calculatePay()
         {
+            EnableTransaction(true, false);
             try
             {
-                int money = Int32.Parse(txtMoney.Text, System.Globalization.NumberStyles.Currency);
+                _moneyBuying = Int32.Parse(txtMoney.Text, System.Globalization.NumberStyles.Currency);
+                int moneyAfter = _cardDTO.CardRemainingMoney - _moneyBuying;
+                if (moneyAfter < 0)
+                    EnableTransaction(false, false);
                 decimal price = rbGas92.Checked ? _rechargeDTO.RechargeGas92Price : rbGas95.Checked ? _rechargeDTO.RechargeGas95Price : _rechargeDTO.RechargeGasDOPrice;
                 txtMoneyBuying.Text = txtMoney.Text;
-                txtMoneyAfter.Text = (_cardDTO.CardRemainingMoney - money).ToString(MONEY_FORMAT);
-                decimal galon = money / price;
+                
+                txtMoneyAfter.Text = moneyAfter.ToString(MONEY_FORMAT);
+                decimal galon = _moneyBuying / price;
                 txtGasBuying.Text = Math.Round(galon,1).ToString();
             }
             catch (Exception ex)
@@ -122,7 +132,7 @@ namespace SGM_SaleGas
             DataTransfer dataResponse = new DataTransfer(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
-                EnableTransaction(true);
+                EnableTransaction(true, true);
                 using (DataSet ds = dataResponse.ResponseDataSet)
                 {
                     DataTable tblCard = ds.Tables[0];
@@ -157,7 +167,7 @@ namespace SGM_SaleGas
                             MessageBox.Show(SGMText.GAS_CARD_LOCK, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             _cardDTO = null;
                             _rechargeDTO = null;
-                            EnableTransaction(false);
+                            EnableTransaction(false, true);
                         }
                     }
                     else
@@ -169,13 +179,13 @@ namespace SGM_SaleGas
             else
             {
                 MessageBox.Show("Lỗi : " + dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                EnableTransaction(false);
+                EnableTransaction(false, true);
             }
         }
 
         private void btnCardDetail_Click(object sender, EventArgs e)
         {
-            ScanCard("card0001");
+            ScanCard(_cardId);
         }
 
         private void CardReaderReceivedHandler(
@@ -188,7 +198,18 @@ namespace SGM_SaleGas
 
         private void btnBuy_Click(object sender, EventArgs e)
         {
-
+             String stResponse = service.GasBuying(_cardId, _moneyBuying);
+            DataTransfer dataResponse = new DataTransfer(stResponse);
+            if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+            {
+                MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _cardDTO.CardRemainingMoney = _cardDTO.CardRemainingMoney - _moneyBuying;
+                txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
+            }
+            else
+            {
+                MessageBox.Show("Lỗi : " + dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private void txtMoney_TextChanged(object sender, EventArgs e)

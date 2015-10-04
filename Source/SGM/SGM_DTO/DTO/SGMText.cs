@@ -20,5 +20,7 @@ namespace SGM_Core.DTO
         public static string GAS_95_TEXT = "Xăng 95";
         public static string GAS_DO_TEXT = "Dầu DO";
         public static string GAS_CARD_LOCK = "Thẻ xăng đã bị khóa.";
+        public static string GAS_BUYING_SUCCESS = "Mua xăng thành công.";
+        public static string GAS_BUYING_FAIL = "Mua xăng không thành công.";
     }
 }

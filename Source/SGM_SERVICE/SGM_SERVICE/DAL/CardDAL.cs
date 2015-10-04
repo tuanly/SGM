@@ -82,6 +82,19 @@ namespace SGM.ServicesCore.DAL
             return result;
         }
 
+        public bool UpdateCardBuying(CardDTO dtoCard)
+        {
+            bool result = true;
+            string query = string.Format("UPDATE CARD SET CARD_MONEY = @CARD_MONEY WHERE CARD_ID = @CARD_ID");
+            SqlParameter[] sqlParameters = new SqlParameter[2];
+            sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
+            sqlParameters[0].Value = Convert.ToString(dtoCard.CardID);
+            sqlParameters[1] = new SqlParameter("@CARD_MONEY", SqlDbType.Int);
+            sqlParameters[1].Value = Convert.ToInt32(dtoCard.CardRemainingMoney);
+            result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
+            return result;
+        }
+
         public bool DeleteCard(string stCardID)
         {
             bool result = true;
@@ -92,27 +105,14 @@ namespace SGM.ServicesCore.DAL
             result = m_dbConnection.ExecuteDeleteQuery(query, sqlParameters);
             return result;
         }
-        public DataTransfer ValidateCardID(string stCardID)
+        public DataTable ValidateCardID(string stCardID)
         {
-            DataTransfer dataResult = new DataTransfer();
             string query = string.Format("SELECT * FROM CARD c, RECHARGE r WHERE c.CARD_ID = @CARD_ID AND c.CARD_ID = r.CARD_ID");
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
             sqlParameters[0].Value = Convert.ToString(stCardID);
             DataTable tblCard = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
-            if (tblCard.Rows.Count > 0)
-            {
-                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
-                DataSet ds = new DataSet();
-                ds.Tables.Add(tblCard.Copy());
-                dataResult.ResponseDataSet = ds;
-            }
-            else
-            {
-                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                dataResult.ResponseErrorMsg = SGMText.GAS_STATION_CARD_ID_NOT_EXIST;
-            }
-            return dataResult;
+            return tblCard;
         }
     }   
 }
