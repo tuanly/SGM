@@ -39,6 +39,12 @@ public class Service : System.Web.Services.WebService
     {
         return m_bllSaleGasService.GasBuying(strCardId, money);
     }
+
+    [WebMethod]
+    public string ValidateAdminLogin(string admin, string pwd)
+    {
+        return m_bSaleGasManagerService.ValidateAdminLogin(admin, pwd);
+    }
 }
     
 

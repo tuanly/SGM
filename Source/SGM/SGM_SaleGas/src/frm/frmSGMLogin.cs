@@ -37,26 +37,10 @@ namespace SGM_SaleGas
                 return;
             
             // request server
-
-            /*******
-            // for test database table
-            DataSet dsReturn = new DataSet();
-            dsReturn = service.ViewDB("GAS_STATION");
-            DataTable dt = new DataTable();
-            dt = dsReturn.Tables[0];
-            int countRow = dt.Rows.Count;
-            string s;
-            foreach (DataRow drEmp in dt.Rows)
-            {
-                s = drEmp["GASSTATION_ID"].ToString();
-            }
-            dataGridView1.DataSource = dt;
-             * ******/
-
             string GASSTATION_ID = txtLoginCode.Text;
             string GASSTATION_MACADDRESS = GetMacAddress();
 
-            String stResponse = service.ValidateGasStationLogin(GASSTATION_ID, GASSTATION_MACADDRESS); // DTO ??
+            String stResponse = service.ValidateGasStationLogin(GASSTATION_ID, GASSTATION_MACADDRESS);
             DataTransfer dataResponse = new DataTransfer(stResponse);          
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
@@ -65,7 +49,7 @@ namespace SGM_SaleGas
                 this.Close();
             }
             else
-                MessageBox.Show("Đăng nhập thất bại : " + dataResponse.ResponseErrorMsg);
+                MessageBox.Show(dataResponse.ResponseErrorMsg);
         }
 
         private bool ValidateLoginCode()

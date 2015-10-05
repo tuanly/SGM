@@ -16,6 +16,24 @@ namespace SGM.ServicesCore.DAL
             m_dbConnection = new DBConnetionDAL();
         }
 
+        public DataSet GetSystemAdminInfo(string admin, string pwd)
+        {
+            string query = string.Format("SELECT * FROM SYSTEM_ADMIN WHERE SYS_ADMIN = @SYS_ADMIN AND SYS_PWD = @SYS_PWD");
+            SqlParameter[] sqlParameters = new SqlParameter[2];
+            sqlParameters[0] = new SqlParameter("@SYS_ADMIN", SqlDbType.NVarChar);
+            sqlParameters[0].Value = Convert.ToString(admin);
+            sqlParameters[1] = new SqlParameter("@SYS_PWD", SqlDbType.NVarChar);
+            sqlParameters[1].Value = Convert.ToString(pwd);
+            DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
+            if (tblResult.Rows.Count > 0)
+            {
+                DataSet ds = new DataSet();
+                ds.Tables.Add(tblResult.Copy());
+                return ds;
+            }
+            return null;
+        }
+
         public SystemAdminDTO GetSystemAdminInfo(string stAdminAcount)
         {
             SystemAdminDTO dtoSysAdmin = null;

@@ -22,5 +22,8 @@ namespace SGM_Core.DTO
         public static string GAS_CARD_LOCK = "Thẻ xăng đã bị khóa.";
         public static string GAS_BUYING_SUCCESS = "Mua xăng thành công.";
         public static string GAS_BUYING_FAIL = "Mua xăng không thành công.";
+
+        public static string ADMIN_LOGON_ERROR = "Lỗi, Không thể đăng nhập hệ thống!";
+        
     }
 }

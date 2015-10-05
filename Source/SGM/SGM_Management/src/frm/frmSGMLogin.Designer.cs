@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMLogin));
             this.label1 = new System.Windows.Forms.Label();
             this.txtAdmin = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtPwd = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -64,8 +67,14 @@
             // 
             this.txtPwd.Location = new System.Drawing.Point(114, 70);
             this.txtPwd.Name = "txtPwd";
+            this.txtPwd.PasswordChar = '*';
             this.txtPwd.Size = new System.Drawing.Size(216, 20);
             this.txtPwd.TabIndex = 1;
+            this.txtPwd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPwd_KeyDown);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // frmSGMLogin
             // 
@@ -83,6 +92,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SGM - Đăng Nhập";
             this.Load += new System.EventHandler(this.frmSGMLogin_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -94,5 +104,6 @@
         private System.Windows.Forms.TextBox txtAdmin;       
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtPwd;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
