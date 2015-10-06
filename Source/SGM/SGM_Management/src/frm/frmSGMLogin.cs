@@ -54,24 +54,34 @@ namespace SGM_Management
             if (e.KeyCode == Keys.Enter)
             {
                 // validate user input
-                if (ValidateLoginCode() == false)
-                    return;
-
-                // request server
-                string SYS_ADMIN = txtAdmin.Text;
-                string SYS_PWD = txtPwd.Text;
-
-                String stResponse = service.ValidateAdminLogin(SYS_ADMIN, SYS_PWD);
-                DataTransfer dataResponse = new DataTransfer(stResponse);
-                if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-                {
-                    this.Hide();
-                    new frmGasStation().ShowDialog();
-                    this.Close();
-                }
-                else
-                    MessageBox.Show(dataResponse.ResponseErrorMsg);
+                Login();
             }
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            Login();
+        }
+
+        private void Login()
+        {
+            if (ValidateLoginCode() == false)
+                return;
+
+            // request server
+            string SYS_ADMIN = txtAdmin.Text;
+            string SYS_PWD = txtPwd.Text;
+
+            String stResponse = service.ValidateAdminLogin(SYS_ADMIN, SYS_PWD);
+            DataTransfer dataResponse = new DataTransfer(stResponse);
+            if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+            {
+                this.Hide();
+                new frmGasStation().ShowDialog();
+                this.Close();
+            }
+            else
+                MessageBox.Show(dataResponse.ResponseErrorMsg);
         }
     }
 }

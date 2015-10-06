@@ -35,6 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtPwd = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnLogin = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,11 +77,22 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(176, 99);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.TabIndex = 4;
+            this.btnLogin.Text = "Đăng Nhập";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
             // frmSGMLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(352, 134);
+            this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.txtPwd);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtAdmin);
@@ -105,5 +117,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtPwd;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Button btnLogin;
     }
 }
