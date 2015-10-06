@@ -12,7 +12,7 @@ namespace SGM_Management
 {
     public partial class frmSGMLogin : Form
     {
-        private ServiceReference1.ServiceSoapClient service = new ServiceReference1.ServiceSoapClient();
+        private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
 
         public frmSGMLogin()
         {

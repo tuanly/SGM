@@ -13,7 +13,7 @@ namespace SGM_SaleGas
 {
     public partial class frmSGMSaleGas : Form
     {
-        private ServiceReference1.ServiceSoapClient service = new ServiceReference1.ServiceSoapClient();
+        private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
         
         CardDTO _cardDTO;
         RechargeDTO _rechargeDTO;
@@ -93,7 +93,7 @@ namespace SGM_SaleGas
                 decimal galon = _moneyBuying / price;
                 txtGasBuying.Text = Math.Round(galon,1).ToString();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 txtGasBuying.Text = "###";
                 txtMoneyAfter.Text = "###";
