@@ -24,6 +24,13 @@ namespace SGM_Core.DTO
         public static string GAS_BUYING_FAIL = "Mua xăng không thành công.";
 
         public static string ADMIN_LOGON_ERROR = "Lỗi, Không thể đăng nhập hệ thống!";
-        
+
+        public static string CUSTOMER_DATA_INPUT_CUS_ID_ERR = "Lỗi! Chưa nhập Mã khách hàng.";
+        public static string CUSTOMER_DATA_INPUT_CUS_NAME_ERR = "Lỗi! Chưa nhập Tên khách hàng.";
+        public static string CUSTOMER_DATA_INPUT_CUS_BIRTHDAY_ERR = "Lỗi! Chưa nhập Ngày Sinh khách hàng.";
+        public static string CUSTOMER_DATA_INPUT_CUS_VISA_ERR = "Lỗi! Chưa nhập CMND khách hàng.";
+        public static string CUSTOMER_DATA_INPUT_EXIST_CUS_ID_ERR = "Lỗi! ID khách hàng đã tồn tại.";
+        public static string CUSTOMER_ADD_NEW_CUS_ERR = "Lỗi! Không thể thêm khách hàng.";
+        public static string CUSTOMER_GET_CUS_ERR = "Lỗi! Không thể lấy thông tin khách hàng.";
     }
 }

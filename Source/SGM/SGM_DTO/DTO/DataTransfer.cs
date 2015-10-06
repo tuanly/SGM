@@ -18,6 +18,8 @@ namespace SGM_Core.DTO
         private string m_stResponseErrorMsg;
         private string m_stResponseErrorMsgDetail;
         private string m_stResponseDataString;
+        private bool m_bResponseDataBool;
+        private Object m_dtoResponseDataDTO;
         private DataSet m_dsResponseDataSet;
 
 
@@ -27,6 +29,8 @@ namespace SGM_Core.DTO
             m_stResponseErrorMsg = "";
             m_stResponseErrorMsgDetail = "";
             m_stResponseDataString = "";
+            m_bResponseDataBool = false;
+            m_dtoResponseDataDTO = null;
             m_dsResponseDataSet = null;
         }
         public DataTransfer(string json)
@@ -56,12 +60,23 @@ namespace SGM_Core.DTO
             get { return m_stResponseDataString; }
             set { m_stResponseDataString = value; }
         }
-
+        public bool ResponseDataBool
+        {
+            get { return m_bResponseDataBool; }
+            set { m_bResponseDataBool = value; }
+        }
+        public Object ResponseDataDTO
+        {
+            get { return m_dtoResponseDataDTO; }
+            set { m_dtoResponseDataDTO = value; }
+        }
         public DataSet ResponseDataSet
         {
             get { return m_dsResponseDataSet; }
             set { m_dsResponseDataSet = value; }
         }
+
+       
 
         public string createJSON()
         {
@@ -85,7 +100,10 @@ namespace SGM_Core.DTO
                 m_stResponseDataString = data.ResponseDataString;
                 m_stResponseErrorMsgDetail = data.ResponseErrorMsgDetail;
                 m_stResponseCode = data.ResponseCode;
+                m_bResponseDataBool = data.ResponseDataBool;
+                m_dtoResponseDataDTO = data.ResponseDataDTO;
                 m_dsResponseDataSet = data.ResponseDataSet;
+
             }
         }
     }

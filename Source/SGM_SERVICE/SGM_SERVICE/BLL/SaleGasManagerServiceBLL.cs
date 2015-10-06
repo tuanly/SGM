@@ -26,5 +26,19 @@ namespace SGM.ServicesCore.BLL
             }
             return response.createJSON();
         }
+
+        public string AddNewCustomer(CustomerDTO dtoCustomer)
+        {
+            CustomerDAL dalCustomer = new CustomerDAL();
+            DataTransfer response = dalCustomer.AddNewCustomer(dtoCustomer);
+            return response.createJSON();
+        }
+
+        public string CheckCustomerExist(string stCustomerID)
+        {
+            CustomerDAL dalCustomer = new CustomerDAL();
+            DataTransfer response = dalCustomer.IsCustomerExisted(stCustomerID);           
+            return response.createJSON();
+        }
     }
 }

@@ -40,7 +40,7 @@ namespace SGM_SaleGas
             string GASSTATION_ID = txtLoginCode.Text;
             string GASSTATION_MACADDRESS = GetMacAddress();
 
-            String stResponse = service.ValidateGasStationLogin(GASSTATION_ID, GASSTATION_MACADDRESS);
+            String stResponse = service.SGMSaleGas_ValidateGasStationLogin(GASSTATION_ID, GASSTATION_MACADDRESS);
             DataTransfer dataResponse = new DataTransfer(stResponse);          
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {

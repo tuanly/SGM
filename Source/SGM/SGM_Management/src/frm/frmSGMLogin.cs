@@ -72,7 +72,7 @@ namespace SGM_Management
             string SYS_ADMIN = txtAdmin.Text;
             string SYS_PWD = txtPwd.Text;
 
-            String stResponse = service.ValidateAdminLogin(SYS_ADMIN, SYS_PWD);
+            String stResponse = service.SGMManager_ValidateAdminLogin(SYS_ADMIN, SYS_PWD);
             DataTransfer dataResponse = new DataTransfer(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {

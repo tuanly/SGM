@@ -28,12 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMCustomer));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.dgvCusList = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnBuyCard = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtNote = new System.Windows.Forms.TextBox();
             this.txtCusAddress = new System.Windows.Forms.TextBox();
             this.txtCusPhone = new System.Windows.Forms.TextBox();
             this.txtCusVisa = new System.Windows.Forms.TextBox();
@@ -56,18 +61,16 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.dgvCardList = new System.Windows.Forms.DataGridView();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCusList)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardList)).BeginInit();
-            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -82,6 +85,44 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Danh sách Khách Hàng";
             // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.btnSearch);
+            this.groupBox6.Controls.Add(this.txtSearch);
+            this.groupBox6.Controls.Add(this.label8);
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox6.Location = new System.Drawing.Point(3, 16);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(281, 55);
+            this.groupBox6.TabIndex = 1;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Tìm kiếm:";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(231, 20);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(44, 23);
+            this.btnSearch.TabIndex = 1;
+            this.btnSearch.Text = "Tìm";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(84, 22);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(141, 20);
+            this.txtSearch.TabIndex = 0;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(17, 25);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Tên/Mã KH:";
+            // 
             // dgvCusList
             // 
             this.dgvCusList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -95,7 +136,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnBuyCard);
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.txtNote);
             this.groupBox2.Controls.Add(this.txtCusAddress);
             this.groupBox2.Controls.Add(this.txtCusPhone);
             this.groupBox2.Controls.Add(this.txtCusVisa);
@@ -112,7 +153,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(287, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(578, 252);
+            this.groupBox2.Size = new System.Drawing.Size(605, 252);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thông tin Khách Hàng:";
@@ -123,36 +164,38 @@
             this.btnBuyCard.Location = new System.Drawing.Point(254, 221);
             this.btnBuyCard.Name = "btnBuyCard";
             this.btnBuyCard.Size = new System.Drawing.Size(79, 23);
-            this.btnBuyCard.TabIndex = 14;
+            this.btnBuyCard.TabIndex = 2;
             this.btnBuyCard.Text = "Mua Thẻ";
             this.btnBuyCard.UseVisualStyleBackColor = true;
             this.btnBuyCard.Click += new System.EventHandler(this.btnBuyCard_Click);
             // 
-            // textBox1
+            // txtNote
             // 
-            this.textBox1.Location = new System.Drawing.Point(82, 170);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(471, 45);
-            this.textBox1.TabIndex = 13;
+            this.txtNote.Location = new System.Drawing.Point(82, 170);
+            this.txtNote.Multiline = true;
+            this.txtNote.Name = "txtNote";
+            this.txtNote.Size = new System.Drawing.Size(514, 45);
+            this.txtNote.TabIndex = 13;
             // 
             // txtCusAddress
             // 
             this.txtCusAddress.Location = new System.Drawing.Point(82, 133);
             this.txtCusAddress.Name = "txtCusAddress";
-            this.txtCusAddress.Size = new System.Drawing.Size(471, 20);
+            this.txtCusAddress.Size = new System.Drawing.Size(514, 20);
             this.txtCusAddress.TabIndex = 12;
             // 
             // txtCusPhone
             // 
             this.txtCusPhone.Location = new System.Drawing.Point(82, 100);
+            this.txtCusPhone.MaxLength = 20;
             this.txtCusPhone.Name = "txtCusPhone";
-            this.txtCusPhone.Size = new System.Drawing.Size(100, 20);
+            this.txtCusPhone.Size = new System.Drawing.Size(151, 20);
             this.txtCusPhone.TabIndex = 11;
             // 
             // txtCusVisa
             // 
-            this.txtCusVisa.Location = new System.Drawing.Point(267, 64);
+            this.txtCusVisa.Location = new System.Drawing.Point(310, 64);
+            this.txtCusVisa.MaxLength = 20;
             this.txtCusVisa.Name = "txtCusVisa";
             this.txtCusVisa.Size = new System.Drawing.Size(286, 20);
             this.txtCusVisa.TabIndex = 10;
@@ -160,13 +203,15 @@
             // txtCusBirthday
             // 
             this.txtCusBirthday.Location = new System.Drawing.Point(82, 64);
+            this.txtCusBirthday.MaxLength = 20;
             this.txtCusBirthday.Name = "txtCusBirthday";
-            this.txtCusBirthday.Size = new System.Drawing.Size(100, 20);
+            this.txtCusBirthday.Size = new System.Drawing.Size(151, 20);
             this.txtCusBirthday.TabIndex = 9;
             // 
             // txtCusName
             // 
-            this.txtCusName.Location = new System.Drawing.Point(267, 29);
+            this.txtCusName.Location = new System.Drawing.Point(310, 29);
+            this.txtCusName.MaxLength = 50;
             this.txtCusName.Name = "txtCusName";
             this.txtCusName.Size = new System.Drawing.Size(286, 20);
             this.txtCusName.TabIndex = 8;
@@ -174,8 +219,9 @@
             // txtCusID
             // 
             this.txtCusID.Location = new System.Drawing.Point(82, 29);
+            this.txtCusID.MaxLength = 20;
             this.txtCusID.Name = "txtCusID";
-            this.txtCusID.Size = new System.Drawing.Size(100, 20);
+            this.txtCusID.Size = new System.Drawing.Size(151, 20);
             this.txtCusID.TabIndex = 7;
             // 
             // label7
@@ -208,7 +254,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(188, 67);
+            this.label4.Location = new System.Drawing.Point(239, 67);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 13);
             this.label4.TabIndex = 3;
@@ -226,7 +272,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(188, 32);
+            this.label2.Location = new System.Drawing.Point(239, 32);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 1;
@@ -249,7 +295,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox3.Location = new System.Drawing.Point(287, 252);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(578, 239);
+            this.groupBox3.Size = new System.Drawing.Size(605, 239);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Danh sách Thẻ:";
@@ -261,10 +307,9 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox5.Location = new System.Drawing.Point(3, 157);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(572, 79);
+            this.groupBox5.Size = new System.Drawing.Size(599, 79);
             this.groupBox5.TabIndex = 10;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "groupBox5";
             // 
             // panel2
             // 
@@ -273,7 +318,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 16);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(202, 60);
+            this.panel2.Size = new System.Drawing.Size(229, 60);
             this.panel2.TabIndex = 10;
             // 
             // groupBox4
@@ -283,7 +328,7 @@
             this.groupBox4.Controls.Add(this.btnAdd);
             this.groupBox4.Controls.Add(this.btnDelete);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox4.Location = new System.Drawing.Point(205, 16);
+            this.groupBox4.Location = new System.Drawing.Point(232, 16);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(364, 60);
             this.groupBox4.TabIndex = 9;
@@ -295,8 +340,8 @@
             this.btnEdit.Location = new System.Drawing.Point(97, 19);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnEdit.TabIndex = 7;
-            this.btnEdit.Text = "Sửa";
+            this.btnEdit.TabIndex = 4;
+            this.btnEdit.Text = "&Sửa";
             this.btnEdit.UseVisualStyleBackColor = true;
             // 
             // btnCancel
@@ -304,26 +349,28 @@
             this.btnCancel.Location = new System.Drawing.Point(278, 19);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 9;
-            this.btnCancel.Text = "Bỏ Qua";
+            this.btnCancel.TabIndex = 6;
+            this.btnCancel.Text = "&Bỏ Qua";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnAdd
             // 
             this.btnAdd.Location = new System.Drawing.Point(10, 19);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 6;
-            this.btnAdd.Text = "Thêm";
+            this.btnAdd.TabIndex = 3;
+            this.btnAdd.Text = "&Thêm";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnDelete
             // 
             this.btnDelete.Location = new System.Drawing.Point(187, 19);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 8;
-            this.btnDelete.Text = "Xóa";
+            this.btnDelete.TabIndex = 5;
+            this.btnDelete.Text = "&Xóa";
             this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // dgvCardList
@@ -332,53 +379,19 @@
             this.dgvCardList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCardList.Location = new System.Drawing.Point(3, 16);
             this.dgvCardList.Name = "dgvCardList";
-            this.dgvCardList.Size = new System.Drawing.Size(572, 220);
+            this.dgvCardList.Size = new System.Drawing.Size(599, 220);
             this.dgvCardList.TabIndex = 0;
             this.dgvCardList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCardList_CellContentClick);
             // 
-            // groupBox6
+            // errProvider
             // 
-            this.groupBox6.Controls.Add(this.btnSearch);
-            this.groupBox6.Controls.Add(this.txtSearch);
-            this.groupBox6.Controls.Add(this.label8);
-            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox6.Location = new System.Drawing.Point(3, 16);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(281, 55);
-            this.groupBox6.TabIndex = 1;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Tìm kiếm:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(17, 25);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(67, 13);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Tên/Mã KH:";
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(84, 22);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(141, 20);
-            this.txtSearch.TabIndex = 2;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(231, 20);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(44, 23);
-            this.btnSearch.TabIndex = 3;
-            this.btnSearch.Text = "Tìm";
-            this.btnSearch.UseVisualStyleBackColor = true;
+            this.errProvider.ContainerControl = this;
             // 
             // frmSGMCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(865, 491);
+            this.ClientSize = new System.Drawing.Size(892, 491);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -388,6 +401,8 @@
             this.Text = "SGM - Quản lý Khách Hàng";
             this.Load += new System.EventHandler(this.frmSGMCustomer_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCusList)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -395,8 +410,7 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardList)).EndInit();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -418,7 +432,7 @@
         private System.Windows.Forms.TextBox txtCusID;
         private System.Windows.Forms.TextBox txtCusBirthday;
         private System.Windows.Forms.TextBox txtCusName;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtNote;
         private System.Windows.Forms.TextBox txtCusAddress;
         private System.Windows.Forms.TextBox txtCusPhone;
         private System.Windows.Forms.TextBox txtCusVisa;
@@ -434,5 +448,6 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ErrorProvider errProvider;
     }
 }

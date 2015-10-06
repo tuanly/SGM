@@ -4,6 +4,7 @@ using System.Web.Services;
 using System.Web.Services.Protocols;
 using System.Collections.Generic;
 using SGM.ServicesCore.BLL;
+using SGM_Core.DTO;
 
 
 
@@ -23,27 +24,39 @@ public class Service : System.Web.Services.WebService
         
       
     [WebMethod]
-    public string ValidateGasStationLogin(string stGasStationID, string stGasStationMacAddress)
+    public string SGMSaleGas_ValidateGasStationLogin(string stGasStationID, string stGasStationMacAddress)
     {
         return m_bllSaleGasService.ValidateGasStationLogin(stGasStationID, stGasStationMacAddress);
     }
 
     [WebMethod]
-    public string ValidateCardId(string strCardId)
+    public string SGMSaleGas_ValidateCardId(string strCardId)
     {
         return m_bllSaleGasService.ValidateCardId(strCardId);
     }
 
     [WebMethod]
-    public string GasBuying(string strCardId, int money)
+    public string SGMSaleGas_GasBuying(string strCardId, int money)
     {
         return m_bllSaleGasService.GasBuying(strCardId, money);
     }
 
     [WebMethod]
-    public string ValidateAdminLogin(string admin, string pwd)
+    public string SGMManager_ValidateAdminLogin(string admin, string pwd)
     {
         return m_bSaleGasManagerService.ValidateAdminLogin(admin, pwd);
+    }
+
+    [WebMethod]
+    public string SGMManager_CheckCustomerExist(string stCusID)
+    {
+        return m_bSaleGasManagerService.CheckCustomerExist(stCusID);
+    }
+
+    [WebMethod]
+    public string SGMManager_AddNewCustomer(CustomerDTO dtoCus)
+    {
+        return m_bSaleGasManagerService.AddNewCustomer(dtoCus);
     }
 }
     

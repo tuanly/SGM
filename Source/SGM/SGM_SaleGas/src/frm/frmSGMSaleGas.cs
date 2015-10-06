@@ -128,7 +128,7 @@ namespace SGM_SaleGas
 
         private void ScanCard(string cardId)
         {
-            String stResponse = service.ValidateCardId(cardId);
+            String stResponse = service.SGMSaleGas_ValidateCardId(cardId);
             DataTransfer dataResponse = new DataTransfer(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
@@ -199,7 +199,7 @@ namespace SGM_SaleGas
 
         private void btnBuy_Click(object sender, EventArgs e)
         {
-            String stResponse = service.GasBuying(_cardId, _cardDTO.CardRemainingMoney - _moneyBuying);
+            String stResponse = service.SGMSaleGas_GasBuying(_cardId, _cardDTO.CardRemainingMoney - _moneyBuying);
             DataTransfer dataResponse = new DataTransfer(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
