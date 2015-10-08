@@ -48,6 +48,12 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public string SGMManager_UpdateAdminAccount(string admin, string admin_new, string pwd)
+    {
+        return m_bSaleGasManagerService.UpdateAdminAccount(admin, admin_new, pwd);
+    }
+
+    [WebMethod]
     public string SGMManager_CheckCustomerExist(string stCusID)
     {
         return m_bSaleGasManagerService.CheckCustomerExist(stCusID);
@@ -58,6 +64,7 @@ public class Service : System.Web.Services.WebService
     {
         return m_bSaleGasManagerService.AddNewCustomer(dtoCus);
     }
+    
 }
     
 

@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMLogin));
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMUpdateAccount));
             this.label1 = new System.Windows.Forms.Label();
             this.txtAdmin = new System.Windows.Forms.TextBox();
             this.btnUpdate = new System.Windows.Forms.Button();
@@ -37,6 +38,8 @@
             this.btnReset = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPwdRepeat = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -63,6 +66,7 @@
             this.btnUpdate.TabIndex = 2;
             this.btnUpdate.Text = "Cập Nhật";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // label2
             // 
@@ -77,6 +81,7 @@
             // 
             this.txtPwd.Location = new System.Drawing.Point(131, 46);
             this.txtPwd.Name = "txtPwd";
+            this.txtPwd.PasswordChar = '*';
             this.txtPwd.Size = new System.Drawing.Size(216, 20);
             this.txtPwd.TabIndex = 1;
             // 
@@ -88,6 +93,7 @@
             this.btnReset.TabIndex = 4;
             this.btnReset.Text = "Mặc Định";
             this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // label3
             // 
@@ -102,10 +108,15 @@
             // 
             this.txtPwdRepeat.Location = new System.Drawing.Point(131, 78);
             this.txtPwdRepeat.Name = "txtPwdRepeat";
+            this.txtPwdRepeat.PasswordChar = '*';
             this.txtPwdRepeat.Size = new System.Drawing.Size(216, 20);
             this.txtPwdRepeat.TabIndex = 6;
             // 
-            // frmSGMLogin
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // frmSGMUpdateAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -121,10 +132,11 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "frmSGMLogin";
+            this.Name = "frmSGMUpdateAccount";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SGM - Cập Nhật Tài Khoản";
             this.Load += new System.EventHandler(this.frmSGMUpdateAccount_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,5 +152,6 @@
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtPwdRepeat;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

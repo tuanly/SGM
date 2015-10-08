@@ -61,6 +61,22 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="SGMManager_UpdateAdminAccount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="admin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="admin_new" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_UpdateAdminAccountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_UpdateAdminAccountResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="SGMManager_CheckCustomerExist">
         <s:complexType>
           <s:sequence>
@@ -126,6 +142,12 @@
   <wsdl:message name="SGMManager_ValidateAdminLoginSoapOut">
     <wsdl:part name="parameters" element="tns:SGMManager_ValidateAdminLoginResponse" />
   </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateAdminAccountSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateAdminAccount" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateAdminAccountSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateAdminAccountResponse" />
+  </wsdl:message>
   <wsdl:message name="SGMManager_CheckCustomerExistSoapIn">
     <wsdl:part name="parameters" element="tns:SGMManager_CheckCustomerExist" />
   </wsdl:message>
@@ -154,6 +176,10 @@
     <wsdl:operation name="SGMManager_ValidateAdminLogin">
       <wsdl:input message="tns:SGMManager_ValidateAdminLoginSoapIn" />
       <wsdl:output message="tns:SGMManager_ValidateAdminLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateAdminAccount">
+      <wsdl:input message="tns:SGMManager_UpdateAdminAccountSoapIn" />
+      <wsdl:output message="tns:SGMManager_UpdateAdminAccountSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="SGMManager_CheckCustomerExist">
       <wsdl:input message="tns:SGMManager_CheckCustomerExistSoapIn" />
@@ -195,6 +221,15 @@
     </wsdl:operation>
     <wsdl:operation name="SGMManager_ValidateAdminLogin">
       <soap:operation soapAction="http://tempuri.org/SGMManager_ValidateAdminLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateAdminAccount">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_UpdateAdminAccount" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -252,6 +287,15 @@
     </wsdl:operation>
     <wsdl:operation name="SGMManager_ValidateAdminLogin">
       <soap12:operation soapAction="http://tempuri.org/SGMManager_ValidateAdminLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateAdminAccount">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_UpdateAdminAccount" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

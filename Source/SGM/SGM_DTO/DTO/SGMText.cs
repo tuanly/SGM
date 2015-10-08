@@ -32,5 +32,8 @@ namespace SGM_Core.DTO
         public static string CUSTOMER_DATA_INPUT_EXIST_CUS_ID_ERR = "Lỗi! ID khách hàng đã tồn tại.";
         public static string CUSTOMER_ADD_NEW_CUS_ERR = "Lỗi! Không thể thêm khách hàng.";
         public static string CUSTOMER_GET_CUS_ERR = "Lỗi! Không thể lấy thông tin khách hàng.";
+
+        public static string SYS_ADMIN_CHANGE_SUCCESS = "Đã cập nhật tài khoản admin.";
+        public static string SYS_ADMIN_CHANGE_FAIL = "Cập nhật tài khoản admin không thành công.";
     }
 }

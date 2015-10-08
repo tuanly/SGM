@@ -54,6 +54,7 @@
             this.txtAdmin.Name = "txtAdmin";
             this.txtAdmin.Size = new System.Drawing.Size(216, 20);
             this.txtAdmin.TabIndex = 0;
+            this.txtAdmin.Text = "admin";
             // 
             // label2
             // 
@@ -71,6 +72,7 @@
             this.txtPwd.PasswordChar = '*';
             this.txtPwd.Size = new System.Drawing.Size(216, 20);
             this.txtPwd.TabIndex = 1;
+            this.txtPwd.Text = "admin";
             this.txtPwd.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPwd_KeyDown);
             // 
             // errorProvider1

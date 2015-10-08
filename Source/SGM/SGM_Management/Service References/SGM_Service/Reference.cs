@@ -174,6 +174,10 @@ namespace SGM_Management.SGM_Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_ValidateAdminLogin", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMManager_ValidateAdminLoginResponse SGMManager_ValidateAdminLogin(SGM_Management.SGM_Service.SGMManager_ValidateAdminLoginRequest request);
         
+        // CODEGEN: Generating message contract since element name admin from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_UpdateAdminAccount", ReplyAction="*")]
+        SGM_Management.SGM_Service.SGMManager_UpdateAdminAccountResponse SGMManager_UpdateAdminAccount(SGM_Management.SGM_Service.SGMManager_UpdateAdminAccountRequest request);
+        
         // CODEGEN: Generating message contract since element name stCusID from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_CheckCustomerExist", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMManager_CheckCustomerExistResponse SGMManager_CheckCustomerExist(SGM_Management.SGM_Service.SGMManager_CheckCustomerExistRequest request);
@@ -471,6 +475,82 @@ namespace SGM_Management.SGM_Service {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateAdminAccountRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateAdminAccount", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_Management.SGM_Service.SGMManager_UpdateAdminAccountRequestBody Body;
+        
+        public SGMManager_UpdateAdminAccountRequest() {
+        }
+        
+        public SGMManager_UpdateAdminAccountRequest(SGM_Management.SGM_Service.SGMManager_UpdateAdminAccountRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateAdminAccountRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string admin;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string admin_new;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string pwd;
+        
+        public SGMManager_UpdateAdminAccountRequestBody() {
+        }
+        
+        public SGMManager_UpdateAdminAccountRequestBody(string admin, string admin_new, string pwd) {
+            this.admin = admin;
+            this.admin_new = admin_new;
+            this.pwd = pwd;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateAdminAccountResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateAdminAccountResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_Management.SGM_Service.SGMManager_UpdateAdminAccountResponseBody Body;
+        
+        public SGMManager_UpdateAdminAccountResponse() {
+        }
+        
+        public SGMManager_UpdateAdminAccountResponse(SGM_Management.SGM_Service.SGMManager_UpdateAdminAccountResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateAdminAccountResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_UpdateAdminAccountResult;
+        
+        public SGMManager_UpdateAdminAccountResponseBody() {
+        }
+        
+        public SGMManager_UpdateAdminAccountResponseBody(string SGMManager_UpdateAdminAccountResult) {
+            this.SGMManager_UpdateAdminAccountResult = SGMManager_UpdateAdminAccountResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class SGMManager_CheckCustomerExistRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_CheckCustomerExist", Namespace="http://tempuri.org/", Order=0)]
@@ -683,6 +763,21 @@ namespace SGM_Management.SGM_Service {
             inValue.Body.pwd = pwd;
             SGM_Management.SGM_Service.SGMManager_ValidateAdminLoginResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMManager_ValidateAdminLogin(inValue);
             return retVal.Body.SGMManager_ValidateAdminLoginResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_Management.SGM_Service.SGMManager_UpdateAdminAccountResponse SGM_Management.SGM_Service.ServiceSoap.SGMManager_UpdateAdminAccount(SGM_Management.SGM_Service.SGMManager_UpdateAdminAccountRequest request) {
+            return base.Channel.SGMManager_UpdateAdminAccount(request);
+        }
+        
+        public string SGMManager_UpdateAdminAccount(string admin, string admin_new, string pwd) {
+            SGM_Management.SGM_Service.SGMManager_UpdateAdminAccountRequest inValue = new SGM_Management.SGM_Service.SGMManager_UpdateAdminAccountRequest();
+            inValue.Body = new SGM_Management.SGM_Service.SGMManager_UpdateAdminAccountRequestBody();
+            inValue.Body.admin = admin;
+            inValue.Body.admin_new = admin_new;
+            inValue.Body.pwd = pwd;
+            SGM_Management.SGM_Service.SGMManager_UpdateAdminAccountResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMManager_UpdateAdminAccount(inValue);
+            return retVal.Body.SGMManager_UpdateAdminAccountResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

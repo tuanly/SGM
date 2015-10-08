@@ -77,7 +77,9 @@ namespace SGM_Management
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
                 this.Hide();
-                new frmGasStation().ShowDialog();
+                frmSGMUpdateAccount a = new frmSGMUpdateAccount();
+                a.setCurrentAdmin(SYS_ADMIN);
+                a.ShowDialog();
                 this.Close();
             }
             else

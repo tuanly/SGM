@@ -27,6 +27,24 @@ namespace SGM.ServicesCore.BLL
             return response.createJSON();
         }
 
+        public string UpdateAdminAccount(string admin, string admin_new, string pwd)
+        {
+            SystemAdminDAL dalSysAdmin = new SystemAdminDAL();
+            DataTransfer response = new DataTransfer();
+            bool res = dalSysAdmin.UpdateAdminAccount(admin, admin_new, pwd);
+            if (res == true)
+            {
+                response.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+                response.ResponseErrorMsg = SGMText.SYS_ADMIN_CHANGE_SUCCESS;
+            }
+            else
+            {
+                response.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                response.ResponseErrorMsg = SGMText.SYS_ADMIN_CHANGE_FAIL;
+            }
+            return response.createJSON();
+        }
+        
         public string AddNewCustomer(CustomerDTO dtoCustomer)
         {
             CustomerDAL dalCustomer = new CustomerDAL();

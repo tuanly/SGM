@@ -136,6 +136,22 @@ namespace SGM.ServicesCore.DAL
             return result;
         }
 
+        public bool UpdateAdminAccount(string admin, string admin_new, string pass)
+        {
+            bool result = true;
+            string query = string.Format("UPDATE SYSTEM_ADMIN SET SYS_PWD = @SYS_PWD, SYS_ADMIN = @SYS_ADMIN_NEW WHERE SYS_ADMIN = @SYS_ADMIN");
+            SqlParameter[] sqlParameters = new SqlParameter[3];
+            sqlParameters[0] = new SqlParameter("@SYS_ADMIN", SqlDbType.NVarChar);
+            sqlParameters[0].Value = Convert.ToString(admin);
+            sqlParameters[1] = new SqlParameter("@SYS_ADMIN_NEW", SqlDbType.NVarChar);
+            sqlParameters[1].Value = Convert.ToString(admin_new);
+            sqlParameters[2] = new SqlParameter("@SYS_PWD", SqlDbType.NVarChar);
+            sqlParameters[2].Value = Convert.ToString(pass);
+
+            result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
+            return result;
+        }
+
         public bool DeleteSystemAdmin(string stAdminAcount)
         {
             bool result = true;
