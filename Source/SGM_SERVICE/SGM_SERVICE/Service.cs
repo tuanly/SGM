@@ -44,25 +44,31 @@ public class Service : System.Web.Services.WebService
     [WebMethod]
     public string SGMManager_ValidateAdminLogin(string admin, string pwd)
     {
-        return m_bSaleGasManagerService.ValidateAdminLogin(admin, pwd);
+        return m_bSaleGasManagerService.SGMLogin_ValidateAdminLogin(admin, pwd);
     }
 
     [WebMethod]
     public string SGMManager_UpdateAdminAccount(string admin, string admin_new, string pwd)
     {
-        return m_bSaleGasManagerService.UpdateAdminAccount(admin, admin_new, pwd);
+        return m_bSaleGasManagerService.SGMUpdateAccount_UpdateAdminAccount(admin, admin_new, pwd);
     }
 
     [WebMethod]
     public string SGMManager_CheckCustomerExist(string stCusID)
     {
-        return m_bSaleGasManagerService.CheckCustomerExist(stCusID);
+        return m_bSaleGasManagerService.SGMCustomer_AddNewCustomer(stCusID);
     }
 
     [WebMethod]
-    public string SGMManager_AddNewCustomer(String jsonCustomerDTO)
+    public string SGMManager_AddNewCustomer(string jsonCustomerDTO)
     {
-        return m_bSaleGasManagerService.AddNewCustomer(jsonCustomerDTO);
+        return m_bSaleGasManagerService.SGMCustomer_AddNewCustomer(jsonCustomerDTO);
+    }
+
+    [WebMethod]
+    public string SGMManager_GetCustomer(string stCusID)
+    {
+        return m_bSaleGasManagerService.SGMCustomer_GetCustomer(stCusID);
     }
     
 }

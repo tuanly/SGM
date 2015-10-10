@@ -15,7 +15,7 @@ namespace SGM.ServicesCore.BLL
         {
             m_jsHelper = new JSonHelper();
         }
-        public string ValidateAdminLogin(string admin, string pwd)
+        public string SGMLogin_ValidateAdminLogin(string admin, string pwd)
         {
             SystemAdminDAL dalSysAdmin = new SystemAdminDAL();
             DataTransfer response = new DataTransfer();
@@ -33,7 +33,7 @@ namespace SGM.ServicesCore.BLL
             return m_jsHelper.ConvertObjectToJSon(response);
         }
 
-        public string UpdateAdminAccount(string admin, string admin_new, string pwd)
+        public string SGMUpdateAccount_UpdateAdminAccount(string admin, string admin_new, string pwd)
         {
             SystemAdminDAL dalSysAdmin = new SystemAdminDAL();
             DataTransfer response = new DataTransfer();
@@ -51,7 +51,7 @@ namespace SGM.ServicesCore.BLL
             return m_jsHelper.ConvertObjectToJSon(response);
         }
 
-        public string AddNewCustomer(String jsonCustomerDTO)
+        public string SGMCustomer_AddNewCustomer(String jsonCustomerDTO)
         {
             DataTransfer dataInput = m_jsHelper.ConvertJSonToObject(jsonCustomerDTO);           
             CustomerDAL dalCustomer = new CustomerDAL();
@@ -59,10 +59,17 @@ namespace SGM.ServicesCore.BLL
             return m_jsHelper.ConvertObjectToJSon(response);
         }
 
-        public string CheckCustomerExist(string stCustomerID)
+        public string SGMCustomer_CheckCustomerExist(string stCustomerID)
         {
             CustomerDAL dalCustomer = new CustomerDAL();
             DataTransfer response = dalCustomer.IsCustomerExisted(stCustomerID);
+            return m_jsHelper.ConvertObjectToJSon(response);
+        }
+
+        public string SGMCustomer_GetCustomer(string stCustomerID)
+        {
+            CustomerDAL dalCustomer = new CustomerDAL();
+            DataTransfer response = dalCustomer.GetCustomer(stCustomerID);
             return m_jsHelper.ConvertObjectToJSon(response);
         }
     }

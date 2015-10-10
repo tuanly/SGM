@@ -19,13 +19,21 @@ namespace SGM.ServicesCore.DAL
             m_jsHelper = new JSonHelper();
         }
 
+        public DataTransfer GetCustomers()
+        {
+            return GetCustomer(null);
+        }
         public DataTransfer GetCustomer(string stCusID)
         {
             DataTransfer dataResult = new DataTransfer();
             try
             {
                 CustomerDTO dtoCustomer = null;
-                string query = string.Format("SELECT * FROM CUSTOMER WHERE CUS_ID = @CUS_ID");
+                string query; 
+                if (stCusID == null)
+                    query = string.Format("SELECT * FROM CUSTOMER");
+                else
+                    query = string.Format("SELECT * FROM CUSTOMER WHERE CUS_ID = @CUS_ID");
                 SqlParameter[] sqlParameters = new SqlParameter[1];
                 sqlParameters[0] = new SqlParameter("@CUS_ID", SqlDbType.NVarChar);
                 sqlParameters[0].Value = Convert.ToString(stCusID);
