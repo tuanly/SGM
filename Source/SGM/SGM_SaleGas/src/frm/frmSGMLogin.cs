@@ -18,11 +18,9 @@ namespace SGM_SaleGas
     public partial class frmSGMLogin : Form
     {
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
-        JSonHelper m_jsHelper; 
         public frmSGMLogin()
         {
             InitializeComponent();
-            m_jsHelper = new JSonHelper();
         }
 
         private void frmSGMLogin_Load(object sender, EventArgs e)
@@ -44,7 +42,7 @@ namespace SGM_SaleGas
             string GASSTATION_MACADDRESS = GetMacAddress();
 
             String stResponse = service.SGMSaleGas_ValidateGasStationLogin(GASSTATION_ID, GASSTATION_MACADDRESS);
-            DataTransfer dataResponse = m_jsHelper.ConvertJSonToObject(stResponse);     
+            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);     
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
                 this.Hide();

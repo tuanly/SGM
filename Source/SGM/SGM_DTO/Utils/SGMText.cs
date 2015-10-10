@@ -22,6 +22,8 @@ namespace SGM_Core.Utils
         public static string GAS_CARD_LOCK = "Thẻ xăng đã bị khóa.";
         public static string GAS_BUYING_SUCCESS = "Mua xăng thành công.";
         public static string GAS_BUYING_FAIL = "Mua xăng không thành công.";
+        public static string UPDATE_PRICE_INPUT_NULL = "Chưa nhập giá!";
+        public static string UPDATE_PRICE_INPUT_ERR = "Giá không hợp lệ!";
 
         public static string ADMIN_LOGON_ERROR = "Lỗi, Không thể đăng nhập hệ thống!";
 
@@ -35,5 +37,6 @@ namespace SGM_Core.Utils
 
         public static string SYS_ADMIN_CHANGE_SUCCESS = "Đã cập nhật tài khoản admin.";
         public static string SYS_ADMIN_CHANGE_FAIL = "Cập nhật tài khoản admin không thành công.";
+        public static string ADMIN_UPDATE_PRICE_ERR = "Lỗi! Không thể cập nhật giá.";
     }
 }

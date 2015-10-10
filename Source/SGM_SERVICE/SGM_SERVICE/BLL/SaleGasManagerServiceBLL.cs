@@ -10,10 +10,10 @@ namespace SGM.ServicesCore.BLL
 {
     public class SaleGasManagerServiceBLL
     {
-        private JSonHelper m_jsHelper;
+        //private JSonHelper m_jsHelper;
         public SaleGasManagerServiceBLL()
         {
-            m_jsHelper = new JSonHelper();
+            //m_jsHelper = new JSonHelper();
         }
         public string SGMLogin_ValidateAdminLogin(string admin, string pwd)
         {
@@ -30,7 +30,7 @@ namespace SGM.ServicesCore.BLL
                 response.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
                 response.ResponseErrorMsg = SGMText.ADMIN_LOGON_ERROR;
             }
-            return m_jsHelper.ConvertObjectToJSon(response);
+            return JSonHelper.ConvertObjectToJSon(response);
         }
 
         public string SGMUpdateAccount_UpdateAdminAccount(string admin, string admin_new, string pwd)
@@ -48,29 +48,37 @@ namespace SGM.ServicesCore.BLL
                 response.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
                 response.ResponseErrorMsg = SGMText.SYS_ADMIN_CHANGE_FAIL;
             }
-            return m_jsHelper.ConvertObjectToJSon(response);
+            return JSonHelper.ConvertObjectToJSon(response);
+        }
+
+        public string UpdateSystemPrice(String jsonSysAdminDTO)
+        {
+            DataTransfer dataInput = JSonHelper.ConvertJSonToObject(jsonSysAdminDTO);
+            SystemAdminDAL dalSystemAd = new SystemAdminDAL();
+            DataTransfer response = dalSystemAd.UpdateSystemAdminPrice(dataInput.ResponseDataSystemAdminDTO);
+            return JSonHelper.ConvertObjectToJSon(response);
         }
 
         public string SGMCustomer_AddNewCustomer(String jsonCustomerDTO)
         {
-            DataTransfer dataInput = m_jsHelper.ConvertJSonToObject(jsonCustomerDTO);           
+            DataTransfer dataInput = JSonHelper.ConvertJSonToObject(jsonCustomerDTO);           
             CustomerDAL dalCustomer = new CustomerDAL();
             DataTransfer response = dalCustomer.AddNewCustomer(dataInput.ResponseDataCustomerDTO);
-            return m_jsHelper.ConvertObjectToJSon(response);
+            return JSonHelper.ConvertObjectToJSon(response);
         }
 
         public string SGMCustomer_CheckCustomerExist(string stCustomerID)
         {
             CustomerDAL dalCustomer = new CustomerDAL();
             DataTransfer response = dalCustomer.IsCustomerExisted(stCustomerID);
-            return m_jsHelper.ConvertObjectToJSon(response);
+            return JSonHelper.ConvertObjectToJSon(response);
         }
-
+        
         public string SGMCustomer_GetCustomer(string stCustomerID)
         {
             CustomerDAL dalCustomer = new CustomerDAL();
             DataTransfer response = dalCustomer.GetCustomer(stCustomerID);
-            return m_jsHelper.ConvertObjectToJSon(response);
+            return JSonHelper.ConvertObjectToJSon(response);
         }
     }
 }

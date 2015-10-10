@@ -85,7 +85,7 @@ namespace SGM_Management
             string SYS_PWD = txtPwd.Text;
 
             String stResponse = service.SGMManager_UpdateAdminAccount(old_admin, SYS_ADMIN, SYS_PWD);
-            DataTransfer dataResponse = m_jsHelper.ConvertJSonToObject(stResponse);
+            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                 MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else

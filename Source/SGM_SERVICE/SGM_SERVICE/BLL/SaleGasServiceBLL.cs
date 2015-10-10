@@ -19,7 +19,7 @@ namespace SGM.ServicesCore.BLL
         {
             GasStationDAL dalGasStation = new GasStationDAL();
             DataTransfer response = dalGasStation.ValidateGasStationLogin(stGasStationID, stGasStationMacAddress);
-            return m_jsHelper.ConvertObjectToJSon(response);
+            return JSonHelper.ConvertObjectToJSon(response);
         }
 
         public string ValidateCardId(string strCardId)
@@ -39,7 +39,7 @@ namespace SGM.ServicesCore.BLL
                 dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
                 dataResult.ResponseErrorMsg = SGMText.GAS_STATION_CARD_ID_NOT_EXIST;
             }
-            return m_jsHelper.ConvertObjectToJSon(dataResult);
+            return JSonHelper.ConvertObjectToJSon(dataResult);
         }
 
         public string GasBuying(string strCardId, int money)
@@ -60,7 +60,7 @@ namespace SGM.ServicesCore.BLL
                 response.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
                 response.ResponseErrorMsg = SGMText.GAS_BUYING_FAIL;
             }
-            return m_jsHelper.ConvertObjectToJSon(response);
+            return JSonHelper.ConvertObjectToJSon(response);
         }
     }
     

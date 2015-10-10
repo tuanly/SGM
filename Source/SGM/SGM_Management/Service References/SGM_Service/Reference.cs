@@ -42,6 +42,10 @@ namespace SGM_Management.SGM_Service {
         // CODEGEN: Generating message contract since element name jsonCustomerDTO from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_AddNewCustomer", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMManager_AddNewCustomerResponse SGMManager_AddNewCustomer(SGM_Management.SGM_Service.SGMManager_AddNewCustomerRequest request);
+        
+        // CODEGEN: Generating message contract since element name jsonSysAdminDTO from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_UpdateSystemPrice", ReplyAction="*")]
+        SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceResponse SGMManager_UpdateSystemPrice(SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -540,6 +544,74 @@ namespace SGM_Management.SGM_Service {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateSystemPriceRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateSystemPrice", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceRequestBody Body;
+        
+        public SGMManager_UpdateSystemPriceRequest() {
+        }
+        
+        public SGMManager_UpdateSystemPriceRequest(SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateSystemPriceRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string jsonSysAdminDTO;
+        
+        public SGMManager_UpdateSystemPriceRequestBody() {
+        }
+        
+        public SGMManager_UpdateSystemPriceRequestBody(string jsonSysAdminDTO) {
+            this.jsonSysAdminDTO = jsonSysAdminDTO;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateSystemPriceResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateSystemPriceResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceResponseBody Body;
+        
+        public SGMManager_UpdateSystemPriceResponse() {
+        }
+        
+        public SGMManager_UpdateSystemPriceResponse(SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateSystemPriceResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_UpdateSystemPriceResult;
+        
+        public SGMManager_UpdateSystemPriceResponseBody() {
+        }
+        
+        public SGMManager_UpdateSystemPriceResponseBody(string SGMManager_UpdateSystemPriceResult) {
+            this.SGMManager_UpdateSystemPriceResult = SGMManager_UpdateSystemPriceResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ServiceSoapChannel : SGM_Management.SGM_Service.ServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -661,6 +733,19 @@ namespace SGM_Management.SGM_Service {
             inValue.Body.jsonCustomerDTO = jsonCustomerDTO;
             SGM_Management.SGM_Service.SGMManager_AddNewCustomerResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMManager_AddNewCustomer(inValue);
             return retVal.Body.SGMManager_AddNewCustomerResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceResponse SGM_Management.SGM_Service.ServiceSoap.SGMManager_UpdateSystemPrice(SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceRequest request) {
+            return base.Channel.SGMManager_UpdateSystemPrice(request);
+        }
+        
+        public string SGMManager_UpdateSystemPrice(string jsonSysAdminDTO) {
+            SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceRequest inValue = new SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceRequest();
+            inValue.Body = new SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceRequestBody();
+            inValue.Body.jsonSysAdminDTO = jsonSysAdminDTO;
+            SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMManager_UpdateSystemPrice(inValue);
+            return retVal.Body.SGMManager_UpdateSystemPriceResult;
         }
     }
 }

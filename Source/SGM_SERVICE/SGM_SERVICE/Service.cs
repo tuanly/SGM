@@ -54,6 +54,12 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public string SGMManager_UpdateSystemPrice(String jsonSysAdminDTO)
+    {
+        return m_bSaleGasManagerService.UpdateSystemPrice(jsonSysAdminDTO);
+    }
+
+    [WebMethod]
     public string SGMManager_CheckCustomerExist(string stCusID)
     {
         return m_bSaleGasManagerService.SGMCustomer_AddNewCustomer(stCusID);
@@ -70,7 +76,7 @@ public class Service : System.Web.Services.WebService
     {
         return m_bSaleGasManagerService.SGMCustomer_GetCustomer(stCusID);
     }
-    
+
 }
     
 

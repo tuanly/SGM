@@ -13,12 +13,10 @@ namespace SGM_Management
     public partial class frmSGMCustomer : Form
     {
         private SGM_Service.ServiceSoapClient m_service = null;
-        private JSonHelper m_jsHelper;
         public frmSGMCustomer()
         {
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
-            m_jsHelper = new JSonHelper();
         }
 
         private void UpdateStateControls(bool isEditMode)
@@ -101,9 +99,9 @@ namespace SGM_Management
                 cus.CustomerNote = txtCusAddress.Text.Trim();
                 DataTransfer request = new DataTransfer();
                 request.ResponseDataCustomerDTO = cus;
-                string jsRequest = m_jsHelper.ConvertObjectToJSon(request);
+                string jsRequest = JSonHelper.ConvertObjectToJSon(request);
                 string response = m_service.SGMManager_AddNewCustomer(jsRequest);
-                DataTransfer dataResponse = m_jsHelper.ConvertJSonToObject(response);
+                DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
                 
                 btnAdd.Text = "&Thêm";
 
@@ -123,7 +121,7 @@ namespace SGM_Management
             else
             {
                 String jsonResponse = m_service.SGMManager_CheckCustomerExist(txtCusID.Text.Trim());
-                DataTransfer response = m_jsHelper.ConvertJSonToObject(jsonResponse);
+                DataTransfer response = JSonHelper.ConvertJSonToObject(jsonResponse);
                 if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                 {
                     if (response.ResponseDataBool)

@@ -137,6 +137,53 @@ namespace SGM.ServicesCore.DAL
             return result;
         }
 
+        public DataTransfer UpdateSystemAdminPrice(SystemAdminDTO dtoSysAdmin)
+        {
+            DataTransfer dataResult = new DataTransfer();
+            try
+            {
+                string query = string.Format("UPDATE SYSTEM_ADMIN SET SYS_GAS92_CURRENT_PRICE = @SYS_GAS92_CURRENT_PRICE, SYS_GAS95_CURRENT_PRICE = @SYS_GAS95_CURRENT_PRICE, SYS_GASDO_CURRENT_PRICE = @SYS_GASDO_CURRENT_PRICE " +
+                                                                     "SYS_GAS92_NEW_PRICE = @SYS_GAS92_NEW_PRICE, SYS_GAS95_NEW_PRICE = @SYS_GAS95_NEW_PRICE, SYS_GASDO_NEW_PRICE = @SYS_GASDO_NEW_PRICE, SYS_APPLY_DATE = @SYS_APPLY_DATE " +
+                                                                " WHERE SYS_ADMIN = @SYS_ADMIN");
+                SqlParameter[] sqlParameters = new SqlParameter[8];
+                sqlParameters[0] = new SqlParameter("@SYS_ADMIN", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(dtoSysAdmin.SysAdminAccount);
+                sqlParameters[1] = new SqlParameter("@SYS_GAS92_CURRENT_PRICE", SqlDbType.Int);
+                sqlParameters[1].Value = Convert.ToInt32(dtoSysAdmin.SysGas92CurrentPrice);
+                sqlParameters[2] = new SqlParameter("@SYS_GAS95_CURRENT_PRICE", SqlDbType.Int);
+                sqlParameters[2].Value = Convert.ToInt32(dtoSysAdmin.SysGas95CurrentPrice);
+                sqlParameters[3] = new SqlParameter("@SYS_GASDO_CURRENT_PRICE", SqlDbType.Int);
+                sqlParameters[3].Value = Convert.ToInt32(dtoSysAdmin.SysGasDOCurrentPrice);
+                sqlParameters[4] = new SqlParameter("@SYS_GAS92_NEW_PRICE", SqlDbType.Int);
+                sqlParameters[4].Value = Convert.ToInt32(dtoSysAdmin.SysGas92NewPrice);
+                sqlParameters[5] = new SqlParameter("@SYS_GAS95_NEW_PRICE", SqlDbType.Int);
+                sqlParameters[5].Value = Convert.ToInt32(dtoSysAdmin.SysGas95NewPrice);
+                sqlParameters[6] = new SqlParameter("@SYS_GASDO_NEW_PRICE", SqlDbType.Int);
+                sqlParameters[6].Value = Convert.ToInt32(dtoSysAdmin.SysGasDONewPrice);
+                sqlParameters[7] = new SqlParameter("@SYS_APPLY_DATE", SqlDbType.DateTime);
+                sqlParameters[7].Value = Convert.ToDateTime(dtoSysAdmin.SysApplyDate);
+
+                bool result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
+                if (result)
+                {
+                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+                }
+                else
+                {
+                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                    dataResult.ResponseErrorMsg = SGMText.ADMIN_UPDATE_PRICE_ERR;
+                }
+            }
+            catch (Exception ex)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.ADMIN_UPDATE_PRICE_ERR;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+
+            return dataResult;
+        }
+
         public bool UpdateAdminAccount(string admin, string admin_new, string pass)
         {
             bool result = true;

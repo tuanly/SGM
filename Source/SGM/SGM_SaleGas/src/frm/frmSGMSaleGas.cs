@@ -132,7 +132,7 @@ namespace SGM_SaleGas
         private void ScanCard(string cardId)
         {
             String stResponse = service.SGMSaleGas_ValidateCardId(cardId);
-            DataTransfer dataResponse = m_jsHelper.ConvertJSonToObject(stResponse);
+            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
                 EnableTransaction(true, true);
@@ -203,7 +203,7 @@ namespace SGM_SaleGas
         private void btnBuy_Click(object sender, EventArgs e)
         {
             String stResponse = service.SGMSaleGas_GasBuying(_cardId, _cardDTO.CardRemainingMoney - _moneyBuying);
-            DataTransfer dataResponse = m_jsHelper.ConvertJSonToObject(stResponse);
+            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
                 MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);

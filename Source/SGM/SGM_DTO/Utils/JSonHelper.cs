@@ -10,7 +10,7 @@ namespace SGM_Core.Utils
     public class JSonHelper 
     {
 
-        public string ConvertObjectToJSon(DataTransfer obj)
+        public static string ConvertObjectToJSon(DataTransfer obj)
         {
 
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(DataTransfer));
@@ -21,7 +21,7 @@ namespace SGM_Core.Utils
             return jsonString;
         }
 
-        public DataTransfer ConvertJSonToObject(string jsonString)
+        public static DataTransfer ConvertJSonToObject(string jsonString)
         {
 
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DataTransfer));

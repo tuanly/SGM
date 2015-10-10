@@ -105,6 +105,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="SGMManager_UpdateSystemPrice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jsonSysAdminDTO" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_UpdateSystemPriceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_UpdateSystemPriceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="SGMSaleGas_ValidateGasStationLoginSoapIn">
@@ -149,6 +163,12 @@
   <wsdl:message name="SGMManager_AddNewCustomerSoapOut">
     <wsdl:part name="parameters" element="tns:SGMManager_AddNewCustomerResponse" />
   </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateSystemPriceSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateSystemPrice" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateSystemPriceSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateSystemPriceResponse" />
+  </wsdl:message>
   <wsdl:portType name="ServiceSoap">
     <wsdl:operation name="SGMSaleGas_ValidateGasStationLogin">
       <wsdl:input message="tns:SGMSaleGas_ValidateGasStationLoginSoapIn" />
@@ -177,6 +197,10 @@
     <wsdl:operation name="SGMManager_AddNewCustomer">
       <wsdl:input message="tns:SGMManager_AddNewCustomerSoapIn" />
       <wsdl:output message="tns:SGMManager_AddNewCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateSystemPrice">
+      <wsdl:input message="tns:SGMManager_UpdateSystemPriceSoapIn" />
+      <wsdl:output message="tns:SGMManager_UpdateSystemPriceSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
@@ -244,6 +268,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateSystemPrice">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_UpdateSystemPrice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -303,6 +336,15 @@
     </wsdl:operation>
     <wsdl:operation name="SGMManager_AddNewCustomer">
       <soap12:operation soapAction="http://tempuri.org/SGMManager_AddNewCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateSystemPrice">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_UpdateSystemPrice" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
