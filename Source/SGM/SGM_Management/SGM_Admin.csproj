@@ -150,9 +150,7 @@
     </Compile>
     <None Include="Service References\SGM_Service\Service.wsdl" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\process\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>

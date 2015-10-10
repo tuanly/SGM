@@ -21,7 +21,26 @@ namespace SGM.ServicesCore.DAL
 
         public DataTransfer GetCustomers()
         {
-            return GetCustomer(null);
+            DataTransfer dataResult = new DataTransfer();
+            try
+            {               
+                string query = query = string.Format("SELECT CUS_ID AS STT, * FROM CUSTOMER");
+                DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, new SqlParameter[0]);
+                if (tblResult.Rows.Count > 0)
+                {
+                    DataSet ds = new DataSet();
+                    ds.Tables.Add(tblResult.Copy());
+                    dataResult.ResponseDataSet = ds;                    
+                }                
+            }
+            catch (Exception ex)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.CUSTOMER_GET_CUS_ERR;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+
+            return dataResult;
         }
         public DataTransfer GetCustomer(string stCusID)
         {
@@ -29,11 +48,7 @@ namespace SGM.ServicesCore.DAL
             try
             {
                 CustomerDTO dtoCustomer = null;
-                string query; 
-                if (stCusID == null)
-                    query = string.Format("SELECT * FROM CUSTOMER");
-                else
-                    query = string.Format("SELECT * FROM CUSTOMER WHERE CUS_ID = @CUS_ID");
+                string query = query = string.Format("SELECT * FROM CUSTOMER WHERE CUS_ID = @CUS_ID");                
                 SqlParameter[] sqlParameters = new SqlParameter[1];
                 sqlParameters[0] = new SqlParameter("@CUS_ID", SqlDbType.NVarChar);
                 sqlParameters[0].Value = Convert.ToString(stCusID);

@@ -13,6 +13,7 @@ namespace SGM_Management
     public partial class frmSGMCustomer : Form
     {
         private SGM_Service.ServiceSoapClient m_service = null;
+        private DataSet m_dsCustomer;
         public frmSGMCustomer()
         {
             InitializeComponent();
@@ -41,7 +42,9 @@ namespace SGM_Management
         }
         private void frmSGMCustomer_Load(object sender, EventArgs e)
         {
+            LoadCustomerList();
             UpdateStateControls(false);
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -160,6 +163,23 @@ namespace SGM_Management
             btnAdd.Text = "&Thêm";
             btnEdit.Text = "&Sửa";
             UpdateStateControls(false);
+        }
+
+        private void LoadCustomerList()
+        {
+            string jsResponse = m_service.SGMManager_GetCustomer(null);
+            DataTransfer response = JSonHelper.ConvertJSonToObject(jsResponse);
+            m_dsCustomer = response.ResponseDataSet;
+            if (m_dsCustomer != null)
+            {                
+                for (int i = 0; i < m_dsCustomer.Tables[0].Rows.Count; i++)
+                {
+                    m_dsCustomer.Tables[0].Rows[i]["STT"] = (i + 1);
+                }
+            }
+            dgvCusList.DataSource = m_dsCustomer;
+            dgvCusList.DataMember = m_dsCustomer.Tables[0].TableName;
+            dgvCusList.Update();
         }
     }
 }

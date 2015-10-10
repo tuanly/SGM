@@ -30,12 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMCustomer));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.dgvCusList = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnBuyCard = new System.Windows.Forms.Button();
             this.txtNote = new System.Windows.Forms.TextBox();
@@ -62,76 +56,26 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.dgvCardList = new System.Windows.Forms.DataGridView();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.groupBox1.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCusList)).BeginInit();
+            this.dgvCusList = new System.Windows.Forms.DataGridView();
+            this.colCusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCusIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCusList)).BeginInit();
+            this.groupBox6.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.groupBox6);
-            this.groupBox1.Controls.Add(this.dgvCusList);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(287, 491);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Danh sách Khách Hàng";
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.btnSearch);
-            this.groupBox6.Controls.Add(this.txtSearch);
-            this.groupBox6.Controls.Add(this.label8);
-            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox6.Location = new System.Drawing.Point(3, 16);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(281, 55);
-            this.groupBox6.TabIndex = 1;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Tìm kiếm:";
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(231, 20);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(44, 23);
-            this.btnSearch.TabIndex = 1;
-            this.btnSearch.Text = "Tìm";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(84, 22);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(141, 20);
-            this.txtSearch.TabIndex = 0;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(17, 25);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(67, 13);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Tên/Mã KH:";
-            // 
-            // dgvCusList
-            // 
-            this.dgvCusList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCusList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCusList.Location = new System.Drawing.Point(3, 16);
-            this.dgvCusList.Name = "dgvCusList";
-            this.dgvCusList.Size = new System.Drawing.Size(281, 472);
-            this.dgvCusList.TabIndex = 0;
-            this.dgvCusList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // groupBox2
             // 
@@ -387,6 +331,90 @@
             // 
             this.errProvider.ContainerControl = this;
             // 
+            // dgvCusList
+            // 
+            this.dgvCusList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCusList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colCusIndex,
+            this.colCusName});
+            this.dgvCusList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCusList.Location = new System.Drawing.Point(0, 0);
+            this.dgvCusList.Name = "dgvCusList";
+            this.dgvCusList.Size = new System.Drawing.Size(281, 417);
+            this.dgvCusList.TabIndex = 0;
+            this.dgvCusList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            // 
+            // colCusName
+            // 
+            this.colCusName.HeaderText = "Khách Hàng";
+            this.colCusName.Name = "colCusName";
+            this.colCusName.ReadOnly = true;
+            // 
+            // colCusIndex
+            // 
+            this.colCusIndex.HeaderText = "STT";
+            this.colCusIndex.Name = "colCusIndex";
+            this.colCusIndex.ReadOnly = true;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.btnSearch);
+            this.groupBox6.Controls.Add(this.txtSearch);
+            this.groupBox6.Controls.Add(this.label8);
+            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox6.Location = new System.Drawing.Point(3, 16);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(281, 55);
+            this.groupBox6.TabIndex = 1;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Tìm kiếm:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(17, 25);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Tên/Mã KH:";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(84, 22);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(141, 20);
+            this.txtSearch.TabIndex = 0;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(231, 20);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(44, 23);
+            this.btnSearch.TabIndex = 1;
+            this.btnSearch.Text = "Tìm";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.panel1);
+            this.groupBox1.Controls.Add(this.groupBox6);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(287, 491);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Danh sách Khách Hàng";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.dgvCusList);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 71);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(281, 417);
+            this.panel1.TabIndex = 2;
+            // 
             // frmSGMCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -400,10 +428,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SGM - Quản lý Khách Hàng";
             this.Load += new System.EventHandler(this.frmSGMCustomer_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCusList)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -411,15 +435,18 @@
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCusList)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dgvCusList;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dgvCardList;
         private System.Windows.Forms.Label label2;
@@ -444,10 +471,15 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnBuyCard;
+        private System.Windows.Forms.ErrorProvider errProvider;
+        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ErrorProvider errProvider;
+        private System.Windows.Forms.DataGridView dgvCusList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCusIndex;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colCusName;
+        private System.Windows.Forms.Panel panel1;
     }
 }

@@ -77,7 +77,11 @@ namespace SGM.ServicesCore.BLL
         public string SGMCustomer_GetCustomer(string stCustomerID)
         {
             CustomerDAL dalCustomer = new CustomerDAL();
-            DataTransfer response = dalCustomer.GetCustomer(stCustomerID);
+            DataTransfer response;
+            if (stCustomerID == null)
+                response = dalCustomer.GetCustomers();
+            else
+                response = dalCustomer.GetCustomer(stCustomerID);
             return JSonHelper.ConvertObjectToJSon(response);
         }
     }
