@@ -49,7 +49,7 @@ namespace SGM_Management
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            UpdateInputFields();
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -173,13 +173,36 @@ namespace SGM_Management
             if (m_dsCustomer != null)
             {                
                 for (int i = 0; i < m_dsCustomer.Tables[0].Rows.Count; i++)
-                {
-                    m_dsCustomer.Tables[0].Rows[i]["STT"] = (i + 1);
+                {                   
+                    dgvCusList.Rows.Add();
+                    dgvCusList.Rows[i].Cells[0].Value = (i + 1);
+                    dgvCusList.Rows[i].Cells[1].Value = m_dsCustomer.Tables[0].Rows[i]["CUS_NAME"] + " (" + m_dsCustomer.Tables[0].Rows[i]["CUS_ID"] + ")";
                 }
             }
-            dgvCusList.DataSource = m_dsCustomer;
-            dgvCusList.DataMember = m_dsCustomer.Tables[0].TableName;
-            dgvCusList.Update();
+            
+        }
+
+        private void UpdateInputFields()
+        {
+            if (m_dsCustomer.Tables[0].Rows.Count > 0)
+            {
+                int selectIndex = dgvCusList.SelectedRows[0].Index;
+                if (selectIndex < m_dsCustomer.Tables[0].Rows.Count)
+                {
+                    txtCusID.Text = m_dsCustomer.Tables[0].Rows[selectIndex]["CUS_ID"].ToString();
+                    txtCusName.Text = m_dsCustomer.Tables[0].Rows[selectIndex]["CUS_NAME"].ToString();
+                    txtCusBirthday.Text = m_dsCustomer.Tables[0].Rows[selectIndex]["CUS_BIRTHDATE"].ToString();
+                    txtCusVisa.Text = m_dsCustomer.Tables[0].Rows[selectIndex]["CUS_VISA"].ToString();
+                    txtCusAddress.Text = m_dsCustomer.Tables[0].Rows[selectIndex]["CUS_ADDRESS"].ToString();
+                    txtCusPhone.Text = m_dsCustomer.Tables[0].Rows[selectIndex]["CUS_PHONE"].ToString();
+                    txtNote.Text = m_dsCustomer.Tables[0].Rows[selectIndex]["CUS_NOTE"].ToString();
+                }
+            }            
+        }
+
+        private void dgvCusList_SelectionChanged(object sender, EventArgs e)
+        {
+            UpdateInputFields();
         }
     }
 }

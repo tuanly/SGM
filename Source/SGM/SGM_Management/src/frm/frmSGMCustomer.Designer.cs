@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMCustomer));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnBuyCard = new System.Windows.Forms.Button();
             this.txtNote = new System.Windows.Forms.TextBox();
@@ -57,14 +58,14 @@
             this.dgvCardList = new System.Windows.Forms.DataGridView();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.dgvCusList = new System.Windows.Forms.DataGridView();
-            this.colCusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCusIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.colCusIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -338,23 +339,13 @@
             this.colCusIndex,
             this.colCusName});
             this.dgvCusList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCusList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvCusList.Location = new System.Drawing.Point(0, 0);
             this.dgvCusList.Name = "dgvCusList";
+            this.dgvCusList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCusList.Size = new System.Drawing.Size(281, 417);
             this.dgvCusList.TabIndex = 0;
-            this.dgvCusList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // colCusName
-            // 
-            this.colCusName.HeaderText = "Khách Hàng";
-            this.colCusName.Name = "colCusName";
-            this.colCusName.ReadOnly = true;
-            // 
-            // colCusIndex
-            // 
-            this.colCusIndex.HeaderText = "STT";
-            this.colCusIndex.Name = "colCusIndex";
-            this.colCusIndex.ReadOnly = true;
+            this.dgvCusList.SelectionChanged += new System.EventHandler(this.dgvCusList_SelectionChanged);
             // 
             // groupBox6
             // 
@@ -369,22 +360,6 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Tìm kiếm:";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(17, 25);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(67, 13);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Tên/Mã KH:";
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(84, 22);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(141, 20);
-            this.txtSearch.TabIndex = 0;
-            // 
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(231, 20);
@@ -393,6 +368,22 @@
             this.btnSearch.TabIndex = 1;
             this.btnSearch.Text = "Tìm";
             this.btnSearch.UseVisualStyleBackColor = true;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(84, 22);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(141, 20);
+            this.txtSearch.TabIndex = 0;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(17, 25);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 13);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "Tên/Mã KH:";
             // 
             // groupBox1
             // 
@@ -414,6 +405,24 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(281, 417);
             this.panel1.TabIndex = 2;
+            // 
+            // colCusIndex
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colCusIndex.DefaultCellStyle = dataGridViewCellStyle1;
+            this.colCusIndex.HeaderText = " STT";
+            this.colCusIndex.Name = "colCusIndex";
+            this.colCusIndex.ReadOnly = true;
+            this.colCusIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCusIndex.Width = 50;
+            // 
+            // colCusName
+            // 
+            this.colCusName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCusName.HeaderText = "                Khách Hàng";
+            this.colCusName.Name = "colCusName";
+            this.colCusName.ReadOnly = true;
+            this.colCusName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // frmSGMCustomer
             // 
@@ -478,8 +487,8 @@
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridView dgvCusList;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCusIndex;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCusName;
-        private System.Windows.Forms.Panel panel1;
     }
 }
