@@ -14,8 +14,8 @@ namespace SGM_Management
     public partial class frmSGMUpdatePrice : Form
     {
         private SGM_Service.ServiceSoapClient m_service = null;
-        
-        private string m_currentAdName;
+
+        private SystemAdminDTO m_currentAdminDTO = null;
 
         public frmSGMUpdatePrice()
         {
@@ -27,11 +27,18 @@ namespace SGM_Management
         {
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "dd/MM/yyyy hh:mm:ss tt";
+
+            if (m_currentAdminDTO != null)
+            {
+                txtGas92CurrentPrice.Text = m_currentAdminDTO.SysGas92CurrentPrice.ToString();
+                txtGas95CurrentPrice.Text = m_currentAdminDTO.SysGas95CurrentPrice.ToString();
+                txtGasDOCurrentPrice.Text = m_currentAdminDTO.SysGasDOCurrentPrice.ToString();
+            }
         }
 
-        public void SetCurrentAccount(string _ad)
+        public void SetCurrentAdminDTO(SystemAdminDTO _ad)
         {
-            m_currentAdName = _ad;
+            m_currentAdminDTO = _ad;
         }
 
         private bool ValidateDataInput()
@@ -67,15 +74,13 @@ namespace SGM_Management
             {
                 return;
             }
-            SystemAdminDTO ad = new SystemAdminDTO();
-            ad.SysAdminAccount = m_currentAdName;
-            ad.SysApplyDate = dateTimePicker1.Value;
-            ad.SysGas92CurrentPrice = ad.SysGas92NewPrice = Int32.Parse(txtGas92NewPrice.Text);
-            ad.SysGas95CurrentPrice = ad.SysGas95NewPrice = Int32.Parse(txtGas95NewPrice.Text);
-            ad.SysGasDOCurrentPrice = ad.SysGasDONewPrice = Int32.Parse(txtGasDONewPrice.Text);
+            m_currentAdminDTO.SysApplyDate = dateTimePicker1.Value;
+            m_currentAdminDTO.SysGas92CurrentPrice = m_currentAdminDTO.SysGas92NewPrice = Int32.Parse(txtGas92NewPrice.Text);
+            m_currentAdminDTO.SysGas95CurrentPrice = m_currentAdminDTO.SysGas95NewPrice = Int32.Parse(txtGas95NewPrice.Text);
+            m_currentAdminDTO.SysGasDOCurrentPrice = m_currentAdminDTO.SysGasDONewPrice = Int32.Parse(txtGasDONewPrice.Text);
 
             DataTransfer request = new DataTransfer();
-            request.ResponseDataSystemAdminDTO = ad;
+            request.ResponseDataSystemAdminDTO = m_currentAdminDTO;
             string jsRequest = JSonHelper.ConvertObjectToJSon(request);
 
             string response = m_service.SGMManager_UpdateSystemPrice(jsRequest);
@@ -83,7 +88,7 @@ namespace SGM_Management
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                 MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
-                MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(dataResponse.ResponseErrorMsgDetail, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
             
         }
     }

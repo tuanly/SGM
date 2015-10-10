@@ -37,6 +37,7 @@ namespace SGM_Core.Utils
 
         public static string SYS_ADMIN_CHANGE_SUCCESS = "Đã cập nhật tài khoản admin.";
         public static string SYS_ADMIN_CHANGE_FAIL = "Cập nhật tài khoản admin không thành công.";
+        public static string ADMIN_UPDATE_PRICE_SUCCESS = "Cập nhật giá thành công.";
         public static string ADMIN_UPDATE_PRICE_ERR = "Lỗi! Không thể cập nhật giá.";
     }
 }

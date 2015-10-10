@@ -15,17 +15,15 @@ namespace SGM_Management
     {
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
 
-        private string old_admin;
-        private JSonHelper m_jsHelper;
+        private SystemAdminDTO m_currentAdminDTO = null;
         public frmSGMUpdateAccount()
         {
             InitializeComponent();
-            m_jsHelper = new JSonHelper();
         }
-       
-        public void setCurrentAdmin(string name)
+
+        public void SetCurrentAdminDTO(SystemAdminDTO ad)
         {
-            old_admin = name;
+            m_currentAdminDTO = ad;
         }
         private bool ValidateInput()
         {
@@ -84,7 +82,7 @@ namespace SGM_Management
             string SYS_ADMIN = txtAdmin.Text;
             string SYS_PWD = txtPwd.Text;
 
-            String stResponse = service.SGMManager_UpdateAdminAccount(old_admin, SYS_ADMIN, SYS_PWD);
+            String stResponse = service.SGMManager_UpdateAdminAccount(m_currentAdminDTO.SysAdminAccount, SYS_ADMIN, SYS_PWD);
             DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                 MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);

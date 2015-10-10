@@ -14,11 +14,11 @@ namespace SGM.ServicesCore.BLL
         {
             SystemAdminDAL dalSysAdmin = new SystemAdminDAL();
             DataTransfer response = new DataTransfer();
-            DataSet ds = dalSysAdmin.GetSystemAdminInfo(admin, pwd);
-            if (ds != null)
+            SystemAdminDTO dto = dalSysAdmin.GetSystemAdminInfo(admin, pwd);
+            if (dto != null)
             {
                 response.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
-                response.ResponseDataSet = ds;
+                response.ResponseDataSystemAdminDTO = dto;
             }
             else
             {

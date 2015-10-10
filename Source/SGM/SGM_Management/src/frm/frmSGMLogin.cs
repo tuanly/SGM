@@ -78,8 +78,9 @@ namespace SGM_Management
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
                 this.Hide();
-                frmSGMUpdateAccount a = new frmSGMUpdateAccount();
-                a.setCurrentAdmin(SYS_ADMIN);
+                frmSGMUpdatePrice a = new frmSGMUpdatePrice();
+                //frmSGMUpdateAccount a = new frmSGMUpdateAccount();
+                a.SetCurrentAdminDTO(dataResponse.ResponseDataSystemAdminDTO);
                 a.ShowDialog();
                 this.Close();
             }
