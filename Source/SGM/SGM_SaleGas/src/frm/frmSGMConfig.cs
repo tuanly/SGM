@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO.Ports;
 using System.Xml;
 using System.Xml.XPath;
 using SGM_Core.DTO;
+using SGM_Core.Utils;
 
 namespace SGM_SaleGas
 {

@@ -9,150 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace SGM_Management.SGM_Service {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CustomerDTO", Namespace="http://tempuri.org/")]
-    [System.SerializableAttribute()]
-    public partial class CustomerDTO : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CustomerIDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CustomerNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CustomerVisaField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CustomerBirthDateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CustomerAddressField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CustomerPhoneField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CustomerNoteField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string CustomerID {
-            get {
-                return this.CustomerIDField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CustomerIDField, value) != true)) {
-                    this.CustomerIDField = value;
-                    this.RaisePropertyChanged("CustomerID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string CustomerName {
-            get {
-                return this.CustomerNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CustomerNameField, value) != true)) {
-                    this.CustomerNameField = value;
-                    this.RaisePropertyChanged("CustomerName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
-        public string CustomerVisa {
-            get {
-                return this.CustomerVisaField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CustomerVisaField, value) != true)) {
-                    this.CustomerVisaField = value;
-                    this.RaisePropertyChanged("CustomerVisa");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
-        public string CustomerBirthDate {
-            get {
-                return this.CustomerBirthDateField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CustomerBirthDateField, value) != true)) {
-                    this.CustomerBirthDateField = value;
-                    this.RaisePropertyChanged("CustomerBirthDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
-        public string CustomerAddress {
-            get {
-                return this.CustomerAddressField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CustomerAddressField, value) != true)) {
-                    this.CustomerAddressField = value;
-                    this.RaisePropertyChanged("CustomerAddress");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
-        public string CustomerPhone {
-            get {
-                return this.CustomerPhoneField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CustomerPhoneField, value) != true)) {
-                    this.CustomerPhoneField = value;
-                    this.RaisePropertyChanged("CustomerPhone");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
-        public string CustomerNote {
-            get {
-                return this.CustomerNoteField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CustomerNoteField, value) != true)) {
-                    this.CustomerNoteField = value;
-                    this.RaisePropertyChanged("CustomerNote");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SGM_Service.ServiceSoap")]
@@ -182,7 +39,7 @@ namespace SGM_Management.SGM_Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_CheckCustomerExist", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMManager_CheckCustomerExistResponse SGMManager_CheckCustomerExist(SGM_Management.SGM_Service.SGMManager_CheckCustomerExistRequest request);
         
-        // CODEGEN: Generating message contract since element name dtoCus from namespace http://tempuri.org/ is not marked nillable
+        // CODEGEN: Generating message contract since element name jsonCustomerDTO from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_AddNewCustomer", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMManager_AddNewCustomerResponse SGMManager_AddNewCustomer(SGM_Management.SGM_Service.SGMManager_AddNewCustomerRequest request);
     }
@@ -639,13 +496,13 @@ namespace SGM_Management.SGM_Service {
     public partial class SGMManager_AddNewCustomerRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public SGM_Management.SGM_Service.CustomerDTO dtoCus;
+        public string jsonCustomerDTO;
         
         public SGMManager_AddNewCustomerRequestBody() {
         }
         
-        public SGMManager_AddNewCustomerRequestBody(SGM_Management.SGM_Service.CustomerDTO dtoCus) {
-            this.dtoCus = dtoCus;
+        public SGMManager_AddNewCustomerRequestBody(string jsonCustomerDTO) {
+            this.jsonCustomerDTO = jsonCustomerDTO;
         }
     }
     
@@ -798,10 +655,10 @@ namespace SGM_Management.SGM_Service {
             return base.Channel.SGMManager_AddNewCustomer(request);
         }
         
-        public string SGMManager_AddNewCustomer(SGM_Management.SGM_Service.CustomerDTO dtoCus) {
+        public string SGMManager_AddNewCustomer(string jsonCustomerDTO) {
             SGM_Management.SGM_Service.SGMManager_AddNewCustomerRequest inValue = new SGM_Management.SGM_Service.SGMManager_AddNewCustomerRequest();
             inValue.Body = new SGM_Management.SGM_Service.SGMManager_AddNewCustomerRequestBody();
-            inValue.Body.dtoCus = dtoCus;
+            inValue.Body.jsonCustomerDTO = jsonCustomerDTO;
             SGM_Management.SGM_Service.SGMManager_AddNewCustomerResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMManager_AddNewCustomer(inValue);
             return retVal.Body.SGMManager_AddNewCustomerResult;
         }

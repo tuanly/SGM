@@ -6,16 +6,19 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using SGM_Core.DTO;
+using SGM_Core.Utils;
 
 namespace SGM_Management
 {
     public partial class frmSGMCustomer : Form
     {
         private SGM_Service.ServiceSoapClient m_service = null;
+        private JSonHelper m_jsHelper;
         public frmSGMCustomer()
         {
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
+            m_jsHelper = new JSonHelper();
         }
 
         private void UpdateStateControls(bool isEditMode)
@@ -96,9 +99,12 @@ namespace SGM_Management
                 cus.CustomerVisa = txtCusVisa.Text.Trim();
                 cus.CustomerAddress = txtCusAddress.Text.Trim();
                 cus.CustomerNote = txtCusAddress.Text.Trim();
-
-               // DataTransfer response = new DataTransfer(m_service.SGMManager_AddNewCustomer(cus));
-
+                DataTransfer request = new DataTransfer();
+                request.ResponseDataCustomerDTO = cus;
+                string jsRequest = m_jsHelper.ConvertObjectToJSon(request);
+                string response = m_service.SGMManager_AddNewCustomer(jsRequest);
+                DataTransfer dataResponse = m_jsHelper.ConvertJSonToObject(response);
+                
                 btnAdd.Text = "&Thêm";
 
                 UpdateStateControls(false);
@@ -114,20 +120,24 @@ namespace SGM_Management
                 errProvider.SetError(txtCusID, SGMText.CUSTOMER_DATA_INPUT_CUS_ID_ERR);
                 bValidate = false;
             }
-            DataTransfer response = new DataTransfer(m_service.SGMManager_CheckCustomerExist(txtCusID.Text.Trim()));
-            if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-            {
-                if (response.ResponseDataBool)
-                {
-                    errProvider.SetError(txtCusID, SGMText.CUSTOMER_DATA_INPUT_EXIST_CUS_ID_ERR);
-                    bValidate = false;
-                }
-            }
             else
             {
-                errProvider.SetError(txtCusName, SGMText.CUSTOMER_GET_CUS_ERR);
-                MessageBox.Show(SGMText.CUSTOMER_GET_CUS_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail);
-                bValidate = false;
+                String jsonResponse = m_service.SGMManager_CheckCustomerExist(txtCusID.Text.Trim());
+                DataTransfer response = m_jsHelper.ConvertJSonToObject(jsonResponse);
+                if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                {
+                    if (response.ResponseDataBool)
+                    {
+                        errProvider.SetError(txtCusID, SGMText.CUSTOMER_DATA_INPUT_EXIST_CUS_ID_ERR);
+                        bValidate = false;
+                    }
+                }
+                else
+                {
+                    errProvider.SetError(txtCusName, SGMText.CUSTOMER_GET_CUS_ERR);
+                    MessageBox.Show(SGMText.CUSTOMER_GET_CUS_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail);
+                    bValidate = false;
+                }
             }
             if (txtCusName.Text.Trim().Equals(""))
             {

@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using SGM_Core.DTO;
+using SGM_Core.Utils;
 
 namespace SGM_Management
 {
     public partial class frmSGMLogin : Form
     {
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
-
+        private JSonHelper m_jsHelper;
         public frmSGMLogin()
         {
             InitializeComponent();
+            m_jsHelper = new JSonHelper();
         }
 
         private void frmSGMLogin_Load(object sender, EventArgs e)
@@ -73,7 +74,7 @@ namespace SGM_Management
             string SYS_PWD = txtPwd.Text;
 
             String stResponse = service.SGMManager_ValidateAdminLogin(SYS_ADMIN, SYS_PWD);
-            DataTransfer dataResponse = new DataTransfer(stResponse);
+            DataTransfer dataResponse = m_jsHelper.ConvertJSonToObject(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
                 this.Hide();

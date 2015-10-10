@@ -11,20 +11,23 @@ using System.Net.NetworkInformation;
 using System.Resources;
 using System.IO.Ports;
 using SGM_Core.DTO;
+using SGM_Core.Utils;
 
 namespace SGM_SaleGas
 {
     public partial class frmSGMLogin : Form
     {
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
-
+        JSonHelper m_jsHelper; 
         public frmSGMLogin()
         {
             InitializeComponent();
+            m_jsHelper = new JSonHelper();
         }
 
         private void frmSGMLogin_Load(object sender, EventArgs e)
         {
+
             if (Program.ReaderPort != null)
                 Program.ReaderPort.DataReceived += new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
             errorProvider.SetIconAlignment(txtLoginCode, ErrorIconAlignment.TopRight);
@@ -41,7 +44,7 @@ namespace SGM_SaleGas
             string GASSTATION_MACADDRESS = GetMacAddress();
 
             String stResponse = service.SGMSaleGas_ValidateGasStationLogin(GASSTATION_ID, GASSTATION_MACADDRESS);
-            DataTransfer dataResponse = new DataTransfer(stResponse);          
+            DataTransfer dataResponse = m_jsHelper.ConvertJSonToObject(stResponse);     
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
                 this.Hide();

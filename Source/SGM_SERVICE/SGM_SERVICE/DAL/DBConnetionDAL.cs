@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using System.Data;
+using SGM_Core.Utils;
 
 namespace SGM.ServicesCore.DAL
 {   

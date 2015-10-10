@@ -5,8 +5,9 @@ using System.Runtime.Serialization.Json;
 using System.IO;
 using System.Data;
 using System.Data.SqlClient;
+using SGM_Core.DTO;
 
-namespace SGM_Core.DTO
+namespace SGM_Core.Utils
 {
     public class DataTransfer
     {
@@ -19,10 +20,14 @@ namespace SGM_Core.DTO
         private string m_stResponseErrorMsgDetail;
         private string m_stResponseDataString;
         private bool m_bResponseDataBool;
-        private Object m_dtoResponseDataDTO;
+        private CustomerDTO m_dtoResponseDataCustomerDTO;
+        private CardDTO m_dtoResponseDataCardDTO;
+        private GasStationDTO m_dtoResponseDataGasStationDTO;
+        private RechargeDTO m_dtoResponseDataRechargeDTO;
+        private SaleGasDTO m_dtoResponseDataSaleGasDTO;
+        private SystemAdminDTO m_dtoResponseDataSystemAdminDTO;
         private DataSet m_dsResponseDataSet;
-
-
+        
         public DataTransfer()
         {
             m_stResponseCode = RESPONSE_CODE_NONE;
@@ -30,13 +35,18 @@ namespace SGM_Core.DTO
             m_stResponseErrorMsgDetail = "";
             m_stResponseDataString = "";
             m_bResponseDataBool = false;
-            m_dtoResponseDataDTO = null;
+            m_dtoResponseDataCustomerDTO = null;
+            m_dtoResponseDataCardDTO = null;
+            m_dtoResponseDataGasStationDTO = null;
+            m_dtoResponseDataRechargeDTO = null;
+            m_dtoResponseDataSaleGasDTO = null;
+            m_dtoResponseDataSystemAdminDTO = null;
             m_dsResponseDataSet = null;
         }
-        public DataTransfer(string json)
-        {
-            parseJSON(json);
-        }
+        //public DataTransfer(string json)
+        //{
+        //    parseJSON(json);
+        //}
         public int ResponseCode
         {
             get { return m_stResponseCode; }
@@ -65,46 +75,40 @@ namespace SGM_Core.DTO
             get { return m_bResponseDataBool; }
             set { m_bResponseDataBool = value; }
         }
-        public Object ResponseDataDTO
+        public CustomerDTO ResponseDataCustomerDTO
         {
-            get { return m_dtoResponseDataDTO; }
-            set { m_dtoResponseDataDTO = value; }
+            get { return m_dtoResponseDataCustomerDTO; }
+            set { m_dtoResponseDataCustomerDTO = value; }
+        }
+        public CardDTO ResponseDataCardDTO
+        {
+            get { return m_dtoResponseDataCardDTO; }
+            set { m_dtoResponseDataCardDTO = value; }
+        }
+        public GasStationDTO ResponseDataGasStationDTO
+        {
+            get { return m_dtoResponseDataGasStationDTO; }
+            set { m_dtoResponseDataGasStationDTO = value; }
+        }
+        public RechargeDTO ResponseDataRechargeDTO
+        {
+            get { return m_dtoResponseDataRechargeDTO; }
+            set { m_dtoResponseDataRechargeDTO = value; }
+        }
+        public SaleGasDTO ResponseDataSaleGasDTO
+        {
+            get { return m_dtoResponseDataSaleGasDTO; }
+            set { m_dtoResponseDataSaleGasDTO = value; }
+        }
+        public SystemAdminDTO ResponseDataSystemAdminDTO
+        {
+            get { return m_dtoResponseDataSystemAdminDTO; }
+            set { m_dtoResponseDataSystemAdminDTO = value; }
         }
         public DataSet ResponseDataSet
         {
             get { return m_dsResponseDataSet; }
             set { m_dsResponseDataSet = value; }
-        }
-
-       
-
-        public string createJSON()
-        {
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DataTransfer));
-            string jsonString = "";
-            using (MemoryStream stream = new MemoryStream())
-            {
-                serializer.WriteObject(stream, this);
-                jsonString = Encoding.UTF8.GetString(stream.ToArray());
-            }
-            return jsonString;
-        }
-
-        public void parseJSON(String jsonString)
-        {
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(DataTransfer));
-            using (MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString)))
-            {
-                DataTransfer data = (DataTransfer)serializer.ReadObject(stream);
-                m_stResponseErrorMsg = data.ResponseErrorMsg;
-                m_stResponseDataString = data.ResponseDataString;
-                m_stResponseErrorMsgDetail = data.ResponseErrorMsgDetail;
-                m_stResponseCode = data.ResponseCode;
-                m_bResponseDataBool = data.ResponseDataBool;
-                m_dtoResponseDataDTO = data.ResponseDataDTO;
-                m_dsResponseDataSet = data.ResponseDataSet;
-
-            }
         }
     }
 }

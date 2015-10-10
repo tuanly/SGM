@@ -4,16 +4,19 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using SGM_Core.DTO;
+using SGM_Core.Utils;
 
 namespace SGM.ServicesCore.DAL
 {
     public class CustomerDAL
     {
         private DBConnetionDAL m_dbConnection;
+        private JSonHelper m_jsHelper;
 
         public CustomerDAL()
         {     
             m_dbConnection = new DBConnetionDAL();
+            m_jsHelper = new JSonHelper();
         }
 
         public DataTransfer GetCustomer(string stCusID)
@@ -41,7 +44,7 @@ namespace SGM.ServicesCore.DAL
                         dtoCustomer.CustomerNote = dr["CUS_NOTE"].ToString(); ;
                     }
                 }
-                dataResult.ResponseDataDTO = dtoCustomer;
+                dataResult.ResponseDataCustomerDTO = dtoCustomer;
             }
             catch (Exception ex)
             {
@@ -66,7 +69,8 @@ namespace SGM.ServicesCore.DAL
                 if (tblResult.Rows.Count > 0)
                 {
                     dataResult.ResponseDataBool = true; 
-                }               
+                }
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
             }
             catch (Exception ex)
             {
@@ -80,6 +84,7 @@ namespace SGM.ServicesCore.DAL
 
         public DataTransfer AddNewCustomer(CustomerDTO dtoCustomer)
         {
+           
             DataTransfer dataResult = new DataTransfer();
             bool insertResult = true;
             try

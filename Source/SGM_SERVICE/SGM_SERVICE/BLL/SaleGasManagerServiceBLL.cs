@@ -4,11 +4,17 @@ using System.Web;
 using SGM.ServicesCore.DAL;
 using SGM_Core.DTO;
 using System.Data;
+using SGM_Core.Utils;
 
 namespace SGM.ServicesCore.BLL
 {
     public class SaleGasManagerServiceBLL
     {
+        private JSonHelper m_jsHelper;
+        public SaleGasManagerServiceBLL()
+        {
+            m_jsHelper = new JSonHelper();
+        }
         public string ValidateAdminLogin(string admin, string pwd)
         {
             SystemAdminDAL dalSysAdmin = new SystemAdminDAL();
@@ -24,7 +30,7 @@ namespace SGM.ServicesCore.BLL
                 response.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
                 response.ResponseErrorMsg = SGMText.ADMIN_LOGON_ERROR;
             }
-            return response.createJSON();
+            return m_jsHelper.ConvertObjectToJSon(response);
         }
 
         public string UpdateAdminAccount(string admin, string admin_new, string pwd)
@@ -42,21 +48,22 @@ namespace SGM.ServicesCore.BLL
                 response.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
                 response.ResponseErrorMsg = SGMText.SYS_ADMIN_CHANGE_FAIL;
             }
-            return response.createJSON();
+            return m_jsHelper.ConvertObjectToJSon(response);
         }
-        
-        public string AddNewCustomer(CustomerDTO dtoCustomer)
+
+        public string AddNewCustomer(String jsonCustomerDTO)
         {
+            DataTransfer dataInput = m_jsHelper.ConvertJSonToObject(jsonCustomerDTO);           
             CustomerDAL dalCustomer = new CustomerDAL();
-            DataTransfer response = dalCustomer.AddNewCustomer(dtoCustomer);
-            return response.createJSON();
+            DataTransfer response = dalCustomer.AddNewCustomer(dataInput.ResponseDataCustomerDTO);
+            return m_jsHelper.ConvertObjectToJSon(response);
         }
 
         public string CheckCustomerExist(string stCustomerID)
         {
             CustomerDAL dalCustomer = new CustomerDAL();
-            DataTransfer response = dalCustomer.IsCustomerExisted(stCustomerID);           
-            return response.createJSON();
+            DataTransfer response = dalCustomer.IsCustomerExisted(stCustomerID);
+            return m_jsHelper.ConvertObjectToJSon(response);
         }
     }
 }

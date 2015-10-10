@@ -4,16 +4,22 @@ using System.Web;
 using SGM.ServicesCore.DAL;
 using SGM_Core.DTO;
 using System.Data;
+using SGM_Core.Utils;
 
 namespace SGM.ServicesCore.BLL
 {
     public class SaleGasServiceBLL
     {
+        private JSonHelper m_jsHelper;
+        public SaleGasServiceBLL()
+        {
+            m_jsHelper = new JSonHelper();
+        }
         public string ValidateGasStationLogin(string stGasStationID, string stGasStationMacAddress)
         {
             GasStationDAL dalGasStation = new GasStationDAL();
             DataTransfer response = dalGasStation.ValidateGasStationLogin(stGasStationID, stGasStationMacAddress);
-            return response.createJSON();
+            return m_jsHelper.ConvertObjectToJSon(response);
         }
 
         public string ValidateCardId(string strCardId)
@@ -33,7 +39,7 @@ namespace SGM.ServicesCore.BLL
                 dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
                 dataResult.ResponseErrorMsg = SGMText.GAS_STATION_CARD_ID_NOT_EXIST;
             }
-            return dataResult.createJSON();
+            return m_jsHelper.ConvertObjectToJSon(dataResult);
         }
 
         public string GasBuying(string strCardId, int money)
@@ -54,7 +60,7 @@ namespace SGM.ServicesCore.BLL
                 response.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
                 response.ResponseErrorMsg = SGMText.GAS_BUYING_FAIL;
             }
-            return response.createJSON();
+            return m_jsHelper.ConvertObjectToJSon(response);
         }
     }
     

@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO.Ports;
 using SGM_Core.DTO;
+using SGM_Core.Utils;
 
 namespace SGM_SaleGas
 {
@@ -17,6 +18,7 @@ namespace SGM_SaleGas
         
         CardDTO _cardDTO;
         RechargeDTO _rechargeDTO;
+        JSonHelper m_jsHelper;
 
         private enum gasTransactType
         {
@@ -32,6 +34,7 @@ namespace SGM_SaleGas
         public frmSGMSaleGas()
         {
             InitializeComponent();
+            m_jsHelper = new JSonHelper();
         }
 
         private void frmSGMSaleGas_Load(object sender, EventArgs e)
@@ -129,7 +132,7 @@ namespace SGM_SaleGas
         private void ScanCard(string cardId)
         {
             String stResponse = service.SGMSaleGas_ValidateCardId(cardId);
-            DataTransfer dataResponse = new DataTransfer(stResponse);
+            DataTransfer dataResponse = m_jsHelper.ConvertJSonToObject(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
                 EnableTransaction(true, true);
@@ -200,7 +203,7 @@ namespace SGM_SaleGas
         private void btnBuy_Click(object sender, EventArgs e)
         {
             String stResponse = service.SGMSaleGas_GasBuying(_cardId, _cardDTO.CardRemainingMoney - _moneyBuying);
-            DataTransfer dataResponse = new DataTransfer(stResponse);
+            DataTransfer dataResponse = m_jsHelper.ConvertJSonToObject(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
                 MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);

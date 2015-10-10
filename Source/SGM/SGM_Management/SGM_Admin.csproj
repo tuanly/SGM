@@ -154,12 +154,6 @@
     <Folder Include="src\process\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SGM_DTO\SGM_DTO.csproj">
-      <Project>{5ABD34AF-902B-408F-85B5-12E0F96E60CF}</Project>
-      <Name>SGM_DTO</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +176,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SGM_DTO\SGM_DTO.csproj">
+      <Project>{5ABD34AF-902B-408F-85B5-12E0F96E60CF}</Project>
+      <Name>SGM_DTO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SGM_Core.DTO
+namespace SGM_Core.Utils
 {
     public class SGMText
     {

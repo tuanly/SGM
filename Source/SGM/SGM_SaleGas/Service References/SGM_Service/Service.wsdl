@@ -46,7 +46,7 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SGMSaleGasManager_ValidateAdminLogin">
+      <s:element name="SGMManager_ValidateAdminLogin">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="admin" type="s:string" />
@@ -54,28 +54,28 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SGMSaleGasManager_ValidateAdminLoginResponse">
+      <s:element name="SGMManager_ValidateAdminLoginResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SGMSaleGasManager_ValidateAdminLoginResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_ValidateAdminLoginResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SGMSaleGasManager_CheckCustomerExist">
+      <s:element name="SGMManager_CheckCustomerExist">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="stCusID" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SGMSaleGasManager_CheckCustomerExistResponse">
+      <s:element name="SGMManager_CheckCustomerExistResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SGMSaleGasManager_CheckCustomerExistResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_CheckCustomerExistResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SGMSaleGasManager_AddNewCustomer">
+      <s:element name="SGMManager_AddNewCustomer">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="dtoCus" type="tns:CustomerDTO" />
@@ -93,10 +93,10 @@
           <s:element minOccurs="0" maxOccurs="1" name="CustomerNote" type="s:string" />
         </s:sequence>
       </s:complexType>
-      <s:element name="SGMSaleGasManager_AddNewCustomerResponse">
+      <s:element name="SGMManager_AddNewCustomerResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SGMSaleGasManager_AddNewCustomerResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_AddNewCustomerResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -120,23 +120,23 @@
   <wsdl:message name="SGMSaleGas_GasBuyingSoapOut">
     <wsdl:part name="parameters" element="tns:SGMSaleGas_GasBuyingResponse" />
   </wsdl:message>
-  <wsdl:message name="SGMSaleGasManager_ValidateAdminLoginSoapIn">
-    <wsdl:part name="parameters" element="tns:SGMSaleGasManager_ValidateAdminLogin" />
+  <wsdl:message name="SGMManager_ValidateAdminLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_ValidateAdminLogin" />
   </wsdl:message>
-  <wsdl:message name="SGMSaleGasManager_ValidateAdminLoginSoapOut">
-    <wsdl:part name="parameters" element="tns:SGMSaleGasManager_ValidateAdminLoginResponse" />
+  <wsdl:message name="SGMManager_ValidateAdminLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_ValidateAdminLoginResponse" />
   </wsdl:message>
-  <wsdl:message name="SGMSaleGasManager_CheckCustomerExistSoapIn">
-    <wsdl:part name="parameters" element="tns:SGMSaleGasManager_CheckCustomerExist" />
+  <wsdl:message name="SGMManager_CheckCustomerExistSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_CheckCustomerExist" />
   </wsdl:message>
-  <wsdl:message name="SGMSaleGasManager_CheckCustomerExistSoapOut">
-    <wsdl:part name="parameters" element="tns:SGMSaleGasManager_CheckCustomerExistResponse" />
+  <wsdl:message name="SGMManager_CheckCustomerExistSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_CheckCustomerExistResponse" />
   </wsdl:message>
-  <wsdl:message name="SGMSaleGasManager_AddNewCustomerSoapIn">
-    <wsdl:part name="parameters" element="tns:SGMSaleGasManager_AddNewCustomer" />
+  <wsdl:message name="SGMManager_AddNewCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_AddNewCustomer" />
   </wsdl:message>
-  <wsdl:message name="SGMSaleGasManager_AddNewCustomerSoapOut">
-    <wsdl:part name="parameters" element="tns:SGMSaleGasManager_AddNewCustomerResponse" />
+  <wsdl:message name="SGMManager_AddNewCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_AddNewCustomerResponse" />
   </wsdl:message>
   <wsdl:portType name="ServiceSoap">
     <wsdl:operation name="SGMSaleGas_ValidateGasStationLogin">
@@ -151,17 +151,17 @@
       <wsdl:input message="tns:SGMSaleGas_GasBuyingSoapIn" />
       <wsdl:output message="tns:SGMSaleGas_GasBuyingSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="SGMSaleGasManager_ValidateAdminLogin">
-      <wsdl:input message="tns:SGMSaleGasManager_ValidateAdminLoginSoapIn" />
-      <wsdl:output message="tns:SGMSaleGasManager_ValidateAdminLoginSoapOut" />
+    <wsdl:operation name="SGMManager_ValidateAdminLogin">
+      <wsdl:input message="tns:SGMManager_ValidateAdminLoginSoapIn" />
+      <wsdl:output message="tns:SGMManager_ValidateAdminLoginSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="SGMSaleGasManager_CheckCustomerExist">
-      <wsdl:input message="tns:SGMSaleGasManager_CheckCustomerExistSoapIn" />
-      <wsdl:output message="tns:SGMSaleGasManager_CheckCustomerExistSoapOut" />
+    <wsdl:operation name="SGMManager_CheckCustomerExist">
+      <wsdl:input message="tns:SGMManager_CheckCustomerExistSoapIn" />
+      <wsdl:output message="tns:SGMManager_CheckCustomerExistSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="SGMSaleGasManager_AddNewCustomer">
-      <wsdl:input message="tns:SGMSaleGasManager_AddNewCustomerSoapIn" />
-      <wsdl:output message="tns:SGMSaleGasManager_AddNewCustomerSoapOut" />
+    <wsdl:operation name="SGMManager_AddNewCustomer">
+      <wsdl:input message="tns:SGMManager_AddNewCustomerSoapIn" />
+      <wsdl:output message="tns:SGMManager_AddNewCustomerSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
@@ -193,8 +193,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SGMSaleGasManager_ValidateAdminLogin">
-      <soap:operation soapAction="http://tempuri.org/SGMSaleGasManager_ValidateAdminLogin" style="document" />
+    <wsdl:operation name="SGMManager_ValidateAdminLogin">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_ValidateAdminLogin" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -202,8 +202,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SGMSaleGasManager_CheckCustomerExist">
-      <soap:operation soapAction="http://tempuri.org/SGMSaleGasManager_CheckCustomerExist" style="document" />
+    <wsdl:operation name="SGMManager_CheckCustomerExist">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_CheckCustomerExist" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -211,8 +211,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SGMSaleGasManager_AddNewCustomer">
-      <soap:operation soapAction="http://tempuri.org/SGMSaleGasManager_AddNewCustomer" style="document" />
+    <wsdl:operation name="SGMManager_AddNewCustomer">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_AddNewCustomer" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -250,8 +250,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SGMSaleGasManager_ValidateAdminLogin">
-      <soap12:operation soapAction="http://tempuri.org/SGMSaleGasManager_ValidateAdminLogin" style="document" />
+    <wsdl:operation name="SGMManager_ValidateAdminLogin">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_ValidateAdminLogin" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -259,8 +259,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SGMSaleGasManager_CheckCustomerExist">
-      <soap12:operation soapAction="http://tempuri.org/SGMSaleGasManager_CheckCustomerExist" style="document" />
+    <wsdl:operation name="SGMManager_CheckCustomerExist">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_CheckCustomerExist" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -268,8 +268,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SGMSaleGasManager_AddNewCustomer">
-      <soap12:operation soapAction="http://tempuri.org/SGMSaleGasManager_AddNewCustomer" style="document" />
+    <wsdl:operation name="SGMManager_AddNewCustomer">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_AddNewCustomer" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

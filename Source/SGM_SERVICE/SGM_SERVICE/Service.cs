@@ -60,9 +60,9 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string SGMManager_AddNewCustomer(CustomerDTO dtoCus)
+    public string SGMManager_AddNewCustomer(String jsonCustomerDTO)
     {
-        return m_bSaleGasManagerService.AddNewCustomer(dtoCus);
+        return m_bSaleGasManagerService.AddNewCustomer(jsonCustomerDTO);
     }
     
 }

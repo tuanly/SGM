@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using SGM_Core.DTO;
+using SGM_Core.Utils;
 
 namespace SGM_Management
 {
@@ -15,10 +16,11 @@ namespace SGM_Management
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
 
         private string old_admin;
-
+        private JSonHelper m_jsHelper;
         public frmSGMUpdateAccount()
         {
             InitializeComponent();
+            m_jsHelper = new JSonHelper();
         }
        
         public void setCurrentAdmin(string name)
@@ -83,7 +85,7 @@ namespace SGM_Management
             string SYS_PWD = txtPwd.Text;
 
             String stResponse = service.SGMManager_UpdateAdminAccount(old_admin, SYS_ADMIN, SYS_PWD);
-            DataTransfer dataResponse = new DataTransfer(stResponse);
+            DataTransfer dataResponse = m_jsHelper.ConvertJSonToObject(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                 MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
