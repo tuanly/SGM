@@ -12,14 +12,18 @@ using SGM_Core.DTO;
 [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
 public class Service : System.Web.Services.WebService
 {
-    private SaleGasServiceBLL m_bllSaleGasService;
-    private SaleGasManagerServiceBLL m_bSaleGasManagerService;
+    private SaleGasServiceBLL m_bllSaleGasService;    
+    private AdminServiceBLL m_bllAdminServcie;
+    private CustomerServiceBLL m_bllCustomerService;
+    private ReportServiceBLL m_bllReportService;
     public Service()
     {
         //Uncomment the following line if using designed components
         //InitializeComponent();
         m_bllSaleGasService = new SaleGasServiceBLL();
-        m_bSaleGasManagerService = new SaleGasManagerServiceBLL();
+        m_bllCustomerService = new CustomerServiceBLL();
+        m_bllAdminServcie = new AdminServiceBLL();
+        m_bllReportService = new ReportServiceBLL();
     }
         
       
@@ -44,37 +48,37 @@ public class Service : System.Web.Services.WebService
     [WebMethod]
     public string SGMManager_ValidateAdminLogin(string admin, string pwd)
     {
-        return m_bSaleGasManagerService.SGMLogin_ValidateAdminLogin(admin, pwd);
+        return m_bllAdminServcie.ValidateAdminLogin(admin, pwd);
     }
 
     [WebMethod]
     public string SGMManager_UpdateAdminAccount(string admin, string admin_new, string pwd)
     {
-        return m_bSaleGasManagerService.SGMUpdateAccount_UpdateAdminAccount(admin, admin_new, pwd);
+        return m_bllAdminServcie.UpdateAdminAccount(admin, admin_new, pwd);
     }
 
     [WebMethod]
     public string SGMManager_UpdateSystemPrice(String jsonSysAdminDTO)
     {
-        return m_bSaleGasManagerService.UpdateSystemPrice(jsonSysAdminDTO);
+        return m_bllAdminServcie.UpdateSystemPrice(jsonSysAdminDTO);
     }
 
     [WebMethod]
     public string SGMManager_CheckCustomerExist(string stCusID)
     {
-        return m_bSaleGasManagerService.SGMCustomer_AddNewCustomer(stCusID);
+        return m_bllCustomerService.AddNewCustomer(stCusID);
     }
 
     [WebMethod]
     public string SGMManager_AddNewCustomer(string jsonCustomerDTO)
     {
-        return m_bSaleGasManagerService.SGMCustomer_AddNewCustomer(jsonCustomerDTO);
+        return m_bllCustomerService.AddNewCustomer(jsonCustomerDTO);
     }
 
     [WebMethod]
     public string SGMManager_GetCustomer(string stCusID)
     {
-        return m_bSaleGasManagerService.SGMCustomer_GetCustomer(stCusID);
+        return m_bllCustomerService.GetCustomer(stCusID);
     }
 
 }

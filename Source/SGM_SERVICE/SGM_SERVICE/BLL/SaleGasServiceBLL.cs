@@ -10,10 +10,10 @@ namespace SGM.ServicesCore.BLL
 {
     public class SaleGasServiceBLL
     {
-        private JSonHelper m_jsHelper;
+        //private JSonHelper m_jsHelper;
         public SaleGasServiceBLL()
         {
-            m_jsHelper = new JSonHelper();
+           // m_jsHelper = new JSonHelper();
         }
         public string ValidateGasStationLogin(string stGasStationID, string stGasStationMacAddress)
         {
