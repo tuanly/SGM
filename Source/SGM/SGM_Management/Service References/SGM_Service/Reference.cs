@@ -39,6 +39,10 @@ namespace SGM_Management.SGM_Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_UpdateSystemPrice", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceResponse SGMManager_UpdateSystemPrice(SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceRequest request);
         
+        // CODEGEN: Generating message contract since element name jsonSysAdminDTO from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_UpdateSystemStore", ReplyAction="*")]
+        SGM_Management.SGM_Service.SGMManager_UpdateSystemStoreResponse SGMManager_UpdateSystemStore(SGM_Management.SGM_Service.SGMManager_UpdateSystemStoreRequest request);
+        
         // CODEGEN: Generating message contract since element name stCusID from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_CheckCustomerExist", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMManager_CheckCustomerExistResponse SGMManager_CheckCustomerExist(SGM_Management.SGM_Service.SGMManager_CheckCustomerExistRequest request);
@@ -489,6 +493,74 @@ namespace SGM_Management.SGM_Service {
         
         public SGMManager_UpdateSystemPriceResponseBody(string SGMManager_UpdateSystemPriceResult) {
             this.SGMManager_UpdateSystemPriceResult = SGMManager_UpdateSystemPriceResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateSystemStoreRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateSystemStore", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_Management.SGM_Service.SGMManager_UpdateSystemStoreRequestBody Body;
+        
+        public SGMManager_UpdateSystemStoreRequest() {
+        }
+        
+        public SGMManager_UpdateSystemStoreRequest(SGM_Management.SGM_Service.SGMManager_UpdateSystemStoreRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateSystemStoreRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string jsonSysAdminDTO;
+        
+        public SGMManager_UpdateSystemStoreRequestBody() {
+        }
+        
+        public SGMManager_UpdateSystemStoreRequestBody(string jsonSysAdminDTO) {
+            this.jsonSysAdminDTO = jsonSysAdminDTO;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateSystemStoreResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateSystemStoreResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_Management.SGM_Service.SGMManager_UpdateSystemStoreResponseBody Body;
+        
+        public SGMManager_UpdateSystemStoreResponse() {
+        }
+        
+        public SGMManager_UpdateSystemStoreResponse(SGM_Management.SGM_Service.SGMManager_UpdateSystemStoreResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateSystemStoreResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_UpdateSystemStoreResult;
+        
+        public SGMManager_UpdateSystemStoreResponseBody() {
+        }
+        
+        public SGMManager_UpdateSystemStoreResponseBody(string SGMManager_UpdateSystemStoreResult) {
+            this.SGMManager_UpdateSystemStoreResult = SGMManager_UpdateSystemStoreResult;
         }
     }
     
@@ -1016,6 +1088,19 @@ namespace SGM_Management.SGM_Service {
             inValue.Body.jsonSysAdminDTO = jsonSysAdminDTO;
             SGM_Management.SGM_Service.SGMManager_UpdateSystemPriceResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMManager_UpdateSystemPrice(inValue);
             return retVal.Body.SGMManager_UpdateSystemPriceResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_Management.SGM_Service.SGMManager_UpdateSystemStoreResponse SGM_Management.SGM_Service.ServiceSoap.SGMManager_UpdateSystemStore(SGM_Management.SGM_Service.SGMManager_UpdateSystemStoreRequest request) {
+            return base.Channel.SGMManager_UpdateSystemStore(request);
+        }
+        
+        public string SGMManager_UpdateSystemStore(string jsonSysAdminDTO) {
+            SGM_Management.SGM_Service.SGMManager_UpdateSystemStoreRequest inValue = new SGM_Management.SGM_Service.SGMManager_UpdateSystemStoreRequest();
+            inValue.Body = new SGM_Management.SGM_Service.SGMManager_UpdateSystemStoreRequestBody();
+            inValue.Body.jsonSysAdminDTO = jsonSysAdminDTO;
+            SGM_Management.SGM_Service.SGMManager_UpdateSystemStoreResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMManager_UpdateSystemStore(inValue);
+            return retVal.Body.SGMManager_UpdateSystemStoreResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

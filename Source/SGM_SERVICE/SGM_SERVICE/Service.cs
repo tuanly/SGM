@@ -66,6 +66,12 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public string SGMManager_UpdateSystemStore(String jsonSysAdminDTO)
+    {
+        return m_bllAdminServcie.UpdateSystemStore(jsonSysAdminDTO);
+    }
+
+    [WebMethod]
     public string SGMManager_CheckCustomerExist(string stCusID)
     {
         return m_bllCustomerService.CheckCustomerExist(stCusID);

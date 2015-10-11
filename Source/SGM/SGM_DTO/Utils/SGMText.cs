@@ -44,6 +44,8 @@ namespace SGM_Core.Utils
         public static string SYS_ADMIN_CHANGE_FAIL = "Cập nhật tài khoản admin không thành công.";
         public static string ADMIN_UPDATE_PRICE_SUCCESS = "Cập nhật giá thành công.";
         public static string ADMIN_UPDATE_PRICE_ERR = "Lỗi! Không thể cập nhật giá.";
+        public static string ADMIN_UPDATE_TOTAL_SUCCESS = "Cập nhật tổng kho thành công.";
+        public static string ADMIN_UPDATE_TOTAL_ERR = "Lỗi! Không thể cập nhật tổng kho.";
 
         public static string CARD_DATA_INPUT_EXIST_CARD_ID_ERR = "Lỗi! Card đã tồn tại!";
         public static string CARD_DATA_INPUT_CARD_ID_ERR = "Lỗi! Chưa nhập Mã Thẻ.";

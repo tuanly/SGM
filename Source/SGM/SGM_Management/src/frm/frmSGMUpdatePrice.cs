@@ -16,6 +16,10 @@ namespace SGM_Management
         private SGM_Service.ServiceSoapClient m_service = null;
 
         private SystemAdminDTO m_currentAdminDTO = null;
+        public void SetCurrentAdminDTO(SystemAdminDTO _ad)
+        {
+            m_currentAdminDTO = _ad;
+        }
 
         public frmSGMUpdatePrice()
         {
@@ -36,11 +40,7 @@ namespace SGM_Management
             }
         }
 
-        public void SetCurrentAdminDTO(SystemAdminDTO _ad)
-        {
-            m_currentAdminDTO = _ad;
-        }
-
+        
         private bool ValidateDataInput()
         {
             bool bValidate = true;
