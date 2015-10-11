@@ -58,6 +58,10 @@ namespace SGM_Management.SGM_Service {
         // CODEGEN: Generating message contract since element name stCusID from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_DelCustomer", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMManager_DelCustomerResponse SGMManager_DelCustomer(SGM_Management.SGM_Service.SGMManager_DelCustomerRequest request);
+        
+        // CODEGEN: Generating message contract since element name stCardID from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_CheckCardExist", ReplyAction="*")]
+        SGM_Management.SGM_Service.SGMManager_CheckCardExistResponse SGMManager_CheckCardExist(SGM_Management.SGM_Service.SGMManager_CheckCardExistRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -836,6 +840,74 @@ namespace SGM_Management.SGM_Service {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_CheckCardExistRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_CheckCardExist", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_Management.SGM_Service.SGMManager_CheckCardExistRequestBody Body;
+        
+        public SGMManager_CheckCardExistRequest() {
+        }
+        
+        public SGMManager_CheckCardExistRequest(SGM_Management.SGM_Service.SGMManager_CheckCardExistRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_CheckCardExistRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stCardID;
+        
+        public SGMManager_CheckCardExistRequestBody() {
+        }
+        
+        public SGMManager_CheckCardExistRequestBody(string stCardID) {
+            this.stCardID = stCardID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_CheckCardExistResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_CheckCardExistResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_Management.SGM_Service.SGMManager_CheckCardExistResponseBody Body;
+        
+        public SGMManager_CheckCardExistResponse() {
+        }
+        
+        public SGMManager_CheckCardExistResponse(SGM_Management.SGM_Service.SGMManager_CheckCardExistResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_CheckCardExistResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_CheckCardExistResult;
+        
+        public SGMManager_CheckCardExistResponseBody() {
+        }
+        
+        public SGMManager_CheckCardExistResponseBody(string SGMManager_CheckCardExistResult) {
+            this.SGMManager_CheckCardExistResult = SGMManager_CheckCardExistResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ServiceSoapChannel : SGM_Management.SGM_Service.ServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -1011,6 +1083,19 @@ namespace SGM_Management.SGM_Service {
             inValue.Body.stCusID = stCusID;
             SGM_Management.SGM_Service.SGMManager_DelCustomerResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMManager_DelCustomer(inValue);
             return retVal.Body.SGMManager_DelCustomerResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_Management.SGM_Service.SGMManager_CheckCardExistResponse SGM_Management.SGM_Service.ServiceSoap.SGMManager_CheckCardExist(SGM_Management.SGM_Service.SGMManager_CheckCardExistRequest request) {
+            return base.Channel.SGMManager_CheckCardExist(request);
+        }
+        
+        public string SGMManager_CheckCardExist(string stCardID) {
+            SGM_Management.SGM_Service.SGMManager_CheckCardExistRequest inValue = new SGM_Management.SGM_Service.SGMManager_CheckCardExistRequest();
+            inValue.Body = new SGM_Management.SGM_Service.SGMManager_CheckCardExistRequestBody();
+            inValue.Body.stCardID = stCardID;
+            SGM_Management.SGM_Service.SGMManager_CheckCardExistResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMManager_CheckCardExist(inValue);
+            return retVal.Body.SGMManager_CheckCardExistResult;
         }
     }
 }

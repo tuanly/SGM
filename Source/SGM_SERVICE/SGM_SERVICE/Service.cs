@@ -16,6 +16,7 @@ public class Service : System.Web.Services.WebService
     private AdminServiceBLL m_bllAdminServcie;
     private CustomerServiceBLL m_bllCustomerService;
     private ReportServiceBLL m_bllReportService;
+    private CardService m_bllCardService;
     public Service()
     {
         //Uncomment the following line if using designed components
@@ -24,6 +25,7 @@ public class Service : System.Web.Services.WebService
         m_bllCustomerService = new CustomerServiceBLL();
         m_bllAdminServcie = new AdminServiceBLL();
         m_bllReportService = new ReportServiceBLL();
+        m_bllCardService = new CardService();
     }
         
       
@@ -91,6 +93,12 @@ public class Service : System.Web.Services.WebService
     public string SGMManager_DelCustomer(string stCusID)
     {
         return m_bllCustomerService.DelCustomer(stCusID);
+    }
+
+    [WebMethod]
+    public string SGMManager_CheckCardExist(string stCardID)
+    {
+        return m_bllCardService.CheckCardExist(stCardID);
     }
 
 }

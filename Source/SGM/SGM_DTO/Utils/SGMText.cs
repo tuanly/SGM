@@ -44,5 +44,13 @@ namespace SGM_Core.Utils
         public static string SYS_ADMIN_CHANGE_FAIL = "Cập nhật tài khoản admin không thành công.";
         public static string ADMIN_UPDATE_PRICE_SUCCESS = "Cập nhật giá thành công.";
         public static string ADMIN_UPDATE_PRICE_ERR = "Lỗi! Không thể cập nhật giá.";
+
+        public static string CARD_DATA_INPUT_EXIST_CARD_ID_ERR = "Lỗi! Card đã tồn tại!";
+        public static string CARD_DATA_INPUT_CARD_ID_ERR = "Lỗi! Chưa nhập Mã Thẻ.";
+        public static string CARD_DATA_INPUT_CARD_MONEY_ERR = "Lỗi! Chưa nhập Số tiền cho thẻ.";
+        public static string CARD_DATA_INPUT_CARD_PRICE_ERR = "Lỗi! Chưa nhập Giá tiền mua thẻ.";
+        public static string CARD_DATA_INPUT_DATE_ERR = "Lỗi! Ngày mua card không được nhỏ hơn ngày hiện tại.";
+        public static string CARD_GET_CARD_ERR = "Lỗi! Không thể lấy thông tin thẻ.";
+
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMRechargeCard));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtRechargeNote = new System.Windows.Forms.TextBox();
@@ -44,8 +45,10 @@
             this.cbCardLocked = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnUpdateCard = new System.Windows.Forms.Button();
+            this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -70,7 +73,6 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin thẻ:";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // txtRechargeNote
             // 
@@ -78,7 +80,7 @@
             this.txtRechargeNote.Multiline = true;
             this.txtRechargeNote.Name = "txtRechargeNote";
             this.txtRechargeNote.Size = new System.Drawing.Size(496, 49);
-            this.txtRechargeNote.TabIndex = 13;
+            this.txtRechargeNote.TabIndex = 4;
             // 
             // txtRechargeGasPrice
             // 
@@ -86,14 +88,15 @@
             this.txtRechargeGasPrice.Location = new System.Drawing.Point(125, 119);
             this.txtRechargeGasPrice.Name = "txtRechargeGasPrice";
             this.txtRechargeGasPrice.Size = new System.Drawing.Size(453, 20);
-            this.txtRechargeGasPrice.TabIndex = 12;
+            this.txtRechargeGasPrice.TabIndex = 3;
             // 
             // txtRechargeMoney
             // 
             this.txtRechargeMoney.Location = new System.Drawing.Point(76, 90);
             this.txtRechargeMoney.Name = "txtRechargeMoney";
             this.txtRechargeMoney.Size = new System.Drawing.Size(133, 20);
-            this.txtRechargeMoney.TabIndex = 11;
+            this.txtRechargeMoney.TabIndex = 2;
+            this.txtRechargeMoney.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRechargeMoney_KeyPress);
             // 
             // dtpRechargeDate
             // 
@@ -102,21 +105,22 @@
             this.dtpRechargeDate.Location = new System.Drawing.Point(314, 56);
             this.dtpRechargeDate.Name = "dtpRechargeDate";
             this.dtpRechargeDate.Size = new System.Drawing.Size(101, 20);
-            this.dtpRechargeDate.TabIndex = 10;
+            this.dtpRechargeDate.TabIndex = 6;
             // 
             // txtCardMoney
             // 
             this.txtCardMoney.Location = new System.Drawing.Point(76, 56);
             this.txtCardMoney.Name = "txtCardMoney";
             this.txtCardMoney.Size = new System.Drawing.Size(133, 20);
-            this.txtCardMoney.TabIndex = 9;
+            this.txtCardMoney.TabIndex = 1;
+            this.txtCardMoney.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCardMoney_KeyPress);
             // 
             // txtCardID
             // 
             this.txtCardID.Location = new System.Drawing.Point(76, 23);
             this.txtCardID.Name = "txtCardID";
             this.txtCardID.Size = new System.Drawing.Size(133, 20);
-            this.txtCardID.TabIndex = 8;
+            this.txtCardID.TabIndex = 0;
             // 
             // label7
             // 
@@ -169,7 +173,7 @@
             this.cbCardLocked.Location = new System.Drawing.Point(288, 25);
             this.cbCardLocked.Name = "cbCardLocked";
             this.cbCardLocked.Size = new System.Drawing.Size(51, 17);
-            this.cbCardLocked.TabIndex = 2;
+            this.cbCardLocked.TabIndex = 5;
             this.cbCardLocked.Text = "Khóa";
             this.cbCardLocked.UseVisualStyleBackColor = true;
             // 
@@ -191,21 +195,26 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Mã thẻ:";
             // 
-            // button1
+            // btnUpdateCard
             // 
-            this.button1.Location = new System.Drawing.Point(267, 231);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Cập nhật";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnUpdateCard.Location = new System.Drawing.Point(267, 231);
+            this.btnUpdateCard.Name = "btnUpdateCard";
+            this.btnUpdateCard.Size = new System.Drawing.Size(75, 23);
+            this.btnUpdateCard.TabIndex = 7;
+            this.btnUpdateCard.Text = "Cập nhật";
+            this.btnUpdateCard.UseVisualStyleBackColor = true;
+            this.btnUpdateCard.Click += new System.EventHandler(this.btnUpdateCard_Click);
+            // 
+            // errProvider
+            // 
+            this.errProvider.ContainerControl = this;
             // 
             // frmSGMRechargeCard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(608, 267);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnUpdateCard);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -213,8 +222,10 @@
             this.Name = "frmSGMRechargeCard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SGM - Mua/Nạp Thẻ";
+            this.Load += new System.EventHandler(this.frmSGMRechargeCard_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -236,6 +247,7 @@
         private System.Windows.Forms.TextBox txtRechargeMoney;
         private System.Windows.Forms.TextBox txtRechargeNote;
         private System.Windows.Forms.TextBox txtRechargeGasPrice;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnUpdateCard;
+        private System.Windows.Forms.ErrorProvider errProvider;
     }
 }

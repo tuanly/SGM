@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\AdminServiceBLL.cs" />
+    <Compile Include="BLL\CardService.cs" />
     <Compile Include="BLL\CustomerServiceBLL.cs" />
     <Compile Include="BLL\ReportServiceBLL.cs" />
     <Compile Include="BLL\SaleGasServiceBLL.cs" />

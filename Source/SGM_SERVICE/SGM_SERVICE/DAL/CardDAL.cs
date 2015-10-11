@@ -4,7 +4,7 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using SGM_Core.DTO;
-
+using SGM_Core.Utils;
 namespace SGM.ServicesCore.DAL
 {
     public class CardDAL
@@ -113,6 +113,32 @@ namespace SGM.ServicesCore.DAL
             sqlParameters[0].Value = Convert.ToString(stCardID);
             DataTable tblCard = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
             return tblCard;
+        }
+
+        public DataTransfer IsCardExisted(string stCardID)
+        {
+            DataTransfer dataResult = new DataTransfer();
+            try
+            {
+                string query = string.Format("SELECT * FROM CARD WHERE CARD_ID = @CARD_ID");
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+                sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(stCardID);
+                DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
+                if (tblResult.Rows.Count > 0)
+                {
+                    dataResult.ResponseDataBool = true;
+                }
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+            }
+            catch (Exception ex)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.CARD_DATA_INPUT_EXIST_CARD_ID_ERR;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+
+            return dataResult;
         }
     }   
 }

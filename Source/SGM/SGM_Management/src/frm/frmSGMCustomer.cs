@@ -58,6 +58,8 @@ namespace SGM_Management
         private void btnBuyCard_Click(object sender, EventArgs e)
         {
             frmSGMRechargeCard frmRechard = new frmSGMRechargeCard();
+            frmRechard.StateUpdate = false;
+            frmRechard.CusID = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_ID"].ToString();
             frmRechard.ShowDialog();
         }
 
@@ -125,7 +127,7 @@ namespace SGM_Management
                 }
                 else
                 {
-                    errProvider.SetError(txtCusName, SGMText.CUSTOMER_GET_CUS_ERR);
+                    errProvider.SetError(txtCusID, SGMText.CUSTOMER_GET_CUS_ERR);
                     MessageBox.Show(SGMText.CUSTOMER_GET_CUS_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail);
                     bValidate = false;
                 }
@@ -172,7 +174,8 @@ namespace SGM_Management
                     dgvCusList.Rows[i].Cells[0].Value = (i + 1);
                     dgvCusList.Rows[i].Cells[1].Value = m_dsCustomer.Tables[0].Rows[i]["CUS_NAME"] + " (" + m_dsCustomer.Tables[0].Rows[i]["CUS_ID"] + ")";
                 }
-                m_iCurrentIndex = iOldSelected;
+                if (iOldSelected > 0)
+                    m_iCurrentIndex = iOldSelected;
                 if (m_iCurrentIndex >= dgvCusList.Rows.Count)
                     m_iCurrentIndex = -1;
                 if (m_iCurrentIndex > 0) 
