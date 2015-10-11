@@ -33,7 +33,12 @@ namespace SGM_Core.Utils
         public static string CUSTOMER_DATA_INPUT_CUS_VISA_ERR = "Lỗi! Chưa nhập CMND khách hàng.";
         public static string CUSTOMER_DATA_INPUT_EXIST_CUS_ID_ERR = "Lỗi! ID khách hàng đã tồn tại.";
         public static string CUSTOMER_ADD_NEW_CUS_ERR = "Lỗi! Không thể thêm khách hàng.";
+        public static string CUSTOMER_UPDATE_CUS_ERR = "Lỗi! Không thể thêm khách hàng.";
+        public static string CUSTOMER_DEL_CUS_ERR = "Lỗi! Không thể xóa khách hàng.";
         public static string CUSTOMER_GET_CUS_ERR = "Lỗi! Không thể lấy thông tin khách hàng.";
+        public static string CUSTOMER_DEL_CUS_SUCCESS = "Khách hàng đã xóa thành công";
+        public static string CUSTOMER_DEL_CUS_WARNING = "Bạn có chắc muốn xóa khách hàng sau đây không?";
+        public static string CUSTOMER_DEL_CUS = "Xóa Khách Hàng";
 
         public static string SYS_ADMIN_CHANGE_SUCCESS = "Đã cập nhật tài khoản admin.";
         public static string SYS_ADMIN_CHANGE_FAIL = "Cập nhật tài khoản admin không thành công.";

@@ -66,7 +66,7 @@ public class Service : System.Web.Services.WebService
     [WebMethod]
     public string SGMManager_CheckCustomerExist(string stCusID)
     {
-        return m_bllCustomerService.AddNewCustomer(stCusID);
+        return m_bllCustomerService.CheckCustomerExist(stCusID);
     }
 
     [WebMethod]
@@ -76,9 +76,21 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string SGMManager_GetCustomer(string stCusID)
+    public string SGMManager_GetCustomer(string stCusID, bool bExactly)
     {
-        return m_bllCustomerService.GetCustomer(stCusID);
+        return m_bllCustomerService.GetCustomer(stCusID, bExactly);
+    }
+
+    [WebMethod]
+    public string SGMManager_UpdateCustomer(string jsonCustomerDTO, string stCusID)
+    {
+        return m_bllCustomerService.UpdateCustomer(jsonCustomerDTO, stCusID);
+    }
+
+    [WebMethod]
+    public string SGMManager_DelCustomer(string stCusID)
+    {
+        return m_bllCustomerService.DelCustomer(stCusID);
     }
 
 }

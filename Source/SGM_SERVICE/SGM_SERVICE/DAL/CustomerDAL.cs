@@ -19,14 +19,23 @@ namespace SGM.ServicesCore.DAL
             m_jsHelper = new JSonHelper();
         }
 
-        public DataTransfer GetCustomers()
+        public DataTransfer GetCustomers(string value)
         {
             DataTransfer dataResult = new DataTransfer();
             try
-            {               
-                string query = query = string.Format("SELECT CUS_ID AS STT, * FROM CUSTOMER");
+            {
+                string query;                
+                if (value == null)
+                {
+                    query = string.Format("SELECT CUS_ID AS STT, * FROM CUSTOMER");                   
+                }
+                else
+                {
+                    query = string.Format("SELECT CUS_ID AS STT, * FROM CUSTOMER WHERE CUS_ID LIKE '%" + value + "%' OR CUS_NAME LIKE '%" + value + "%'");                   
+                }
                 DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, new SqlParameter[0]);
-                if (tblResult.Rows.Count > 0)
+                dataResult.ResponseDataString = query;
+                if (tblResult != null && tblResult.Rows.Count > 0)
                 {
                     DataSet ds = new DataSet();
                     ds.Tables.Add(tblResult.Copy());
@@ -137,7 +146,13 @@ namespace SGM.ServicesCore.DAL
                 insertResult = false;                
                 dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
             }
-            if (!insertResult)
+            
+            
+            if (insertResult)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+            }
+            else
             {
                 dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
                 dataResult.ResponseErrorMsg = SGMText.CUSTOMER_ADD_NEW_CUS_ERR;
@@ -145,38 +160,80 @@ namespace SGM.ServicesCore.DAL
             return dataResult;
         }
 
-        public bool UpdateCustomer(CustomerDTO dtoCustomer)
+        public DataTransfer UpdateCustomer(CustomerDTO dtoCustomer, string cusID)
         {
-            bool result = true;
-            string query = string.Format("UPDATE CUSTOMER SET CUS_NAME = @CUS_NAME, CUS_VISA = @CUS_VISA, CUS_BIRTHDATE = @CUS_BIRTHDATE, CUS_ADDRESS = @CUS_ADDRESS, CUS_PHONE = @CUS_PHONE, CUS_NOTE = @CUS_NOTE WHERE CUS_ID = @CUS_ID");
-            SqlParameter[] sqlParameters = new SqlParameter[7];
-            sqlParameters[0] = new SqlParameter("@CUS_ID", SqlDbType.NVarChar);
-            sqlParameters[0].Value = Convert.ToString(dtoCustomer.CustomerID);
-            sqlParameters[1] = new SqlParameter("@CUS_NAME", SqlDbType.NVarChar);
-            sqlParameters[1].Value = Convert.ToString(dtoCustomer.CustomerName);
-            sqlParameters[2] = new SqlParameter("@CUS_VISA", SqlDbType.NVarChar);
-            sqlParameters[2].Value = Convert.ToString(dtoCustomer.CustomerVisa);
-            sqlParameters[3] = new SqlParameter("@CUS_BIRTHDATE", SqlDbType.NVarChar);
-            sqlParameters[3].Value = Convert.ToString(dtoCustomer.CustomerBirthDate);
-            sqlParameters[4] = new SqlParameter("@CUS_ADDRESS", SqlDbType.NVarChar);
-            sqlParameters[4].Value = Convert.ToString(dtoCustomer.CustomerAddress);
-            sqlParameters[5] = new SqlParameter("@CUS_PHONE", SqlDbType.NVarChar);
-            sqlParameters[5].Value = Convert.ToString(dtoCustomer.CustomerPhone);
-            sqlParameters[6] = new SqlParameter("@CUS_NOTE", SqlDbType.NVarChar);
-            sqlParameters[6].Value = Convert.ToString(dtoCustomer.CustomerNote);
-            result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
-            return result;
+            DataTransfer dataResult = new DataTransfer();
+            bool updateResult = true;
+            try
+            {
+                string query = string.Format("UPDATE CUSTOMER SET CUS_ID = @CUS_ID_NEW, CUS_NAME = @CUS_NAME, CUS_VISA = @CUS_VISA, CUS_BIRTHDATE = @CUS_BIRTHDATE, CUS_ADDRESS = @CUS_ADDRESS, CUS_PHONE = @CUS_PHONE, CUS_NOTE = @CUS_NOTE WHERE CUS_ID = @CUS_ID_OLD");
+                SqlParameter[] sqlParameters = new SqlParameter[8];
+                sqlParameters[0] = new SqlParameter("@CUS_ID_NEW", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(dtoCustomer.CustomerID);
+                sqlParameters[1] = new SqlParameter("@CUS_NAME", SqlDbType.NVarChar);
+                sqlParameters[1].Value = Convert.ToString(dtoCustomer.CustomerName);
+                sqlParameters[2] = new SqlParameter("@CUS_VISA", SqlDbType.NVarChar);
+                sqlParameters[2].Value = Convert.ToString(dtoCustomer.CustomerVisa);
+                sqlParameters[3] = new SqlParameter("@CUS_BIRTHDATE", SqlDbType.NVarChar);
+                sqlParameters[3].Value = Convert.ToString(dtoCustomer.CustomerBirthDate);
+                sqlParameters[4] = new SqlParameter("@CUS_ADDRESS", SqlDbType.NVarChar);
+                sqlParameters[4].Value = Convert.ToString(dtoCustomer.CustomerAddress);
+                sqlParameters[5] = new SqlParameter("@CUS_PHONE", SqlDbType.NVarChar);
+                sqlParameters[5].Value = Convert.ToString(dtoCustomer.CustomerPhone);
+                sqlParameters[6] = new SqlParameter("@CUS_NOTE", SqlDbType.NVarChar);
+                sqlParameters[6].Value = Convert.ToString(dtoCustomer.CustomerNote);
+                sqlParameters[7] = new SqlParameter("@CUS_ID_OLD", SqlDbType.NVarChar);
+                sqlParameters[7].Value = Convert.ToString(cusID);
+                updateResult = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                updateResult = false;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+
+            if (updateResult)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+            }
+            else
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.CUSTOMER_UPDATE_CUS_ERR;
+            }
+            
+            return dataResult;
         }
 
-        public bool DeleteCustomer(string stCustomerID)
+        public DataTransfer DeleteCustomer(string stCustomerID)
         {
-            bool result = true;
-            string query = string.Format("DELETE FROM CUSTOMER WHERE CUS_ID = @CUS_ID");
-            SqlParameter[] sqlParameters = new SqlParameter[1];
-            sqlParameters[0] = new SqlParameter("@CUS_ID", SqlDbType.NVarChar);
-            sqlParameters[0].Value = Convert.ToString(stCustomerID);
-            result = m_dbConnection.ExecuteDeleteQuery(query, sqlParameters);
-            return result;
+            bool delResult = true;
+            DataTransfer dataResult = new DataTransfer();
+            try
+            {
+                string query = string.Format("DELETE FROM CUSTOMER WHERE CUS_ID = @CUS_ID");
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+                sqlParameters[0] = new SqlParameter("@CUS_ID", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(stCustomerID);
+                delResult = m_dbConnection.ExecuteDeleteQuery(query, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                delResult = false;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+            if (delResult)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+            }
+            else
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.CUSTOMER_DEL_CUS_ERR;
+            }
+            
+            
+            return dataResult;
         }
     }
 }

@@ -10,30 +10,47 @@ namespace SGM.ServicesCore.BLL
 {
     public class CustomerServiceBLL
     {
-        public string AddNewCustomer(String jsonCustomerDTO)
+        private CustomerDAL m_dalCustomer;
+        private DataTransfer m_dataRequest;
+        private DataTransfer m_dataResponse;
+        public CustomerServiceBLL()
         {
-            DataTransfer dataInput = JSonHelper.ConvertJSonToObject(jsonCustomerDTO);
-            CustomerDAL dalCustomer = new CustomerDAL();
-            DataTransfer response = dalCustomer.AddNewCustomer(dataInput.ResponseDataCustomerDTO);
-            return JSonHelper.ConvertObjectToJSon(response);
+            m_dalCustomer = new CustomerDAL();
+            m_dataRequest = null;
+            m_dataResponse = null;
+
+        }
+        public string AddNewCustomer(string jsonCustomerDTO)
+        {
+            m_dataRequest = JSonHelper.ConvertJSonToObject(jsonCustomerDTO);
+            m_dataResponse = m_dalCustomer.AddNewCustomer(m_dataRequest.ResponseDataCustomerDTO);
+            return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
 
         public string CheckCustomerExist(string stCustomerID)
         {
-            CustomerDAL dalCustomer = new CustomerDAL();
-            DataTransfer response = dalCustomer.IsCustomerExisted(stCustomerID);
-            return JSonHelper.ConvertObjectToJSon(response);
+            m_dataResponse = m_dalCustomer.IsCustomerExisted(stCustomerID);
+            return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
 
-        public string GetCustomer(string stCustomerID)
-        {
-            CustomerDAL dalCustomer = new CustomerDAL();
-            DataTransfer response;
-            if (stCustomerID == null)
-                response = dalCustomer.GetCustomers();
+        public string GetCustomer(string stCustomerID, bool bExactly)
+        {            
+            if (bExactly)
+                m_dataResponse = m_dalCustomer.GetCustomer(stCustomerID);
             else
-                response = dalCustomer.GetCustomer(stCustomerID);
-            return JSonHelper.ConvertObjectToJSon(response);
+                m_dataResponse = m_dalCustomer.GetCustomers(stCustomerID);
+            return JSonHelper.ConvertObjectToJSon(m_dataResponse);
+        }
+        public string UpdateCustomer(string jsonCustomerDTO, string stCustomerID)
+        {
+            m_dataRequest = JSonHelper.ConvertJSonToObject(jsonCustomerDTO);
+            m_dataResponse = m_dalCustomer.UpdateCustomer(m_dataRequest.ResponseDataCustomerDTO, stCustomerID);
+            return JSonHelper.ConvertObjectToJSon(m_dataResponse);
+        }
+        public string DelCustomer(string stCustomerID)
+        {
+            m_dataResponse = m_dalCustomer.DeleteCustomer(stCustomerID);
+            return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
     }
 }

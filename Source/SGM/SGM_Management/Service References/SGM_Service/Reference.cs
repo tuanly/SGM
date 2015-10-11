@@ -50,6 +50,14 @@ namespace SGM_Management.SGM_Service {
         // CODEGEN: Generating message contract since element name stCusID from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_GetCustomer", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMManager_GetCustomerResponse SGMManager_GetCustomer(SGM_Management.SGM_Service.SGMManager_GetCustomerRequest request);
+        
+        // CODEGEN: Generating message contract since element name jsonCustomerDTO from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_UpdateCustomer", ReplyAction="*")]
+        SGM_Management.SGM_Service.SGMManager_UpdateCustomerResponse SGMManager_UpdateCustomer(SGM_Management.SGM_Service.SGMManager_UpdateCustomerRequest request);
+        
+        // CODEGEN: Generating message contract since element name stCusID from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_DelCustomer", ReplyAction="*")]
+        SGM_Management.SGM_Service.SGMManager_DelCustomerResponse SGMManager_DelCustomer(SGM_Management.SGM_Service.SGMManager_DelCustomerRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -642,11 +650,15 @@ namespace SGM_Management.SGM_Service {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string stCusID;
         
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public bool bExactly;
+        
         public SGMManager_GetCustomerRequestBody() {
         }
         
-        public SGMManager_GetCustomerRequestBody(string stCusID) {
+        public SGMManager_GetCustomerRequestBody(string stCusID, bool bExactly) {
             this.stCusID = stCusID;
+            this.bExactly = bExactly;
         }
     }
     
@@ -681,6 +693,146 @@ namespace SGM_Management.SGM_Service {
         
         public SGMManager_GetCustomerResponseBody(string SGMManager_GetCustomerResult) {
             this.SGMManager_GetCustomerResult = SGMManager_GetCustomerResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateCustomerRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateCustomer", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_Management.SGM_Service.SGMManager_UpdateCustomerRequestBody Body;
+        
+        public SGMManager_UpdateCustomerRequest() {
+        }
+        
+        public SGMManager_UpdateCustomerRequest(SGM_Management.SGM_Service.SGMManager_UpdateCustomerRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateCustomerRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string jsonCustomerDTO;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string stCusID;
+        
+        public SGMManager_UpdateCustomerRequestBody() {
+        }
+        
+        public SGMManager_UpdateCustomerRequestBody(string jsonCustomerDTO, string stCusID) {
+            this.jsonCustomerDTO = jsonCustomerDTO;
+            this.stCusID = stCusID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateCustomerResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateCustomerResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_Management.SGM_Service.SGMManager_UpdateCustomerResponseBody Body;
+        
+        public SGMManager_UpdateCustomerResponse() {
+        }
+        
+        public SGMManager_UpdateCustomerResponse(SGM_Management.SGM_Service.SGMManager_UpdateCustomerResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateCustomerResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_UpdateCustomerResult;
+        
+        public SGMManager_UpdateCustomerResponseBody() {
+        }
+        
+        public SGMManager_UpdateCustomerResponseBody(string SGMManager_UpdateCustomerResult) {
+            this.SGMManager_UpdateCustomerResult = SGMManager_UpdateCustomerResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_DelCustomerRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_DelCustomer", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_Management.SGM_Service.SGMManager_DelCustomerRequestBody Body;
+        
+        public SGMManager_DelCustomerRequest() {
+        }
+        
+        public SGMManager_DelCustomerRequest(SGM_Management.SGM_Service.SGMManager_DelCustomerRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_DelCustomerRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stCusID;
+        
+        public SGMManager_DelCustomerRequestBody() {
+        }
+        
+        public SGMManager_DelCustomerRequestBody(string stCusID) {
+            this.stCusID = stCusID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_DelCustomerResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_DelCustomerResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_Management.SGM_Service.SGMManager_DelCustomerResponseBody Body;
+        
+        public SGMManager_DelCustomerResponse() {
+        }
+        
+        public SGMManager_DelCustomerResponse(SGM_Management.SGM_Service.SGMManager_DelCustomerResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_DelCustomerResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_DelCustomerResult;
+        
+        public SGMManager_DelCustomerResponseBody() {
+        }
+        
+        public SGMManager_DelCustomerResponseBody(string SGMManager_DelCustomerResult) {
+            this.SGMManager_DelCustomerResult = SGMManager_DelCustomerResult;
         }
     }
     
@@ -825,12 +977,40 @@ namespace SGM_Management.SGM_Service {
             return base.Channel.SGMManager_GetCustomer(request);
         }
         
-        public string SGMManager_GetCustomer(string stCusID) {
+        public string SGMManager_GetCustomer(string stCusID, bool bExactly) {
             SGM_Management.SGM_Service.SGMManager_GetCustomerRequest inValue = new SGM_Management.SGM_Service.SGMManager_GetCustomerRequest();
             inValue.Body = new SGM_Management.SGM_Service.SGMManager_GetCustomerRequestBody();
             inValue.Body.stCusID = stCusID;
+            inValue.Body.bExactly = bExactly;
             SGM_Management.SGM_Service.SGMManager_GetCustomerResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMManager_GetCustomer(inValue);
             return retVal.Body.SGMManager_GetCustomerResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_Management.SGM_Service.SGMManager_UpdateCustomerResponse SGM_Management.SGM_Service.ServiceSoap.SGMManager_UpdateCustomer(SGM_Management.SGM_Service.SGMManager_UpdateCustomerRequest request) {
+            return base.Channel.SGMManager_UpdateCustomer(request);
+        }
+        
+        public string SGMManager_UpdateCustomer(string jsonCustomerDTO, string stCusID) {
+            SGM_Management.SGM_Service.SGMManager_UpdateCustomerRequest inValue = new SGM_Management.SGM_Service.SGMManager_UpdateCustomerRequest();
+            inValue.Body = new SGM_Management.SGM_Service.SGMManager_UpdateCustomerRequestBody();
+            inValue.Body.jsonCustomerDTO = jsonCustomerDTO;
+            inValue.Body.stCusID = stCusID;
+            SGM_Management.SGM_Service.SGMManager_UpdateCustomerResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMManager_UpdateCustomer(inValue);
+            return retVal.Body.SGMManager_UpdateCustomerResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_Management.SGM_Service.SGMManager_DelCustomerResponse SGM_Management.SGM_Service.ServiceSoap.SGMManager_DelCustomer(SGM_Management.SGM_Service.SGMManager_DelCustomerRequest request) {
+            return base.Channel.SGMManager_DelCustomer(request);
+        }
+        
+        public string SGMManager_DelCustomer(string stCusID) {
+            SGM_Management.SGM_Service.SGMManager_DelCustomerRequest inValue = new SGM_Management.SGM_Service.SGMManager_DelCustomerRequest();
+            inValue.Body = new SGM_Management.SGM_Service.SGMManager_DelCustomerRequestBody();
+            inValue.Body.stCusID = stCusID;
+            SGM_Management.SGM_Service.SGMManager_DelCustomerResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMManager_DelCustomer(inValue);
+            return retVal.Body.SGMManager_DelCustomerResult;
         }
     }
 }

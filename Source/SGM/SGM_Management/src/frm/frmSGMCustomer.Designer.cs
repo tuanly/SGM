@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMCustomer));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnBuyCard = new System.Windows.Forms.Button();
             this.txtNote = new System.Windows.Forms.TextBox();
@@ -58,14 +58,14 @@
             this.dgvCardList = new System.Windows.Forms.DataGridView();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.dgvCusList = new System.Windows.Forms.DataGridView();
+            this.colCusIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.colCusIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -288,6 +288,7 @@
             this.btnEdit.TabIndex = 4;
             this.btnEdit.Text = "&Sửa";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnCancel
             // 
@@ -317,6 +318,7 @@
             this.btnDelete.TabIndex = 5;
             this.btnDelete.Text = "&Xóa";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // dgvCardList
             // 
@@ -334,6 +336,9 @@
             // 
             // dgvCusList
             // 
+            this.dgvCusList.AllowUserToAddRows = false;
+            this.dgvCusList.AllowUserToDeleteRows = false;
+            this.dgvCusList.AllowUserToResizeRows = false;
             this.dgvCusList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCusList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colCusIndex,
@@ -341,11 +346,31 @@
             this.dgvCusList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCusList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgvCusList.Location = new System.Drawing.Point(0, 0);
+            this.dgvCusList.MultiSelect = false;
             this.dgvCusList.Name = "dgvCusList";
+            this.dgvCusList.RowHeadersVisible = false;
             this.dgvCusList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCusList.Size = new System.Drawing.Size(281, 417);
             this.dgvCusList.TabIndex = 0;
             this.dgvCusList.SelectionChanged += new System.EventHandler(this.dgvCusList_SelectionChanged);
+            // 
+            // colCusIndex
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colCusIndex.DefaultCellStyle = dataGridViewCellStyle9;
+            this.colCusIndex.HeaderText = " STT";
+            this.colCusIndex.Name = "colCusIndex";
+            this.colCusIndex.ReadOnly = true;
+            this.colCusIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCusIndex.Width = 50;
+            // 
+            // colCusName
+            // 
+            this.colCusName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colCusName.HeaderText = "                Khách Hàng";
+            this.colCusName.Name = "colCusName";
+            this.colCusName.ReadOnly = true;
+            this.colCusName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // groupBox6
             // 
@@ -368,6 +393,7 @@
             this.btnSearch.TabIndex = 1;
             this.btnSearch.Text = "Tìm";
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // txtSearch
             // 
@@ -375,6 +401,7 @@
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(141, 20);
             this.txtSearch.TabIndex = 0;
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
             // label8
             // 
@@ -405,24 +432,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(281, 417);
             this.panel1.TabIndex = 2;
-            // 
-            // colCusIndex
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colCusIndex.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colCusIndex.HeaderText = " STT";
-            this.colCusIndex.Name = "colCusIndex";
-            this.colCusIndex.ReadOnly = true;
-            this.colCusIndex.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colCusIndex.Width = 50;
-            // 
-            // colCusName
-            // 
-            this.colCusName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colCusName.HeaderText = "                Khách Hàng";
-            this.colCusName.Name = "colCusName";
-            this.colCusName.ReadOnly = true;
-            this.colCusName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // frmSGMCustomer
             // 
