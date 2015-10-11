@@ -101,8 +101,7 @@
             this.groupBox2.Size = new System.Drawing.Size(605, 252);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Thông tin Khách Hàng:";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
+            this.groupBox2.Text = "Thông tin Khách Hàng:";            
             // 
             // btnBuyCard
             // 
@@ -221,8 +220,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Họ && Tên KH:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.label2.Text = "Họ && Tên KH:";            
             // 
             // label1
             // 
@@ -278,7 +276,6 @@
             this.groupBox4.Size = new System.Drawing.Size(364, 60);
             this.groupBox4.TabIndex = 9;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Enter += new System.EventHandler(this.groupBox4_Enter);
             // 
             // btnEdit
             // 
@@ -328,7 +325,7 @@
             this.dgvCardList.Name = "dgvCardList";
             this.dgvCardList.Size = new System.Drawing.Size(599, 220);
             this.dgvCardList.TabIndex = 0;
-            this.dgvCardList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCardList_CellContentClick);
+            
             // 
             // errProvider
             // 

@@ -53,29 +53,12 @@ namespace SGM_Management
             UpdateInputFields();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox4_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvCardList_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
 
         private void btnBuyCard_Click(object sender, EventArgs e)
         {
-            
+            frmSGMRechargeCard frmRechard = new frmSGMRechargeCard();
+            frmRechard.ShowDialog();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
