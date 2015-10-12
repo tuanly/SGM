@@ -261,7 +261,7 @@ namespace SGM.ServicesCore.DAL
             DataTransfer dataResult = new DataTransfer();
             try
             {
-                string query = string.Format("SELECT (CAST(SYS_APPLY_DATE AS FLOAT) - CAST(GETDATE() AS FLOAT) AS RESULT_DATE, * FROM SYSTEM_ADMIN");
+                string query = string.Format("SELECT (CAST(SYS_APPLY_DATE AS FLOAT) - CAST(GETDATE() AS FLOAT)) AS RESULT_DATE, * FROM SYSTEM_ADMIN");
                 DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, new SqlParameter[0]);
                 if (tblResult.Rows.Count > 0)
                 {
