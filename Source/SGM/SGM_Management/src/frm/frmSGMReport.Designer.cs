@@ -31,18 +31,19 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMReport));
             this.tabSGMHistory = new System.Windows.Forms.TabControl();
             this.subTabSGMSaleGas = new System.Windows.Forms.TabPage();
-            this.subTabSGMRechargeCard = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cboGasStation = new System.Windows.Forms.ComboBox();
             this.dgvSaleGasHistory = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dtpSaleGasBegin = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.dtpSaleGasEnd = new System.Windows.Forms.DateTimePicker();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtSaleGasCardID = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSaleGasView = new System.Windows.Forms.Button();
+            this.txtSaleGasCardID = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dtpSaleGasEnd = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.dtpSaleGasBegin = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cboGasStation = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.subTabSGMRechargeCard = new System.Windows.Forms.TabPage();
+            this.dgvRechargeCardHistory = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnRechargeCardView = new System.Windows.Forms.Button();
             this.txtRechargeCardID = new System.Windows.Forms.TextBox();
@@ -53,14 +54,13 @@
             this.label7 = new System.Windows.Forms.Label();
             this.dboRechargeCardCustomer = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.dgvRechargeCardHistory = new System.Windows.Forms.DataGridView();
             this.tabSGMHistory.SuspendLayout();
             this.subTabSGMSaleGas.SuspendLayout();
-            this.subTabSGMRechargeCard.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSaleGasHistory)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.subTabSGMRechargeCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRechargeCardHistory)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabSGMHistory
@@ -86,17 +86,14 @@
             this.subTabSGMSaleGas.Text = "Bán Xăng";
             this.subTabSGMSaleGas.UseVisualStyleBackColor = true;
             // 
-            // subTabSGMRechargeCard
+            // dgvSaleGasHistory
             // 
-            this.subTabSGMRechargeCard.Controls.Add(this.dgvRechargeCardHistory);
-            this.subTabSGMRechargeCard.Controls.Add(this.groupBox2);
-            this.subTabSGMRechargeCard.Location = new System.Drawing.Point(4, 22);
-            this.subTabSGMRechargeCard.Name = "subTabSGMRechargeCard";
-            this.subTabSGMRechargeCard.Padding = new System.Windows.Forms.Padding(3);
-            this.subTabSGMRechargeCard.Size = new System.Drawing.Size(753, 459);
-            this.subTabSGMRechargeCard.TabIndex = 1;
-            this.subTabSGMRechargeCard.Text = "Bán Thẻ";
-            this.subTabSGMRechargeCard.UseVisualStyleBackColor = true;
+            this.dgvSaleGasHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSaleGasHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvSaleGasHistory.Location = new System.Drawing.Point(3, 164);
+            this.dgvSaleGasHistory.Name = "dgvSaleGasHistory";
+            this.dgvSaleGasHistory.Size = new System.Drawing.Size(747, 292);
+            this.dgvSaleGasHistory.TabIndex = 1;
             // 
             // groupBox1
             // 
@@ -117,67 +114,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Xem giao dịch: ";
             // 
-            // label1
+            // btnSaleGasView
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Trạm Xăng:";
+            this.btnSaleGasView.Location = new System.Drawing.Point(336, 126);
+            this.btnSaleGasView.Name = "btnSaleGasView";
+            this.btnSaleGasView.Size = new System.Drawing.Size(75, 23);
+            this.btnSaleGasView.TabIndex = 8;
+            this.btnSaleGasView.Text = "Xem";
+            this.btnSaleGasView.UseVisualStyleBackColor = true;
+            this.btnSaleGasView.Click += new System.EventHandler(this.btnSaleGasView_Click);
             // 
-            // cboGasStation
+            // txtSaleGasCardID
             // 
-            this.cboGasStation.FormattingEnabled = true;
-            this.cboGasStation.Location = new System.Drawing.Point(90, 23);
-            this.cboGasStation.Name = "cboGasStation";
-            this.cboGasStation.Size = new System.Drawing.Size(639, 21);
-            this.cboGasStation.TabIndex = 1;
-            // 
-            // dgvSaleGasHistory
-            // 
-            this.dgvSaleGasHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSaleGasHistory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvSaleGasHistory.Location = new System.Drawing.Point(3, 164);
-            this.dgvSaleGasHistory.Name = "dgvSaleGasHistory";
-            this.dgvSaleGasHistory.Size = new System.Drawing.Size(747, 292);
-            this.dgvSaleGasHistory.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 64);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Từ ngày:";
-            // 
-            // dtpSaleGasBegin
-            // 
-            this.dtpSaleGasBegin.CustomFormat = "dd/MM/yyyy";
-            this.dtpSaleGasBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpSaleGasBegin.Location = new System.Drawing.Point(90, 61);
-            this.dtpSaleGasBegin.Name = "dtpSaleGasBegin";
-            this.dtpSaleGasBegin.Size = new System.Drawing.Size(98, 20);
-            this.dtpSaleGasBegin.TabIndex = 3;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(194, 64);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Đến ngày:";
-            // 
-            // dtpSaleGasEnd
-            // 
-            this.dtpSaleGasEnd.CustomFormat = "dd/MM/yyyy";
-            this.dtpSaleGasEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpSaleGasEnd.Location = new System.Drawing.Point(256, 61);
-            this.dtpSaleGasEnd.Name = "dtpSaleGasEnd";
-            this.dtpSaleGasEnd.Size = new System.Drawing.Size(98, 20);
-            this.dtpSaleGasEnd.TabIndex = 5;
+            this.txtSaleGasCardID.Location = new System.Drawing.Point(90, 94);
+            this.txtSaleGasCardID.Name = "txtSaleGasCardID";
+            this.txtSaleGasCardID.Size = new System.Drawing.Size(264, 20);
+            this.txtSaleGasCardID.TabIndex = 7;
+            this.txtSaleGasCardID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label4
             // 
@@ -188,22 +141,79 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Mã thẻ:";
             // 
-            // txtSaleGasCardID
+            // dtpSaleGasEnd
             // 
-            this.txtSaleGasCardID.Location = new System.Drawing.Point(90, 94);
-            this.txtSaleGasCardID.Name = "txtSaleGasCardID";
-            this.txtSaleGasCardID.Size = new System.Drawing.Size(264, 20);
-            this.txtSaleGasCardID.TabIndex = 7;
-            this.txtSaleGasCardID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dtpSaleGasEnd.CustomFormat = "dd/MM/yyyy";
+            this.dtpSaleGasEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpSaleGasEnd.Location = new System.Drawing.Point(256, 61);
+            this.dtpSaleGasEnd.Name = "dtpSaleGasEnd";
+            this.dtpSaleGasEnd.Size = new System.Drawing.Size(98, 20);
+            this.dtpSaleGasEnd.TabIndex = 5;
             // 
-            // btnSaleGasView
+            // label3
             // 
-            this.btnSaleGasView.Location = new System.Drawing.Point(336, 126);
-            this.btnSaleGasView.Name = "btnSaleGasView";
-            this.btnSaleGasView.Size = new System.Drawing.Size(75, 23);
-            this.btnSaleGasView.TabIndex = 8;
-            this.btnSaleGasView.Text = "Xem";
-            this.btnSaleGasView.UseVisualStyleBackColor = true;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(194, 64);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Đến ngày:";
+            // 
+            // dtpSaleGasBegin
+            // 
+            this.dtpSaleGasBegin.CustomFormat = "dd/MM/yyyy";
+            this.dtpSaleGasBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpSaleGasBegin.Location = new System.Drawing.Point(90, 61);
+            this.dtpSaleGasBegin.Name = "dtpSaleGasBegin";
+            this.dtpSaleGasBegin.Size = new System.Drawing.Size(98, 20);
+            this.dtpSaleGasBegin.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(23, 64);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Từ ngày:";
+            // 
+            // cboGasStation
+            // 
+            this.cboGasStation.FormattingEnabled = true;
+            this.cboGasStation.Location = new System.Drawing.Point(90, 23);
+            this.cboGasStation.Name = "cboGasStation";
+            this.cboGasStation.Size = new System.Drawing.Size(639, 21);
+            this.cboGasStation.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(22, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(62, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Trạm Xăng:";
+            // 
+            // subTabSGMRechargeCard
+            // 
+            this.subTabSGMRechargeCard.Controls.Add(this.dgvRechargeCardHistory);
+            this.subTabSGMRechargeCard.Controls.Add(this.groupBox2);
+            this.subTabSGMRechargeCard.Location = new System.Drawing.Point(4, 22);
+            this.subTabSGMRechargeCard.Name = "subTabSGMRechargeCard";
+            this.subTabSGMRechargeCard.Padding = new System.Windows.Forms.Padding(3);
+            this.subTabSGMRechargeCard.Size = new System.Drawing.Size(753, 459);
+            this.subTabSGMRechargeCard.TabIndex = 1;
+            this.subTabSGMRechargeCard.Text = "Bán Thẻ";
+            this.subTabSGMRechargeCard.UseVisualStyleBackColor = true;
+            // 
+            // dgvRechargeCardHistory
+            // 
+            this.dgvRechargeCardHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRechargeCardHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvRechargeCardHistory.Location = new System.Drawing.Point(3, 164);
+            this.dgvRechargeCardHistory.Name = "dgvRechargeCardHistory";
+            this.dgvRechargeCardHistory.Size = new System.Drawing.Size(747, 292);
+            this.dgvRechargeCardHistory.TabIndex = 2;
             // 
             // groupBox2
             // 
@@ -303,15 +313,6 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Khách hàng:";
             // 
-            // dgvRechargeCardHistory
-            // 
-            this.dgvRechargeCardHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRechargeCardHistory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvRechargeCardHistory.Location = new System.Drawing.Point(3, 164);
-            this.dgvRechargeCardHistory.Name = "dgvRechargeCardHistory";
-            this.dgvRechargeCardHistory.Size = new System.Drawing.Size(747, 292);
-            this.dgvRechargeCardHistory.TabIndex = 2;
-            // 
             // frmSGMReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -321,15 +322,16 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSGMReport";
             this.Text = "SGM - Lịch Sử Giao Dịch";
+            this.Load += new System.EventHandler(this.frmSGMReport_Load);
             this.tabSGMHistory.ResumeLayout(false);
             this.subTabSGMSaleGas.ResumeLayout(false);
-            this.subTabSGMRechargeCard.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSaleGasHistory)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSaleGasHistory)).EndInit();
+            this.subTabSGMRechargeCard.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvRechargeCardHistory)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvRechargeCardHistory)).EndInit();
             this.ResumeLayout(false);
 
         }

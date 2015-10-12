@@ -27,7 +27,12 @@ public class Service : System.Web.Services.WebService
         m_bllReportService = new ReportServiceBLL();
         m_bllCardService = new CardService();
     }
-        
+
+    [WebMethod]
+    public string SGMSaleGas_GetGasStationList()
+    {
+        return m_bllReportService.GetGasStationList();
+    }
       
     [WebMethod]
     public string SGMSaleGas_ValidateGasStationLogin(string stGasStationID, string stGasStationMacAddress)

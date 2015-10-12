@@ -17,6 +17,19 @@ namespace SGM.ServicesCore.DAL
             m_dbConnection = new DBConnetionDAL();
         }
 
+        public DataSet GetGasStationList()
+        {
+            DataSet ds = null;
+            string query = string.Format("SELECT * FROM GAS_STATION");
+            DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, null);
+            if (tblResult.Rows.Count > 0)
+            {
+                ds = new DataSet();
+                ds.Tables.Add(tblResult.Copy());
+            }
+            return ds;
+        }
+
         public GasStationDTO GetGasStation(string stGasStationID)
         {
             GasStationDTO dtoGasStation = null;

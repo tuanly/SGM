@@ -15,6 +15,10 @@ namespace SGM_Management.SGM_Service {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SGM_Service.ServiceSoap")]
     public interface ServiceSoap {
         
+        // CODEGEN: Generating message contract since element name SGMSaleGas_GetGasStationListResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMSaleGas_GetGasStationList", ReplyAction="*")]
+        SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListResponse SGMSaleGas_GetGasStationList(SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListRequest request);
+        
         // CODEGEN: Generating message contract since element name stGasStationID from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMSaleGas_ValidateGasStationLogin", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMSaleGas_ValidateGasStationLoginResponse SGMSaleGas_ValidateGasStationLogin(SGM_Management.SGM_Service.SGMSaleGas_ValidateGasStationLoginRequest request);
@@ -66,6 +70,67 @@ namespace SGM_Management.SGM_Service {
         // CODEGEN: Generating message contract since element name stCardID from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_CheckCardExist", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMManager_CheckCardExistResponse SGMManager_CheckCardExist(SGM_Management.SGM_Service.SGMManager_CheckCardExistRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMSaleGas_GetGasStationListRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMSaleGas_GetGasStationList", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListRequestBody Body;
+        
+        public SGMSaleGas_GetGasStationListRequest() {
+        }
+        
+        public SGMSaleGas_GetGasStationListRequest(SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class SGMSaleGas_GetGasStationListRequestBody {
+        
+        public SGMSaleGas_GetGasStationListRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMSaleGas_GetGasStationListResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMSaleGas_GetGasStationListResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListResponseBody Body;
+        
+        public SGMSaleGas_GetGasStationListResponse() {
+        }
+        
+        public SGMSaleGas_GetGasStationListResponse(SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMSaleGas_GetGasStationListResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMSaleGas_GetGasStationListResult;
+        
+        public SGMSaleGas_GetGasStationListResponseBody() {
+        }
+        
+        public SGMSaleGas_GetGasStationListResponseBody(string SGMSaleGas_GetGasStationListResult) {
+            this.SGMSaleGas_GetGasStationListResult = SGMSaleGas_GetGasStationListResult;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -1005,6 +1070,18 @@ namespace SGM_Management.SGM_Service {
         
         public ServiceSoapClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListResponse SGM_Management.SGM_Service.ServiceSoap.SGMSaleGas_GetGasStationList(SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListRequest request) {
+            return base.Channel.SGMSaleGas_GetGasStationList(request);
+        }
+        
+        public string SGMSaleGas_GetGasStationList() {
+            SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListRequest inValue = new SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListRequest();
+            inValue.Body = new SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListRequestBody();
+            SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMSaleGas_GetGasStationList(inValue);
+            return retVal.Body.SGMSaleGas_GetGasStationListResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

@@ -45,7 +45,8 @@ namespace SGM.ServicesCore.DAL
             {
                 myCommand.Connection = OpenConnection();
                 myCommand.CommandText = _query;
-                myCommand.Parameters.AddRange(sqlParameter);
+                if (sqlParameter != null)
+                    myCommand.Parameters.AddRange(sqlParameter);
                 myCommand.ExecuteNonQuery();                
                 myAdapter.SelectCommand = myCommand;
                 myAdapter.Fill(ds);
