@@ -112,6 +112,12 @@ public class Service : System.Web.Services.WebService
         return m_bllCardService.CheckCardExist(stCardID);
     }
 
+    [WebMethod]
+    public string SGMManager_GetCurrentPrice(int iGasType)
+    {
+        return m_bllAdminServcie.GetCurrentPrice(iGasType);
+    }
+
 }
     
 
