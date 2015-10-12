@@ -42,8 +42,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.cbCardLocked = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnUpdateCard = new System.Windows.Forms.Button();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
@@ -64,8 +62,6 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.cbCardLocked);
-            this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(7, 7);
             this.groupBox1.Name = "groupBox1";
@@ -76,23 +72,23 @@
             // 
             // txtRechargeNote
             // 
-            this.txtRechargeNote.Location = new System.Drawing.Point(82, 156);
+            this.txtRechargeNote.Location = new System.Drawing.Point(82, 133);
             this.txtRechargeNote.Multiline = true;
             this.txtRechargeNote.Name = "txtRechargeNote";
-            this.txtRechargeNote.Size = new System.Drawing.Size(496, 49);
+            this.txtRechargeNote.Size = new System.Drawing.Size(496, 72);
             this.txtRechargeNote.TabIndex = 4;
             // 
             // txtRechargeGasPrice
             // 
             this.txtRechargeGasPrice.Enabled = false;
-            this.txtRechargeGasPrice.Location = new System.Drawing.Point(125, 119);
+            this.txtRechargeGasPrice.Location = new System.Drawing.Point(125, 95);
             this.txtRechargeGasPrice.Name = "txtRechargeGasPrice";
             this.txtRechargeGasPrice.Size = new System.Drawing.Size(453, 20);
             this.txtRechargeGasPrice.TabIndex = 3;
             // 
             // txtRechargeMoney
             // 
-            this.txtRechargeMoney.Location = new System.Drawing.Point(76, 90);
+            this.txtRechargeMoney.Location = new System.Drawing.Point(314, 59);
             this.txtRechargeMoney.Name = "txtRechargeMoney";
             this.txtRechargeMoney.Size = new System.Drawing.Size(133, 20);
             this.txtRechargeMoney.TabIndex = 2;
@@ -102,14 +98,14 @@
             // 
             this.dtpRechargeDate.CustomFormat = "dd/MM/yyyy";
             this.dtpRechargeDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpRechargeDate.Location = new System.Drawing.Point(314, 56);
+            this.dtpRechargeDate.Location = new System.Drawing.Point(314, 21);
             this.dtpRechargeDate.Name = "dtpRechargeDate";
-            this.dtpRechargeDate.Size = new System.Drawing.Size(101, 20);
+            this.dtpRechargeDate.Size = new System.Drawing.Size(133, 20);
             this.dtpRechargeDate.TabIndex = 6;
             // 
             // txtCardMoney
             // 
-            this.txtCardMoney.Location = new System.Drawing.Point(76, 56);
+            this.txtCardMoney.Location = new System.Drawing.Point(76, 59);
             this.txtCardMoney.Name = "txtCardMoney";
             this.txtCardMoney.Size = new System.Drawing.Size(133, 20);
             this.txtCardMoney.TabIndex = 1;
@@ -125,7 +121,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(28, 172);
+            this.label7.Location = new System.Drawing.Point(28, 161);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(48, 13);
             this.label7.TabIndex = 7;
@@ -134,7 +130,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(27, 122);
+            this.label6.Location = new System.Drawing.Point(27, 98);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(92, 13);
             this.label6.TabIndex = 6;
@@ -143,7 +139,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(227, 59);
+            this.label5.Location = new System.Drawing.Point(227, 24);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 13);
             this.label5.TabIndex = 5;
@@ -152,7 +148,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(27, 90);
+            this.label4.Location = new System.Drawing.Point(226, 59);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 13);
             this.label4.TabIndex = 4;
@@ -166,25 +162,6 @@
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 3;
             this.label3.Text = "Số tiền:";
-            // 
-            // cbCardLocked
-            // 
-            this.cbCardLocked.AutoSize = true;
-            this.cbCardLocked.Location = new System.Drawing.Point(288, 25);
-            this.cbCardLocked.Name = "cbCardLocked";
-            this.cbCardLocked.Size = new System.Drawing.Size(51, 17);
-            this.cbCardLocked.TabIndex = 5;
-            this.cbCardLocked.Text = "Khóa";
-            this.cbCardLocked.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(227, 26);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(55, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Trạng thái";
             // 
             // label1
             // 
@@ -233,8 +210,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox cbCardLocked;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;

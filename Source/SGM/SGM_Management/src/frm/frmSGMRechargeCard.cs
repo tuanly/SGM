@@ -62,7 +62,7 @@ namespace SGM_Management
             txtRechargeGasPrice.Text = "";
             txtRechargeMoney.Text = "";
             txtRechargeNote.Text = "";
-            cbCardLocked.Checked = false;
+            //cbCardLocked.Checked = false;
             dtpRechargeDate.Value = DateTime.Now;
         }
 
@@ -84,6 +84,7 @@ namespace SGM_Management
             else
             {
             }
+            GetPriceGas();
         }
 
         private bool ValidateDataInput()
@@ -124,7 +125,12 @@ namespace SGM_Management
                 errProvider.SetError(txtRechargeMoney, SGMText.CARD_DATA_INPUT_CARD_PRICE_ERR);
                 bValidate = false;
             }
-            if (!m_bStateUpdate)
+            if (Int32.Parse(txtCardMoney.Text.Trim()) < Int32.Parse(txtRechargeMoney.Text.Trim()))
+            {
+                errProvider.SetError(txtRechargeMoney, SGMText.CARD_DATA_INPUT_CARD_MONEY_PRICE_ERR);
+                bValidate = false;
+            }
+            //if (!m_bStateUpdate)
             {
                 if (dtpRechargeDate.Value.Date < DateTime.Now.Date)
                 {
@@ -150,12 +156,31 @@ namespace SGM_Management
 
         private void GetPriceGas()
         {
-            if (m_bStateUpdate) // get current price
-            {
-            }
-            else // get price from recharge
-            {
-            }
+           bool bHasErr = true;
+                DataTransfer dataResult = JSonHelper.ConvertJSonToObject(m_service.SGMManager_GetCurrentPrice(SystemAdminDTO.GAS_TYPE_92));
+
+                if (dataResult.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                {
+                    m_iPriceGas92 = dataResult.ResponseDataInt;
+                    dataResult = JSonHelper.ConvertJSonToObject(m_service.SGMManager_GetCurrentPrice(SystemAdminDTO.GAS_TYPE_95));
+                    if (dataResult.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                    {
+                        m_iPriceGas95 = dataResult.ResponseDataInt;
+                        dataResult = JSonHelper.ConvertJSonToObject(m_service.SGMManager_GetCurrentPrice(SystemAdminDTO.GAS_TYPE_DO));
+                        if (dataResult.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                        {
+                            m_iPriceGasDO = dataResult.ResponseDataInt;
+                            bHasErr = false;
+                        }
+                    }                    
+                }
+                if (bHasErr)
+                {
+                    m_iPriceGas92 = m_iPriceGas95 = m_iPriceGasDO = 0;
+                    MessageBox.Show(SGMText.SYS_ADMIN_GET_PRICE_ERR + "\n" + dataResult.ResponseErrorMsg + ":" + dataResult.ResponseErrorMsgDetail);
+                }
+
+                txtRechargeGasPrice.Text = SGMText.GAS_92_TEXT + " : " + m_iPriceGas92 + "đ - " + SGMText.GAS_95_TEXT + " : " + m_iPriceGas95 + "đ - " + SGMText.GAS_DO_TEXT + " : " + m_iPriceGasDO + "đ";
         }
 
     }

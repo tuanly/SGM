@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMCustomer));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnBuyCard = new System.Windows.Forms.Button();
             this.txtNote = new System.Windows.Forms.TextBox();
@@ -66,6 +66,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRecharge = new System.Windows.Forms.Button();
+            this.btnLockCard = new System.Windows.Forms.Button();
+            this.btnDelCard = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -80,6 +83,9 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnDelCard);
+            this.groupBox2.Controls.Add(this.btnLockCard);
+            this.groupBox2.Controls.Add(this.btnRecharge);
             this.groupBox2.Controls.Add(this.btnBuyCard);
             this.groupBox2.Controls.Add(this.txtNote);
             this.groupBox2.Controls.Add(this.txtCusAddress);
@@ -101,11 +107,11 @@
             this.groupBox2.Size = new System.Drawing.Size(605, 252);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Thông tin Khách Hàng:";            
+            this.groupBox2.Text = "Thông tin Khách Hàng:";
             // 
             // btnBuyCard
             // 
-            this.btnBuyCard.Location = new System.Drawing.Point(254, 221);
+            this.btnBuyCard.Location = new System.Drawing.Point(148, 221);
             this.btnBuyCard.Name = "btnBuyCard";
             this.btnBuyCard.Size = new System.Drawing.Size(79, 23);
             this.btnBuyCard.TabIndex = 2;
@@ -220,7 +226,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Họ && Tên KH:";            
+            this.label2.Text = "Họ && Tên KH:";
             // 
             // label1
             // 
@@ -325,7 +331,6 @@
             this.dgvCardList.Name = "dgvCardList";
             this.dgvCardList.Size = new System.Drawing.Size(599, 220);
             this.dgvCardList.TabIndex = 0;
-            
             // 
             // errProvider
             // 
@@ -353,8 +358,8 @@
             // 
             // colCusIndex
             // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colCusIndex.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colCusIndex.DefaultCellStyle = dataGridViewCellStyle1;
             this.colCusIndex.HeaderText = " STT";
             this.colCusIndex.Name = "colCusIndex";
             this.colCusIndex.ReadOnly = true;
@@ -430,6 +435,33 @@
             this.panel1.Size = new System.Drawing.Size(281, 417);
             this.panel1.TabIndex = 2;
             // 
+            // btnRecharge
+            // 
+            this.btnRecharge.Location = new System.Drawing.Point(235, 221);
+            this.btnRecharge.Name = "btnRecharge";
+            this.btnRecharge.Size = new System.Drawing.Size(79, 23);
+            this.btnRecharge.TabIndex = 14;
+            this.btnRecharge.Text = "Nạp Tiền";
+            this.btnRecharge.UseVisualStyleBackColor = true;
+            // 
+            // btnLockCard
+            // 
+            this.btnLockCard.Location = new System.Drawing.Point(322, 221);
+            this.btnLockCard.Name = "btnLockCard";
+            this.btnLockCard.Size = new System.Drawing.Size(79, 23);
+            this.btnLockCard.TabIndex = 15;
+            this.btnLockCard.Text = "Khóa Thẻ";
+            this.btnLockCard.UseVisualStyleBackColor = true;
+            // 
+            // btnDelCard
+            // 
+            this.btnDelCard.Location = new System.Drawing.Point(412, 221);
+            this.btnDelCard.Name = "btnDelCard";
+            this.btnDelCard.Size = new System.Drawing.Size(79, 23);
+            this.btnDelCard.TabIndex = 16;
+            this.btnDelCard.Text = "Hủy Thẻ";
+            this.btnDelCard.UseVisualStyleBackColor = true;
+            // 
             // frmSGMCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -496,5 +528,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCusIndex;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCusName;
+        private System.Windows.Forms.Button btnLockCard;
+        private System.Windows.Forms.Button btnRecharge;
+        private System.Windows.Forms.Button btnDelCard;
     }
 }

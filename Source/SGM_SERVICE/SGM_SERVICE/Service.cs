@@ -118,6 +118,25 @@ public class Service : System.Web.Services.WebService
         return m_bllAdminServcie.GetCurrentPrice(iGasType);
     }
 
+    [WebMethod]
+    public string SGMManager_AddNewCard(string jsCardDTO)
+    {
+        return m_bllCardService.AddNewCard(jsCardDTO);
+    }
+
+    [WebMethod]
+    public string SGMManager_AddRechargeCard(string jsRechargeDTO)
+    {
+        return m_bllCardService.AddRechargeCard(jsRechargeDTO);
+    }
+
+     [WebMethod]
+    public string SGMManager_UpdateRechargeIDForCard(string stCardID)
+    {
+        return m_bllCardService.UpdateRechargeIDForCard(stCardID);
+    }
+    
+
 }
     
 

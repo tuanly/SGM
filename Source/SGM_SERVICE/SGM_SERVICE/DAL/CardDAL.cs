@@ -40,27 +40,46 @@ namespace SGM.ServicesCore.DAL
             return dtoCard;
         }
 
-        
 
-        public bool AddNewCard(CardDTO dtoCard)
+
+        public DataTransfer AddNewCard(CardDTO dtoCard)
         {
-            bool result = true;
-            string query = string.Format("INSERT INTO CARD (CARD_ID, CARD_STATE, CARD_MONEY, CARD_BUY_DATE, RECHARGE_ID, CUS_ID) VALUES (@CARD_ID, @CARD_STATE, @CARD_MONEY, @CARD_BUY_DATE, @RECHARGE_ID, @CUS_ID)");
-            SqlParameter[] sqlParameters = new SqlParameter[6];
-            sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
-            sqlParameters[0].Value = Convert.ToString(dtoCard.CardID);
-            sqlParameters[1] = new SqlParameter("@CARD_STATE", SqlDbType.Bit);
-            sqlParameters[1].Value = Convert.ToBoolean(dtoCard.CardUnlockState);
-            sqlParameters[2] = new SqlParameter("@CARD_MONEY", SqlDbType.Int);
-            sqlParameters[2].Value = Convert.ToInt32(dtoCard.CardRemainingMoney);
-            sqlParameters[3] = new SqlParameter("@CARD_BUY_DATE", SqlDbType.Int);
-            sqlParameters[3].Value = Convert.ToDateTime(dtoCard.CardBuyDate);
-            sqlParameters[4] = new SqlParameter("@RECHARGE_ID", SqlDbType.Int);
-            sqlParameters[4].Value = Convert.ToInt32(dtoCard.RechargeID);
-            sqlParameters[5] = new SqlParameter("@CUS_ID", SqlDbType.Int);
-            sqlParameters[5].Value = Convert.ToInt32(dtoCard.CustomerID);
-            result = m_dbConnection.ExecuteInsertQuery(query, sqlParameters);           
-            return result;
+            DataTransfer dataResult = new DataTransfer();
+            bool insertResult = true;
+            try
+            {
+                string query = string.Format("INSERT INTO CARD (CARD_ID, CARD_STATE, CARD_MONEY, CARD_BUY_DATE, RECHARGE_ID, CUS_ID) VALUES (@CARD_ID, @CARD_STATE, @CARD_MONEY, @CARD_BUY_DATE, @RECHARGE_ID, @CUS_ID)");
+                SqlParameter[] sqlParameters = new SqlParameter[6];
+                sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(dtoCard.CardID);
+                sqlParameters[1] = new SqlParameter("@CARD_STATE", SqlDbType.Bit);
+                sqlParameters[1].Value = Convert.ToBoolean(dtoCard.CardUnlockState);
+                sqlParameters[2] = new SqlParameter("@CARD_MONEY", SqlDbType.Int);
+                sqlParameters[2].Value = Convert.ToInt32(dtoCard.CardRemainingMoney);
+                sqlParameters[3] = new SqlParameter("@CARD_BUY_DATE", SqlDbType.Int);
+                sqlParameters[3].Value = Convert.ToDateTime(dtoCard.CardBuyDate);
+                sqlParameters[4] = new SqlParameter("@RECHARGE_ID", SqlDbType.Int);
+                sqlParameters[4].Value = Convert.ToInt32(dtoCard.RechargeID);
+                sqlParameters[5] = new SqlParameter("@CUS_ID", SqlDbType.Int);
+                sqlParameters[5].Value = Convert.ToInt32(dtoCard.CustomerID);
+                insertResult = m_dbConnection.ExecuteInsertQuery(query, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                insertResult = false;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+            if (insertResult)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+            }
+            else
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.CARD_INSERT_ERR;
+            }
+            
+            return dataResult;
         }
 
         public bool UpdateCard(CardDTO dtoCard)
@@ -138,6 +157,35 @@ namespace SGM.ServicesCore.DAL
                 dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
             }
 
+            return dataResult;
+        }
+
+        public DataTransfer UpdateRechargeIDForCard(string stCardID)
+        {
+            DataTransfer dataResult = new DataTransfer();
+            bool updateResult = true;
+            try
+            {
+                string query = string.Format("UPDATE CARD SET RECHARGE_ID = (SELECT MAX (RECHARGE_ID) FROM RECHARGE) WHERE CARD_ID = @CARD_ID");
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+                sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(stCardID);
+                updateResult = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);                
+            }
+            catch (Exception ex)
+            {
+                updateResult = false;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+            if (updateResult)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+            }
+            else
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.CARD_UPDATE_RECHARGE_ID;
+            }
             return dataResult;
         }
     }   
