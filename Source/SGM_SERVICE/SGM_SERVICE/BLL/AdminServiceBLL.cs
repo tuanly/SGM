@@ -61,5 +61,12 @@ namespace SGM.ServicesCore.BLL
             DataTransfer response = dalSystemAd.UpdateSystemAdminStore(dataInput.ResponseDataSystemAdminDTO);
             return JSonHelper.ConvertObjectToJSon(response);
         }
+
+        public string GetCurrentPrice(int iGasType)
+        {            
+            SystemAdminDAL dalSystemAd = new SystemAdminDAL();
+            DataTransfer response = dalSystemAd.GetCurrentPrice(iGasType);
+            return JSonHelper.ConvertObjectToJSon(response);
+        }
     }
 }

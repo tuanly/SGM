@@ -6,6 +6,11 @@ namespace SGM_Core.DTO
 {
     public class SystemAdminDTO
     {
+
+        public static int GAS_TYPE_92 = 0;
+        public static int GAS_TYPE_95 = 1;
+        public static int GAS_TYPE_DO = 2;
+
         private string m_stSysAdmin;    //admin account, primate key
         private string m_stSysPwd;      //admin password
         private int m_iSysGas92Total;   //total gas92 in store

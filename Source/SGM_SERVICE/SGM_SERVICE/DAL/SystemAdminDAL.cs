@@ -11,6 +11,7 @@ namespace SGM.ServicesCore.DAL
     public class SystemAdminDAL
     {
         private DBConnetionDAL m_dbConnection;
+      
 
         public SystemAdminDAL()
         {     
@@ -253,6 +254,64 @@ namespace SGM.ServicesCore.DAL
             sqlParameters[0].Value = Convert.ToString(stAdminAcount);            
             result = m_dbConnection.ExecuteDeleteQuery(query, sqlParameters);
             return result;
+        }
+
+        public DataTransfer GetCurrentPrice(int iGasType)
+        {
+            DataTransfer dataResult = new DataTransfer();
+            try
+            {
+                string query = string.Format("SELECT (CAST(SYS_APPLY_DATE AS FLOAT) - CAST(GETDATE() AS FLOAT) AS RESULT_DATE, * FROM SYSTEM_ADMIN");
+                DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, new SqlParameter[0]);
+                if (tblResult.Rows.Count > 0)
+                {
+                    double resultDate = Double.Parse(tblResult.Rows[0]["RESULT_DATE"].ToString());
+                    if (resultDate >= 0)
+                    {
+                        if (iGasType == SystemAdminDTO.GAS_TYPE_92)
+                        {
+                            dataResult.ResponseDataInt = Int32.Parse(tblResult.Rows[0]["SYS_GAS92_NEW_PRICE"].ToString());
+                        }
+                        else if (iGasType == SystemAdminDTO.GAS_TYPE_95)
+                        {
+                            dataResult.ResponseDataInt = Int32.Parse(tblResult.Rows[0]["SYS_GAS95_NEW_PRICE"].ToString());
+                        }
+                        else
+                        {
+                            dataResult.ResponseDataInt = Int32.Parse(tblResult.Rows[0]["SYS_GASDO_NEW_PRICE"].ToString());
+                        }
+                    }
+                    else
+                    {
+                        if (iGasType == SystemAdminDTO.GAS_TYPE_92)
+                        {
+                            dataResult.ResponseDataInt = Int32.Parse(tblResult.Rows[0]["SYS_GAS92_CURRENT_PRICE"].ToString());
+                        }
+                        else if (iGasType == SystemAdminDTO.GAS_TYPE_95)
+                        {
+                            dataResult.ResponseDataInt = Int32.Parse(tblResult.Rows[0]["SYS_GAS95_CURRENT_PRICE"].ToString());
+                        }
+                        else
+                        {
+                            dataResult.ResponseDataInt = Int32.Parse(tblResult.Rows[0]["SYS_GASDO_CURRENT_PRICE"].ToString());
+                        }
+                    }
+                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+                }
+                else
+                {
+                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                    dataResult.ResponseErrorMsg = SGMText.SYS_ADMIN_GET_PRICE_ERR;
+                }
+            }
+            catch (Exception ex)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.SYS_ADMIN_GET_PRICE_ERR;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+
+            return dataResult;
         }
     }
 }

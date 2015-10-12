@@ -20,6 +20,7 @@ namespace SGM_Core.Utils
         private string m_stResponseErrorMsgDetail;
         private string m_stResponseDataString;
         private bool m_bResponseDataBool;
+        private int m_bResponseDataInt;
         private CustomerDTO m_dtoResponseDataCustomerDTO;
         private CardDTO m_dtoResponseDataCardDTO;
         private GasStationDTO m_dtoResponseDataGasStationDTO;
@@ -75,6 +76,11 @@ namespace SGM_Core.Utils
             get { return m_bResponseDataBool; }
             set { m_bResponseDataBool = value; }
         }
+        public int ResponseDataInt
+        {
+            get { return m_bResponseDataInt; }
+            set { m_bResponseDataInt = value; }
+        }
         public CustomerDTO ResponseDataCustomerDTO
         {
             get { return m_dtoResponseDataCustomerDTO; }
@@ -110,5 +116,6 @@ namespace SGM_Core.Utils
             get { return m_dsResponseDataSet; }
             set { m_dsResponseDataSet = value; }
         }
+        
     }
 }
