@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMCustomer));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnBuyCard = new System.Windows.Forms.Button();
             this.txtNote = new System.Windows.Forms.TextBox();
@@ -358,8 +358,8 @@
             // 
             // colCusIndex
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colCusIndex.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colCusIndex.DefaultCellStyle = dataGridViewCellStyle2;
             this.colCusIndex.HeaderText = " STT";
             this.colCusIndex.Name = "colCusIndex";
             this.colCusIndex.ReadOnly = true;
@@ -443,6 +443,7 @@
             this.btnRecharge.TabIndex = 14;
             this.btnRecharge.Text = "Nạp Tiền";
             this.btnRecharge.UseVisualStyleBackColor = true;
+            this.btnRecharge.Click += new System.EventHandler(this.btnRecharge_Click);
             // 
             // btnLockCard
             // 

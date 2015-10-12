@@ -13,7 +13,7 @@ namespace SGM_Management
 {
     public partial class frmSGMRechargeCard : Form
     {
-        private bool m_bStateUpdate;
+        private bool m_bRecharge;
         private string m_stCusID;
         private string m_stCardID;
         private CardDTO m_cardDTO;
@@ -26,7 +26,7 @@ namespace SGM_Management
         public frmSGMRechargeCard()
         {
             InitializeComponent();
-            m_bStateUpdate = false;
+            m_bRecharge = false;
             m_stCusID = "";
             m_stCardID = "";
             m_cardDTO = null;
@@ -50,10 +50,10 @@ namespace SGM_Management
             get { return m_cardDTO; }
             set { m_cardDTO = value; }
         }
-        public bool StateUpdate
+        public bool StateRecharge
         {
-            get { return m_bStateUpdate; }
-            set { m_bStateUpdate = value; }
+            get { return m_bRecharge; }
+            set { m_bRecharge = value; }
         }
         private void ResetInput()
         {
@@ -70,19 +70,26 @@ namespace SGM_Management
         {
             if (ValidateDataInput())
             {
-                int a = 0;
+                if (m_bRecharge)
+                {
+                }
+                else
+                {
+                }
             }
         }
 
         private void frmSGMRechargeCard_Load(object sender, EventArgs e)
         {
-            if (m_bStateUpdate)
-            {
-                ResetInput();
-                txtCardID.Focus();
+            if (m_bRecharge)
+            {               
+                txtCardID.Enabled = false;
             }
             else
             {
+                txtCardID.Enabled = true;
+                ResetInput();
+                txtCardID.Focus();
             }
             GetPriceGas();
         }
@@ -96,7 +103,7 @@ namespace SGM_Management
                 errProvider.SetError(txtCardID, SGMText.CARD_DATA_INPUT_CARD_ID_ERR);
                 bValidate = false;
             }
-            else if (!m_bStateUpdate)
+            else if (!m_bRecharge)
             {
                 String jsonResponse = m_service.SGMManager_CheckCardExist(txtCardID.Text.Trim());
                 DataTransfer response = JSonHelper.ConvertJSonToObject(jsonResponse);

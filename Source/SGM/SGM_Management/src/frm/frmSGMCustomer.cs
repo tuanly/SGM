@@ -58,7 +58,7 @@ namespace SGM_Management
         private void btnBuyCard_Click(object sender, EventArgs e)
         {
             frmSGMRechargeCard frmRechard = new frmSGMRechargeCard();
-            frmRechard.StateUpdate = false;
+            frmRechard.StateRecharge = false;
             frmRechard.CusID = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_ID"].ToString();
             frmRechard.ShowDialog();
         }
@@ -341,6 +341,14 @@ namespace SGM_Management
 
                 }
             }
+        }
+
+        private void btnRecharge_Click(object sender, EventArgs e)
+        {
+            frmSGMRechargeCard frmRechard = new frmSGMRechargeCard();
+            frmRechard.StateRecharge = true;
+            frmRechard.CusID = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_ID"].ToString();
+            frmRechard.ShowDialog();
         }
     }
 }
