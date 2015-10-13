@@ -33,8 +33,7 @@ namespace SGM.ServicesCore.DAL
                 {
                     query = string.Format("SELECT CUS_ID AS STT, * FROM CUSTOMER WHERE CUS_ID LIKE '%" + value + "%' OR CUS_NAME LIKE '%" + value + "%'");                   
                 }
-                DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, new SqlParameter[0]);
-                dataResult.ResponseDataString = query;
+                DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, new SqlParameter[0]);                
                 if (tblResult != null && tblResult.Rows.Count > 0)
                 {
                     DataSet ds = new DataSet();

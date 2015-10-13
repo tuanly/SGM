@@ -16,6 +16,7 @@ namespace SGM_Management
         private bool m_bRecharge;
         private string m_stCusID;
         private string m_stCardID;
+        private int m_iCurrentCardMoney;
         private CardDTO m_cardDTO;
         private int m_iPriceGas95;
         private int m_iPriceGas92;
@@ -55,6 +56,11 @@ namespace SGM_Management
             get { return m_bRecharge; }
             set { m_bRecharge = value; }
         }
+        public int CurrentCardMoney
+        {
+            get { return m_iCurrentCardMoney; }
+            set { m_iCurrentCardMoney = value; }
+        }
         private void ResetInput()
         {
             txtCardID.Text = "";
@@ -70,11 +76,78 @@ namespace SGM_Management
         {
             if (ValidateDataInput())
             {
+                DataTransfer response = null;
+                DataTransfer request = new DataTransfer();
+                string jsResult = "";
                 if (m_bRecharge)
                 {
+                    RechargeDTO dtoRecharge = new RechargeDTO();
+                    dtoRecharge.RechargeDate = dtpRechargeDate.Value;
+                    dtoRecharge.RechargeGas92Price = m_iPriceGas92;
+                    dtoRecharge.RechargeGas95Price = m_iPriceGas95;
+                    dtoRecharge.RechargeGasDOPrice = m_iPriceGasDO;
+                    dtoRecharge.RechargeMoney = Int32.Parse(txtCardMoney.Text.Trim());
+                    dtoRecharge.RechargeNote = txtRechargeNote.Text.Trim();
+                    dtoRecharge.CardID = txtCardID.Text.Trim();
+                    request.ResponseDataRechargeDTO = dtoRecharge;
+                    jsResult = m_service.SGMManager_AddRechargeCard(JSonHelper.ConvertObjectToJSon(request));
+                    response = JSonHelper.ConvertJSonToObject(jsResult);
+                    if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                    {
+                        jsResult = m_service.SGMManager_UpdateRechargeIDForCard(txtCardID.Text.Trim());
+                        response = JSonHelper.ConvertJSonToObject(jsResult);
+                        if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                        {
+                            jsResult = m_service.SGMManager_UpdateMoneyForCard(txtCardID.Text.Trim(), m_iCurrentCardMoney + Int32.Parse(txtCardMoney.Text.Trim()));
+                            response = JSonHelper.ConvertJSonToObject(jsResult);
+                            if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                            {
+                                this.Close();
+                            }
+                        }
+                    }
                 }
                 else
                 {
+                    CardDTO dtoCard = new CardDTO();
+                    dtoCard.CardID = txtCardID.Text.Trim();
+                    dtoCard.CardUnlockState = true;
+                    dtoCard.CardRemainingMoney = Int32.Parse(txtCardMoney.Text.Trim());
+                    dtoCard.CardBuyDate = dtpRechargeDate.Value;
+                    dtoCard.RechargeID = -1;
+                    dtoCard.CustomerID = m_stCusID;
+
+                    request.ResponseDataCardDTO = dtoCard;
+                    jsResult = m_service.SGMManager_AddNewCard(JSonHelper.ConvertObjectToJSon(request));
+                    response = JSonHelper.ConvertJSonToObject(jsResult);
+                    if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                    {
+                        RechargeDTO dtoRecharge = new RechargeDTO();
+                        dtoRecharge.RechargeDate = dtpRechargeDate.Value;
+                        dtoRecharge.RechargeGas92Price = m_iPriceGas92;
+                        dtoRecharge.RechargeGas95Price = m_iPriceGas95;
+                        dtoRecharge.RechargeGasDOPrice = m_iPriceGasDO;
+                        dtoRecharge.RechargeMoney = Int32.Parse(txtCardMoney.Text.Trim());
+                        dtoRecharge.RechargeNote = txtRechargeNote.Text.Trim();
+                        dtoRecharge.CardID = txtCardID.Text.Trim();
+                        request.ResponseDataRechargeDTO = dtoRecharge;
+                        jsResult = m_service.SGMManager_AddRechargeCard(JSonHelper.ConvertObjectToJSon(request));
+                        response = JSonHelper.ConvertJSonToObject(jsResult);
+                        if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                        {
+                            jsResult = m_service.SGMManager_UpdateRechargeIDForCard(txtCardID.Text.Trim());
+                            response = JSonHelper.ConvertJSonToObject(jsResult);
+                        }
+                    }
+                }
+                
+                if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                {
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show(response.ResponseErrorMsg + " : " + response.ResponseErrorMsgDetail);
                 }
             }
         }
@@ -84,6 +157,7 @@ namespace SGM_Management
             if (m_bRecharge)
             {               
                 txtCardID.Enabled = false;
+                txtCardID.Text = m_stCardID;
             }
             else
             {
@@ -127,12 +201,12 @@ namespace SGM_Management
                 errProvider.SetError(txtCardMoney, SGMText.CARD_DATA_INPUT_CARD_MONEY_ERR);
                 bValidate = false;
             }
-            if (txtRechargeMoney.Text.Trim().Equals(""))
+            else if (txtRechargeMoney.Text.Trim().Equals(""))
             {
                 errProvider.SetError(txtRechargeMoney, SGMText.CARD_DATA_INPUT_CARD_PRICE_ERR);
                 bValidate = false;
             }
-            if (Int32.Parse(txtCardMoney.Text.Trim()) < Int32.Parse(txtRechargeMoney.Text.Trim()))
+            else if (Int32.Parse(txtCardMoney.Text.Trim()) < Int32.Parse(txtRechargeMoney.Text.Trim()))
             {
                 errProvider.SetError(txtRechargeMoney, SGMText.CARD_DATA_INPUT_CARD_MONEY_PRICE_ERR);
                 bValidate = false;

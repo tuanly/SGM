@@ -12,6 +12,7 @@ namespace SGM.ServicesCore.BLL
     {
         private CardDAL m_dalCard;
         private RechargeDAL m_dalRecharge;
+        private SaleGasDAL m_dalSaleGas;
         private DataTransfer m_dataRequest;
         private DataTransfer m_dataResponse;
 
@@ -19,13 +20,14 @@ namespace SGM.ServicesCore.BLL
         {
             m_dalCard = new CardDAL();
             m_dalRecharge = new RechargeDAL();
+            m_dalSaleGas = new SaleGasDAL();
             m_dataRequest = null;
             m_dataResponse = null;
         }
 
-        public string CheckCardExist(string stCaradID)
+        public string CheckCardExist(string stCardID)
         {
-            m_dataResponse = m_dalCard.IsCardExisted(stCaradID);
+            m_dataResponse = m_dalCard.IsCardExisted(stCardID);
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
 
@@ -43,10 +45,29 @@ namespace SGM.ServicesCore.BLL
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
 
-        public string UpdateRechargeIDForCard(string stCaradID)
+        public string UpdateRechargeIDForCard(string stCardID)
         {           
-            m_dataResponse = m_dalCard.UpdateRechargeIDForCard(stCaradID);
+            m_dataResponse = m_dalCard.UpdateRechargeIDForCard(stCardID);
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
+		
+		public string UpdateMoneyForCard(string stCardID, int iMoney)
+		{
+			m_dataResponse = m_dalCard.UpdateMoneyForCard(stCardID, iMoney);
+            return JSonHelper.ConvertObjectToJSon(m_dataResponse);
+		}
+
+        public string GetCardsOfCustomer(string stCusID)
+        {
+            m_dataResponse = m_dalCard.GetCardsOfCustomer(stCusID);
+            return JSonHelper.ConvertObjectToJSon(m_dataResponse);
+        }
+
+        public string UpdateCardState(string stCardID, bool bLocked)
+        {
+            m_dataResponse = m_dalCard.UpdateCardState(stCardID, bLocked);
+            return JSonHelper.ConvertObjectToJSon(m_dataResponse);
+        }
+       
     }
 }

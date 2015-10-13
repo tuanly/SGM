@@ -55,9 +55,13 @@ namespace SGM_Core.Utils
         public static string CARD_DATA_INPUT_CARD_MONEY_PRICE_ERR = "Lỗi! Giá mua không thể lớn hơn số tiền trên thẻ.";
         public static string CARD_DATA_INPUT_DATE_ERR = "Lỗi! Ngày mua card không được nhỏ hơn ngày hiện tại.";
         public static string CARD_GET_CARD_ERR = "Lỗi! Không thể lấy thông tin thẻ.";
+        public static string CARD_GET_CARDS_ERR = "Lỗi! Không thể lấy danh sách thẻ.";
         public static string CARD_INSERT_ERR = "Lỗi! Không thể thêm thẻ";
         public static string CARD_RECHARGE_INSERT_ERR = "Lỗi! Không thể nạp thẻ";
-        public static string CARD_UPDATE_RECHARGE_ID = "Lỗi! Không thể cập nhật thông tin nạp thẻ";
+        public static string CARD_UPDATE_RECHARGE_ID_ERR = "Lỗi! Không thể cập nhật thông tin nạp thẻ";
+        public static string CARD_UPDATE_MONEY_ERR = "Lỗi! Không thể cập nhật thông tin nạp thẻ";
+        public static string CARD_UPDATE_CARD_STATE_ERR = "Lỗi! Không thể cập nhật trạng thái thẻ.";
+        
 
     }
 }

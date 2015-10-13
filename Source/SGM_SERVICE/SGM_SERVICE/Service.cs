@@ -144,12 +144,29 @@ public class Service : System.Web.Services.WebService
         return m_bllCardService.AddRechargeCard(jsRechargeDTO);
     }
 
-     [WebMethod]
+    [WebMethod]
     public string SGMManager_UpdateRechargeIDForCard(string stCardID)
     {
         return m_bllCardService.UpdateRechargeIDForCard(stCardID);
     }
-    
+
+    [WebMethod]
+    public string SGMManager_UpdateMoneyForCard(string stCardID, int iMoney)
+    {
+        return m_bllCardService.UpdateMoneyForCard(stCardID, iMoney);
+    }
+
+    [WebMethod]
+    public string SGMManager_GetCardsOfCustomer(string stCusID)
+    {
+        return m_bllCardService.GetCardsOfCustomer(stCusID);
+    }
+
+    [WebMethod]
+    public string SGMManager_UpdateCardState(string stCardID, bool bLocked)
+    {
+        return m_bllCardService.UpdateCardState(stCardID, bLocked);
+    }
 
 }
     

@@ -14,7 +14,14 @@ namespace SGM_Management
     {
         private SGM_Service.ServiceSoapClient m_service = null;
         private DataSet m_dsCustomer;
+        private DataSet m_dsCard;
         private string m_stSearchValue = null;
+
+        private string m_stCusIDEdit = "";
+        private int m_iCurrentCustomerIndex = -1;
+
+        private int m_iCurrentCardIndex = -1;
+
         public frmSGMCustomer()
         {
             InitializeComponent();
@@ -26,6 +33,7 @@ namespace SGM_Management
             txtSearch.Enabled = (!isEditMode && (dgvCusList.RowCount > 0));
             btnSearch.Enabled = (!isEditMode && (dgvCusList.RowCount > 0));
             dgvCusList.Enabled = !isEditMode;
+            dgvCardList.Enabled = !isEditMode;
             txtCusID.Enabled = isEditMode;
             txtCusName.Enabled = isEditMode;
             txtCusBirthday.Enabled = isEditMode;
@@ -34,6 +42,8 @@ namespace SGM_Management
             txtCusAddress.Enabled = isEditMode;
             txtNote.Enabled = isEditMode;
             btnBuyCard.Enabled = (!isEditMode && (dgvCusList.RowCount > 0));
+            btnLockCard.Enabled = (!isEditMode && (dgvCardList.RowCount > 0));
+            btnRecharge.Enabled = (!isEditMode && (dgvCardList.RowCount > 0));
             dgvCardList.Enabled = !isEditMode;
             btnCancel.Enabled = isEditMode;
             btnDelete.Enabled = (!isEditMode && (dgvCusList.RowCount > 0));
@@ -48,19 +58,15 @@ namespace SGM_Management
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            UpdateInputFields();
-        }
-
         
 
         private void btnBuyCard_Click(object sender, EventArgs e)
         {
             frmSGMRechargeCard frmRechard = new frmSGMRechargeCard();
             frmRechard.StateRecharge = false;
-            frmRechard.CusID = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_ID"].ToString();
+            frmRechard.CusID = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString();
             frmRechard.ShowDialog();
+            LoadCardList();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -165,7 +171,7 @@ namespace SGM_Management
             DataTransfer response = JSonHelper.ConvertJSonToObject(jsResponse);
             dgvCusList.Rows.Clear();
             m_dsCustomer = response.ResponseDataSet;
-            int iOldSelected = m_iCurrentIndex;
+            int iOldSelected = m_iCurrentCustomerIndex;
             if (m_dsCustomer != null)
             {                
                 for (int i = 0; i < m_dsCustomer.Tables[0].Rows.Count; i++)
@@ -174,30 +180,62 @@ namespace SGM_Management
                     dgvCusList.Rows[i].Cells[0].Value = (i + 1);
                     dgvCusList.Rows[i].Cells[1].Value = m_dsCustomer.Tables[0].Rows[i]["CUS_NAME"] + " (" + m_dsCustomer.Tables[0].Rows[i]["CUS_ID"] + ")";
                 }
-                if (iOldSelected > 0)
-                    m_iCurrentIndex = iOldSelected;
-                if (m_iCurrentIndex >= dgvCusList.Rows.Count)
-                    m_iCurrentIndex = -1;
-                if (m_iCurrentIndex > 0) 
-                    dgvCusList.Rows[m_iCurrentIndex].Selected = true;
+                if (iOldSelected >= 0)
+                    m_iCurrentCustomerIndex = iOldSelected;
+                if (m_iCurrentCustomerIndex >= dgvCusList.Rows.Count)
+                    m_iCurrentCustomerIndex = -1;
+                if (m_iCurrentCustomerIndex >= 0)
+                    dgvCusList.Rows[m_iCurrentCustomerIndex].Selected = true;
+                
             }
-            
+        }
+
+        private void LoadCardList()
+        {
+            if (m_iCurrentCustomerIndex >= 0)
+            {
+                string jsResponse = m_service.SGMManager_GetCardsOfCustomer(m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString());
+                DataTransfer response = JSonHelper.ConvertJSonToObject(jsResponse);
+                dgvCardList.Rows.Clear();
+                m_dsCard = response.ResponseDataSet;
+                int iOldSelected = m_iCurrentCardIndex;
+                if (m_dsCard != null)
+                {
+                    for (int i = 0; i < m_dsCard.Tables[0].Rows.Count; i++)
+                    {
+                        dgvCardList.Rows.Add();
+                        dgvCardList.Rows[i].Cells[0].Value = (i + 1);
+                        dgvCardList.Rows[i].Cells[1].Value = m_dsCard.Tables[0].Rows[i]["CARD_ID"] ;
+                        dgvCardList.Rows[i].Cells[2].Value = m_dsCard.Tables[0].Rows[i]["CARD_MONEY"];
+                        dgvCardList.Rows[i].Cells[3].Value = m_dsCard.Tables[0].Rows[i]["RECHARGE_MONEY"];
+                        dgvCardList.Rows[i].Cells[4].Value = m_dsCard.Tables[0].Rows[i]["CARD_BUY_DATE"];
+                        dgvCardList.Rows[i].Cells[5].Value = m_dsCard.Tables[0].Rows[i]["RECHARGE_DATE"];
+                        dgvCardList.Rows[i].Cells[6].Value = !Boolean.Parse(m_dsCard.Tables[0].Rows[i]["CARD_STATE"].ToString());
+                    }
+                    if (iOldSelected >= 0)
+                        m_iCurrentCardIndex = iOldSelected;
+                    if (m_iCurrentCardIndex >= dgvCusList.Rows.Count)
+                        m_iCurrentCardIndex = -1;
+                    if (m_iCurrentCardIndex >= 0)
+                        dgvCardList.Rows[m_iCurrentCardIndex].Selected = true;
+                }
+            }
         }
 
         private void UpdateInputFields()
         {
             if (m_dsCustomer != null && m_dsCustomer.Tables.Count > 0 && m_dsCustomer.Tables[0].Rows.Count > 0 && dgvCusList.SelectedRows.Count > 0)
             {
-                m_iCurrentIndex = dgvCusList.SelectedRows[0].Index;
-                if (m_iCurrentIndex < m_dsCustomer.Tables[0].Rows.Count)
+                m_iCurrentCustomerIndex = dgvCusList.SelectedRows[0].Index;
+                if (m_iCurrentCustomerIndex < m_dsCustomer.Tables[0].Rows.Count)
                 {
-                    txtCusID.Text = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_ID"].ToString();
-                    txtCusName.Text = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_NAME"].ToString();
-                    txtCusBirthday.Text = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_BIRTHDATE"].ToString();
-                    txtCusVisa.Text = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_VISA"].ToString();
-                    txtCusAddress.Text = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_ADDRESS"].ToString();
-                    txtCusPhone.Text = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_PHONE"].ToString();
-                    txtNote.Text = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_NOTE"].ToString();
+                    txtCusID.Text = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString();
+                    txtCusName.Text = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_NAME"].ToString();
+                    txtCusBirthday.Text = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_BIRTHDATE"].ToString();
+                    txtCusVisa.Text = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_VISA"].ToString();
+                    txtCusAddress.Text = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ADDRESS"].ToString();
+                    txtCusPhone.Text = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_PHONE"].ToString();
+                    txtNote.Text = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_NOTE"].ToString();
                     btnAdd.Enabled = true;
                     btnEdit.Enabled = true;
                     btnDelete.Enabled = true;
@@ -211,7 +249,9 @@ namespace SGM_Management
                 btnEdit.Enabled = false;
                 btnDelete.Enabled = false;
                 btnBuyCard.Enabled = false;
+                
             }
+            
         }
         private void clearInput()
         {
@@ -226,6 +266,8 @@ namespace SGM_Management
         private void dgvCusList_SelectionChanged(object sender, EventArgs e)
         {
             UpdateInputFields();
+            LoadCardList();
+            UpdateStateControls(false);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -255,11 +297,11 @@ namespace SGM_Management
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (m_iCurrentIndex > 0)
+            if (m_iCurrentCustomerIndex >= 0)
                 {
 
-                    string cusID = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_ID"].ToString();
-                    string cusName = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_NAME"].ToString();
+                    string cusID = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString();
+                    string cusName = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_NAME"].ToString();
                     if (MessageBox.Show(SGMText.CUSTOMER_DEL_CUS_WARNING + "\n" + cusID + " : " + cusName, SGMText.CUSTOMER_DEL_CUS, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         string jsResponse = m_service.SGMManager_DelCustomer(cusID);
@@ -278,16 +320,15 @@ namespace SGM_Management
                 
            
         }
-        private string m_stCusIDEdit = "";
-        private int m_iCurrentIndex = -1;
+        
         private void btnEdit_Click(object sender, EventArgs e)
         {
-           if (m_iCurrentIndex > 0)
+            if (m_iCurrentCustomerIndex >= 0)
                 {
 
                     if (btnEdit.Text.Equals("&Sửa"))
                     {
-                        m_stCusIDEdit = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_ID"].ToString();
+                        m_stCusIDEdit = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString();
                         btnEdit.Text = "&Lưu";
                         UpdateStateControls(true);               
                         txtCusID.Focus();
@@ -347,8 +388,53 @@ namespace SGM_Management
         {
             frmSGMRechargeCard frmRechard = new frmSGMRechargeCard();
             frmRechard.StateRecharge = true;
-            frmRechard.CusID = m_dsCustomer.Tables[0].Rows[m_iCurrentIndex]["CUS_ID"].ToString();
+            frmRechard.CardID = m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_ID"].ToString();
+            frmRechard.CurrentCardMoney = Int32.Parse(m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_MONEY"].ToString());
+            frmRechard.CusID = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString();
             frmRechard.ShowDialog();
+            LoadCardList();
+        }
+
+        private void dgvCardList_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvCardList.SelectedRows.Count > 0)
+            {
+                m_iCurrentCardIndex = dgvCardList.SelectedRows[0].Index;
+                bool bUnLock = Boolean.Parse(m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_STATE"].ToString());
+                if (bUnLock)
+                {
+                    
+                    btnRecharge.Enabled = true;
+                    btnLockCard.Text = "&Khóa Thẻ";
+                }
+                else
+                {
+                   
+                    btnRecharge.Enabled = false;
+                    btnLockCard.Text = "&Mở khóa Thẻ";
+                }
+            }
+        }
+
+        private void btnLockCard_Click(object sender, EventArgs e)
+        {
+            if (m_iCurrentCardIndex >= 0)
+            {
+                bool bUnLock = Boolean.Parse(m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_STATE"].ToString());
+                bUnLock = !bUnLock;
+                string stCardID = m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_ID"].ToString();
+                string response = m_service.SGMManager_UpdateCardState(stCardID, bUnLock);
+                DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
+                if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                {
+                   
+                    LoadCardList();
+                }
+                else
+                {
+                    MessageBox.Show(dataResponse.ResponseErrorMsg + " :  " + dataResponse.ResponseErrorMsgDetail);
+                }
+            }
         }
     }
 }
