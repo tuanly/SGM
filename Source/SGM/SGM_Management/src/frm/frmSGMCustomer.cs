@@ -436,5 +436,25 @@ namespace SGM_Management
                 }
             }
         }
+
+        private void dgvCardList_DoubleClick(object sender, EventArgs e)
+        {
+            if (m_iCurrentCardIndex >= 0)
+            {
+                bool bUnLock = Boolean.Parse(m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_STATE"].ToString());
+                string logInfo = "Thông tin chi tiết thẻ: \n" +
+                                 "- Mã thẻ :" + m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_ID"] + "\n" +
+                                 "- Trạng thái :" + (bUnLock ? "Đang sử dụng" : "Đã khóa") + "\n" +
+                                 "- Ngày mua thẻ :" + m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_BUY_DATE"] + "\n" +
+                                 "- Số tiền trên thẻ :" + m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_MONEY"] + "\n" +
+                                 "- Ngày nạp tiền :" + m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["RECHARGE_DATE"] + "\n" +
+                                 "- Số tiền nạp :" + m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["RECHARGE_MONEY"] + "\n" +
+                                 "- Giá xăng tại thời điểm nạp tiền: \n" +
+                                 "    + Xăng 92 : " + m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["RECHARGE_GAS92_PRICE"] + "\n" +
+                                 "    + Xăng 95 : " + m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["RECHARGE_GAS95_PRICE"] + "\n" +
+                                 "    + Dầu DO : " + m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["RECHARGE_GASDO_PRICE"] + "\n";
+                MessageBox.Show(logInfo);
+            }
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace SGM_Management
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmGasStation());
+            Application.Run(new frmSGMCustomer());
         }
     }
 }

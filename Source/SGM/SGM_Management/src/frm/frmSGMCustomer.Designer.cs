@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMCustomer));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnDelCard = new System.Windows.Forms.Button();
             this.btnLockCard = new System.Windows.Forms.Button();
@@ -59,6 +59,13 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.dgvCardList = new System.Windows.Forms.DataGridView();
+            this.colCardSTT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCardID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCardMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCardRechargeMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCardDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCardRechargeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colCardState = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.dgvCusList = new System.Windows.Forms.DataGridView();
             this.colCusIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -69,13 +76,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.colCardSTT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCardID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCardMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCardRechargeMoney = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCardDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCardRechargeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCardState = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -384,6 +384,42 @@
             this.dgvCardList.Size = new System.Drawing.Size(695, 220);
             this.dgvCardList.TabIndex = 0;
             this.dgvCardList.SelectionChanged += new System.EventHandler(this.dgvCardList_SelectionChanged);
+            this.dgvCardList.DoubleClick += new System.EventHandler(this.dgvCardList_DoubleClick);
+            // 
+            // colCardSTT
+            // 
+            this.colCardSTT.HeaderText = "STT";
+            this.colCardSTT.Name = "colCardSTT";
+            // 
+            // colCardID
+            // 
+            this.colCardID.HeaderText = "Mã Thẻ";
+            this.colCardID.Name = "colCardID";
+            // 
+            // colCardMoney
+            // 
+            this.colCardMoney.HeaderText = "Tiền trên thẻ";
+            this.colCardMoney.Name = "colCardMoney";
+            // 
+            // colCardRechargeMoney
+            // 
+            this.colCardRechargeMoney.HeaderText = "Giá mua";
+            this.colCardRechargeMoney.Name = "colCardRechargeMoney";
+            // 
+            // colCardDate
+            // 
+            this.colCardDate.HeaderText = "Ngày mua";
+            this.colCardDate.Name = "colCardDate";
+            // 
+            // colCardRechargeDate
+            // 
+            this.colCardRechargeDate.HeaderText = "Ngày nạp";
+            this.colCardRechargeDate.Name = "colCardRechargeDate";
+            // 
+            // colCardState
+            // 
+            this.colCardState.HeaderText = "Thẻ bị khóa";
+            this.colCardState.Name = "colCardState";
             // 
             // errProvider
             // 
@@ -411,8 +447,8 @@
             // 
             // colCusIndex
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colCusIndex.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colCusIndex.DefaultCellStyle = dataGridViewCellStyle1;
             this.colCusIndex.HeaderText = " STT";
             this.colCusIndex.Name = "colCusIndex";
             this.colCusIndex.ReadOnly = true;
@@ -487,41 +523,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(281, 417);
             this.panel1.TabIndex = 2;
-            // 
-            // colCardSTT
-            // 
-            this.colCardSTT.HeaderText = "STT";
-            this.colCardSTT.Name = "colCardSTT";
-            // 
-            // colCardID
-            // 
-            this.colCardID.HeaderText = "Mã Thẻ";
-            this.colCardID.Name = "colCardID";
-            // 
-            // colCardMoney
-            // 
-            this.colCardMoney.HeaderText = "Tiền trên thẻ";
-            this.colCardMoney.Name = "colCardMoney";
-            // 
-            // colCardRechargeMoney
-            // 
-            this.colCardRechargeMoney.HeaderText = "Giá mua";
-            this.colCardRechargeMoney.Name = "colCardRechargeMoney";
-            // 
-            // colCardDate
-            // 
-            this.colCardDate.HeaderText = "Ngày mua";
-            this.colCardDate.Name = "colCardDate";
-            // 
-            // colCardRechargeDate
-            // 
-            this.colCardRechargeDate.HeaderText = "Ngày nạp";
-            this.colCardRechargeDate.Name = "colCardRechargeDate";
-            // 
-            // colCardState
-            // 
-            this.colCardState.HeaderText = "Thẻ bị khóa";
-            this.colCardState.Name = "colCardState";
             // 
             // frmSGMCustomer
             // 
