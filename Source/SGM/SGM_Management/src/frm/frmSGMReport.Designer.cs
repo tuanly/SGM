@@ -52,7 +52,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.dtpRechargeCardBegin = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
-            this.dboRechargeCardCustomer = new System.Windows.Forms.ComboBox();
+            this.cboRechargeCardCustomer = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tabSGMHistory.SuspendLayout();
             this.subTabSGMSaleGas.SuspendLayout();
@@ -224,7 +224,7 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.dtpRechargeCardBegin);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.dboRechargeCardCustomer);
+            this.groupBox2.Controls.Add(this.cboRechargeCardCustomer);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(3, 3);
@@ -236,7 +236,7 @@
             // 
             // btnRechargeCardView
             // 
-            this.btnRechargeCardView.Location = new System.Drawing.Point(207, 126);
+            this.btnRechargeCardView.Location = new System.Drawing.Point(336, 126);
             this.btnRechargeCardView.Name = "btnRechargeCardView";
             this.btnRechargeCardView.Size = new System.Drawing.Size(75, 23);
             this.btnRechargeCardView.TabIndex = 8;
@@ -296,13 +296,13 @@
             this.label7.TabIndex = 2;
             this.label7.Text = "Từ ngày:";
             // 
-            // dboRechargeCardCustomer
+            // cboRechargeCardCustomer
             // 
-            this.dboRechargeCardCustomer.FormattingEnabled = true;
-            this.dboRechargeCardCustomer.Location = new System.Drawing.Point(90, 23);
-            this.dboRechargeCardCustomer.Name = "dboRechargeCardCustomer";
-            this.dboRechargeCardCustomer.Size = new System.Drawing.Size(382, 21);
-            this.dboRechargeCardCustomer.TabIndex = 1;
+            this.cboRechargeCardCustomer.FormattingEnabled = true;
+            this.cboRechargeCardCustomer.Location = new System.Drawing.Point(90, 23);
+            this.cboRechargeCardCustomer.Name = "cboRechargeCardCustomer";
+            this.cboRechargeCardCustomer.Size = new System.Drawing.Size(382, 21);
+            this.cboRechargeCardCustomer.TabIndex = 1;
             // 
             // label8
             // 
@@ -361,7 +361,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DateTimePicker dtpRechargeCardBegin;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox dboRechargeCardCustomer;
+        private System.Windows.Forms.ComboBox cboRechargeCardCustomer;
         private System.Windows.Forms.Label label8;
     }
 }

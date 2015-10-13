@@ -10,10 +10,8 @@ namespace SGM.ServicesCore.BLL
 {
     public class SaleGasServiceBLL
     {
-        //private JSonHelper m_jsHelper;
         public SaleGasServiceBLL()
         {
-           // m_jsHelper = new JSonHelper();
         }
         public string ValidateGasStationLogin(string stGasStationID, string stGasStationMacAddress)
         {
@@ -61,6 +59,27 @@ namespace SGM.ServicesCore.BLL
                 response.ResponseErrorMsg = SGMText.GAS_BUYING_FAIL;
             }
             return JSonHelper.ConvertObjectToJSon(response);
+        }
+
+        public string GetSaleGasReport(string stGasStationID, string dateStart, string dateEnd)
+        {
+            throw new NotImplementedException();
+            //CardDAL dalCard = new CardDAL();
+            //DataTable tblCard = dalCard.GetSaleGasReport(stGasStationID, dateStart, dateEnd);
+            //DataTransfer dataResult = new DataTransfer();
+            //if (tblCard.Rows.Count > 0)
+            //{
+            //    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+            //    DataSet ds = new DataSet();
+            //    ds.Tables.Add(tblCard.Copy());
+            //    dataResult.ResponseDataSet = ds;
+            //}
+            //else
+            //{
+            //    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+            //    dataResult.ResponseErrorMsg = SGMText.GAS_STATION_CARD_ID_NOT_EXIST;
+            //}
+            //return JSonHelper.ConvertObjectToJSon(dataResult);
         }
     }
     

@@ -28,5 +28,12 @@ namespace SGM.ServicesCore.BLL
 
             return JSonHelper.ConvertObjectToJSon(response);
         }
+
+        public string GetCustomerList()
+        {
+            CustomerDAL dalCustomer = new CustomerDAL();
+            DataTransfer response = dalCustomer.GetCustomerList();
+            return JSonHelper.ConvertObjectToJSon(response);
+        }
     }
 }

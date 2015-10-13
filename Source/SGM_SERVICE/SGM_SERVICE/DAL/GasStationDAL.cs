@@ -20,7 +20,7 @@ namespace SGM.ServicesCore.DAL
         public DataSet GetGasStationList()
         {
             DataSet ds = null;
-            string query = string.Format("SELECT * FROM GAS_STATION");
+            string query = string.Format("SELECT GASSTATION_ID, GASSTATION_NAME FROM GAS_STATION");
             DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, null);
             if (tblResult.Rows.Count > 0)
             {

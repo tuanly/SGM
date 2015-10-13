@@ -53,6 +53,13 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public string SGMSaleGas_GetSaleGasReport(string stGasStationID, string dateStart, string dateEnd)
+    {
+        return m_bllSaleGasService.GetSaleGasReport(stGasStationID, dateStart, dateEnd);
+    }
+    
+
+    [WebMethod]
     public string SGMManager_ValidateAdminLogin(string admin, string pwd)
     {
         return m_bllAdminServcie.ValidateAdminLogin(admin, pwd);
@@ -105,6 +112,13 @@ public class Service : System.Web.Services.WebService
     {
         return m_bllCustomerService.DelCustomer(stCusID);
     }
+
+    [WebMethod]
+    public string SGMSaleGas_GetCustomerList()
+    {
+        return m_bllReportService.GetCustomerList();
+    }
+    
 
     [WebMethod]
     public string SGMManager_CheckCardExist(string stCardID)

@@ -235,5 +235,32 @@ namespace SGM.ServicesCore.DAL
             
             return dataResult;
         }
+
+        public DataTransfer GetCustomerList()
+        {
+            DataTransfer dataResult = new DataTransfer();
+            try
+            {
+                string query = string.Format("SELECT CUS_ID, CUS_NAME FROM CUSTOMER");
+                DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, null);
+                DataSet ds = null;
+                if (tblResult.Rows.Count > 0)
+                {
+                    ds = new DataSet();
+                    ds.Tables.Add(tblResult.Copy());
+                    
+                }
+                dataResult.ResponseDataSet = ds;
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+            }
+            catch (Exception ex)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.CUSTOMER_GET_CUS_ERR;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+
+            return dataResult;
+        }
     }
 }
