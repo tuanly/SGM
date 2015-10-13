@@ -13,9 +13,9 @@ namespace SGM_Core.DTO
 
         private string m_stSysAdmin;    //admin account, primate key
         private string m_stSysPwd;      //admin password
-        private int m_iSysGas92Total;   //total gas92 in store
-        private int m_iSysGas95Total;   //total gas95 in store
-        private int m_iSysGasDOTotal;   //total gasDO in store
+        private float m_iSysGas92Total;   //total gas92 in store
+        private float m_iSysGas95Total;   //total gas95 in store
+        private float m_iSysGasDOTotal;   //total gasDO in store
         private int m_iSysGas92CurrentPrice;    //current price of gas92
         private int m_iSysGas95CurrentPrice;    //current price of gas95
         private int m_iSysGasDOCurrentPrice;    //current price of gasDO
@@ -52,19 +52,19 @@ namespace SGM_Core.DTO
             set { m_stSysPwd = value; }
         }
 
-        public int SysGas92Total
+        public float SysGas92Total
         {
             get { return m_iSysGas92Total; }
             set { m_iSysGas92Total = value; }
         }
 
-        public int SysGas95Total
+        public float SysGas95Total
         {
             get { return m_iSysGas95Total; }
             set { m_iSysGas95Total = value; }
         }
 
-        public int SysGasDOTotal
+        public float SysGasDOTotal
         {
             get { return m_iSysGasDOTotal; }
             set { m_iSysGasDOTotal = value; }

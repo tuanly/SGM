@@ -53,9 +53,9 @@ namespace SGM.ServicesCore.DAL
                 {
                     dtoSysAdmin.SysAdminAccount = dr["SYS_ADMIN"].ToString();
                     dtoSysAdmin.SysAdminPwd = dr["SYS_PWD"].ToString();
-                    dtoSysAdmin.SysGas92Total = Int32.Parse(dr["SYS_GAS92_TOTAL"].ToString());
-                    dtoSysAdmin.SysGas95Total = Int32.Parse(dr["SYS_GAS95_TOTAL"].ToString());
-                    dtoSysAdmin.SysGasDOTotal = Int32.Parse(dr["SYS_GASDO_TOTAL"].ToString());
+                    dtoSysAdmin.SysGas92Total = float.Parse(dr["SYS_GAS92_TOTAL"].ToString());
+                    dtoSysAdmin.SysGas95Total = float.Parse(dr["SYS_GAS95_TOTAL"].ToString());
+                    dtoSysAdmin.SysGasDOTotal = float.Parse(dr["SYS_GASDO_TOTAL"].ToString());
                     dtoSysAdmin.SysGas92CurrentPrice = Int32.Parse(dr["SYS_GAS92_CURRENT_PRICE"].ToString());
                     dtoSysAdmin.SysGas95CurrentPrice = Int32.Parse(dr["SYS_GAS95_CURRENT_PRICE"].ToString());
                     dtoSysAdmin.SysGasDOCurrentPrice = Int32.Parse(dr["SYS_GASDO_CURRENT_PRICE"].ToString());
@@ -78,11 +78,11 @@ namespace SGM.ServicesCore.DAL
             sqlParameters[0].Value = Convert.ToString(dtoSysAdmin.SysAdminAccount);
             sqlParameters[1] = new SqlParameter("@SYS_PWD", SqlDbType.NVarChar);
             sqlParameters[1].Value = Convert.ToString(dtoSysAdmin.SysAdminPwd);
-            sqlParameters[2] = new SqlParameter("@SYS_GAS92_TOTAL", SqlDbType.Int);
+            sqlParameters[2] = new SqlParameter("@SYS_GAS92_TOTAL", SqlDbType.Float);
             sqlParameters[2].Value = Convert.ToInt32(dtoSysAdmin.SysGas92Total);
-            sqlParameters[3] = new SqlParameter("@SYS_GAS95_TOTAL", SqlDbType.Int);
+            sqlParameters[3] = new SqlParameter("@SYS_GAS95_TOTAL", SqlDbType.Float);
             sqlParameters[3].Value = Convert.ToInt32(dtoSysAdmin.SysGas95Total);
-            sqlParameters[4] = new SqlParameter("@SYS_GASDO_TOTAL", SqlDbType.Int);
+            sqlParameters[4] = new SqlParameter("@SYS_GASDO_TOTAL", SqlDbType.Float);
             sqlParameters[4].Value = Convert.ToInt32(dtoSysAdmin.SysGasDOTotal);
             sqlParameters[5] = new SqlParameter("@SYS_GAS92_CURRENT_PRICE", SqlDbType.Int);
             sqlParameters[5].Value = Convert.ToInt32(dtoSysAdmin.SysGas92CurrentPrice);
@@ -115,11 +115,11 @@ namespace SGM.ServicesCore.DAL
             sqlParameters[0].Value = Convert.ToString(dtoSysAdmin.SysAdminAccount);
             sqlParameters[1] = new SqlParameter("@SYS_PWD", SqlDbType.NVarChar);
             sqlParameters[1].Value = Convert.ToString(dtoSysAdmin.SysAdminPwd);
-            sqlParameters[2] = new SqlParameter("@SYS_GAS92_TOTAL", SqlDbType.Int);
+            sqlParameters[2] = new SqlParameter("@SYS_GAS92_TOTAL", SqlDbType.Float);
             sqlParameters[2].Value = Convert.ToInt32(dtoSysAdmin.SysGas92Total);
-            sqlParameters[3] = new SqlParameter("@SYS_GAS95_TOTAL", SqlDbType.Int);
+            sqlParameters[3] = new SqlParameter("@SYS_GAS95_TOTAL", SqlDbType.Float);
             sqlParameters[3].Value = Convert.ToInt32(dtoSysAdmin.SysGas95Total);
-            sqlParameters[4] = new SqlParameter("@SYS_GASDO_TOTAL", SqlDbType.Int);
+            sqlParameters[4] = new SqlParameter("@SYS_GASDO_TOTAL", SqlDbType.Float);
             sqlParameters[4].Value = Convert.ToInt32(dtoSysAdmin.SysGasDOTotal);
             sqlParameters[5] = new SqlParameter("@SYS_GAS92_CURRENT_PRICE", SqlDbType.Int);
             sqlParameters[5].Value = Convert.ToInt32(dtoSysAdmin.SysGas92CurrentPrice);
@@ -216,11 +216,11 @@ namespace SGM.ServicesCore.DAL
                 SqlParameter[] sqlParameters = new SqlParameter[4];
                 sqlParameters[0] = new SqlParameter("@SYS_ADMIN", SqlDbType.NVarChar);
                 sqlParameters[0].Value = Convert.ToString(dtoSysAdmin.SysAdminAccount);
-                sqlParameters[1] = new SqlParameter("@SYS_GAS92_TOTAL", SqlDbType.Int);
+                sqlParameters[1] = new SqlParameter("@SYS_GAS92_TOTAL", SqlDbType.Float);
                 sqlParameters[1].Value = Convert.ToInt32(dtoSysAdmin.SysGas92Total);
-                sqlParameters[2] = new SqlParameter("@SYS_GAS95_TOTAL", SqlDbType.Int);
+                sqlParameters[2] = new SqlParameter("@SYS_GAS95_TOTAL", SqlDbType.Float);
                 sqlParameters[2].Value = Convert.ToInt32(dtoSysAdmin.SysGas95Total);
-                sqlParameters[3] = new SqlParameter("@SYS_GASDO_TOTAL", SqlDbType.Int);
+                sqlParameters[3] = new SqlParameter("@SYS_GASDO_TOTAL", SqlDbType.Float);
                 sqlParameters[3].Value = Convert.ToInt32(dtoSysAdmin.SysGasDOTotal);
 
                 bool result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
