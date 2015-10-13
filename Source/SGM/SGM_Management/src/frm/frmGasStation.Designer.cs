@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGasStation));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,13 +46,23 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.colSTT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colGSID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtMacAddress = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGSList)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtMacAddress);
+            this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtGSDes);
             this.groupBox1.Controls.Add(this.txtGSAddress);
@@ -62,7 +73,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(591, 184);
+            this.groupBox1.Size = new System.Drawing.Size(597, 199);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin chi tiết:";
@@ -70,7 +81,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 134);
+            this.label4.Location = new System.Drawing.Point(25, 164);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 7;
@@ -78,31 +89,31 @@
             // 
             // txtGSDes
             // 
-            this.txtGSDes.Location = new System.Drawing.Point(80, 113);
+            this.txtGSDes.Location = new System.Drawing.Point(100, 154);
             this.txtGSDes.Multiline = true;
             this.txtGSDes.Name = "txtGSDes";
-            this.txtGSDes.Size = new System.Drawing.Size(500, 56);
+            this.txtGSDes.Size = new System.Drawing.Size(480, 35);
             this.txtGSDes.TabIndex = 6;
             // 
             // txtGSAddress
             // 
-            this.txtGSAddress.Location = new System.Drawing.Point(80, 85);
+            this.txtGSAddress.Location = new System.Drawing.Point(100, 85);
             this.txtGSAddress.Name = "txtGSAddress";
-            this.txtGSAddress.Size = new System.Drawing.Size(500, 20);
+            this.txtGSAddress.Size = new System.Drawing.Size(480, 20);
             this.txtGSAddress.TabIndex = 5;
             // 
             // txtGSName
             // 
-            this.txtGSName.Location = new System.Drawing.Point(80, 56);
+            this.txtGSName.Location = new System.Drawing.Point(100, 56);
             this.txtGSName.Name = "txtGSName";
-            this.txtGSName.Size = new System.Drawing.Size(500, 20);
+            this.txtGSName.Size = new System.Drawing.Size(480, 20);
             this.txtGSName.TabIndex = 4;
             // 
             // txtGSCode
             // 
-            this.txtGSCode.Location = new System.Drawing.Point(80, 26);
+            this.txtGSCode.Location = new System.Drawing.Point(100, 26);
             this.txtGSCode.Name = "txtGSCode";
-            this.txtGSCode.Size = new System.Drawing.Size(159, 20);
+            this.txtGSCode.Size = new System.Drawing.Size(139, 20);
             this.txtGSCode.TabIndex = 3;
             // 
             // label3
@@ -134,11 +145,24 @@
             // 
             // dgvGSList
             // 
+            this.dgvGSList.AllowUserToAddRows = false;
+            this.dgvGSList.AllowUserToDeleteRows = false;
+            this.dgvGSList.AllowUserToResizeRows = false;
             this.dgvGSList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvGSList.Location = new System.Drawing.Point(12, 202);
+            this.dgvGSList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSTT,
+            this.colGSID,
+            this.colName,
+            this.colAddress});
+            this.dgvGSList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvGSList.Location = new System.Drawing.Point(9, 217);
+            this.dgvGSList.MultiSelect = false;
             this.dgvGSList.Name = "dgvGSList";
-            this.dgvGSList.Size = new System.Drawing.Size(591, 196);
+            this.dgvGSList.RowHeadersVisible = false;
+            this.dgvGSList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvGSList.Size = new System.Drawing.Size(600, 181);
             this.dgvGSList.TabIndex = 1;
+            this.dgvGSList.SelectionChanged += new System.EventHandler(this.dgvGSList_SelectionChanged);
             // 
             // panel2
             // 
@@ -167,8 +191,9 @@
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
             this.btnEdit.TabIndex = 7;
-            this.btnEdit.Text = "Sửa";
+            this.btnEdit.Text = "&Sửa";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnCancel
             // 
@@ -176,8 +201,9 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 9;
-            this.btnCancel.Text = "Bỏ Qua";
+            this.btnCancel.Text = "&Bỏ Qua";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnAdd
             // 
@@ -185,8 +211,9 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 6;
-            this.btnAdd.Text = "Thêm";
+            this.btnAdd.Text = "&Thêm";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnDelete
             // 
@@ -194,14 +221,60 @@
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 8;
-            this.btnDelete.Text = "Xóa";
+            this.btnDelete.Text = "&Xóa";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // errProvider
+            // 
+            this.errProvider.ContainerControl = this;
+            // 
+            // colSTT
+            // 
+            this.colSTT.HeaderText = "STT";
+            this.colSTT.Name = "colSTT";
+            this.colSTT.Width = 40;
+            // 
+            // colGSID
+            // 
+            this.colGSID.HeaderText = "Mã Số";
+            this.colGSID.Name = "colGSID";
+            // 
+            // colName
+            // 
+            this.colName.FillWeight = 150F;
+            this.colName.HeaderText = "Tên Cây Xăng";
+            this.colName.Name = "colName";
+            this.colName.Width = 150;
+            // 
+            // colAddress
+            // 
+            this.colAddress.HeaderText = "Địa Chỉ";
+            this.colAddress.Name = "colAddress";
+            this.colAddress.Width = 300;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(25, 123);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(69, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "MacAddress:";
+            // 
+            // txtMacAddress
+            // 
+            this.txtMacAddress.Enabled = false;
+            this.txtMacAddress.Location = new System.Drawing.Point(100, 121);
+            this.txtMacAddress.Name = "txtMacAddress";
+            this.txtMacAddress.Size = new System.Drawing.Size(480, 20);
+            this.txtMacAddress.TabIndex = 9;
             // 
             // frmGasStation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(612, 458);
+            this.ClientSize = new System.Drawing.Size(621, 458);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.dgvGSList);
@@ -210,10 +283,12 @@
             this.Name = "frmGasStation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SGM - Quản Lý Trạm Xăng";
+            this.Load += new System.EventHandler(this.frmGasStation_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGSList)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -236,5 +311,12 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.ErrorProvider errProvider;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSTT;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colGSID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
+        private System.Windows.Forms.TextBox txtMacAddress;
+        private System.Windows.Forms.Label label5;
     }
 }

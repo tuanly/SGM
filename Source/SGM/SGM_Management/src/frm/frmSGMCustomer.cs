@@ -324,46 +324,46 @@ namespace SGM_Management
         private void btnEdit_Click(object sender, EventArgs e)
         {
             if (m_iCurrentCustomerIndex >= 0)
-                {
+            {
 
-                    if (btnEdit.Text.Equals("&Sửa"))
-                    {
-                        m_stCusIDEdit = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString();
-                        btnEdit.Text = "&Lưu";
-                        UpdateStateControls(true);               
-                        txtCusID.Focus();
-                    }
-                    else
-                    {
-                        if (!ValidateDataInput())
-                        {
-                            return;
-                        }
-                        CustomerDTO cus = new CustomerDTO();
-                        cus.CustomerID = txtCusID.Text.Trim();
-                        cus.CustomerName = txtCusName.Text.Trim();
-                        cus.CustomerPhone = txtCusPhone.Text.Trim();
-                        cus.CustomerBirthDate = txtCusBirthday.Text.Trim();
-                        cus.CustomerVisa = txtCusVisa.Text.Trim();
-                        cus.CustomerAddress = txtCusAddress.Text.Trim();
-                        cus.CustomerNote = txtCusAddress.Text.Trim();
-                        DataTransfer request = new DataTransfer();
-                        request.ResponseDataCustomerDTO = cus;
-                        string jsRequest = JSonHelper.ConvertObjectToJSon(request);
-                        string response = m_service.SGMManager_UpdateCustomer(jsRequest, m_stCusIDEdit);
-                        DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
-                        if (dataResponse.ResponseCode != DataTransfer.RESPONSE_CODE_SUCCESS)
-                        {
-                            MessageBox.Show(dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail);
-                            return;
-                        }
-                        m_stCusIDEdit = "";
-                        btnEdit.Text = "&Sửa";
-                        LoadCustomerList();
-                        SelectCustomeRow(cus.CustomerID);
-                        UpdateStateControls(false); 
-                    }
+                if (btnEdit.Text.Equals("&Sửa"))
+                {
+                    m_stCusIDEdit = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString();
+                    btnEdit.Text = "&Lưu";
+                    UpdateStateControls(true);
+                    txtCusID.Focus();
                 }
+                else
+                {
+                    if (!ValidateDataInput())
+                    {
+                        return;
+                    }
+                    CustomerDTO cus = new CustomerDTO();
+                    cus.CustomerID = txtCusID.Text.Trim();
+                    cus.CustomerName = txtCusName.Text.Trim();
+                    cus.CustomerPhone = txtCusPhone.Text.Trim();
+                    cus.CustomerBirthDate = txtCusBirthday.Text.Trim();
+                    cus.CustomerVisa = txtCusVisa.Text.Trim();
+                    cus.CustomerAddress = txtCusAddress.Text.Trim();
+                    cus.CustomerNote = txtCusAddress.Text.Trim();
+                    DataTransfer request = new DataTransfer();
+                    request.ResponseDataCustomerDTO = cus;
+                    string jsRequest = JSonHelper.ConvertObjectToJSon(request);
+                    string response = m_service.SGMManager_UpdateCustomer(jsRequest, m_stCusIDEdit);
+                    DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
+                    if (dataResponse.ResponseCode != DataTransfer.RESPONSE_CODE_SUCCESS)
+                    {
+                        MessageBox.Show(dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail);
+                        return;
+                    }
+                    m_stCusIDEdit = "";
+                    btnEdit.Text = "&Sửa";
+                    LoadCustomerList();
+                    SelectCustomeRow(cus.CustomerID);
+                    UpdateStateControls(false);
+                }
+            }
             
         }
 
