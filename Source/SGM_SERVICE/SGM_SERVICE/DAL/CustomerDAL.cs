@@ -34,12 +34,13 @@ namespace SGM.ServicesCore.DAL
                     query = string.Format("SELECT CUS_ID AS STT, * FROM CUSTOMER WHERE CUS_ID LIKE '%" + value + "%' OR CUS_NAME LIKE '%" + value + "%'");                   
                 }
                 DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, new SqlParameter[0]);                
-                if (tblResult != null && tblResult.Rows.Count > 0)
+                if (tblResult.Rows.Count > 0)
                 {
                     DataSet ds = new DataSet();
                     ds.Tables.Add(tblResult.Copy());
                     dataResult.ResponseDataSet = ds;                    
-                }                
+                }
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
             }
             catch (Exception ex)
             {

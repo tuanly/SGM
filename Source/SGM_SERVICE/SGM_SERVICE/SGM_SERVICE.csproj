@@ -68,6 +68,7 @@
     <Compile Include="BLL\AdminServiceBLL.cs" />
     <Compile Include="BLL\CardService.cs" />
     <Compile Include="BLL\CustomerServiceBLL.cs" />
+    <Compile Include="BLL\GasStationServiceBLL.cs" />
     <Compile Include="BLL\ReportServiceBLL.cs" />
     <Compile Include="BLL\SaleGasServiceBLL.cs" />
     <Compile Include="DAL\CardDAL.cs" />

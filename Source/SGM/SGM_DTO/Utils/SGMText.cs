@@ -61,7 +61,10 @@ namespace SGM_Core.Utils
         public static string CARD_UPDATE_RECHARGE_ID_ERR = "Lỗi! Không thể cập nhật thông tin nạp thẻ";
         public static string CARD_UPDATE_MONEY_ERR = "Lỗi! Không thể cập nhật thông tin nạp thẻ";
         public static string CARD_UPDATE_CARD_STATE_ERR = "Lỗi! Không thể cập nhật trạng thái thẻ.";
-        
 
+        public static string GASSTATION_GET_GS_ERR = "Lỗi! Không thể lấy thông tin trạm xăng.";
+        public static string GASSTATION_ADD_NEW_GS_ERR = "Lỗi! Không thể thêm trạm xăng.";
+        public static string GASSTATION_UPDATE_ERR = "Lỗi! Không thể cập nhật trạm xăng.";
+        public static string GASSTATION_DEL_ERR = "Lỗi! Không thể xóa trạm xăng.";
     }
 }

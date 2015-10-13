@@ -17,6 +17,7 @@ public class Service : System.Web.Services.WebService
     private CustomerServiceBLL m_bllCustomerService;
     private ReportServiceBLL m_bllReportService;
     private CardService m_bllCardService;
+    private GasStationServiceBLL m_bllGasStationService;
     public Service()
     {
         //Uncomment the following line if using designed components
@@ -26,6 +27,7 @@ public class Service : System.Web.Services.WebService
         m_bllAdminServcie = new AdminServiceBLL();
         m_bllReportService = new ReportServiceBLL();
         m_bllCardService = new CardService();
+        m_bllGasStationService = new GasStationServiceBLL();
     }
 
     [WebMethod]
@@ -166,6 +168,36 @@ public class Service : System.Web.Services.WebService
     public string SGMManager_UpdateCardState(string stCardID, bool bLocked)
     {
         return m_bllCardService.UpdateCardState(stCardID, bLocked);
+    }
+
+    [WebMethod]
+    public string SGMManager_CheckGasStationExist(string stGasStationID)
+    {
+        return m_bllGasStationService.CheckGasStationExist(stGasStationID);
+    }
+
+    [WebMethod]
+    public string SGMManager_AddNewGasStaion(string jsGasStationDTO)
+    {
+        return m_bllGasStationService.AddNewGasStaion(jsGasStationDTO);
+    }
+
+    [WebMethod]
+    public string SGMManager_GetGasStation(string stGasStationID)
+    {
+        return m_bllGasStationService.GetGasStation(stGasStationID);
+    }
+
+    [WebMethod]
+    public string SGMManager_UpdateGasStation(string jsonCustomerDTO, string stGasStationID)
+    {
+        return m_bllGasStationService.UpdateGasStation(jsonCustomerDTO, stGasStationID);
+    }
+
+    [WebMethod]
+    public string SGMManager_DelGasStion(string stGasStationID)
+    {
+        return m_bllGasStationService.DelGasStion(stGasStationID);
     }
 
 }
