@@ -18,6 +18,7 @@ namespace SGM_Core.DTO
         private int m_iCardMoneyAfter;
         private string m_stGasStationID;
         private string m_stCardID;
+        private DateTime m_dtSalGasDate;
 
         public SaleGasDTO()
         {
@@ -29,6 +30,7 @@ namespace SGM_Core.DTO
             m_iCardMoneyAfter = 0;
             m_stGasStationID = "";
             m_stCardID = "";
+            m_dtSalGasDate = DateTime.Now;
         }
 
         public int SaleGasID
@@ -77,6 +79,12 @@ namespace SGM_Core.DTO
         {
             get { return m_stCardID; }
             set { m_stCardID = value; }
+        }
+
+        public DateTime SaleGasDate
+        {
+            get { return m_dtSalGasDate; }
+            set { m_dtSalGasDate = value; }
         }
     }
 }
