@@ -49,9 +49,9 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string SGMSaleGas_GasBuying(string strCardId, int money)
+    public string SGMSaleGas_GasBuying(string jsonSaleGasDTO, string sysadmin)
     {
-        return m_bllSaleGasService.GasBuying(strCardId, money);
+        return m_bllSaleGasService.GasBuying(jsonSaleGasDTO, sysadmin);
     }
 
     [WebMethod]

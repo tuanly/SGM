@@ -101,17 +101,36 @@ namespace SGM.ServicesCore.DAL
             return result;
         }
 
-        public bool UpdateCardBuying(CardDTO dtoCard)
+        public DataTransfer UpdateSaleGas(CardDTO dtoCard)
         {
+            DataTransfer dataResult = new DataTransfer();
             bool result = true;
-            string query = string.Format("UPDATE CARD SET CARD_MONEY = @CARD_MONEY WHERE CARD_ID = @CARD_ID");
-            SqlParameter[] sqlParameters = new SqlParameter[2];
-            sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
-            sqlParameters[0].Value = Convert.ToString(dtoCard.CardID);
-            sqlParameters[1] = new SqlParameter("@CARD_MONEY", SqlDbType.Int);
-            sqlParameters[1].Value = Convert.ToInt32(dtoCard.CardRemainingMoney);
-            result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
-            return result;
+            try
+            {
+                string query = string.Format("UPDATE CARD SET CARD_MONEY = @CARD_MONEY WHERE CARD_ID = @CARD_ID");
+                SqlParameter[] sqlParameters = new SqlParameter[2];
+                sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(dtoCard.CardID);
+                sqlParameters[1] = new SqlParameter("@CARD_MONEY", SqlDbType.Int);
+                sqlParameters[1].Value = Convert.ToInt32(dtoCard.CardRemainingMoney);
+                result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
+            }
+            catch (Exception ex)
+            {
+                result = false;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+            if (result)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+            }
+            else
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.CARD_INSERT_ERR;
+            }
+            
+            return dataResult;
         }
 
         public bool DeleteCard(string stCardID)

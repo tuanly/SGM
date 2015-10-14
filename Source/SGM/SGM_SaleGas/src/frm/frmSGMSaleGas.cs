@@ -202,7 +202,17 @@ namespace SGM_SaleGas
 
         private void btnBuy_Click(object sender, EventArgs e)
         {
-            String stResponse = service.SGMSaleGas_GasBuying(_cardId, _cardDTO.CardRemainingMoney - _moneyBuying);
+            SaleGasDTO dto = new SaleGasDTO();
+            dto.CardID = _cardDTO.CardID;
+            dto.GasStationID = "000002";
+            dto.SaleGasType = rbGas92.Checked ? SaleGasDTO.GAS_TYPE_92 : rbGas95.Checked ? SaleGasDTO.GAS_TYPE_95 : SaleGasDTO.GAS_TYPE_DO;
+            dto.SaleGasPriceOnCard = 100;
+            dto.SaleGasCardMoneyBefore = _cardDTO.CardRemainingMoney;
+            dto.SaleGasCardMoneyAfter = _cardDTO.CardRemainingMoney - _moneyBuying;
+            dto.SaleGasCurrentPrice = rbGas92.Checked ? _rechargeDTO.RechargeGas92Price : rbGas95.Checked ? _rechargeDTO.RechargeGas95Price : _rechargeDTO.RechargeGasDOPrice;
+            DataTransfer df = new DataTransfer();
+            df.ResponseDataSaleGasDTO = dto;
+            string stResponse = service.SGMSaleGas_GasBuying(JSonHelper.ConvertObjectToJSon(df), "admin");
             DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
@@ -213,7 +223,7 @@ namespace SGM_SaleGas
             }
             else
             {
-                MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 

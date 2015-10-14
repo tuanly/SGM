@@ -15,6 +15,10 @@ namespace SGM_SaleGas.SGM_Service {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SGM_Service.ServiceSoap")]
     public interface ServiceSoap {
         
+        // CODEGEN: Generating message contract since element name SGMSaleGas_GetGasStationListResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMSaleGas_GetGasStationList", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMSaleGas_GetGasStationListResponse SGMSaleGas_GetGasStationList(SGM_SaleGas.SGM_Service.SGMSaleGas_GetGasStationListRequest request);
+        
         // CODEGEN: Generating message contract since element name stGasStationID from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMSaleGas_ValidateGasStationLogin", ReplyAction="*")]
         SGM_SaleGas.SGM_Service.SGMSaleGas_ValidateGasStationLoginResponse SGMSaleGas_ValidateGasStationLogin(SGM_SaleGas.SGM_Service.SGMSaleGas_ValidateGasStationLoginRequest request);
@@ -23,9 +27,13 @@ namespace SGM_SaleGas.SGM_Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMSaleGas_ValidateCardId", ReplyAction="*")]
         SGM_SaleGas.SGM_Service.SGMSaleGas_ValidateCardIdResponse SGMSaleGas_ValidateCardId(SGM_SaleGas.SGM_Service.SGMSaleGas_ValidateCardIdRequest request);
         
-        // CODEGEN: Generating message contract since element name strCardId from namespace http://tempuri.org/ is not marked nillable
+        // CODEGEN: Generating message contract since element name jsonSaleGasDTO from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMSaleGas_GasBuying", ReplyAction="*")]
         SGM_SaleGas.SGM_Service.SGMSaleGas_GasBuyingResponse SGMSaleGas_GasBuying(SGM_SaleGas.SGM_Service.SGMSaleGas_GasBuyingRequest request);
+        
+        // CODEGEN: Generating message contract since element name stGasStationID from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMSaleGas_GetSaleGasReport", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMSaleGas_GetSaleGasReportResponse SGMSaleGas_GetSaleGasReport(SGM_SaleGas.SGM_Service.SGMSaleGas_GetSaleGasReportRequest request);
         
         // CODEGEN: Generating message contract since element name admin from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_ValidateAdminLogin", ReplyAction="*")]
@@ -39,6 +47,10 @@ namespace SGM_SaleGas.SGM_Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_UpdateSystemPrice", ReplyAction="*")]
         SGM_SaleGas.SGM_Service.SGMManager_UpdateSystemPriceResponse SGMManager_UpdateSystemPrice(SGM_SaleGas.SGM_Service.SGMManager_UpdateSystemPriceRequest request);
         
+        // CODEGEN: Generating message contract since element name jsonSysAdminDTO from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_UpdateSystemStore", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_UpdateSystemStoreResponse SGMManager_UpdateSystemStore(SGM_SaleGas.SGM_Service.SGMManager_UpdateSystemStoreRequest request);
+        
         // CODEGEN: Generating message contract since element name stCusID from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_CheckCustomerExist", ReplyAction="*")]
         SGM_SaleGas.SGM_Service.SGMManager_CheckCustomerExistResponse SGMManager_CheckCustomerExist(SGM_SaleGas.SGM_Service.SGMManager_CheckCustomerExistRequest request);
@@ -50,6 +62,131 @@ namespace SGM_SaleGas.SGM_Service {
         // CODEGEN: Generating message contract since element name stCusID from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_GetCustomer", ReplyAction="*")]
         SGM_SaleGas.SGM_Service.SGMManager_GetCustomerResponse SGMManager_GetCustomer(SGM_SaleGas.SGM_Service.SGMManager_GetCustomerRequest request);
+        
+        // CODEGEN: Generating message contract since element name jsonCustomerDTO from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_UpdateCustomer", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_UpdateCustomerResponse SGMManager_UpdateCustomer(SGM_SaleGas.SGM_Service.SGMManager_UpdateCustomerRequest request);
+        
+        // CODEGEN: Generating message contract since element name stCusID from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_DelCustomer", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_DelCustomerResponse SGMManager_DelCustomer(SGM_SaleGas.SGM_Service.SGMManager_DelCustomerRequest request);
+        
+        // CODEGEN: Generating message contract since element name SGMSaleGas_GetCustomerListResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMSaleGas_GetCustomerList", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMSaleGas_GetCustomerListResponse SGMSaleGas_GetCustomerList(SGM_SaleGas.SGM_Service.SGMSaleGas_GetCustomerListRequest request);
+        
+        // CODEGEN: Generating message contract since element name stCardID from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_CheckCardExist", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_CheckCardExistResponse SGMManager_CheckCardExist(SGM_SaleGas.SGM_Service.SGMManager_CheckCardExistRequest request);
+        
+        // CODEGEN: Generating message contract since element name SGMManager_GetCurrentPriceResult from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_GetCurrentPrice", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_GetCurrentPriceResponse SGMManager_GetCurrentPrice(SGM_SaleGas.SGM_Service.SGMManager_GetCurrentPriceRequest request);
+        
+        // CODEGEN: Generating message contract since element name jsCardDTO from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_AddNewCard", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_AddNewCardResponse SGMManager_AddNewCard(SGM_SaleGas.SGM_Service.SGMManager_AddNewCardRequest request);
+        
+        // CODEGEN: Generating message contract since element name jsRechargeDTO from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_AddRechargeCard", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_AddRechargeCardResponse SGMManager_AddRechargeCard(SGM_SaleGas.SGM_Service.SGMManager_AddRechargeCardRequest request);
+        
+        // CODEGEN: Generating message contract since element name stCardID from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_UpdateRechargeIDForCard", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_UpdateRechargeIDForCardResponse SGMManager_UpdateRechargeIDForCard(SGM_SaleGas.SGM_Service.SGMManager_UpdateRechargeIDForCardRequest request);
+        
+        // CODEGEN: Generating message contract since element name stCardID from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_UpdateMoneyForCard", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_UpdateMoneyForCardResponse SGMManager_UpdateMoneyForCard(SGM_SaleGas.SGM_Service.SGMManager_UpdateMoneyForCardRequest request);
+        
+        // CODEGEN: Generating message contract since element name stCusID from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_GetCardsOfCustomer", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_GetCardsOfCustomerResponse SGMManager_GetCardsOfCustomer(SGM_SaleGas.SGM_Service.SGMManager_GetCardsOfCustomerRequest request);
+        
+        // CODEGEN: Generating message contract since element name stCardID from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_UpdateCardState", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_UpdateCardStateResponse SGMManager_UpdateCardState(SGM_SaleGas.SGM_Service.SGMManager_UpdateCardStateRequest request);
+        
+        // CODEGEN: Generating message contract since element name stGasStationID from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_CheckGasStationExist", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_CheckGasStationExistResponse SGMManager_CheckGasStationExist(SGM_SaleGas.SGM_Service.SGMManager_CheckGasStationExistRequest request);
+        
+        // CODEGEN: Generating message contract since element name jsGasStationDTO from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_AddNewGasStaion", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_AddNewGasStaionResponse SGMManager_AddNewGasStaion(SGM_SaleGas.SGM_Service.SGMManager_AddNewGasStaionRequest request);
+        
+        // CODEGEN: Generating message contract since element name stGasStationID from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_GetGasStation", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_GetGasStationResponse SGMManager_GetGasStation(SGM_SaleGas.SGM_Service.SGMManager_GetGasStationRequest request);
+        
+        // CODEGEN: Generating message contract since element name jsonCustomerDTO from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_UpdateGasStation", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_UpdateGasStationResponse SGMManager_UpdateGasStation(SGM_SaleGas.SGM_Service.SGMManager_UpdateGasStationRequest request);
+        
+        // CODEGEN: Generating message contract since element name stGasStationID from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_DelGasStion", ReplyAction="*")]
+        SGM_SaleGas.SGM_Service.SGMManager_DelGasStionResponse SGMManager_DelGasStion(SGM_SaleGas.SGM_Service.SGMManager_DelGasStionRequest request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMSaleGas_GetGasStationListRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMSaleGas_GetGasStationList", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMSaleGas_GetGasStationListRequestBody Body;
+        
+        public SGMSaleGas_GetGasStationListRequest() {
+        }
+        
+        public SGMSaleGas_GetGasStationListRequest(SGM_SaleGas.SGM_Service.SGMSaleGas_GetGasStationListRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class SGMSaleGas_GetGasStationListRequestBody {
+        
+        public SGMSaleGas_GetGasStationListRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMSaleGas_GetGasStationListResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMSaleGas_GetGasStationListResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMSaleGas_GetGasStationListResponseBody Body;
+        
+        public SGMSaleGas_GetGasStationListResponse() {
+        }
+        
+        public SGMSaleGas_GetGasStationListResponse(SGM_SaleGas.SGM_Service.SGMSaleGas_GetGasStationListResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMSaleGas_GetGasStationListResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMSaleGas_GetGasStationListResult;
+        
+        public SGMSaleGas_GetGasStationListResponseBody() {
+        }
+        
+        public SGMSaleGas_GetGasStationListResponseBody(string SGMSaleGas_GetGasStationListResult) {
+            this.SGMSaleGas_GetGasStationListResult = SGMSaleGas_GetGasStationListResult;
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -216,17 +353,17 @@ namespace SGM_SaleGas.SGM_Service {
     public partial class SGMSaleGas_GasBuyingRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string strCardId;
+        public string jsonSaleGasDTO;
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-        public int money;
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string sysadmin;
         
         public SGMSaleGas_GasBuyingRequestBody() {
         }
         
-        public SGMSaleGas_GasBuyingRequestBody(string strCardId, int money) {
-            this.strCardId = strCardId;
-            this.money = money;
+        public SGMSaleGas_GasBuyingRequestBody(string jsonSaleGasDTO, string sysadmin) {
+            this.jsonSaleGasDTO = jsonSaleGasDTO;
+            this.sysadmin = sysadmin;
         }
     }
     
@@ -261,6 +398,82 @@ namespace SGM_SaleGas.SGM_Service {
         
         public SGMSaleGas_GasBuyingResponseBody(string SGMSaleGas_GasBuyingResult) {
             this.SGMSaleGas_GasBuyingResult = SGMSaleGas_GasBuyingResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMSaleGas_GetSaleGasReportRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMSaleGas_GetSaleGasReport", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMSaleGas_GetSaleGasReportRequestBody Body;
+        
+        public SGMSaleGas_GetSaleGasReportRequest() {
+        }
+        
+        public SGMSaleGas_GetSaleGasReportRequest(SGM_SaleGas.SGM_Service.SGMSaleGas_GetSaleGasReportRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMSaleGas_GetSaleGasReportRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stGasStationID;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string dateStart;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string dateEnd;
+        
+        public SGMSaleGas_GetSaleGasReportRequestBody() {
+        }
+        
+        public SGMSaleGas_GetSaleGasReportRequestBody(string stGasStationID, string dateStart, string dateEnd) {
+            this.stGasStationID = stGasStationID;
+            this.dateStart = dateStart;
+            this.dateEnd = dateEnd;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMSaleGas_GetSaleGasReportResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMSaleGas_GetSaleGasReportResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMSaleGas_GetSaleGasReportResponseBody Body;
+        
+        public SGMSaleGas_GetSaleGasReportResponse() {
+        }
+        
+        public SGMSaleGas_GetSaleGasReportResponse(SGM_SaleGas.SGM_Service.SGMSaleGas_GetSaleGasReportResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMSaleGas_GetSaleGasReportResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMSaleGas_GetSaleGasReportResult;
+        
+        public SGMSaleGas_GetSaleGasReportResponseBody() {
+        }
+        
+        public SGMSaleGas_GetSaleGasReportResponseBody(string SGMSaleGas_GetSaleGasReportResult) {
+            this.SGMSaleGas_GetSaleGasReportResult = SGMSaleGas_GetSaleGasReportResult;
         }
     }
     
@@ -484,6 +697,74 @@ namespace SGM_SaleGas.SGM_Service {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateSystemStoreRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateSystemStore", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_UpdateSystemStoreRequestBody Body;
+        
+        public SGMManager_UpdateSystemStoreRequest() {
+        }
+        
+        public SGMManager_UpdateSystemStoreRequest(SGM_SaleGas.SGM_Service.SGMManager_UpdateSystemStoreRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateSystemStoreRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string jsonSysAdminDTO;
+        
+        public SGMManager_UpdateSystemStoreRequestBody() {
+        }
+        
+        public SGMManager_UpdateSystemStoreRequestBody(string jsonSysAdminDTO) {
+            this.jsonSysAdminDTO = jsonSysAdminDTO;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateSystemStoreResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateSystemStoreResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_UpdateSystemStoreResponseBody Body;
+        
+        public SGMManager_UpdateSystemStoreResponse() {
+        }
+        
+        public SGMManager_UpdateSystemStoreResponse(SGM_SaleGas.SGM_Service.SGMManager_UpdateSystemStoreResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateSystemStoreResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_UpdateSystemStoreResult;
+        
+        public SGMManager_UpdateSystemStoreResponseBody() {
+        }
+        
+        public SGMManager_UpdateSystemStoreResponseBody(string SGMManager_UpdateSystemStoreResult) {
+            this.SGMManager_UpdateSystemStoreResult = SGMManager_UpdateSystemStoreResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class SGMManager_CheckCustomerExistRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_CheckCustomerExist", Namespace="http://tempuri.org/", Order=0)]
@@ -642,11 +923,15 @@ namespace SGM_SaleGas.SGM_Service {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string stCusID;
         
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public bool bExactly;
+        
         public SGMManager_GetCustomerRequestBody() {
         }
         
-        public SGMManager_GetCustomerRequestBody(string stCusID) {
+        public SGMManager_GetCustomerRequestBody(string stCusID, bool bExactly) {
             this.stCusID = stCusID;
+            this.bExactly = bExactly;
         }
     }
     
@@ -684,6 +969,1103 @@ namespace SGM_SaleGas.SGM_Service {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateCustomerRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateCustomer", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_UpdateCustomerRequestBody Body;
+        
+        public SGMManager_UpdateCustomerRequest() {
+        }
+        
+        public SGMManager_UpdateCustomerRequest(SGM_SaleGas.SGM_Service.SGMManager_UpdateCustomerRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateCustomerRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string jsonCustomerDTO;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string stCusID;
+        
+        public SGMManager_UpdateCustomerRequestBody() {
+        }
+        
+        public SGMManager_UpdateCustomerRequestBody(string jsonCustomerDTO, string stCusID) {
+            this.jsonCustomerDTO = jsonCustomerDTO;
+            this.stCusID = stCusID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateCustomerResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateCustomerResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_UpdateCustomerResponseBody Body;
+        
+        public SGMManager_UpdateCustomerResponse() {
+        }
+        
+        public SGMManager_UpdateCustomerResponse(SGM_SaleGas.SGM_Service.SGMManager_UpdateCustomerResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateCustomerResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_UpdateCustomerResult;
+        
+        public SGMManager_UpdateCustomerResponseBody() {
+        }
+        
+        public SGMManager_UpdateCustomerResponseBody(string SGMManager_UpdateCustomerResult) {
+            this.SGMManager_UpdateCustomerResult = SGMManager_UpdateCustomerResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_DelCustomerRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_DelCustomer", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_DelCustomerRequestBody Body;
+        
+        public SGMManager_DelCustomerRequest() {
+        }
+        
+        public SGMManager_DelCustomerRequest(SGM_SaleGas.SGM_Service.SGMManager_DelCustomerRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_DelCustomerRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stCusID;
+        
+        public SGMManager_DelCustomerRequestBody() {
+        }
+        
+        public SGMManager_DelCustomerRequestBody(string stCusID) {
+            this.stCusID = stCusID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_DelCustomerResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_DelCustomerResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_DelCustomerResponseBody Body;
+        
+        public SGMManager_DelCustomerResponse() {
+        }
+        
+        public SGMManager_DelCustomerResponse(SGM_SaleGas.SGM_Service.SGMManager_DelCustomerResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_DelCustomerResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_DelCustomerResult;
+        
+        public SGMManager_DelCustomerResponseBody() {
+        }
+        
+        public SGMManager_DelCustomerResponseBody(string SGMManager_DelCustomerResult) {
+            this.SGMManager_DelCustomerResult = SGMManager_DelCustomerResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMSaleGas_GetCustomerListRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMSaleGas_GetCustomerList", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMSaleGas_GetCustomerListRequestBody Body;
+        
+        public SGMSaleGas_GetCustomerListRequest() {
+        }
+        
+        public SGMSaleGas_GetCustomerListRequest(SGM_SaleGas.SGM_Service.SGMSaleGas_GetCustomerListRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class SGMSaleGas_GetCustomerListRequestBody {
+        
+        public SGMSaleGas_GetCustomerListRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMSaleGas_GetCustomerListResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMSaleGas_GetCustomerListResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMSaleGas_GetCustomerListResponseBody Body;
+        
+        public SGMSaleGas_GetCustomerListResponse() {
+        }
+        
+        public SGMSaleGas_GetCustomerListResponse(SGM_SaleGas.SGM_Service.SGMSaleGas_GetCustomerListResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMSaleGas_GetCustomerListResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMSaleGas_GetCustomerListResult;
+        
+        public SGMSaleGas_GetCustomerListResponseBody() {
+        }
+        
+        public SGMSaleGas_GetCustomerListResponseBody(string SGMSaleGas_GetCustomerListResult) {
+            this.SGMSaleGas_GetCustomerListResult = SGMSaleGas_GetCustomerListResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_CheckCardExistRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_CheckCardExist", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_CheckCardExistRequestBody Body;
+        
+        public SGMManager_CheckCardExistRequest() {
+        }
+        
+        public SGMManager_CheckCardExistRequest(SGM_SaleGas.SGM_Service.SGMManager_CheckCardExistRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_CheckCardExistRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stCardID;
+        
+        public SGMManager_CheckCardExistRequestBody() {
+        }
+        
+        public SGMManager_CheckCardExistRequestBody(string stCardID) {
+            this.stCardID = stCardID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_CheckCardExistResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_CheckCardExistResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_CheckCardExistResponseBody Body;
+        
+        public SGMManager_CheckCardExistResponse() {
+        }
+        
+        public SGMManager_CheckCardExistResponse(SGM_SaleGas.SGM_Service.SGMManager_CheckCardExistResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_CheckCardExistResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_CheckCardExistResult;
+        
+        public SGMManager_CheckCardExistResponseBody() {
+        }
+        
+        public SGMManager_CheckCardExistResponseBody(string SGMManager_CheckCardExistResult) {
+            this.SGMManager_CheckCardExistResult = SGMManager_CheckCardExistResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_GetCurrentPriceRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_GetCurrentPrice", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_GetCurrentPriceRequestBody Body;
+        
+        public SGMManager_GetCurrentPriceRequest() {
+        }
+        
+        public SGMManager_GetCurrentPriceRequest(SGM_SaleGas.SGM_Service.SGMManager_GetCurrentPriceRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_GetCurrentPriceRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public int iGasType;
+        
+        public SGMManager_GetCurrentPriceRequestBody() {
+        }
+        
+        public SGMManager_GetCurrentPriceRequestBody(int iGasType) {
+            this.iGasType = iGasType;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_GetCurrentPriceResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_GetCurrentPriceResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_GetCurrentPriceResponseBody Body;
+        
+        public SGMManager_GetCurrentPriceResponse() {
+        }
+        
+        public SGMManager_GetCurrentPriceResponse(SGM_SaleGas.SGM_Service.SGMManager_GetCurrentPriceResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_GetCurrentPriceResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_GetCurrentPriceResult;
+        
+        public SGMManager_GetCurrentPriceResponseBody() {
+        }
+        
+        public SGMManager_GetCurrentPriceResponseBody(string SGMManager_GetCurrentPriceResult) {
+            this.SGMManager_GetCurrentPriceResult = SGMManager_GetCurrentPriceResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_AddNewCardRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_AddNewCard", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_AddNewCardRequestBody Body;
+        
+        public SGMManager_AddNewCardRequest() {
+        }
+        
+        public SGMManager_AddNewCardRequest(SGM_SaleGas.SGM_Service.SGMManager_AddNewCardRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_AddNewCardRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string jsCardDTO;
+        
+        public SGMManager_AddNewCardRequestBody() {
+        }
+        
+        public SGMManager_AddNewCardRequestBody(string jsCardDTO) {
+            this.jsCardDTO = jsCardDTO;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_AddNewCardResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_AddNewCardResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_AddNewCardResponseBody Body;
+        
+        public SGMManager_AddNewCardResponse() {
+        }
+        
+        public SGMManager_AddNewCardResponse(SGM_SaleGas.SGM_Service.SGMManager_AddNewCardResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_AddNewCardResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_AddNewCardResult;
+        
+        public SGMManager_AddNewCardResponseBody() {
+        }
+        
+        public SGMManager_AddNewCardResponseBody(string SGMManager_AddNewCardResult) {
+            this.SGMManager_AddNewCardResult = SGMManager_AddNewCardResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_AddRechargeCardRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_AddRechargeCard", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_AddRechargeCardRequestBody Body;
+        
+        public SGMManager_AddRechargeCardRequest() {
+        }
+        
+        public SGMManager_AddRechargeCardRequest(SGM_SaleGas.SGM_Service.SGMManager_AddRechargeCardRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_AddRechargeCardRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string jsRechargeDTO;
+        
+        public SGMManager_AddRechargeCardRequestBody() {
+        }
+        
+        public SGMManager_AddRechargeCardRequestBody(string jsRechargeDTO) {
+            this.jsRechargeDTO = jsRechargeDTO;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_AddRechargeCardResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_AddRechargeCardResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_AddRechargeCardResponseBody Body;
+        
+        public SGMManager_AddRechargeCardResponse() {
+        }
+        
+        public SGMManager_AddRechargeCardResponse(SGM_SaleGas.SGM_Service.SGMManager_AddRechargeCardResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_AddRechargeCardResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_AddRechargeCardResult;
+        
+        public SGMManager_AddRechargeCardResponseBody() {
+        }
+        
+        public SGMManager_AddRechargeCardResponseBody(string SGMManager_AddRechargeCardResult) {
+            this.SGMManager_AddRechargeCardResult = SGMManager_AddRechargeCardResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateRechargeIDForCardRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateRechargeIDForCard", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_UpdateRechargeIDForCardRequestBody Body;
+        
+        public SGMManager_UpdateRechargeIDForCardRequest() {
+        }
+        
+        public SGMManager_UpdateRechargeIDForCardRequest(SGM_SaleGas.SGM_Service.SGMManager_UpdateRechargeIDForCardRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateRechargeIDForCardRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stCardID;
+        
+        public SGMManager_UpdateRechargeIDForCardRequestBody() {
+        }
+        
+        public SGMManager_UpdateRechargeIDForCardRequestBody(string stCardID) {
+            this.stCardID = stCardID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateRechargeIDForCardResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateRechargeIDForCardResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_UpdateRechargeIDForCardResponseBody Body;
+        
+        public SGMManager_UpdateRechargeIDForCardResponse() {
+        }
+        
+        public SGMManager_UpdateRechargeIDForCardResponse(SGM_SaleGas.SGM_Service.SGMManager_UpdateRechargeIDForCardResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateRechargeIDForCardResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_UpdateRechargeIDForCardResult;
+        
+        public SGMManager_UpdateRechargeIDForCardResponseBody() {
+        }
+        
+        public SGMManager_UpdateRechargeIDForCardResponseBody(string SGMManager_UpdateRechargeIDForCardResult) {
+            this.SGMManager_UpdateRechargeIDForCardResult = SGMManager_UpdateRechargeIDForCardResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateMoneyForCardRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateMoneyForCard", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_UpdateMoneyForCardRequestBody Body;
+        
+        public SGMManager_UpdateMoneyForCardRequest() {
+        }
+        
+        public SGMManager_UpdateMoneyForCardRequest(SGM_SaleGas.SGM_Service.SGMManager_UpdateMoneyForCardRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateMoneyForCardRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stCardID;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public int iMoney;
+        
+        public SGMManager_UpdateMoneyForCardRequestBody() {
+        }
+        
+        public SGMManager_UpdateMoneyForCardRequestBody(string stCardID, int iMoney) {
+            this.stCardID = stCardID;
+            this.iMoney = iMoney;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateMoneyForCardResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateMoneyForCardResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_UpdateMoneyForCardResponseBody Body;
+        
+        public SGMManager_UpdateMoneyForCardResponse() {
+        }
+        
+        public SGMManager_UpdateMoneyForCardResponse(SGM_SaleGas.SGM_Service.SGMManager_UpdateMoneyForCardResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateMoneyForCardResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_UpdateMoneyForCardResult;
+        
+        public SGMManager_UpdateMoneyForCardResponseBody() {
+        }
+        
+        public SGMManager_UpdateMoneyForCardResponseBody(string SGMManager_UpdateMoneyForCardResult) {
+            this.SGMManager_UpdateMoneyForCardResult = SGMManager_UpdateMoneyForCardResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_GetCardsOfCustomerRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_GetCardsOfCustomer", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_GetCardsOfCustomerRequestBody Body;
+        
+        public SGMManager_GetCardsOfCustomerRequest() {
+        }
+        
+        public SGMManager_GetCardsOfCustomerRequest(SGM_SaleGas.SGM_Service.SGMManager_GetCardsOfCustomerRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_GetCardsOfCustomerRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stCusID;
+        
+        public SGMManager_GetCardsOfCustomerRequestBody() {
+        }
+        
+        public SGMManager_GetCardsOfCustomerRequestBody(string stCusID) {
+            this.stCusID = stCusID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_GetCardsOfCustomerResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_GetCardsOfCustomerResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_GetCardsOfCustomerResponseBody Body;
+        
+        public SGMManager_GetCardsOfCustomerResponse() {
+        }
+        
+        public SGMManager_GetCardsOfCustomerResponse(SGM_SaleGas.SGM_Service.SGMManager_GetCardsOfCustomerResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_GetCardsOfCustomerResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_GetCardsOfCustomerResult;
+        
+        public SGMManager_GetCardsOfCustomerResponseBody() {
+        }
+        
+        public SGMManager_GetCardsOfCustomerResponseBody(string SGMManager_GetCardsOfCustomerResult) {
+            this.SGMManager_GetCardsOfCustomerResult = SGMManager_GetCardsOfCustomerResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateCardStateRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateCardState", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_UpdateCardStateRequestBody Body;
+        
+        public SGMManager_UpdateCardStateRequest() {
+        }
+        
+        public SGMManager_UpdateCardStateRequest(SGM_SaleGas.SGM_Service.SGMManager_UpdateCardStateRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateCardStateRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stCardID;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public bool bLocked;
+        
+        public SGMManager_UpdateCardStateRequestBody() {
+        }
+        
+        public SGMManager_UpdateCardStateRequestBody(string stCardID, bool bLocked) {
+            this.stCardID = stCardID;
+            this.bLocked = bLocked;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateCardStateResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateCardStateResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_UpdateCardStateResponseBody Body;
+        
+        public SGMManager_UpdateCardStateResponse() {
+        }
+        
+        public SGMManager_UpdateCardStateResponse(SGM_SaleGas.SGM_Service.SGMManager_UpdateCardStateResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateCardStateResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_UpdateCardStateResult;
+        
+        public SGMManager_UpdateCardStateResponseBody() {
+        }
+        
+        public SGMManager_UpdateCardStateResponseBody(string SGMManager_UpdateCardStateResult) {
+            this.SGMManager_UpdateCardStateResult = SGMManager_UpdateCardStateResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_CheckGasStationExistRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_CheckGasStationExist", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_CheckGasStationExistRequestBody Body;
+        
+        public SGMManager_CheckGasStationExistRequest() {
+        }
+        
+        public SGMManager_CheckGasStationExistRequest(SGM_SaleGas.SGM_Service.SGMManager_CheckGasStationExistRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_CheckGasStationExistRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stGasStationID;
+        
+        public SGMManager_CheckGasStationExistRequestBody() {
+        }
+        
+        public SGMManager_CheckGasStationExistRequestBody(string stGasStationID) {
+            this.stGasStationID = stGasStationID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_CheckGasStationExistResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_CheckGasStationExistResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_CheckGasStationExistResponseBody Body;
+        
+        public SGMManager_CheckGasStationExistResponse() {
+        }
+        
+        public SGMManager_CheckGasStationExistResponse(SGM_SaleGas.SGM_Service.SGMManager_CheckGasStationExistResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_CheckGasStationExistResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_CheckGasStationExistResult;
+        
+        public SGMManager_CheckGasStationExistResponseBody() {
+        }
+        
+        public SGMManager_CheckGasStationExistResponseBody(string SGMManager_CheckGasStationExistResult) {
+            this.SGMManager_CheckGasStationExistResult = SGMManager_CheckGasStationExistResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_AddNewGasStaionRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_AddNewGasStaion", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_AddNewGasStaionRequestBody Body;
+        
+        public SGMManager_AddNewGasStaionRequest() {
+        }
+        
+        public SGMManager_AddNewGasStaionRequest(SGM_SaleGas.SGM_Service.SGMManager_AddNewGasStaionRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_AddNewGasStaionRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string jsGasStationDTO;
+        
+        public SGMManager_AddNewGasStaionRequestBody() {
+        }
+        
+        public SGMManager_AddNewGasStaionRequestBody(string jsGasStationDTO) {
+            this.jsGasStationDTO = jsGasStationDTO;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_AddNewGasStaionResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_AddNewGasStaionResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_AddNewGasStaionResponseBody Body;
+        
+        public SGMManager_AddNewGasStaionResponse() {
+        }
+        
+        public SGMManager_AddNewGasStaionResponse(SGM_SaleGas.SGM_Service.SGMManager_AddNewGasStaionResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_AddNewGasStaionResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_AddNewGasStaionResult;
+        
+        public SGMManager_AddNewGasStaionResponseBody() {
+        }
+        
+        public SGMManager_AddNewGasStaionResponseBody(string SGMManager_AddNewGasStaionResult) {
+            this.SGMManager_AddNewGasStaionResult = SGMManager_AddNewGasStaionResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_GetGasStationRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_GetGasStation", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_GetGasStationRequestBody Body;
+        
+        public SGMManager_GetGasStationRequest() {
+        }
+        
+        public SGMManager_GetGasStationRequest(SGM_SaleGas.SGM_Service.SGMManager_GetGasStationRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_GetGasStationRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stGasStationID;
+        
+        public SGMManager_GetGasStationRequestBody() {
+        }
+        
+        public SGMManager_GetGasStationRequestBody(string stGasStationID) {
+            this.stGasStationID = stGasStationID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_GetGasStationResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_GetGasStationResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_GetGasStationResponseBody Body;
+        
+        public SGMManager_GetGasStationResponse() {
+        }
+        
+        public SGMManager_GetGasStationResponse(SGM_SaleGas.SGM_Service.SGMManager_GetGasStationResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_GetGasStationResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_GetGasStationResult;
+        
+        public SGMManager_GetGasStationResponseBody() {
+        }
+        
+        public SGMManager_GetGasStationResponseBody(string SGMManager_GetGasStationResult) {
+            this.SGMManager_GetGasStationResult = SGMManager_GetGasStationResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateGasStationRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateGasStation", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_UpdateGasStationRequestBody Body;
+        
+        public SGMManager_UpdateGasStationRequest() {
+        }
+        
+        public SGMManager_UpdateGasStationRequest(SGM_SaleGas.SGM_Service.SGMManager_UpdateGasStationRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateGasStationRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string jsonCustomerDTO;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string stGasStationID;
+        
+        public SGMManager_UpdateGasStationRequestBody() {
+        }
+        
+        public SGMManager_UpdateGasStationRequestBody(string jsonCustomerDTO, string stGasStationID) {
+            this.jsonCustomerDTO = jsonCustomerDTO;
+            this.stGasStationID = stGasStationID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_UpdateGasStationResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_UpdateGasStationResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_UpdateGasStationResponseBody Body;
+        
+        public SGMManager_UpdateGasStationResponse() {
+        }
+        
+        public SGMManager_UpdateGasStationResponse(SGM_SaleGas.SGM_Service.SGMManager_UpdateGasStationResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_UpdateGasStationResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_UpdateGasStationResult;
+        
+        public SGMManager_UpdateGasStationResponseBody() {
+        }
+        
+        public SGMManager_UpdateGasStationResponseBody(string SGMManager_UpdateGasStationResult) {
+            this.SGMManager_UpdateGasStationResult = SGMManager_UpdateGasStationResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_DelGasStionRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_DelGasStion", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_DelGasStionRequestBody Body;
+        
+        public SGMManager_DelGasStionRequest() {
+        }
+        
+        public SGMManager_DelGasStionRequest(SGM_SaleGas.SGM_Service.SGMManager_DelGasStionRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_DelGasStionRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stGasStationID;
+        
+        public SGMManager_DelGasStionRequestBody() {
+        }
+        
+        public SGMManager_DelGasStionRequestBody(string stGasStationID) {
+            this.stGasStationID = stGasStationID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_DelGasStionResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_DelGasStionResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_SaleGas.SGM_Service.SGMManager_DelGasStionResponseBody Body;
+        
+        public SGMManager_DelGasStionResponse() {
+        }
+        
+        public SGMManager_DelGasStionResponse(SGM_SaleGas.SGM_Service.SGMManager_DelGasStionResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_DelGasStionResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_DelGasStionResult;
+        
+        public SGMManager_DelGasStionResponseBody() {
+        }
+        
+        public SGMManager_DelGasStionResponseBody(string SGMManager_DelGasStionResult) {
+            this.SGMManager_DelGasStionResult = SGMManager_DelGasStionResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ServiceSoapChannel : SGM_SaleGas.SGM_Service.ServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -709,6 +2091,18 @@ namespace SGM_SaleGas.SGM_Service {
         
         public ServiceSoapClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMSaleGas_GetGasStationListResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMSaleGas_GetGasStationList(SGM_SaleGas.SGM_Service.SGMSaleGas_GetGasStationListRequest request) {
+            return base.Channel.SGMSaleGas_GetGasStationList(request);
+        }
+        
+        public string SGMSaleGas_GetGasStationList() {
+            SGM_SaleGas.SGM_Service.SGMSaleGas_GetGasStationListRequest inValue = new SGM_SaleGas.SGM_Service.SGMSaleGas_GetGasStationListRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMSaleGas_GetGasStationListRequestBody();
+            SGM_SaleGas.SGM_Service.SGMSaleGas_GetGasStationListResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMSaleGas_GetGasStationList(inValue);
+            return retVal.Body.SGMSaleGas_GetGasStationListResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -743,13 +2137,28 @@ namespace SGM_SaleGas.SGM_Service {
             return base.Channel.SGMSaleGas_GasBuying(request);
         }
         
-        public string SGMSaleGas_GasBuying(string strCardId, int money) {
+        public string SGMSaleGas_GasBuying(string jsonSaleGasDTO, string sysadmin) {
             SGM_SaleGas.SGM_Service.SGMSaleGas_GasBuyingRequest inValue = new SGM_SaleGas.SGM_Service.SGMSaleGas_GasBuyingRequest();
             inValue.Body = new SGM_SaleGas.SGM_Service.SGMSaleGas_GasBuyingRequestBody();
-            inValue.Body.strCardId = strCardId;
-            inValue.Body.money = money;
+            inValue.Body.jsonSaleGasDTO = jsonSaleGasDTO;
+            inValue.Body.sysadmin = sysadmin;
             SGM_SaleGas.SGM_Service.SGMSaleGas_GasBuyingResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMSaleGas_GasBuying(inValue);
             return retVal.Body.SGMSaleGas_GasBuyingResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMSaleGas_GetSaleGasReportResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMSaleGas_GetSaleGasReport(SGM_SaleGas.SGM_Service.SGMSaleGas_GetSaleGasReportRequest request) {
+            return base.Channel.SGMSaleGas_GetSaleGasReport(request);
+        }
+        
+        public string SGMSaleGas_GetSaleGasReport(string stGasStationID, string dateStart, string dateEnd) {
+            SGM_SaleGas.SGM_Service.SGMSaleGas_GetSaleGasReportRequest inValue = new SGM_SaleGas.SGM_Service.SGMSaleGas_GetSaleGasReportRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMSaleGas_GetSaleGasReportRequestBody();
+            inValue.Body.stGasStationID = stGasStationID;
+            inValue.Body.dateStart = dateStart;
+            inValue.Body.dateEnd = dateEnd;
+            SGM_SaleGas.SGM_Service.SGMSaleGas_GetSaleGasReportResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMSaleGas_GetSaleGasReport(inValue);
+            return retVal.Body.SGMSaleGas_GetSaleGasReportResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -795,6 +2204,19 @@ namespace SGM_SaleGas.SGM_Service {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_UpdateSystemStoreResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_UpdateSystemStore(SGM_SaleGas.SGM_Service.SGMManager_UpdateSystemStoreRequest request) {
+            return base.Channel.SGMManager_UpdateSystemStore(request);
+        }
+        
+        public string SGMManager_UpdateSystemStore(string jsonSysAdminDTO) {
+            SGM_SaleGas.SGM_Service.SGMManager_UpdateSystemStoreRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_UpdateSystemStoreRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_UpdateSystemStoreRequestBody();
+            inValue.Body.jsonSysAdminDTO = jsonSysAdminDTO;
+            SGM_SaleGas.SGM_Service.SGMManager_UpdateSystemStoreResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_UpdateSystemStore(inValue);
+            return retVal.Body.SGMManager_UpdateSystemStoreResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         SGM_SaleGas.SGM_Service.SGMManager_CheckCustomerExistResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_CheckCustomerExist(SGM_SaleGas.SGM_Service.SGMManager_CheckCustomerExistRequest request) {
             return base.Channel.SGMManager_CheckCustomerExist(request);
         }
@@ -825,12 +2247,224 @@ namespace SGM_SaleGas.SGM_Service {
             return base.Channel.SGMManager_GetCustomer(request);
         }
         
-        public string SGMManager_GetCustomer(string stCusID) {
+        public string SGMManager_GetCustomer(string stCusID, bool bExactly) {
             SGM_SaleGas.SGM_Service.SGMManager_GetCustomerRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_GetCustomerRequest();
             inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_GetCustomerRequestBody();
             inValue.Body.stCusID = stCusID;
+            inValue.Body.bExactly = bExactly;
             SGM_SaleGas.SGM_Service.SGMManager_GetCustomerResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_GetCustomer(inValue);
             return retVal.Body.SGMManager_GetCustomerResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_UpdateCustomerResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_UpdateCustomer(SGM_SaleGas.SGM_Service.SGMManager_UpdateCustomerRequest request) {
+            return base.Channel.SGMManager_UpdateCustomer(request);
+        }
+        
+        public string SGMManager_UpdateCustomer(string jsonCustomerDTO, string stCusID) {
+            SGM_SaleGas.SGM_Service.SGMManager_UpdateCustomerRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_UpdateCustomerRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_UpdateCustomerRequestBody();
+            inValue.Body.jsonCustomerDTO = jsonCustomerDTO;
+            inValue.Body.stCusID = stCusID;
+            SGM_SaleGas.SGM_Service.SGMManager_UpdateCustomerResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_UpdateCustomer(inValue);
+            return retVal.Body.SGMManager_UpdateCustomerResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_DelCustomerResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_DelCustomer(SGM_SaleGas.SGM_Service.SGMManager_DelCustomerRequest request) {
+            return base.Channel.SGMManager_DelCustomer(request);
+        }
+        
+        public string SGMManager_DelCustomer(string stCusID) {
+            SGM_SaleGas.SGM_Service.SGMManager_DelCustomerRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_DelCustomerRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_DelCustomerRequestBody();
+            inValue.Body.stCusID = stCusID;
+            SGM_SaleGas.SGM_Service.SGMManager_DelCustomerResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_DelCustomer(inValue);
+            return retVal.Body.SGMManager_DelCustomerResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMSaleGas_GetCustomerListResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMSaleGas_GetCustomerList(SGM_SaleGas.SGM_Service.SGMSaleGas_GetCustomerListRequest request) {
+            return base.Channel.SGMSaleGas_GetCustomerList(request);
+        }
+        
+        public string SGMSaleGas_GetCustomerList() {
+            SGM_SaleGas.SGM_Service.SGMSaleGas_GetCustomerListRequest inValue = new SGM_SaleGas.SGM_Service.SGMSaleGas_GetCustomerListRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMSaleGas_GetCustomerListRequestBody();
+            SGM_SaleGas.SGM_Service.SGMSaleGas_GetCustomerListResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMSaleGas_GetCustomerList(inValue);
+            return retVal.Body.SGMSaleGas_GetCustomerListResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_CheckCardExistResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_CheckCardExist(SGM_SaleGas.SGM_Service.SGMManager_CheckCardExistRequest request) {
+            return base.Channel.SGMManager_CheckCardExist(request);
+        }
+        
+        public string SGMManager_CheckCardExist(string stCardID) {
+            SGM_SaleGas.SGM_Service.SGMManager_CheckCardExistRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_CheckCardExistRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_CheckCardExistRequestBody();
+            inValue.Body.stCardID = stCardID;
+            SGM_SaleGas.SGM_Service.SGMManager_CheckCardExistResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_CheckCardExist(inValue);
+            return retVal.Body.SGMManager_CheckCardExistResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_GetCurrentPriceResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_GetCurrentPrice(SGM_SaleGas.SGM_Service.SGMManager_GetCurrentPriceRequest request) {
+            return base.Channel.SGMManager_GetCurrentPrice(request);
+        }
+        
+        public string SGMManager_GetCurrentPrice(int iGasType) {
+            SGM_SaleGas.SGM_Service.SGMManager_GetCurrentPriceRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_GetCurrentPriceRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_GetCurrentPriceRequestBody();
+            inValue.Body.iGasType = iGasType;
+            SGM_SaleGas.SGM_Service.SGMManager_GetCurrentPriceResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_GetCurrentPrice(inValue);
+            return retVal.Body.SGMManager_GetCurrentPriceResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_AddNewCardResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_AddNewCard(SGM_SaleGas.SGM_Service.SGMManager_AddNewCardRequest request) {
+            return base.Channel.SGMManager_AddNewCard(request);
+        }
+        
+        public string SGMManager_AddNewCard(string jsCardDTO) {
+            SGM_SaleGas.SGM_Service.SGMManager_AddNewCardRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_AddNewCardRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_AddNewCardRequestBody();
+            inValue.Body.jsCardDTO = jsCardDTO;
+            SGM_SaleGas.SGM_Service.SGMManager_AddNewCardResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_AddNewCard(inValue);
+            return retVal.Body.SGMManager_AddNewCardResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_AddRechargeCardResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_AddRechargeCard(SGM_SaleGas.SGM_Service.SGMManager_AddRechargeCardRequest request) {
+            return base.Channel.SGMManager_AddRechargeCard(request);
+        }
+        
+        public string SGMManager_AddRechargeCard(string jsRechargeDTO) {
+            SGM_SaleGas.SGM_Service.SGMManager_AddRechargeCardRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_AddRechargeCardRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_AddRechargeCardRequestBody();
+            inValue.Body.jsRechargeDTO = jsRechargeDTO;
+            SGM_SaleGas.SGM_Service.SGMManager_AddRechargeCardResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_AddRechargeCard(inValue);
+            return retVal.Body.SGMManager_AddRechargeCardResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_UpdateRechargeIDForCardResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_UpdateRechargeIDForCard(SGM_SaleGas.SGM_Service.SGMManager_UpdateRechargeIDForCardRequest request) {
+            return base.Channel.SGMManager_UpdateRechargeIDForCard(request);
+        }
+        
+        public string SGMManager_UpdateRechargeIDForCard(string stCardID) {
+            SGM_SaleGas.SGM_Service.SGMManager_UpdateRechargeIDForCardRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_UpdateRechargeIDForCardRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_UpdateRechargeIDForCardRequestBody();
+            inValue.Body.stCardID = stCardID;
+            SGM_SaleGas.SGM_Service.SGMManager_UpdateRechargeIDForCardResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_UpdateRechargeIDForCard(inValue);
+            return retVal.Body.SGMManager_UpdateRechargeIDForCardResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_UpdateMoneyForCardResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_UpdateMoneyForCard(SGM_SaleGas.SGM_Service.SGMManager_UpdateMoneyForCardRequest request) {
+            return base.Channel.SGMManager_UpdateMoneyForCard(request);
+        }
+        
+        public string SGMManager_UpdateMoneyForCard(string stCardID, int iMoney) {
+            SGM_SaleGas.SGM_Service.SGMManager_UpdateMoneyForCardRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_UpdateMoneyForCardRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_UpdateMoneyForCardRequestBody();
+            inValue.Body.stCardID = stCardID;
+            inValue.Body.iMoney = iMoney;
+            SGM_SaleGas.SGM_Service.SGMManager_UpdateMoneyForCardResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_UpdateMoneyForCard(inValue);
+            return retVal.Body.SGMManager_UpdateMoneyForCardResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_GetCardsOfCustomerResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_GetCardsOfCustomer(SGM_SaleGas.SGM_Service.SGMManager_GetCardsOfCustomerRequest request) {
+            return base.Channel.SGMManager_GetCardsOfCustomer(request);
+        }
+        
+        public string SGMManager_GetCardsOfCustomer(string stCusID) {
+            SGM_SaleGas.SGM_Service.SGMManager_GetCardsOfCustomerRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_GetCardsOfCustomerRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_GetCardsOfCustomerRequestBody();
+            inValue.Body.stCusID = stCusID;
+            SGM_SaleGas.SGM_Service.SGMManager_GetCardsOfCustomerResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_GetCardsOfCustomer(inValue);
+            return retVal.Body.SGMManager_GetCardsOfCustomerResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_UpdateCardStateResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_UpdateCardState(SGM_SaleGas.SGM_Service.SGMManager_UpdateCardStateRequest request) {
+            return base.Channel.SGMManager_UpdateCardState(request);
+        }
+        
+        public string SGMManager_UpdateCardState(string stCardID, bool bLocked) {
+            SGM_SaleGas.SGM_Service.SGMManager_UpdateCardStateRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_UpdateCardStateRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_UpdateCardStateRequestBody();
+            inValue.Body.stCardID = stCardID;
+            inValue.Body.bLocked = bLocked;
+            SGM_SaleGas.SGM_Service.SGMManager_UpdateCardStateResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_UpdateCardState(inValue);
+            return retVal.Body.SGMManager_UpdateCardStateResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_CheckGasStationExistResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_CheckGasStationExist(SGM_SaleGas.SGM_Service.SGMManager_CheckGasStationExistRequest request) {
+            return base.Channel.SGMManager_CheckGasStationExist(request);
+        }
+        
+        public string SGMManager_CheckGasStationExist(string stGasStationID) {
+            SGM_SaleGas.SGM_Service.SGMManager_CheckGasStationExistRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_CheckGasStationExistRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_CheckGasStationExistRequestBody();
+            inValue.Body.stGasStationID = stGasStationID;
+            SGM_SaleGas.SGM_Service.SGMManager_CheckGasStationExistResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_CheckGasStationExist(inValue);
+            return retVal.Body.SGMManager_CheckGasStationExistResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_AddNewGasStaionResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_AddNewGasStaion(SGM_SaleGas.SGM_Service.SGMManager_AddNewGasStaionRequest request) {
+            return base.Channel.SGMManager_AddNewGasStaion(request);
+        }
+        
+        public string SGMManager_AddNewGasStaion(string jsGasStationDTO) {
+            SGM_SaleGas.SGM_Service.SGMManager_AddNewGasStaionRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_AddNewGasStaionRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_AddNewGasStaionRequestBody();
+            inValue.Body.jsGasStationDTO = jsGasStationDTO;
+            SGM_SaleGas.SGM_Service.SGMManager_AddNewGasStaionResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_AddNewGasStaion(inValue);
+            return retVal.Body.SGMManager_AddNewGasStaionResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_GetGasStationResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_GetGasStation(SGM_SaleGas.SGM_Service.SGMManager_GetGasStationRequest request) {
+            return base.Channel.SGMManager_GetGasStation(request);
+        }
+        
+        public string SGMManager_GetGasStation(string stGasStationID) {
+            SGM_SaleGas.SGM_Service.SGMManager_GetGasStationRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_GetGasStationRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_GetGasStationRequestBody();
+            inValue.Body.stGasStationID = stGasStationID;
+            SGM_SaleGas.SGM_Service.SGMManager_GetGasStationResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_GetGasStation(inValue);
+            return retVal.Body.SGMManager_GetGasStationResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_UpdateGasStationResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_UpdateGasStation(SGM_SaleGas.SGM_Service.SGMManager_UpdateGasStationRequest request) {
+            return base.Channel.SGMManager_UpdateGasStation(request);
+        }
+        
+        public string SGMManager_UpdateGasStation(string jsonCustomerDTO, string stGasStationID) {
+            SGM_SaleGas.SGM_Service.SGMManager_UpdateGasStationRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_UpdateGasStationRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_UpdateGasStationRequestBody();
+            inValue.Body.jsonCustomerDTO = jsonCustomerDTO;
+            inValue.Body.stGasStationID = stGasStationID;
+            SGM_SaleGas.SGM_Service.SGMManager_UpdateGasStationResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_UpdateGasStation(inValue);
+            return retVal.Body.SGMManager_UpdateGasStationResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_SaleGas.SGM_Service.SGMManager_DelGasStionResponse SGM_SaleGas.SGM_Service.ServiceSoap.SGMManager_DelGasStion(SGM_SaleGas.SGM_Service.SGMManager_DelGasStionRequest request) {
+            return base.Channel.SGMManager_DelGasStion(request);
+        }
+        
+        public string SGMManager_DelGasStion(string stGasStationID) {
+            SGM_SaleGas.SGM_Service.SGMManager_DelGasStionRequest inValue = new SGM_SaleGas.SGM_Service.SGMManager_DelGasStionRequest();
+            inValue.Body = new SGM_SaleGas.SGM_Service.SGMManager_DelGasStionRequestBody();
+            inValue.Body.stGasStationID = stGasStationID;
+            SGM_SaleGas.SGM_Service.SGMManager_DelGasStionResponse retVal = ((SGM_SaleGas.SGM_Service.ServiceSoap)(this)).SGMManager_DelGasStion(inValue);
+            return retVal.Body.SGMManager_DelGasStionResult;
         }
     }
 }

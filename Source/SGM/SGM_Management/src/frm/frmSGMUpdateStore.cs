@@ -59,7 +59,8 @@ namespace SGM_Management
                     bValidate = false;
                     break;
                 }
-                if (!txt.All(Char.IsDigit) || Int32.Parse(txt) < 0)
+                float tmp;
+                if (float.TryParse(txt, out tmp) == false)
                 {
                     errorProvider1.SetError(f[i], SGMText.UPDATE_PRICE_INPUT_ERR);
                     bValidate = false;
@@ -75,9 +76,9 @@ namespace SGM_Management
             {
                 return;
             }
-            m_currentAdminDTO.SysGas92Total = Int32.Parse(txtGas92Current.Text) + Int32.Parse(txtGas92New.Text);
-            m_currentAdminDTO.SysGas95Total = Int32.Parse(txtGas95Current.Text) + Int32.Parse(txtGas95New.Text);
-            m_currentAdminDTO.SysGasDOTotal = Int32.Parse(txtGasDOCurrent.Text) + Int32.Parse(txtGasDONew.Text);
+            m_currentAdminDTO.SysGas92Total = float.Parse(txtGas92Current.Text) + float.Parse(txtGas92New.Text);
+            m_currentAdminDTO.SysGas95Total = float.Parse(txtGas95Current.Text) + float.Parse(txtGas95New.Text);
+            m_currentAdminDTO.SysGasDOTotal = float.Parse(txtGasDOCurrent.Text) + float.Parse(txtGasDONew.Text);
 
             DataTransfer request = new DataTransfer();
             request.ResponseDataSystemAdminDTO = m_currentAdminDTO;
@@ -93,9 +94,9 @@ namespace SGM_Management
             else
             {
                 MessageBox.Show(dataResponse.ResponseErrorMsgDetail, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                m_currentAdminDTO.SysGas92Total = Int32.Parse(txtGas92Current.Text);
-                m_currentAdminDTO.SysGas95Total = Int32.Parse(txtGas95Current.Text);
-                m_currentAdminDTO.SysGasDOTotal = Int32.Parse(txtGasDOCurrent.Text);
+                m_currentAdminDTO.SysGas92Total = float.Parse(txtGas92Current.Text);
+                m_currentAdminDTO.SysGas95Total = float.Parse(txtGas95Current.Text);
+                m_currentAdminDTO.SysGasDOTotal = float.Parse(txtGasDOCurrent.Text);
             }
         }
     }

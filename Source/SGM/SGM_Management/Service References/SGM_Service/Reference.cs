@@ -27,7 +27,7 @@ namespace SGM_Management.SGM_Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMSaleGas_ValidateCardId", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMSaleGas_ValidateCardIdResponse SGMSaleGas_ValidateCardId(SGM_Management.SGM_Service.SGMSaleGas_ValidateCardIdRequest request);
         
-        // CODEGEN: Generating message contract since element name strCardId from namespace http://tempuri.org/ is not marked nillable
+        // CODEGEN: Generating message contract since element name jsonSaleGasDTO from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMSaleGas_GasBuying", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMSaleGas_GasBuyingResponse SGMSaleGas_GasBuying(SGM_Management.SGM_Service.SGMSaleGas_GasBuyingRequest request);
         
@@ -353,17 +353,17 @@ namespace SGM_Management.SGM_Service {
     public partial class SGMSaleGas_GasBuyingRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string strCardId;
+        public string jsonSaleGasDTO;
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-        public int money;
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string sysadmin;
         
         public SGMSaleGas_GasBuyingRequestBody() {
         }
         
-        public SGMSaleGas_GasBuyingRequestBody(string strCardId, int money) {
-            this.strCardId = strCardId;
-            this.money = money;
+        public SGMSaleGas_GasBuyingRequestBody(string jsonSaleGasDTO, string sysadmin) {
+            this.jsonSaleGasDTO = jsonSaleGasDTO;
+            this.sysadmin = sysadmin;
         }
     }
     
@@ -2137,11 +2137,11 @@ namespace SGM_Management.SGM_Service {
             return base.Channel.SGMSaleGas_GasBuying(request);
         }
         
-        public string SGMSaleGas_GasBuying(string strCardId, int money) {
+        public string SGMSaleGas_GasBuying(string jsonSaleGasDTO, string sysadmin) {
             SGM_Management.SGM_Service.SGMSaleGas_GasBuyingRequest inValue = new SGM_Management.SGM_Service.SGMSaleGas_GasBuyingRequest();
             inValue.Body = new SGM_Management.SGM_Service.SGMSaleGas_GasBuyingRequestBody();
-            inValue.Body.strCardId = strCardId;
-            inValue.Body.money = money;
+            inValue.Body.jsonSaleGasDTO = jsonSaleGasDTO;
+            inValue.Body.sysadmin = sysadmin;
             SGM_Management.SGM_Service.SGMSaleGas_GasBuyingResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMSaleGas_GasBuying(inValue);
             return retVal.Body.SGMSaleGas_GasBuyingResult;
         }

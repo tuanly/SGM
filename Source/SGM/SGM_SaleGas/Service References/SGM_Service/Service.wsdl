@@ -2,6 +2,16 @@
 <wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="SGMSaleGas_GetGasStationList">
+        <s:complexType />
+      </s:element>
+      <s:element name="SGMSaleGas_GetGasStationListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMSaleGas_GetGasStationListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="SGMSaleGas_ValidateGasStationLogin">
         <s:complexType>
           <s:sequence>
@@ -34,8 +44,8 @@
       <s:element name="SGMSaleGas_GasBuying">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="strCardId" type="s:string" />
-            <s:element minOccurs="1" maxOccurs="1" name="money" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsonSaleGasDTO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="sysadmin" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -43,6 +53,22 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="SGMSaleGas_GasBuyingResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMSaleGas_GetSaleGasReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stGasStationID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateStart" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dateEnd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMSaleGas_GetSaleGasReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMSaleGas_GetSaleGasReportResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -91,6 +117,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="SGMManager_UpdateSystemStore">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jsonSysAdminDTO" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_UpdateSystemStoreResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_UpdateSystemStoreResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="SGMManager_CheckCustomerExist">
         <s:complexType>
           <s:sequence>
@@ -123,6 +163,7 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="stCusID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bExactly" type="s:boolean" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -133,8 +174,238 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="SGMManager_UpdateCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jsonCustomerDTO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="stCusID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_UpdateCustomerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_UpdateCustomerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_DelCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stCusID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_DelCustomerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_DelCustomerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMSaleGas_GetCustomerList">
+        <s:complexType />
+      </s:element>
+      <s:element name="SGMSaleGas_GetCustomerListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMSaleGas_GetCustomerListResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_CheckCardExist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stCardID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_CheckCardExistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_CheckCardExistResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_GetCurrentPrice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="iGasType" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_GetCurrentPriceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_GetCurrentPriceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_AddNewCard">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jsCardDTO" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_AddNewCardResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_AddNewCardResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_AddRechargeCard">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jsRechargeDTO" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_AddRechargeCardResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_AddRechargeCardResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_UpdateRechargeIDForCard">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stCardID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_UpdateRechargeIDForCardResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_UpdateRechargeIDForCardResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_UpdateMoneyForCard">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stCardID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="iMoney" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_UpdateMoneyForCardResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_UpdateMoneyForCardResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_GetCardsOfCustomer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stCusID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_GetCardsOfCustomerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_GetCardsOfCustomerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_UpdateCardState">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stCardID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bLocked" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_UpdateCardStateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_UpdateCardStateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_CheckGasStationExist">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stGasStationID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_CheckGasStationExistResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_CheckGasStationExistResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_AddNewGasStaion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jsGasStationDTO" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_AddNewGasStaionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_AddNewGasStaionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_GetGasStation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stGasStationID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_GetGasStationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_GetGasStationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_UpdateGasStation">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jsonCustomerDTO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="stGasStationID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_UpdateGasStationResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_UpdateGasStationResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_DelGasStion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stGasStationID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_DelGasStionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_DelGasStionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
+  <wsdl:message name="SGMSaleGas_GetGasStationListSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMSaleGas_GetGasStationList" />
+  </wsdl:message>
+  <wsdl:message name="SGMSaleGas_GetGasStationListSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMSaleGas_GetGasStationListResponse" />
+  </wsdl:message>
   <wsdl:message name="SGMSaleGas_ValidateGasStationLoginSoapIn">
     <wsdl:part name="parameters" element="tns:SGMSaleGas_ValidateGasStationLogin" />
   </wsdl:message>
@@ -152,6 +423,12 @@
   </wsdl:message>
   <wsdl:message name="SGMSaleGas_GasBuyingSoapOut">
     <wsdl:part name="parameters" element="tns:SGMSaleGas_GasBuyingResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMSaleGas_GetSaleGasReportSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMSaleGas_GetSaleGasReport" />
+  </wsdl:message>
+  <wsdl:message name="SGMSaleGas_GetSaleGasReportSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMSaleGas_GetSaleGasReportResponse" />
   </wsdl:message>
   <wsdl:message name="SGMManager_ValidateAdminLoginSoapIn">
     <wsdl:part name="parameters" element="tns:SGMManager_ValidateAdminLogin" />
@@ -171,6 +448,12 @@
   <wsdl:message name="SGMManager_UpdateSystemPriceSoapOut">
     <wsdl:part name="parameters" element="tns:SGMManager_UpdateSystemPriceResponse" />
   </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateSystemStoreSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateSystemStore" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateSystemStoreSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateSystemStoreResponse" />
+  </wsdl:message>
   <wsdl:message name="SGMManager_CheckCustomerExistSoapIn">
     <wsdl:part name="parameters" element="tns:SGMManager_CheckCustomerExist" />
   </wsdl:message>
@@ -189,7 +472,107 @@
   <wsdl:message name="SGMManager_GetCustomerSoapOut">
     <wsdl:part name="parameters" element="tns:SGMManager_GetCustomerResponse" />
   </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateCustomer" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_DelCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_DelCustomer" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_DelCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_DelCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMSaleGas_GetCustomerListSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMSaleGas_GetCustomerList" />
+  </wsdl:message>
+  <wsdl:message name="SGMSaleGas_GetCustomerListSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMSaleGas_GetCustomerListResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_CheckCardExistSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_CheckCardExist" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_CheckCardExistSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_CheckCardExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_GetCurrentPriceSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_GetCurrentPrice" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_GetCurrentPriceSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_GetCurrentPriceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_AddNewCardSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_AddNewCard" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_AddNewCardSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_AddNewCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_AddRechargeCardSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_AddRechargeCard" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_AddRechargeCardSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_AddRechargeCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateRechargeIDForCardSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateRechargeIDForCard" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateRechargeIDForCardSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateRechargeIDForCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateMoneyForCardSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateMoneyForCard" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateMoneyForCardSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateMoneyForCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_GetCardsOfCustomerSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_GetCardsOfCustomer" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_GetCardsOfCustomerSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_GetCardsOfCustomerResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateCardStateSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateCardState" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateCardStateSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateCardStateResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_CheckGasStationExistSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_CheckGasStationExist" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_CheckGasStationExistSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_CheckGasStationExistResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_AddNewGasStaionSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_AddNewGasStaion" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_AddNewGasStaionSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_AddNewGasStaionResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_GetGasStationSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_GetGasStation" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_GetGasStationSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_GetGasStationResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateGasStationSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateGasStation" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_UpdateGasStationSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_UpdateGasStationResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_DelGasStionSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_DelGasStion" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_DelGasStionSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_DelGasStionResponse" />
+  </wsdl:message>
   <wsdl:portType name="ServiceSoap">
+    <wsdl:operation name="SGMSaleGas_GetGasStationList">
+      <wsdl:input message="tns:SGMSaleGas_GetGasStationListSoapIn" />
+      <wsdl:output message="tns:SGMSaleGas_GetGasStationListSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="SGMSaleGas_ValidateGasStationLogin">
       <wsdl:input message="tns:SGMSaleGas_ValidateGasStationLoginSoapIn" />
       <wsdl:output message="tns:SGMSaleGas_ValidateGasStationLoginSoapOut" />
@@ -201,6 +584,10 @@
     <wsdl:operation name="SGMSaleGas_GasBuying">
       <wsdl:input message="tns:SGMSaleGas_GasBuyingSoapIn" />
       <wsdl:output message="tns:SGMSaleGas_GasBuyingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMSaleGas_GetSaleGasReport">
+      <wsdl:input message="tns:SGMSaleGas_GetSaleGasReportSoapIn" />
+      <wsdl:output message="tns:SGMSaleGas_GetSaleGasReportSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="SGMManager_ValidateAdminLogin">
       <wsdl:input message="tns:SGMManager_ValidateAdminLoginSoapIn" />
@@ -214,6 +601,10 @@
       <wsdl:input message="tns:SGMManager_UpdateSystemPriceSoapIn" />
       <wsdl:output message="tns:SGMManager_UpdateSystemPriceSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateSystemStore">
+      <wsdl:input message="tns:SGMManager_UpdateSystemStoreSoapIn" />
+      <wsdl:output message="tns:SGMManager_UpdateSystemStoreSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="SGMManager_CheckCustomerExist">
       <wsdl:input message="tns:SGMManager_CheckCustomerExistSoapIn" />
       <wsdl:output message="tns:SGMManager_CheckCustomerExistSoapOut" />
@@ -226,9 +617,82 @@
       <wsdl:input message="tns:SGMManager_GetCustomerSoapIn" />
       <wsdl:output message="tns:SGMManager_GetCustomerSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateCustomer">
+      <wsdl:input message="tns:SGMManager_UpdateCustomerSoapIn" />
+      <wsdl:output message="tns:SGMManager_UpdateCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_DelCustomer">
+      <wsdl:input message="tns:SGMManager_DelCustomerSoapIn" />
+      <wsdl:output message="tns:SGMManager_DelCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMSaleGas_GetCustomerList">
+      <wsdl:input message="tns:SGMSaleGas_GetCustomerListSoapIn" />
+      <wsdl:output message="tns:SGMSaleGas_GetCustomerListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_CheckCardExist">
+      <wsdl:input message="tns:SGMManager_CheckCardExistSoapIn" />
+      <wsdl:output message="tns:SGMManager_CheckCardExistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_GetCurrentPrice">
+      <wsdl:input message="tns:SGMManager_GetCurrentPriceSoapIn" />
+      <wsdl:output message="tns:SGMManager_GetCurrentPriceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_AddNewCard">
+      <wsdl:input message="tns:SGMManager_AddNewCardSoapIn" />
+      <wsdl:output message="tns:SGMManager_AddNewCardSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_AddRechargeCard">
+      <wsdl:input message="tns:SGMManager_AddRechargeCardSoapIn" />
+      <wsdl:output message="tns:SGMManager_AddRechargeCardSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateRechargeIDForCard">
+      <wsdl:input message="tns:SGMManager_UpdateRechargeIDForCardSoapIn" />
+      <wsdl:output message="tns:SGMManager_UpdateRechargeIDForCardSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateMoneyForCard">
+      <wsdl:input message="tns:SGMManager_UpdateMoneyForCardSoapIn" />
+      <wsdl:output message="tns:SGMManager_UpdateMoneyForCardSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_GetCardsOfCustomer">
+      <wsdl:input message="tns:SGMManager_GetCardsOfCustomerSoapIn" />
+      <wsdl:output message="tns:SGMManager_GetCardsOfCustomerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateCardState">
+      <wsdl:input message="tns:SGMManager_UpdateCardStateSoapIn" />
+      <wsdl:output message="tns:SGMManager_UpdateCardStateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_CheckGasStationExist">
+      <wsdl:input message="tns:SGMManager_CheckGasStationExistSoapIn" />
+      <wsdl:output message="tns:SGMManager_CheckGasStationExistSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_AddNewGasStaion">
+      <wsdl:input message="tns:SGMManager_AddNewGasStaionSoapIn" />
+      <wsdl:output message="tns:SGMManager_AddNewGasStaionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_GetGasStation">
+      <wsdl:input message="tns:SGMManager_GetGasStationSoapIn" />
+      <wsdl:output message="tns:SGMManager_GetGasStationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateGasStation">
+      <wsdl:input message="tns:SGMManager_UpdateGasStationSoapIn" />
+      <wsdl:output message="tns:SGMManager_UpdateGasStationSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_DelGasStion">
+      <wsdl:input message="tns:SGMManager_DelGasStionSoapIn" />
+      <wsdl:output message="tns:SGMManager_DelGasStionSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SGMSaleGas_GetGasStationList">
+      <soap:operation soapAction="http://tempuri.org/SGMSaleGas_GetGasStationList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SGMSaleGas_ValidateGasStationLogin">
       <soap:operation soapAction="http://tempuri.org/SGMSaleGas_ValidateGasStationLogin" style="document" />
       <wsdl:input>
@@ -249,6 +713,15 @@
     </wsdl:operation>
     <wsdl:operation name="SGMSaleGas_GasBuying">
       <soap:operation soapAction="http://tempuri.org/SGMSaleGas_GasBuying" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMSaleGas_GetSaleGasReport">
+      <soap:operation soapAction="http://tempuri.org/SGMSaleGas_GetSaleGasReport" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -283,6 +756,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateSystemStore">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_UpdateSystemStore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SGMManager_CheckCustomerExist">
       <soap:operation soapAction="http://tempuri.org/SGMManager_CheckCustomerExist" style="document" />
       <wsdl:input>
@@ -310,9 +792,162 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateCustomer">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_UpdateCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_DelCustomer">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_DelCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMSaleGas_GetCustomerList">
+      <soap:operation soapAction="http://tempuri.org/SGMSaleGas_GetCustomerList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_CheckCardExist">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_CheckCardExist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_GetCurrentPrice">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_GetCurrentPrice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_AddNewCard">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_AddNewCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_AddRechargeCard">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_AddRechargeCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateRechargeIDForCard">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_UpdateRechargeIDForCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateMoneyForCard">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_UpdateMoneyForCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_GetCardsOfCustomer">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_GetCardsOfCustomer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateCardState">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_UpdateCardState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_CheckGasStationExist">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_CheckGasStationExist" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_AddNewGasStaion">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_AddNewGasStaion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_GetGasStation">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_GetGasStation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateGasStation">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_UpdateGasStation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_DelGasStion">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_DelGasStion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SGMSaleGas_GetGasStationList">
+      <soap12:operation soapAction="http://tempuri.org/SGMSaleGas_GetGasStationList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SGMSaleGas_ValidateGasStationLogin">
       <soap12:operation soapAction="http://tempuri.org/SGMSaleGas_ValidateGasStationLogin" style="document" />
       <wsdl:input>
@@ -333,6 +968,15 @@
     </wsdl:operation>
     <wsdl:operation name="SGMSaleGas_GasBuying">
       <soap12:operation soapAction="http://tempuri.org/SGMSaleGas_GasBuying" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMSaleGas_GetSaleGasReport">
+      <soap12:operation soapAction="http://tempuri.org/SGMSaleGas_GetSaleGasReport" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -367,6 +1011,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateSystemStore">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_UpdateSystemStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SGMManager_CheckCustomerExist">
       <soap12:operation soapAction="http://tempuri.org/SGMManager_CheckCustomerExist" style="document" />
       <wsdl:input>
@@ -387,6 +1040,150 @@
     </wsdl:operation>
     <wsdl:operation name="SGMManager_GetCustomer">
       <soap12:operation soapAction="http://tempuri.org/SGMManager_GetCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateCustomer">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_UpdateCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_DelCustomer">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_DelCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMSaleGas_GetCustomerList">
+      <soap12:operation soapAction="http://tempuri.org/SGMSaleGas_GetCustomerList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_CheckCardExist">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_CheckCardExist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_GetCurrentPrice">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_GetCurrentPrice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_AddNewCard">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_AddNewCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_AddRechargeCard">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_AddRechargeCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateRechargeIDForCard">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_UpdateRechargeIDForCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateMoneyForCard">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_UpdateMoneyForCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_GetCardsOfCustomer">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_GetCardsOfCustomer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateCardState">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_UpdateCardState" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_CheckGasStationExist">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_CheckGasStationExist" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_AddNewGasStaion">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_AddNewGasStaion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_GetGasStation">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_GetGasStation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_UpdateGasStation">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_UpdateGasStation" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_DelGasStion">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_DelGasStion" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

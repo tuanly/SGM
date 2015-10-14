@@ -40,25 +40,58 @@ namespace SGM.ServicesCore.BLL
             return JSonHelper.ConvertObjectToJSon(dataResult);
         }
 
-        public string GasBuying(string strCardId, int money)
+        public string GasBuying(String jsonSaleGasDTO, string sys_admin)
+        {
+            DataTransfer dataInput = JSonHelper.ConvertJSonToObject(jsonSaleGasDTO);
+            SystemAdminDAL dalSystemAd = new SystemAdminDAL();
+            SaleGasDTO saleGasDTO = dataInput.ResponseDataSaleGasDTO;
+            DataTransfer response = GasBuyingAddSaleGas(saleGasDTO);
+            if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+            {
+                response = GasBuyingUpdateCard(saleGasDTO.CardID, saleGasDTO.SaleGasCardMoneyAfter);
+                if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                {
+                    response = GasBuyingUpdateSysAdmin(sys_admin, saleGasDTO);
+                    if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                    {
+                        response.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+                        response.ResponseErrorMsg = SGMText.GAS_BUYING_SUCCESS;
+                    }
+                    else
+                    {
+                    }
+                }
+                else
+                {
+                }
+            }
+            else
+            {
+            }
+            return JSonHelper.ConvertObjectToJSon(response);
+        }
+
+        private DataTransfer GasBuyingUpdateSysAdmin(string sys_admin, SaleGasDTO saleGasDTO)
+        {
+            SystemAdminDAL dal = new SystemAdminDAL();
+            float money = saleGasDTO.SaleGasCardMoneyBefore - saleGasDTO.SaleGasCardMoneyAfter;
+            float amount = money / saleGasDTO.SaleGasCurrentPrice;
+            DataTransfer res = dal.UpdateSaleGas(sys_admin, saleGasDTO.SaleGasType, amount);
+            return res;
+        }
+
+        private DataTransfer GasBuyingAddSaleGas(SaleGasDTO saleGasDTO)
+        {
+            SaleGasDAL dal = new SaleGasDAL();
+            return dal.AddSaleGas(saleGasDTO);
+        }
+        private DataTransfer GasBuyingUpdateCard(string strCardId, int money)
         {
             CardDAL dalCard = new CardDAL();
             CardDTO dtoCard = new CardDTO();
             dtoCard.CardID = strCardId;
             dtoCard.CardRemainingMoney = money;
-            DataTransfer response = new DataTransfer();
-            bool b = dalCard.UpdateCardBuying(dtoCard);
-            if (b)
-            {
-                response.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
-                response.ResponseErrorMsg = SGMText.GAS_BUYING_SUCCESS;
-            }
-            else
-            {
-                response.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                response.ResponseErrorMsg = SGMText.GAS_BUYING_FAIL;
-            }
-            return JSonHelper.ConvertObjectToJSon(response);
+            return dalCard.UpdateSaleGas(dtoCard);
         }
 
         public string GetSaleGasReport(string stGasStationID, string dateStart, string dateEnd)
