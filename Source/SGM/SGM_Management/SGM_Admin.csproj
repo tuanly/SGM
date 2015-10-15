@@ -63,6 +63,12 @@
     <Compile Include="src\frm\frmGasStation.Designer.cs">
       <DependentUpon>frmGasStation.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\frm\frmGSMMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmGSMMain.Designer.cs">
+      <DependentUpon>frmGSMMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\frm\frmSGMCustomer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,9 @@
     </Compile>
     <EmbeddedResource Include="src\frm\frmGasStation.resx">
       <DependentUpon>frmGasStation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\frm\frmGSMMain.resx">
+      <DependentUpon>frmGSMMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\frm\frmSGMCustomer.resx">
       <DependentUpon>frmSGMCustomer.cs</DependentUpon>
