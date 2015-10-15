@@ -427,16 +427,16 @@ namespace SGM_Management.SGM_Service {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string stGasStationID;
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
-        public string dateStart;
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public System.DateTime dateStart;
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
-        public string dateEnd;
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public System.DateTime dateEnd;
         
         public SGMSaleGas_GetSaleGasReportRequestBody() {
         }
         
-        public SGMSaleGas_GetSaleGasReportRequestBody(string stGasStationID, string dateStart, string dateEnd) {
+        public SGMSaleGas_GetSaleGasReportRequestBody(string stGasStationID, System.DateTime dateStart, System.DateTime dateEnd) {
             this.stGasStationID = stGasStationID;
             this.dateStart = dateStart;
             this.dateEnd = dateEnd;
@@ -2151,7 +2151,7 @@ namespace SGM_Management.SGM_Service {
             return base.Channel.SGMSaleGas_GetSaleGasReport(request);
         }
         
-        public string SGMSaleGas_GetSaleGasReport(string stGasStationID, string dateStart, string dateEnd) {
+        public string SGMSaleGas_GetSaleGasReport(string stGasStationID, System.DateTime dateStart, System.DateTime dateEnd) {
             SGM_Management.SGM_Service.SGMSaleGas_GetSaleGasReportRequest inValue = new SGM_Management.SGM_Service.SGMSaleGas_GetSaleGasReportRequest();
             inValue.Body = new SGM_Management.SGM_Service.SGMSaleGas_GetSaleGasReportRequestBody();
             inValue.Body.stGasStationID = stGasStationID;

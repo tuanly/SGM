@@ -55,7 +55,7 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string SGMSaleGas_GetSaleGasReport(string stGasStationID, string dateStart, string dateEnd)
+    public string SGMSaleGas_GetSaleGasReport(string stGasStationID, DateTime dateStart, DateTime dateEnd)
     {
         return m_bllSaleGasService.GetSaleGasReport(stGasStationID, dateStart, dateEnd);
     }

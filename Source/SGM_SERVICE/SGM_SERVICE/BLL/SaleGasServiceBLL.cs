@@ -94,25 +94,11 @@ namespace SGM.ServicesCore.BLL
             return dalCard.UpdateSaleGas(dtoCard);
         }
 
-        public string GetSaleGasReport(string stGasStationID, string dateStart, string dateEnd)
+        public string GetSaleGasReport(string stGasStationID, DateTime dateStart, DateTime dateEnd)
         {
-            throw new NotImplementedException();
-            //CardDAL dalCard = new CardDAL();
-            //DataTable tblCard = dalCard.GetSaleGasReport(stGasStationID, dateStart, dateEnd);
-            //DataTransfer dataResult = new DataTransfer();
-            //if (tblCard.Rows.Count > 0)
-            //{
-            //    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
-            //    DataSet ds = new DataSet();
-            //    ds.Tables.Add(tblCard.Copy());
-            //    dataResult.ResponseDataSet = ds;
-            //}
-            //else
-            //{
-            //    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-            //    dataResult.ResponseErrorMsg = SGMText.GAS_STATION_CARD_ID_NOT_EXIST;
-            //}
-            //return JSonHelper.ConvertObjectToJSon(dataResult);
+            SaleGasDAL dal = new SaleGasDAL();
+            DataTransfer dataResult = dal.GetSaleGasReport(stGasStationID, dateStart, dateEnd);
+            return JSonHelper.ConvertObjectToJSon(dataResult);
         }
     }
     

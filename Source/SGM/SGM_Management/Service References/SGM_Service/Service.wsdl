@@ -60,8 +60,8 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="stGasStationID" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="dateStart" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="dateEnd" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateStart" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateEnd" type="s:dateTime" />
           </s:sequence>
         </s:complexType>
       </s:element>

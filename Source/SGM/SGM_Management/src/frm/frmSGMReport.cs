@@ -45,18 +45,18 @@ namespace SGM_Management
                 }
 
                 string gasStationId = (cboGasStation.SelectedItem as ComboboxItem).Value.ToString();
-                string date_begin = dtpSaleGasBegin.Text;
-                string date_end = dtpSaleGasEnd.Text;
-
+                DateTime date_begin = dtpSaleGasBegin.Value;
+                DateTime date_end = dtpSaleGasEnd.Value;
                 string response = m_service.SGMSaleGas_GetSaleGasReport(gasStationId, date_begin, date_end);
                 DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
                 if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                 {
-                    dgvSaleGasHistory.DataSource = dataResponse.ResponseDataSet;
+                    if (dataResponse.ResponseDataSet != null)
+                        dgvSaleGasHistory.DataSource = dataResponse.ResponseDataSet.Tables[0];
                 }
                 else
                 {
-                    MessageBox.Show(dataResponse.ResponseErrorMsgDetail, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
