@@ -242,6 +242,7 @@
             this.btnRechargeCardView.TabIndex = 8;
             this.btnRechargeCardView.Text = "Xem";
             this.btnRechargeCardView.UseVisualStyleBackColor = true;
+            this.btnRechargeCardView.Click += new System.EventHandler(this.btnRechargeCardView_Click);
             // 
             // txtRechargeCardID
             // 

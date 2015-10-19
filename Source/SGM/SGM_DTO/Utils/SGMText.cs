@@ -71,5 +71,8 @@ namespace SGM_Core.Utils
         public static string GASSTATION_DATA_INPUT_GS_ID_ERR = "Lỗi! Chưa nhập Mã Cây Xăng.";
         public static string GASSTATION_DATA_INPUT_GS_NAME_ERR = "Lỗi! Chưa nhập Tên Cây Xăng.";
         public static string GASSTATION_DATA_INPUT_GS_ADDRESS_ERR = "Lỗi! Chưa nhập Địa chỉ.";
+
+        public static string REPORT_NO_DATA = "Không có dữ liệu!";
+        public static string REPORT_INPUT_DATE_ERROR = "Chọn khoảng thời gian ko hợp lệ!";
     }
 }

@@ -72,6 +72,22 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="SGMSaleGas_GetCardReport">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stGasStationID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateStart" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateEnd" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMSaleGas_GetCardReportResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMSaleGas_GetCardReportResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="SGMManager_ValidateAdminLogin">
         <s:complexType>
           <s:sequence>
@@ -430,6 +446,12 @@
   <wsdl:message name="SGMSaleGas_GetSaleGasReportSoapOut">
     <wsdl:part name="parameters" element="tns:SGMSaleGas_GetSaleGasReportResponse" />
   </wsdl:message>
+  <wsdl:message name="SGMSaleGas_GetCardReportSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMSaleGas_GetCardReport" />
+  </wsdl:message>
+  <wsdl:message name="SGMSaleGas_GetCardReportSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMSaleGas_GetCardReportResponse" />
+  </wsdl:message>
   <wsdl:message name="SGMManager_ValidateAdminLoginSoapIn">
     <wsdl:part name="parameters" element="tns:SGMManager_ValidateAdminLogin" />
   </wsdl:message>
@@ -589,6 +611,10 @@
       <wsdl:input message="tns:SGMSaleGas_GetSaleGasReportSoapIn" />
       <wsdl:output message="tns:SGMSaleGas_GetSaleGasReportSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="SGMSaleGas_GetCardReport">
+      <wsdl:input message="tns:SGMSaleGas_GetCardReportSoapIn" />
+      <wsdl:output message="tns:SGMSaleGas_GetCardReportSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="SGMManager_ValidateAdminLogin">
       <wsdl:input message="tns:SGMManager_ValidateAdminLoginSoapIn" />
       <wsdl:output message="tns:SGMManager_ValidateAdminLoginSoapOut" />
@@ -722,6 +748,15 @@
     </wsdl:operation>
     <wsdl:operation name="SGMSaleGas_GetSaleGasReport">
       <soap:operation soapAction="http://tempuri.org/SGMSaleGas_GetSaleGasReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMSaleGas_GetCardReport">
+      <soap:operation soapAction="http://tempuri.org/SGMSaleGas_GetCardReport" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -977,6 +1012,15 @@
     </wsdl:operation>
     <wsdl:operation name="SGMSaleGas_GetSaleGasReport">
       <soap12:operation soapAction="http://tempuri.org/SGMSaleGas_GetSaleGasReport" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMSaleGas_GetCardReport">
+      <soap12:operation soapAction="http://tempuri.org/SGMSaleGas_GetCardReport" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

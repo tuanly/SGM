@@ -296,5 +296,35 @@ namespace SGM.ServicesCore.DAL
             }
             return dataResult;
         }
+
+        public DataTransfer GetCardReport(string strCusId, DateTime dateStart, DateTime dateEnd)
+        {
+            DataTransfer res = new DataTransfer();
+            try
+            {
+                string query = string.Format("SELECT * FROM CARD WHERE CUS_ID = @CUS_ID AND CARD_BUY_DATE BETWEEN @STARTDATE AND @ENDDATE");
+                SqlParameter[] sqlParameters = new SqlParameter[3];
+                sqlParameters[0] = new SqlParameter("@CUS_ID", SqlDbType.NVarChar);
+                sqlParameters[0].Value = strCusId;
+                sqlParameters[1] = new SqlParameter("@STARTDATE", SqlDbType.DateTime);
+                sqlParameters[1].Value = dateStart;
+                sqlParameters[2] = new SqlParameter("@ENDDATE", SqlDbType.DateTime);
+                sqlParameters[2].Value = dateEnd;
+                DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
+                res.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+                if (tblResult.Rows.Count > 0)
+                {
+                    DataSet ds = new DataSet();
+                    ds.Tables.Add(tblResult.Copy());
+                    res.ResponseDataSet = ds;
+                }
+            }
+            catch (Exception e)
+            {
+                res.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                res.ResponseErrorMsg = e.Message;
+            }
+            return res;
+        }
     }   
 }

@@ -59,6 +59,12 @@ public class Service : System.Web.Services.WebService
     {
         return m_bllSaleGasService.GetSaleGasReport(stGasStationID, dateStart, dateEnd);
     }
+
+    [WebMethod]
+    public string SGMSaleGas_GetCardReport(string stGasStationID, DateTime dateStart, DateTime dateEnd)
+    {
+        return m_bllCardService.GetCardReport(stGasStationID, dateStart, dateEnd);
+    }
     
 
     [WebMethod]

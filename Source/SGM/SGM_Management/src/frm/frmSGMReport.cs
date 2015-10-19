@@ -33,26 +33,25 @@ namespace SGM_Management
 
         private void btnSaleGasView_Click(object sender, EventArgs e)
         {
-            if (tabSGMHistory.SelectedTab == subTabSGMRechargeCard)
+            if (!ValidateDataSaleGasInput())
             {
-                string customerId = (cboRechargeCardCustomer.SelectedItem as ComboboxItem).Value.ToString();
+                return;
             }
-            else if (tabSGMHistory.SelectedTab == subTabSGMSaleGas)
-            {
-                if (!ValidateDataSaleGasInput())
-                {
-                    return;
-                }
+            
+            dgvSaleGasHistory.DataSource = null;
 
+            DateTime date_begin = dtpSaleGasBegin.Value;
+            DateTime date_end = dtpSaleGasEnd.Value;
+            {
                 string gasStationId = (cboGasStation.SelectedItem as ComboboxItem).Value.ToString();
-                DateTime date_begin = dtpSaleGasBegin.Value;
-                DateTime date_end = dtpSaleGasEnd.Value;
                 string response = m_service.SGMSaleGas_GetSaleGasReport(gasStationId, date_begin, date_end);
                 DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
                 if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                 {
                     if (dataResponse.ResponseDataSet != null)
                         dgvSaleGasHistory.DataSource = dataResponse.ResponseDataSet.Tables[0];
+                    else
+                        MessageBox.Show(SGMText.REPORT_NO_DATA, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -61,12 +60,49 @@ namespace SGM_Management
             }
         }
 
+        private void btnRechargeCardView_Click(object sender, EventArgs e)
+        {
+            if (!ValidateDataCardInput())
+            {
+                return;
+            }
+
+            dgvRechargeCardHistory.DataSource = null;
+
+            DateTime date_begin = dtpRechargeCardBegin.Value;
+            DateTime date_end = dtpRechargeCardEnd.Value;
+
+            string customerId = (cboRechargeCardCustomer.SelectedItem as ComboboxItem).Value.ToString();
+            string response = m_service.SGMSaleGas_GetCardReport(customerId, date_begin, date_end);
+            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
+            if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+            {
+                if (dataResponse.ResponseDataSet != null)
+                    dgvRechargeCardHistory.DataSource = dataResponse.ResponseDataSet.Tables[0];
+                else
+                    MessageBox.Show(SGMText.REPORT_NO_DATA, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         private bool ValidateDataSaleGasInput()
         {
             bool validate = true;
             if (dtpSaleGasBegin.Value > dtpSaleGasEnd.Value)
             {
-                MessageBox.Show("Chọn khoảng thời gian ko hợp lệ !");
+                MessageBox.Show(SGMText.REPORT_INPUT_DATE_ERROR, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                validate = false;
+            }
+            return validate;
+        }
+        private bool ValidateDataCardInput()
+        {
+            bool validate = true;
+            if (dtpRechargeCardBegin.Value > dtpRechargeCardEnd.Value)
+            {
+                MessageBox.Show(SGMText.REPORT_INPUT_DATE_ERROR, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 validate = false;
             }
             return validate;

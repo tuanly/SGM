@@ -68,6 +68,11 @@ namespace SGM.ServicesCore.BLL
             m_dataResponse = m_dalCard.UpdateCardState(stCardID, bLocked);
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
-       
+
+        public string GetCardReport(string stGasStationID, DateTime dateStart, DateTime dateEnd)
+        {
+            DataTransfer dataResult = m_dalCard.GetCardReport(stGasStationID, dateStart, dateEnd);
+            return JSonHelper.ConvertObjectToJSon(dataResult);
+        }
     }
 }
