@@ -21,14 +21,16 @@ namespace SGM_Management
         {
             InitializeComponent();
             bFromResizing = false;
+            frmSGMMessage msg = new frmSGMMessage();
+            SGMMessageResult a = msg.ShowMsg("test title", "test msg", SGMMessageType.SGM_MESSAGE_TYPE_QUES);
+           
         }
 
 
         private void frmGSMMain_Load(object sender, EventArgs e)
         {
             m_btnCurrenButton = btnHome;
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-            
+            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;           
         }
 
         private void button3_Click(object sender, EventArgs e)
