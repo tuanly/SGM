@@ -24,11 +24,12 @@ namespace SGM_Management
         }
 
         private SGM_Service.ServiceSoapClient m_service = null;
-
+        private frmSGMMessage frmMsg = null;
         public frmSGMReport()
         {
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
+            frmMsg = new frmSGMMessage();
         }
 
         private void btnSaleGasView_Click(object sender, EventArgs e)
@@ -51,11 +52,12 @@ namespace SGM_Management
                     if (dataResponse.ResponseDataSet != null)
                         dgvSaleGasHistory.DataSource = dataResponse.ResponseDataSet.Tables[0];
                     else
-                        MessageBox.Show(SGMText.REPORT_NO_DATA, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.REPORT_NO_DATA, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                        
                 }
                 else
                 {
-                    MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);                    
                 }
             }
         }
@@ -80,19 +82,19 @@ namespace SGM_Management
                 if (dataResponse.ResponseDataSet != null)
                     dgvRechargeCardHistory.DataSource = dataResponse.ResponseDataSet.Tables[0];
                 else
-                    MessageBox.Show(SGMText.REPORT_NO_DATA, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.REPORT_NO_DATA, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
             }
             else
             {
-                MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);               
             }
         }
         private bool ValidateDataSaleGasInput()
         {
             bool validate = true;
             if (dtpSaleGasBegin.Value > dtpSaleGasEnd.Value)
-            {
-                MessageBox.Show(SGMText.REPORT_INPUT_DATE_ERROR, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {                
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.REPORT_INPUT_DATE_ERROR, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 validate = false;
             }
             return validate;
@@ -102,7 +104,7 @@ namespace SGM_Management
             bool validate = true;
             if (dtpRechargeCardBegin.Value > dtpRechargeCardEnd.Value)
             {
-                MessageBox.Show(SGMText.REPORT_INPUT_DATE_ERROR, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.REPORT_INPUT_DATE_ERROR, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 validate = false;
             }
             return validate;
@@ -138,7 +140,7 @@ namespace SGM_Management
             }
             else
             {
-                MessageBox.Show(dataResponse.ResponseErrorMsgDetail, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);                
             }
         }
 
@@ -166,7 +168,7 @@ namespace SGM_Management
             }
             else
             {
-                MessageBox.Show(dataResponse.ResponseErrorMsgDetail, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);                
             }
         }
     }

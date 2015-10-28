@@ -1,4 +1,4 @@
-﻿namespace SGM_Management
+﻿namespace SGM_SaleGas
 {
     partial class frmSGMMessage
     {
@@ -78,8 +78,8 @@
             // 
             // picIcon
             // 
-            this.picIcon.BackgroundImage = global::SGM_Management.Properties.Resources.sgm_info;
             this.picIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picIcon.InitialImage = global::SGM_SaleGas.Properties.Resources.sgm_warning;
             this.picIcon.Location = new System.Drawing.Point(12, 18);
             this.picIcon.Name = "picIcon";
             this.picIcon.Size = new System.Drawing.Size(63, 50);

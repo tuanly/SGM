@@ -125,6 +125,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="src\frm\frmGasStation.resx">
       <DependentUpon>frmGasStation.cs</DependentUpon>
@@ -168,7 +169,9 @@
     </Compile>
     <None Include="Service References\SGM_Service\Service.wsdl" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app_data\sgm_error.png" />
+  </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
@@ -198,6 +201,15 @@
       <Project>{5ABD34AF-902B-408F-85B5-12E0F96E60CF}</Project>
       <Name>SGM_DTO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app_data\sgm_info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app_data\sgm_question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app_data\sgm_warning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

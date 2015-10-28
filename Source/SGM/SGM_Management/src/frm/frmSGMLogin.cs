@@ -14,10 +14,12 @@ namespace SGM_Management
     {
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
         private JSonHelper m_jsHelper;
+        private frmSGMMessage frmMsg = null;
         public frmSGMLogin()
         {
             InitializeComponent();
             m_jsHelper = new JSonHelper();
+            frmMsg = new frmSGMMessage();
         }
 
         private void frmSGMLogin_Load(object sender, EventArgs e)
@@ -86,7 +88,8 @@ namespace SGM_Management
                 this.Close();
             }
             else
-                MessageBox.Show(dataResponse.ResponseErrorMsg);
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+               
         }
     }
 }

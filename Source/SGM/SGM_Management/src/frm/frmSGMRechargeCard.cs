@@ -23,6 +23,7 @@ namespace SGM_Management
         private int m_iPriceGasDO;
 
         private SGM_Service.ServiceSoapClient m_service;
+        private frmSGMMessage frmMsg = null;
 
         public frmSGMRechargeCard()
         {
@@ -35,6 +36,7 @@ namespace SGM_Management
             m_iPriceGas92 = 0;
             m_iPriceGasDO = 0;
             m_service = new SGM_Service.ServiceSoapClient();
+            frmMsg = new frmSGMMessage();
         }
         public string CusID
         {
@@ -147,7 +149,7 @@ namespace SGM_Management
                 }
                 else
                 {
-                    MessageBox.Show(response.ResponseErrorMsg + " : " + response.ResponseErrorMsgDetail);
+                    frmMsg.ShowMsg(SGMText.SGM_ERROR, response.ResponseErrorMsg + " : " + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 }
             }
         }
@@ -192,7 +194,7 @@ namespace SGM_Management
                 else
                 {
                     errProvider.SetError(txtCardID, SGMText.CARD_GET_CARD_ERR);
-                    MessageBox.Show(SGMText.CARD_GET_CARD_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail);
+                    frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.CARD_GET_CARD_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                     bValidate = false;
                 }
             }
@@ -258,7 +260,7 @@ namespace SGM_Management
                 if (bHasErr)
                 {
                     m_iPriceGas92 = m_iPriceGas95 = m_iPriceGasDO = 0;
-                    MessageBox.Show(SGMText.SYS_ADMIN_GET_PRICE_ERR + "\n" + dataResult.ResponseErrorMsg + ":" + dataResult.ResponseErrorMsgDetail);
+                    frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.SYS_ADMIN_GET_PRICE_ERR + "\n" + dataResult.ResponseErrorMsg + ":" + dataResult.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 }
 
                 txtRechargeGasPrice.Text = SGMText.GAS_92_TEXT + " : " + m_iPriceGas92 + "đ - " + SGMText.GAS_95_TEXT + " : " + m_iPriceGas95 + "đ - " + SGMText.GAS_DO_TEXT + " : " + m_iPriceGasDO + "đ";

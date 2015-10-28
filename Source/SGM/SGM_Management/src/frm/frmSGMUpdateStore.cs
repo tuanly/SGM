@@ -14,11 +14,13 @@ namespace SGM_Management
     public partial class frmSGMUpdateStore : Form
     {
         private SGM_Service.ServiceSoapClient m_service = null;
+        private frmSGMMessage frmMsg = null;
 
         public frmSGMUpdateStore()
         {
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
+            frmMsg = new frmSGMMessage();
         }
 
         private SystemAdminDTO m_currentAdminDTO = null;
@@ -88,12 +90,12 @@ namespace SGM_Management
             DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
-                MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.ADMIN_UPDATE_TOTAL_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
                 DataToUIView();
             }
             else
             {
-                MessageBox.Show(dataResponse.ResponseErrorMsgDetail, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 m_currentAdminDTO.SysGas92Total = float.Parse(txtGas92Current.Text);
                 m_currentAdminDTO.SysGas95Total = float.Parse(txtGas95Current.Text);
                 m_currentAdminDTO.SysGasDOTotal = float.Parse(txtGasDOCurrent.Text);

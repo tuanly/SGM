@@ -18,9 +18,12 @@ namespace SGM_SaleGas
     public partial class frmSGMLogin : Form
     {
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
+        private frmSGMMessage frmMsg = null;
+
         public frmSGMLogin()
         {
             InitializeComponent();
+            frmMsg = new frmSGMMessage();
         }
 
         private void frmSGMLogin_Load(object sender, EventArgs e)
@@ -50,7 +53,7 @@ namespace SGM_SaleGas
                 this.Close();
             }
             else
-                MessageBox.Show(dataResponse.ResponseErrorMsg);
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
         }
 
         private bool ValidateLoginCode()

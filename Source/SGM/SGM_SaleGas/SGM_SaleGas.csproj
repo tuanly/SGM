@@ -79,6 +79,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\frm\frmSGMMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMMessage.Designer.cs">
+      <DependentUpon>frmSGMMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\frm\frmSGMSaleGas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="src\frm\frmSGMMessage.resx">
+      <DependentUpon>frmSGMMessage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\frm\frmSGMSaleGas.resx">
       <DependentUpon>frmSGMSaleGas.cs</DependentUpon>
     </EmbeddedResource>
@@ -171,6 +180,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\sgm_error.png" />
+    <None Include="Resources\sgm_info.png" />
+    <None Include="Resources\sgm_question.png" />
+    <None Include="Resources\sgm_warning.png" />
     <Content Include="sgm_icon.ico" />
   </ItemGroup>
   <ItemGroup>

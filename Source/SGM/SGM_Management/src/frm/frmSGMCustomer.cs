@@ -21,11 +21,12 @@ namespace SGM_Management
         private int m_iCurrentCustomerIndex = -1;
 
         private int m_iCurrentCardIndex = -1;
-
+        private frmSGMMessage frmMSg = null;
         public frmSGMCustomer()
         {
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
+            frmMSg = new frmSGMMessage();
         }
 
         private void UpdateStateControls(bool isEditMode)
@@ -98,8 +99,8 @@ namespace SGM_Management
                 string response = m_service.SGMManager_AddNewCustomer(jsRequest);
                 DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
                 if (dataResponse.ResponseCode != DataTransfer.RESPONSE_CODE_SUCCESS)
-                {
-                    MessageBox.Show(dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail);
+                {                    
+                    frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                     return;
                 }
                
@@ -133,8 +134,8 @@ namespace SGM_Management
                 }
                 else
                 {
-                    errProvider.SetError(txtCusID, SGMText.CUSTOMER_GET_CUS_ERR);
-                    MessageBox.Show(SGMText.CUSTOMER_GET_CUS_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail);
+                    errProvider.SetError(txtCusID, SGMText.CUSTOMER_GET_CUS_ERR);                  
+                    frmMSg.ShowMsg(SGMText.SGM_ERROR, SGMText.CUSTOMER_GET_CUS_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                     bValidate = false;
                 }
             }
@@ -302,18 +303,19 @@ namespace SGM_Management
 
                     string cusID = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString();
                     string cusName = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_NAME"].ToString();
-                    if (MessageBox.Show(SGMText.CUSTOMER_DEL_CUS_WARNING + "\n" + cusID + " : " + cusName, SGMText.CUSTOMER_DEL_CUS, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+
+                    if ((frmMSg.ShowMsg(SGMText.SGM_WARNING, SGMText.CUSTOMER_DEL_CUS_WARNING + "\n" + cusID + " : " + cusName, SGMMessageType.SGM_MESSAGE_TYPE_QUES) == SGMMessageResult.SGM_MESSAGE_RESULT_OK))
                     {
                         string jsResponse = m_service.SGMManager_DelCustomer(cusID);
                         DataTransfer response = JSonHelper.ConvertJSonToObject(jsResponse);
                         if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                         {
-                            MessageBox.Show(SGMText.CUSTOMER_DEL_CUS_SUCCESS);
+                            frmMSg.ShowMsg(SGMText.SGM_INFO, SGMText.CUSTOMER_DEL_CUS_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
                             LoadCustomerList();
                         }
                         else
                         {
-                            MessageBox.Show(response.ResponseErrorMsg + "\n" + response.ResponseErrorMsgDetail);
+                            frmMSg.ShowMsg(SGMText.SGM_ERROR, response.ResponseErrorMsg + "\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                         }
                     }                    
                 }
@@ -354,7 +356,7 @@ namespace SGM_Management
                     DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
                     if (dataResponse.ResponseCode != DataTransfer.RESPONSE_CODE_SUCCESS)
                     {
-                        MessageBox.Show(dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail);
+                        frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                         return;
                     }
                     m_stCusIDEdit = "";
@@ -432,7 +434,7 @@ namespace SGM_Management
                 }
                 else
                 {
-                    MessageBox.Show(dataResponse.ResponseErrorMsg + " :  " + dataResponse.ResponseErrorMsgDetail);
+                    frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + " :  " + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 }
             }
         }
@@ -453,7 +455,7 @@ namespace SGM_Management
                                  "    + Xăng 92 : " + m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["RECHARGE_GAS92_PRICE"] + "\n" +
                                  "    + Xăng 95 : " + m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["RECHARGE_GAS95_PRICE"] + "\n" +
                                  "    + Dầu DO : " + m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["RECHARGE_GASDO_PRICE"] + "\n";
-                MessageBox.Show(logInfo);
+                frmMSg.ShowMsg(SGMText.SGM_INFO, logInfo, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
             }
         }
     }

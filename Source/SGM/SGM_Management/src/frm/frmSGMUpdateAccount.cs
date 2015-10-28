@@ -16,9 +16,12 @@ namespace SGM_Management
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
 
         private SystemAdminDTO m_currentAdminDTO = null;
+
+        private frmSGMMessage frmMsg = null;
         public frmSGMUpdateAccount()
         {
             InitializeComponent();
+            frmMsg = new frmSGMMessage();
         }
 
         public void SetCurrentAdminDTO(SystemAdminDTO ad)
@@ -85,9 +88,9 @@ namespace SGM_Management
             String stResponse = service.SGMManager_UpdateAdminAccount(m_currentAdminDTO.SysAdminAccount, SYS_ADMIN, SYS_PWD);
             DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-                MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.SYS_ADMIN_CHANGE_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);                
             else
-                MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
         }
     }
 }

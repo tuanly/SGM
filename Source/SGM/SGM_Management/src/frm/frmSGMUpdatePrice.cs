@@ -14,6 +14,7 @@ namespace SGM_Management
     public partial class frmSGMUpdatePrice : Form
     {
         private SGM_Service.ServiceSoapClient m_service = null;
+        private frmSGMMessage frmMSg = null;
 
         private SystemAdminDTO m_currentAdminDTO = null;
         public void SetCurrentAdminDTO(SystemAdminDTO _ad)
@@ -25,6 +26,7 @@ namespace SGM_Management
         {
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
+            frmMSg = new frmSGMMessage();
         }
 
         private void frmSGMUpdatePrice_Load(object sender, EventArgs e)
@@ -86,9 +88,10 @@ namespace SGM_Management
             string response = m_service.SGMManager_UpdateSystemPrice(jsRequest);
             DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-                MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                frmMSg.ShowMsg(SGMText.SGM_INFO, SGMText.ADMIN_UPDATE_PRICE_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
             else
-                MessageBox.Show(dataResponse.ResponseErrorMsgDetail, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                
             
         }
     }

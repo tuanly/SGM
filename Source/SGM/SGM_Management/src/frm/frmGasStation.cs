@@ -16,10 +16,12 @@ namespace SGM_Management
         private DataSet m_dsGasStation;
         private int m_iCurrentGSIndex = -1;
         private string m_stGSIDEdit = "";
+		private frmSGMMessage frmMsg = null;
         public frmGasStation()
         {
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
+			frmMsg = new frmSGMMessage();
         }
 
         private void UpdateStateControls(bool isEditMode)
@@ -91,8 +93,8 @@ namespace SGM_Management
                 }
                 else
                 {
-                    errProvider.SetError(txtGSCode, SGMText.GASSTATION_GET_GS_ERR);
-                    MessageBox.Show(SGMText.CUSTOMER_GET_CUS_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail);
+                    errProvider.SetError(txtGSCode, SGMText.GASSTATION_GET_GS_ERR);                    
+					frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.CUSTOMER_GET_CUS_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                     bValidate = false;
                 }
             }
@@ -195,8 +197,8 @@ namespace SGM_Management
                 string response = m_service.SGMManager_AddNewGasStaion(jsRequest);
                 DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
                 if (dataResponse.ResponseCode != DataTransfer.RESPONSE_CODE_SUCCESS)
-                {
-                    MessageBox.Show(dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail);
+                {                    
+					frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                     return;
                 }
 
@@ -222,18 +224,19 @@ namespace SGM_Management
 
                 string gasID = m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTATION_ID"].ToString();
                 string gasName = m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTATION_NAME"].ToString();
-                if (MessageBox.Show(SGMText.CUSTOMER_DEL_CUS_WARNING + "\n" + gasID + " : " + gasName, SGMText.CUSTOMER_DEL_CUS, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+				
+                if (frmMsg.ShowMsg(SGMText.SGM_WARNING, SGMText.CUSTOMER_DEL_CUS_WARNING + "\n" + gasID + " : " + gasName, SGMMessageType.SGM_MESSAGE_TYPE_QUES) == SGMMessageResult.SGM_MESSAGE_RESULT_OK)
                 {
                     string jsResponse = m_service.SGMManager_DelGasStion(gasID);
                     DataTransfer response = JSonHelper.ConvertJSonToObject(jsResponse);
                     if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-                    {
-                        MessageBox.Show(SGMText.GASSTATION_DEL_SUCCESS);
+                    {                        
+                        frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GASSTATION_DEL_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
                         LoadGasStationList();
                     }
                     else
-                    {
-                        MessageBox.Show(response.ResponseErrorMsg + "\n" + response.ResponseErrorMsgDetail);
+                    {                        
+                        frmMsg.ShowMsg(SGMText.SGM_ERROR, response.ResponseErrorMsg + "\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                     }
                 }
             }
@@ -269,8 +272,8 @@ namespace SGM_Management
                     string response = m_service.SGMManager_UpdateGasStation(jsRequest, m_stGSIDEdit);
                     DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
                     if (dataResponse.ResponseCode != DataTransfer.RESPONSE_CODE_SUCCESS)
-                    {
-                        MessageBox.Show(dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail);
+                    {                        
+                        frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                         return;
                     }
                     m_stGSIDEdit = "";

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace SGM_Management
+namespace SGM_SaleGas
 {
     public enum SGMMessageType
         {

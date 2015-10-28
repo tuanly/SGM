@@ -17,10 +17,12 @@ namespace SGM_SaleGas
     {
         private string m_stSettingFile = "\\SGMSetting.xml";
         private string m_stCurrentPortName = "";
+        private frmSGMMessage frmMsg = null;
 
         public frmSGMConfig()
         {
             InitializeComponent();
+            frmMsg = new frmSGMMessage();
         }
 
         private void frmSGMConfig_Load(object sender, EventArgs e)
@@ -40,7 +42,7 @@ namespace SGM_SaleGas
                         }
                         else
                         {
-                            MessageBox.Show(SGMText.FRM_CONFIG_CANT_CONNECT_READER);                            
+                            frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.FRM_CONFIG_CANT_CONNECT_READER, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                         }
                     }
                 }
@@ -55,12 +57,12 @@ namespace SGM_SaleGas
             if (InitComPort())
             {
                 if (saveConfig(m_stSettingFile))
-                    MessageBox.Show(SGMText.FRM_CONFIG_SAVE_CONFIG_SUCCESS);
+                    frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.FRM_CONFIG_SAVE_CONFIG_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
                 else
-                    MessageBox.Show(SGMText.FRM_CONFIG_SAVE_CONFIG_ERR);
+                    frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.FRM_CONFIG_SAVE_CONFIG_ERR, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
             }
             else
-                MessageBox.Show(SGMText.FRM_CONFIG_CANT_CONNECT_READER);
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.FRM_CONFIG_CANT_CONNECT_READER, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
         }
 
         private void loadPortsName()
@@ -109,7 +111,7 @@ namespace SGM_SaleGas
             }
             catch (Exception ex)
             {
-                MessageBox.Show(SGMText.FRM_CONFIG_SAVE_CONFIG_ERR + "\n" + ex.Message + " : " + ex.StackTrace);
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.FRM_CONFIG_SAVE_CONFIG_ERR + "\n" + ex.Message + " : " + ex.StackTrace, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
             }   
             flag = true;       
             return flag;

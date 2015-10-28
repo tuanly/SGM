@@ -6,6 +6,11 @@ namespace SGM_Core.Utils
 {
     public class SGMText
     {
+        public static string SGM_ERROR = "Lỗi";
+        public static string SGM_WARNING = "Lưu ý";
+        public static string SGM_QUESTION = "Xác nhận";
+        public static string SGM_INFO = "Thông báo";
+
         public static string GAS_STATION_LOGON_ID_INVALID = "Lỗi, ID đăng nhập không hợp lệ!";
         public static string GAS_STATION_LOGON_ERR = "Lỗi, Không thể đăng nhập hệ thống!";
         public static string GAS_STATION_LOGON_UPDATE_MACADR_ERR = "Lỗi, Không thể cập nhật Mac Address!";

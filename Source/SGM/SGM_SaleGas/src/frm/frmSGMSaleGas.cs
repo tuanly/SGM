@@ -15,7 +15,7 @@ namespace SGM_SaleGas
     public partial class frmSGMSaleGas : Form
     {
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
-        
+        private frmSGMMessage frmMsg = null;
         CardDTO _cardDTO;
         RechargeDTO _rechargeDTO;
         JSonHelper m_jsHelper;
@@ -35,6 +35,7 @@ namespace SGM_SaleGas
         {
             InitializeComponent();
             m_jsHelper = new JSonHelper();
+            frmMsg = new frmSGMMessage();
         }
 
         private void frmSGMSaleGas_Load(object sender, EventArgs e)
@@ -168,7 +169,7 @@ namespace SGM_SaleGas
                         updateGasChoice(rbGas92.Checked ? gasTransactType.gas92 : rbGas95.Checked ? gasTransactType.gas95 : gasTransactType.gasDO);
                         if (_cardDTO.CardUnlockState == false)
                         {
-                            MessageBox.Show(SGMText.GAS_CARD_LOCK, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GAS_CARD_LOCK, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
                             _cardDTO = null;
                             _rechargeDTO = null;
                             EnableTransaction(false, true);
@@ -182,7 +183,7 @@ namespace SGM_SaleGas
             }
             else
             {
-                MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 EnableTransaction(false, true);
             }
         }
@@ -216,14 +217,14 @@ namespace SGM_SaleGas
             DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
-                MessageBox.Show(dataResponse.ResponseErrorMsg, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GAS_BUYING_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
                 _cardDTO.CardRemainingMoney = _cardDTO.CardRemainingMoney - _moneyBuying;
                 txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
                 calculatePay();
             }
             else
             {
-                MessageBox.Show(dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, "SGM", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
             }
         }
 

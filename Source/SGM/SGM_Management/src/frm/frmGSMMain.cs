@@ -22,7 +22,7 @@ namespace SGM_Management
             InitializeComponent();
             bFromResizing = false;
             frmSGMMessage msg = new frmSGMMessage();
-            SGMMessageResult a = msg.ShowMsg("test title", "test msg", SGMMessageType.SGM_MESSAGE_TYPE_QUES);
+            //SGMMessageResult a = msg.ShowMsg("test title", "test msg", SGMMessageType.SGM_MESSAGE_TYPE_WARNING);
            
         }
 
