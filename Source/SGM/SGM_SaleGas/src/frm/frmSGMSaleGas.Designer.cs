@@ -371,6 +371,7 @@
             this.Name = "frmSGMSaleGas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SGM";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSGMSaleGas_FormClosing);
             this.Load += new System.EventHandler(this.frmSGMSaleGas_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

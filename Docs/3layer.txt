@@ -1,9 +1,8 @@
-C?u tr�c m� h�nh 3 class:
-+ GUI ( presentation layer): nh?n d? li?u ngu?i d�ng, ki?m tra t�nh h?p l?, chuy?n cho BLL
-				nh?n d? li?u t? BLL, hi?n th? cho ngu?i d�ng
-+ BLL (bussiness logic layer): nh?n v� g?i d? li?u t? GUI, chuy?n d?i d? li?u sang DTO d? g?i sang DAL truy xu?t db.
-+ DAL (data access layer): class data access select,insert,update data transfer v�o database
-DTO (data transfer object) class data transfer ~ table
+cấu trúc mô hình 3 tầng:
+- Presentation layer (GUI - graphic user interface): giao diện người dùng, nhận dữ liệu từ người dùng truyền cho BLL xử lý, nhận dữ liệu đã xử lý từ BLL hiển thị cho người dùng xem.
+- Bussiness logic layer (BLL): nhận dữ liệu từ GUI, xử lý -> chuyển cho DAL để truy xuất database. Nhận kết quả từ DAL, trả về cho GUI.
+- Data access layer (DAL): nhận yêu cầu từ BLL, truy xuất database, trả kết quả lại cho BLL -> mỗi class DAL chứa các hàm truy xuất csdl (select, update, insert, delete) đến 1 hay nhiều table trong csdl.
+Ngoài ra, còn có DTO (data transfer object): class chứa dữ liệu để truyền qua lại giữa các layer -> mỗi class DTO ~ 1 table trong csdl.
 
 
 Service b�n xang:

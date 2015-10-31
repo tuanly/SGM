@@ -52,7 +52,7 @@
             this.txtLoginCode.Name = "txtLoginCode";
             this.txtLoginCode.Size = new System.Drawing.Size(216, 20);
             this.txtLoginCode.TabIndex = 1;
-            this.txtLoginCode.Text = "000003";
+            this.txtLoginCode.Text = "000001";
             // 
             // btnLogin
             // 
@@ -83,6 +83,7 @@
             this.Name = "frmSGMLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SGM - Đăng Nhập";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSGMLogin_FormClosing);
             this.Load += new System.EventHandler(this.frmSGMLogin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

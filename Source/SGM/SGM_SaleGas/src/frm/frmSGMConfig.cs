@@ -15,7 +15,7 @@ namespace SGM_SaleGas
 {
     public partial class frmSGMConfig : Form
     {
-        private string m_stSettingFile = "\\SGMSetting.xml";
+        private static string m_stSettingFile = "\\SGMSetting.xml";
         private string m_stCurrentPortName = "";
         private frmSGMMessage frmMsg = null;
 
@@ -27,8 +27,12 @@ namespace SGM_SaleGas
 
         private void frmSGMConfig_Load(object sender, EventArgs e)
         {
+            if (SGMConfig.Flag_DisableReader)
+            {
+                openLoginFrm();
+            }
             m_stSettingFile = Application.StartupPath + m_stSettingFile;
-            loadConfig(m_stSettingFile);
+            m_stCurrentPortName = RFIDReader.LoadConfig(m_stSettingFile);
             loadPortsName();
             if (!m_stCurrentPortName.Equals(""))
             {
@@ -38,7 +42,7 @@ namespace SGM_SaleGas
                     {
                         if (InitComPort())
                         {
-                            //Close();
+                            openLoginFrm();
                         }
                         else
                         {
@@ -53,26 +57,33 @@ namespace SGM_SaleGas
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            m_stCurrentPortName = cboPorts.Text;
             if (InitComPort())
             {
-                if (saveConfig(m_stSettingFile))
+                if (RFIDReader.SaveConfig(m_stSettingFile, cboPorts.Text))
+                {
                     frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.FRM_CONFIG_SAVE_CONFIG_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                    this.Hide();
+                    new frmSGMLogin().ShowDialog();
+                    this.Close();
+                }
                 else
                     frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.FRM_CONFIG_SAVE_CONFIG_ERR, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
             }
             else
                 frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.FRM_CONFIG_CANT_CONNECT_READER, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+
         }
 
         private void loadPortsName()
         {
+            cboPorts.Items.Clear();
             string[] arrComPortNames = null;
             int index = -1;
             string stComPortName = null;
 
             //Com Ports
-            arrComPortNames = SerialPort.GetPortNames();
+            arrComPortNames = RFIDReader.GetPortsName();
             if (arrComPortNames.Length > 0)
             {
                 do
@@ -95,86 +106,24 @@ namespace SGM_SaleGas
             
         }
 
-        public bool saveConfig(string stFileName)
-        {
-            UnicodeEncoding unicodeEncoding = new UnicodeEncoding();
-            bool flag;
-            try
-            {
-                XmlTextWriter xmlTextWriter = new XmlTextWriter(stFileName, (Encoding)unicodeEncoding);
-                xmlTextWriter.WriteRaw("<?xml version=\"1.0\"?>");
-                xmlTextWriter.WriteComment("SGM - Version 1.0");
-                ((XmlWriter)xmlTextWriter).WriteStartElement("Config");
-                xmlTextWriter.WriteElementString("PortName", cboPorts.Text);                
-                xmlTextWriter.WriteEndElement();
-                xmlTextWriter.Close();
-            }
-            catch (Exception ex)
-            {
-                frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.FRM_CONFIG_SAVE_CONFIG_ERR + "\n" + ex.Message + " : " + ex.StackTrace, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-            }   
-            flag = true;       
-            return flag;
-        }
-
-        public bool loadConfig(string stFileName)
-        {
-            XmlDocument xmlDocument = new XmlDocument();
-            UnicodeEncoding unicodeEncoding = new UnicodeEncoding();            
-            bool flag = false;
-            try
-            {
-                xmlDocument.Load(stFileName);
-                XPathNodeIterator xpathNodeIterator = xmlDocument.CreateNavigator().Select("Config");            
-                if (xpathNodeIterator.MoveNext())
-                {
-                    xpathNodeIterator.Current.MoveToFirstAttribute();
-                    do
-                    {
-                        xpathNodeIterator.Current.MoveToFirstChild();
-                        do
-                        {
-                            string name = xpathNodeIterator.Current.Name;
-                            if (name.Equals("PortName"))
-                            {
-                                m_stCurrentPortName = xpathNodeIterator.Current.Value;
-                                flag = true;
-                            }
-                        }
-                        while (xpathNodeIterator.Current.MoveToNext());
-                    }
-                    while (xpathNodeIterator.Current.MoveToNextAttribute());
-                }   
-            }
-            catch (Exception )
-            {
-                //MessageBox.Show(SGMText.FRM_CONFIG_LOAD_CONFIG_ERR + "\n" + ex.Message + " : " + ex.StackTrace);
-            }
-            return flag;
-        }
+        
 
         public bool InitComPort()
         {
-            try
-            {
-                Program.ReaderPort = new SerialPort(m_stCurrentPortName);
+            Program.ReaderPort = RFIDReader.InitComPort(m_stCurrentPortName);
+            return (Program.ReaderPort != null);
+        }
 
-                Program.ReaderPort.BaudRate = 9600;
-                Program.ReaderPort.Parity = Parity.None;
-                Program.ReaderPort.StopBits = StopBits.One;
-                Program.ReaderPort.DataBits = 8;
-                Program.ReaderPort.Handshake = Handshake.None;
-                Program.ReaderPort.RtsEnable = true;
+        private void openLoginFrm()
+        {
+            this.Hide();
+            new frmSGMLogin().ShowDialog();
+            this.Close();
+        }
 
-                //Program.ReaderPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
-
-                Program.ReaderPort.Open();
-            }
-            catch (Exception )
-            {
-                return false;
-            }
-            return true;
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            loadPortsName();
         }
     }
 }

@@ -17,6 +17,7 @@ namespace SGM_Core.Utils
         public static string GAS_STATION_CARD_ID_NOT_EXIST = "Lỗi, Thẻ không tồn tại!";
         public static string GAS_STATION_RECHARGE_ID_NOT_EXIST = "Lỗi, Recharge id không tồn tại!";
 
+
         public static string FRM_CONFIG_SAVE_CONFIG_ERR = "Lỗi! Không thể lưu thông tin cấu hình.";
         public static string FRM_CONFIG_LOAD_CONFIG_ERR = "Lỗi! Không thể lấy thông tin cấu hình.";
         public static string FRM_CONFIG_CANT_CONNECT_READER = "Lỗi! Không thể kết nối với máy quét thẻ.";
@@ -79,5 +80,7 @@ namespace SGM_Core.Utils
 
         public static string REPORT_NO_DATA = "Không có dữ liệu!";
         public static string REPORT_INPUT_DATE_ERROR = "Chọn khoảng thời gian ko hợp lệ!";
+
+        public static string SALEGAS_LOGIN_INPUT_ERROR = "Lỗi, Chưa nhập mã đăng nhập!";
     }
 }

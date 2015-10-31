@@ -15,7 +15,7 @@ namespace SGM_SaleGas
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmSGMLogin());
+            Application.Run(new frmSGMConfig());
         }
         public static SerialPort ReaderPort;
 

@@ -19,7 +19,7 @@ namespace SGM_SaleGas
         CardDTO _cardDTO;
         RechargeDTO _rechargeDTO;
         JSonHelper m_jsHelper;
-
+        SerialDataReceivedEventHandler serailReaderHandler = null;
         private enum gasTransactType
         {
             gas92,
@@ -40,9 +40,9 @@ namespace SGM_SaleGas
 
         private void frmSGMSaleGas_Load(object sender, EventArgs e)
         {
-            if (Program.ReaderPort != null)
-                Program.ReaderPort.DataReceived += new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
-            
+
+            serailReaderHandler = new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
+            RFIDReader.RegistryReaderListener(Program.ReaderPort, serailReaderHandler);
             _cardDTO = null;
             _rechargeDTO = null;
 
@@ -197,8 +197,17 @@ namespace SGM_SaleGas
                         object sender,
                         SerialDataReceivedEventArgs e)
         {
-            SerialPort sp = (SerialPort)sender;
-            String readData = sp.ReadExisting();
+            
+            try
+            {
+                SerialPort sp = (SerialPort)sender;
+
+                txtCardID.Invoke(new MethodInvoker(delegate { txtCardID.Text = sp.ReadLine(); }));
+            }
+            catch (TimeoutException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnBuy_Click(object sender, EventArgs e)
@@ -231,6 +240,11 @@ namespace SGM_SaleGas
         private void txtMoney_TextChanged(object sender, EventArgs e)
         {
             calculatePay();
+        }
+
+        private void frmSGMSaleGas_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            RFIDReader.UnRegistryReaderListener(Program.ReaderPort, serailReaderHandler);
         }
     }
 }

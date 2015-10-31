@@ -19,6 +19,7 @@ namespace SGM_SaleGas
     {
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
         private frmSGMMessage frmMsg = null;
+        private SerialDataReceivedEventHandler serialDatahandler = null;
 
         public frmSGMLogin()
         {
@@ -28,9 +29,9 @@ namespace SGM_SaleGas
 
         private void frmSGMLogin_Load(object sender, EventArgs e)
         {
-
-            if (Program.ReaderPort != null)
-                Program.ReaderPort.DataReceived += new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
+            serialDatahandler = new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
+            RFIDReader.RegistryReaderListener(Program.ReaderPort, serialDatahandler);
+            
             errorProvider.SetIconAlignment(txtLoginCode, ErrorIconAlignment.TopRight);
         }
 
@@ -49,6 +50,8 @@ namespace SGM_SaleGas
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
                 this.Hide();
+                if (Program.ReaderPort != null)
+                    Program.ReaderPort.DataReceived -= serialDatahandler;
                 new frmSGMSaleGas().ShowDialog();
                 this.Close();
             }
@@ -60,7 +63,7 @@ namespace SGM_SaleGas
         {
             if (string.IsNullOrEmpty(txtLoginCode.Text))
             {
-                errorProvider.SetError(txtLoginCode, "Mã cây xăng ?");
+                errorProvider.SetError(txtLoginCode, SGMText.SALEGAS_LOGIN_INPUT_ERROR);
             }
             //else if (!Regex.IsMatch(txtLoginCode.Text, @"[A-Za-z][A-Za-z0-9]{2,7}"))
             //{
@@ -93,8 +96,24 @@ namespace SGM_SaleGas
                         object sender,
                         SerialDataReceivedEventArgs e)
         {
-            SerialPort sp = (SerialPort)sender;           
-            txtLoginCode.Text = sp.ReadExisting();
+            try
+            {
+                SerialPort sp = (SerialPort)sender;           
+                
+                txtLoginCode.Invoke(new MethodInvoker(delegate { txtLoginCode.Text = sp.ReadLine(); }));
+            }
+            catch (TimeoutException)
+            {
+            }
+        
+           
+
+        }
+
+        private void frmSGMLogin_FormClosing(object sender, FormClosingEventArgs e)
+        {
+           
+            RFIDReader.UnRegistryReaderListener(Program.ReaderPort, serialDatahandler);
         }
     }
 }

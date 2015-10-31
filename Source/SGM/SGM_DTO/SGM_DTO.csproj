@@ -49,6 +49,8 @@
     <Compile Include="DTO\RechargeDTO.cs" />
     <Compile Include="DTO\SaleGasDTO.cs" />
     <Compile Include="DTO\SystemAdminDTO.cs" />
+    <Compile Include="Utils\RFIDReader.cs" />
+    <Compile Include="Utils\SGMConfig.cs" />
     <Compile Include="Utils\SGMText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
