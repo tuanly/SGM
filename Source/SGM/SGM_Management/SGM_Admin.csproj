@@ -57,6 +57,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="src\frm\frmSGMConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMConfig.Designer.cs">
+      <DependentUpon>frmSGMConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\frm\frmSGMGasStation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +133,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="src\frm\frmSGMConfig.resx">
+      <DependentUpon>frmSGMConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\frm\frmSGMGasStation.resx">
       <DependentUpon>frmSGMGasStation.cs</DependentUpon>
     </EmbeddedResource>

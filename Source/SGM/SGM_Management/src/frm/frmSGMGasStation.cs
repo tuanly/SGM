@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
+using System.IO.Ports;
 
 namespace SGM_Management
 {
@@ -17,11 +18,14 @@ namespace SGM_Management
         private int m_iCurrentGSIndex = -1;
         private string m_stGSIDEdit = "";
 		private frmSGMMessage frmMsg = null;
+        private SerialDataReceivedEventHandler serialDatahandler = null;
         public frmGasStation()
         {
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
 			frmMsg = new frmSGMMessage();
+            serialDatahandler = new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
+            RFIDReader.RegistryReaderListener(Program.ReaderPort, serialDatahandler);
         }
 
         private void UpdateStateControls(bool isEditMode)
@@ -283,6 +287,30 @@ namespace SGM_Management
                     UpdateStateControls(false);
                 }
             }
+        }
+        private void CardReaderReceivedHandler(
+                       object sender,
+                       SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                SerialPort sp = (SerialPort)sender;
+                if (txtGSCode.Enabled == true)
+                {
+                    txtGSCode.Invoke(new MethodInvoker(delegate { txtGSCode.Text = sp.ReadLine(); }));
+                }
+            }
+            catch (TimeoutException)
+            {
+            }
+
+
+
+        }
+
+        private void frmGasStation_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            RFIDReader.UnRegistryReaderListener(Program.ReaderPort, serialDatahandler);
         }
     }
 }

@@ -25,12 +25,13 @@ namespace SGM_SaleGas
         {
             InitializeComponent();
             frmMsg = new frmSGMMessage();
+            serialDatahandler = new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
+            RFIDReader.RegistryReaderListener(Program.ReaderPort, serialDatahandler);
         }
 
         private void frmSGMLogin_Load(object sender, EventArgs e)
         {
-            serialDatahandler = new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
-            RFIDReader.RegistryReaderListener(Program.ReaderPort, serialDatahandler);
+           
             
             errorProvider.SetIconAlignment(txtLoginCode, ErrorIconAlignment.TopRight);
         }

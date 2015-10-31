@@ -199,6 +199,7 @@
             this.Name = "frmSGMRechargeCard";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SGM - Mua/Nạp Thẻ";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSGMRechargeCard_FormClosing);
             this.Load += new System.EventHandler(this.frmSGMRechargeCard_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

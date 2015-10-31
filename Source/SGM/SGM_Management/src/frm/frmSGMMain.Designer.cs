@@ -31,12 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGSMMain));
             this.panelMain = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnExit = new System.Windows.Forms.Button();
             this.btnGasStation = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnUpdatePrice = new System.Windows.Forms.Button();
             this.btnUpdateStore = new System.Windows.Forms.Button();
             this.btnCustomer = new System.Windows.Forms.Button();
-            this.btnExit = new System.Windows.Forms.Button();
+            this.btnConfig = new System.Windows.Forms.Button();
             this.btnAccount = new System.Windows.Forms.Button();
             this.btnReport = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.panelMain)).BeginInit();
@@ -70,19 +71,20 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.btnExit, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.btnGasStation, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnHome, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnUpdatePrice, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnUpdateStore, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.btnCustomer, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnExit, 0, 7);
+            this.tableLayoutPanel1.Controls.Add(this.btnConfig, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.btnAccount, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.btnReport, 0, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 8;
+            this.tableLayoutPanel1.RowCount = 9;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
@@ -91,8 +93,26 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(244, 396);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(244, 453);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // btnExit
+            // 
+            this.btnExit.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnExit.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.ForeColor = System.Drawing.Color.DarkGreen;
+            this.btnExit.Location = new System.Drawing.Point(0, 400);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(0);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(244, 50);
+            this.btnExit.TabIndex = 10;
+            this.btnExit.Text = "Thoát >>";
+            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExit.UseVisualStyleBackColor = false;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnGasStation
             // 
@@ -199,26 +219,26 @@
             this.btnCustomer.MouseLeave += new System.EventHandler(this.btnCustomer_MouseLeave);
             this.btnCustomer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnCustomer_MouseMove);
             // 
-            // btnExit
+            // btnConfig
             // 
-            this.btnExit.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnExit.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnExit.Location = new System.Drawing.Point(0, 350);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(0);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(244, 44);
-            this.btnExit.TabIndex = 8;
-            this.btnExit.Text = "Thoát >>";
-            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click_1);
-            this.btnExit.Enter += new System.EventHandler(this.btnExit_Enter);
-            this.btnExit.Leave += new System.EventHandler(this.btnExit_Leave);
-            this.btnExit.MouseLeave += new System.EventHandler(this.btnExit_MouseLeave);
-            this.btnExit.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnExit_MouseMove);
+            this.btnConfig.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnConfig.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfig.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfig.ForeColor = System.Drawing.Color.DarkGreen;
+            this.btnConfig.Location = new System.Drawing.Point(0, 350);
+            this.btnConfig.Margin = new System.Windows.Forms.Padding(0);
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.Size = new System.Drawing.Size(244, 50);
+            this.btnConfig.TabIndex = 8;
+            this.btnConfig.Text = "Cấu Hình >>";
+            this.btnConfig.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnConfig.UseVisualStyleBackColor = false;
+            this.btnConfig.Click += new System.EventHandler(this.btnExit_Click_1);
+            this.btnConfig.Enter += new System.EventHandler(this.btnExit_Enter);
+            this.btnConfig.Leave += new System.EventHandler(this.btnExit_Leave);
+            this.btnConfig.MouseLeave += new System.EventHandler(this.btnExit_MouseLeave);
+            this.btnConfig.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnExit_MouseMove);
             // 
             // btnAccount
             // 
@@ -294,7 +314,8 @@
         private System.Windows.Forms.Button btnUpdateStore;
         private System.Windows.Forms.Button btnAccount;
         private System.Windows.Forms.Button btnCustomer;
-        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnConfig;
         private System.Windows.Forms.Button btnReport;
+        private System.Windows.Forms.Button btnExit;
     }
 }

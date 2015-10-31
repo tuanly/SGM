@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
-
+using System.IO.Ports;
 namespace SGM_Management
 {
     public partial class frmSGMRechargeCard : Form
@@ -24,7 +24,7 @@ namespace SGM_Management
 
         private SGM_Service.ServiceSoapClient m_service;
         private frmSGMMessage frmMsg = null;
-
+        private SerialDataReceivedEventHandler serialDatahandler = null;
         public frmSGMRechargeCard()
         {
             InitializeComponent();
@@ -37,6 +37,8 @@ namespace SGM_Management
             m_iPriceGasDO = 0;
             m_service = new SGM_Service.ServiceSoapClient();
             frmMsg = new frmSGMMessage();
+            serialDatahandler = new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
+            RFIDReader.RegistryReaderListener(Program.ReaderPort, serialDatahandler);
         }
         public string CusID
         {
@@ -264,6 +266,30 @@ namespace SGM_Management
                 }
 
                 txtRechargeGasPrice.Text = SGMText.GAS_92_TEXT + " : " + m_iPriceGas92 + "đ - " + SGMText.GAS_95_TEXT + " : " + m_iPriceGas95 + "đ - " + SGMText.GAS_DO_TEXT + " : " + m_iPriceGasDO + "đ";
+        }
+        private void CardReaderReceivedHandler(
+                       object sender,
+                       SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                SerialPort sp = (SerialPort)sender;
+                if (txtCardID.Enabled == true)
+                {
+                    txtCardID.Invoke(new MethodInvoker(delegate { txtCardID.Text = sp.ReadLine(); }));
+                }
+            }
+            catch (TimeoutException)
+            {
+            }
+
+
+
+        }
+
+        private void frmSGMRechargeCard_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            RFIDReader.UnRegistryReaderListener(Program.ReaderPort, serialDatahandler);
         }
 
     }

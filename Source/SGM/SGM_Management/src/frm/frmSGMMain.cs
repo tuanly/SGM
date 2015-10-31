@@ -16,7 +16,8 @@ namespace SGM_Management
         private Color BUTTON_COLOR_FOCUS = Color.PowderBlue;
         private Color BUTTON_COLOR_NORMAL = Color.DarkSeaGreen;
         private Color BUTTON_COLOR_SELECTED = Color.SpringGreen;
-        private Button m_btnCurrenButton;
+        private Button m_btnCurrenButton = null;
+        private Form m_frmCurrent = null;
         public frmGSMMain()
         {
             InitializeComponent();
@@ -30,7 +31,16 @@ namespace SGM_Management
         private void frmGSMMain_Load(object sender, EventArgs e)
         {
             m_btnCurrenButton = btnHome;
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;           
+            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
+            frmSGMConfig frmConfig = new frmSGMConfig();
+            showFrom(frmConfig, btnConfig);
+            if (frmSGMConfig.IsReaderConnected)
+            {
+                frmConfig.Close();
+                m_btnCurrenButton.BackColor = BUTTON_COLOR_NORMAL;
+                m_btnCurrenButton = btnHome;
+                m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -45,8 +55,14 @@ namespace SGM_Management
             }
         }
 
-        private void showFrom(Form frm)
+        private void showFrom(Form frm, Button button)
         {
+            if (m_frmCurrent != null)
+                m_frmCurrent.Close();
+            m_frmCurrent = frm;
+            m_btnCurrenButton.BackColor = BUTTON_COLOR_NORMAL;
+            m_btnCurrenButton = button;
+            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
             this.m_frmCurrentForm = frm;
             this.panelMain.Panel2.AutoScroll = true;
             frm.TopLevel = false;
@@ -84,61 +100,40 @@ namespace SGM_Management
         }
 
         private void btnCustomer_Click(object sender, EventArgs e)
-        {
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_NORMAL;
-            m_btnCurrenButton = btnCustomer;
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-            showFrom(new frmSGMCustomer());
+        {           
+            showFrom(new frmSGMCustomer(), btnCustomer);
         }
 
         private void btnGasStation_Click(object sender, EventArgs e)
-        {
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_NORMAL;
-            m_btnCurrenButton = btnGasStation;
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-            showFrom(new frmGasStation());
+        {            
+            showFrom(new frmGasStation(), btnGasStation);
         }
 
         private void btnUpdatePrice_Click(object sender, EventArgs e)
         {
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_NORMAL;
-            m_btnCurrenButton = btnUpdatePrice;
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-            showFrom(new frmSGMUpdatePrice());
+            showFrom(new frmSGMUpdatePrice(), btnUpdatePrice);
         }
 
         private void btnUpdateStore_Click(object sender, EventArgs e)
         {
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_NORMAL;
-            m_btnCurrenButton = btnUpdateStore;
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-            showFrom(new frmSGMUpdateStore());
+            showFrom(new frmSGMUpdateStore(), btnUpdateStore);
         }
 
         private void btnAccount_Click(object sender, EventArgs e)
         {
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_NORMAL;
-            m_btnCurrenButton = btnAccount;
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-            showFrom(new frmSGMUpdateAccount());
+            showFrom(new frmSGMUpdateAccount(), btnAccount);
         }
 
         
 
         private void btnReport_Click(object sender, EventArgs e)
         {
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_NORMAL;
-            m_btnCurrenButton = btnReport;
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-            showFrom(new frmSGMReport());
+            showFrom(new frmSGMReport(), btnReport);
         }
 
         private void btnExit_Click_1(object sender, EventArgs e)
         {
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_NORMAL;
-            m_btnCurrenButton = btnExit;
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-            this.Close();
+            showFrom(new frmSGMConfig(), btnConfig);
         }
 
         private void btnGasStation_Enter(object sender, EventArgs e)
@@ -329,28 +324,36 @@ namespace SGM_Management
 
         private void btnExit_Leave(object sender, EventArgs e)
         {
-            if (m_btnCurrenButton != btnExit)
-                btnExit.BackColor = BUTTON_COLOR_NORMAL;
+            if (m_btnCurrenButton != btnConfig)
+                btnConfig.BackColor = BUTTON_COLOR_NORMAL;
             //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
         }
 
         private void btnExit_MouseLeave(object sender, EventArgs e)
         {
-            if (m_btnCurrenButton != btnExit)
-                btnExit.BackColor = BUTTON_COLOR_NORMAL;
+            if (m_btnCurrenButton != btnConfig)
+                btnConfig.BackColor = BUTTON_COLOR_NORMAL;
             //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
         }
 
         private void btnExit_Enter(object sender, EventArgs e)
         {
-            if (m_btnCurrenButton != btnExit)
-                btnExit.BackColor = BUTTON_COLOR_FOCUS;
+            if (m_btnCurrenButton != btnConfig)
+                btnConfig.BackColor = BUTTON_COLOR_FOCUS;
         }
 
         private void btnExit_MouseMove(object sender, MouseEventArgs e)
         {
-            if (m_btnCurrenButton != btnExit)
-                btnExit.BackColor = BUTTON_COLOR_FOCUS;
+            if (m_btnCurrenButton != btnConfig)
+                btnConfig.BackColor = BUTTON_COLOR_FOCUS;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            m_btnCurrenButton.BackColor = BUTTON_COLOR_NORMAL;
+            m_btnCurrenButton = btnExit;
+            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
+            this.Close();
         }
         
     }

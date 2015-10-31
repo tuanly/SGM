@@ -8,6 +8,6 @@ namespace SGM_Core.Utils
     public class SGMConfig
     {
         public static bool Flag_Debug = false;
-        public static bool Flag_DisableReader = true;
+        public static bool Flag_DisableReader = false;
     }
 }

@@ -11,26 +11,23 @@ using System.Xml.XPath;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
 
-namespace SGM_SaleGas
+namespace SGM_Management
 {
     public partial class frmSGMConfig : Form
     {
         private static string m_stSettingFile = "\\SGMSetting.xml";
         private string m_stCurrentPortName = "";
         private frmSGMMessage frmMsg = null;
-
+        public static bool IsReaderConnected = false;
         public frmSGMConfig()
         {
             InitializeComponent();
             frmMsg = new frmSGMMessage();
+            IsReaderConnected = false;
         }
 
         private void frmSGMConfig_Load(object sender, EventArgs e)
-        {
-            if (SGMConfig.Flag_DisableReader)
-            {
-                openLoginFrm();
-            }
+        {            
             m_stSettingFile = Application.StartupPath + m_stSettingFile;
             m_stCurrentPortName = RFIDReader.LoadConfig(m_stSettingFile);
             loadPortsName();
@@ -42,7 +39,7 @@ namespace SGM_SaleGas
                     {
                         if (InitComPort())
                         {
-                            openLoginFrm();
+                            IsReaderConnected = true;
                         }
                         else
                         {
@@ -63,7 +60,7 @@ namespace SGM_SaleGas
                 if (RFIDReader.SaveConfig(m_stSettingFile, cboPorts.Text))
                 {
                     frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.FRM_CONFIG_SAVE_CONFIG_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
-                    openLoginFrm();
+                    
                 }
                 else
                     frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.FRM_CONFIG_SAVE_CONFIG_ERR, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
@@ -112,12 +109,7 @@ namespace SGM_SaleGas
             return (Program.ReaderPort != null);
         }
 
-        private void openLoginFrm()
-        {
-            this.Hide();
-            new frmSGMLogin().ShowDialog();
-            this.Close();
-        }
+        
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {

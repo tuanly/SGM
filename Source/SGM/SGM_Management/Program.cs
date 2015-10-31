@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO.Ports;
 using System.Windows.Forms;
 
 namespace SGM_Management
@@ -17,5 +17,6 @@ namespace SGM_Management
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmGSMMain());
         }
+        public static SerialPort ReaderPort;
     }
 }
