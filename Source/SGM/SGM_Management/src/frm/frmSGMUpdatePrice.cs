@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
+using SGM_WaitingIdicator;
+
 
 namespace SGM_Management
 {
@@ -15,6 +17,7 @@ namespace SGM_Management
     {
         private SGM_Service.ServiceSoapClient m_service = null;
         private frmSGMMessage frmMSg = null;
+        private WaitingForm waitingFrm;
 
         private SystemAdminDTO m_currentAdminDTO = null;
         public void SetCurrentAdminDTO(SystemAdminDTO _ad)
@@ -27,6 +30,7 @@ namespace SGM_Management
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
             frmMSg = new frmSGMMessage();
+            waitingFrm = new WaitingForm(this);
         }
 
         private void frmSGMUpdatePrice_Load(object sender, EventArgs e)
@@ -34,12 +38,9 @@ namespace SGM_Management
             dateTimePicker1.Format = DateTimePickerFormat.Custom;
             dateTimePicker1.CustomFormat = "dd/MM/yyyy hh:mm:ss tt";
 
-            if (m_currentAdminDTO != null)
-            {
-                txtGas92CurrentPrice.Text = m_currentAdminDTO.SysGas92CurrentPrice.ToString();
-                txtGas95CurrentPrice.Text = m_currentAdminDTO.SysGas95CurrentPrice.ToString();
-                txtGasDOCurrentPrice.Text = m_currentAdminDTO.SysGasDOCurrentPrice.ToString();
-            }
+            DataToUIView();
+            waitingFrm._bw.DoWork += DoUpdate;
+            waitingFrm._bw.RunWorkerCompleted += DoUpdateCompleted;
         }
 
         
@@ -83,16 +84,45 @@ namespace SGM_Management
 
             DataTransfer request = new DataTransfer();
             request.ResponseDataSystemAdminDTO = m_currentAdminDTO;
-            string jsRequest = JSonHelper.ConvertObjectToJSon(request);
+            String jsRequest = JSonHelper.ConvertObjectToJSon(request);
 
-            string response = m_service.SGMManager_UpdateSystemPrice(jsRequest);
-            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
+            waitingFrm.ShowMe();
+            waitingFrm._bw.RunWorkerAsync(jsRequest);
+        }
+
+        private void DoUpdate(object sender, DoWorkEventArgs doWorkEventArgs)
+        {
+            String jsRequest = (String)doWorkEventArgs.Argument;
+            doWorkEventArgs.Result = m_service.SGMManager_UpdateSystemPrice(jsRequest);
+        }
+
+        private void DoUpdateCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            waitingFrm.HideMe();
+            String stResponse = e.Result as String;
+            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+            {
                 frmMSg.ShowMsg(SGMText.SGM_INFO, SGMText.ADMIN_UPDATE_PRICE_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                DataToUIView();
+            }
             else
+            {
                 frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                
-            
+                m_currentAdminDTO.SysGas92CurrentPrice = int.Parse(txtGas92CurrentPrice.Text);
+                m_currentAdminDTO.SysGas95CurrentPrice = int.Parse(txtGas95CurrentPrice.Text);
+                m_currentAdminDTO.SysGasDOCurrentPrice = int.Parse(txtGasDOCurrentPrice.Text);
+            }
+        }
+
+        private void DataToUIView()
+        {
+            if (m_currentAdminDTO != null)
+            {
+                txtGas92CurrentPrice.Text = m_currentAdminDTO.SysGas92CurrentPrice.ToString();
+                txtGas95CurrentPrice.Text = m_currentAdminDTO.SysGas95CurrentPrice.ToString();
+                txtGasDOCurrentPrice.Text = m_currentAdminDTO.SysGasDOCurrentPrice.ToString();
+            }
         }
     }
 }

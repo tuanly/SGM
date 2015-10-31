@@ -63,7 +63,7 @@
             this.btnUpdate.Location = new System.Drawing.Point(149, 108);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(75, 23);
-            this.btnUpdate.TabIndex = 2;
+            this.btnUpdate.TabIndex = 3;
             this.btnUpdate.Text = "Cập Nhật";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
@@ -110,7 +110,7 @@
             this.txtPwdRepeat.Name = "txtPwdRepeat";
             this.txtPwdRepeat.PasswordChar = '*';
             this.txtPwdRepeat.Size = new System.Drawing.Size(216, 20);
-            this.txtPwdRepeat.TabIndex = 6;
+            this.txtPwdRepeat.TabIndex = 2;
             // 
             // errorProvider1
             // 
