@@ -1,0 +1,8 @@
+C:\SGM\trunk\Source\SGM\WaitingIdicator\bin\Debug\WaitingIdicator.dll
+C:\SGM\trunk\Source\SGM\WaitingIdicator\bin\Debug\WaitingIdicator.pdb
+C:\SGM\trunk\Source\SGM\WaitingIdicator\obj\Debug\WaitingIdicator.IdicatorUC.resources
+C:\SGM\trunk\Source\SGM\WaitingIdicator\obj\Debug\WaitingIdicator.Properties.Resources.resources
+C:\SGM\trunk\Source\SGM\WaitingIdicator\obj\Debug\WaitingIdicator.WaitingForm.resources
+C:\SGM\trunk\Source\SGM\WaitingIdicator\obj\Debug\WaitingIdicator.csproj.GenerateResource.Cache
+C:\SGM\trunk\Source\SGM\WaitingIdicator\obj\Debug\WaitingIdicator.dll
+C:\SGM\trunk\Source\SGM\WaitingIdicator\obj\Debug\WaitingIdicator.pdb

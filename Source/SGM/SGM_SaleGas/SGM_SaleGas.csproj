@@ -191,6 +191,10 @@
       <Project>{5ABD34AF-902B-408F-85B5-12E0F96E60CF}</Project>
       <Name>SGM_DTO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SGM_WaitingIdicator\SGM_WaitingIdicator.csproj">
+      <Project>{DD852908-1C4F-4725-B332-5E5BAB53E2F5}</Project>
+      <Name>SGM_WaitingIdicator</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

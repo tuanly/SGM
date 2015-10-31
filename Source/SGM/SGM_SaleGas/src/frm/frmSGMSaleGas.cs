@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.IO.Ports;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
+using SGM_WaitingIdicator;
 
 namespace SGM_SaleGas
 {
@@ -20,6 +21,10 @@ namespace SGM_SaleGas
         RechargeDTO _rechargeDTO;
         JSonHelper m_jsHelper;
         SerialDataReceivedEventHandler serailReaderHandler = null;
+
+        private readonly BackgroundWorker _bw = new BackgroundWorker();
+        private WaitingForm waitingFrm;
+
         private enum gasTransactType
         {
             gas92,
@@ -36,6 +41,7 @@ namespace SGM_SaleGas
             InitializeComponent();
             m_jsHelper = new JSonHelper();
             frmMsg = new frmSGMMessage();
+            waitingFrm = new WaitingForm(this);
         }
 
         private void frmSGMSaleGas_Load(object sender, EventArgs e)

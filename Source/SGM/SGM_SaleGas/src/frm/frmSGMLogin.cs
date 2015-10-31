@@ -12,6 +12,8 @@ using System.Resources;
 using System.IO.Ports;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
+using SGM_WaitingIdicator;
+using System.Threading;
 
 namespace SGM_SaleGas
 {
@@ -20,6 +22,8 @@ namespace SGM_SaleGas
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
         private frmSGMMessage frmMsg = null;
         private SerialDataReceivedEventHandler serialDatahandler = null;
+        private readonly BackgroundWorker _bw = new BackgroundWorker();
+        private WaitingForm waitingFrm;
 
         public frmSGMLogin()
         {
@@ -27,13 +31,40 @@ namespace SGM_SaleGas
             frmMsg = new frmSGMMessage();
             serialDatahandler = new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
             RFIDReader.RegistryReaderListener(Program.ReaderPort, serialDatahandler);
+            waitingFrm = new WaitingForm(this);
         }
 
         private void frmSGMLogin_Load(object sender, EventArgs e)
         {
-           
-            
             errorProvider.SetIconAlignment(txtLoginCode, ErrorIconAlignment.TopRight);
+
+            _bw.DoWork += Login;
+            _bw.RunWorkerCompleted += LoginCompleted;
+        }
+
+        private void LoginCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            waitingFrm.HideMe();
+            String stResponse = e.Result as String;
+            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+            if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+            {
+                this.Hide();
+                if (Program.ReaderPort != null)
+                    Program.ReaderPort.DataReceived -= serialDatahandler;
+                new frmSGMSaleGas().ShowDialog();
+                this.Close();
+            }
+            else
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+        }
+
+        private void Login(object sender, DoWorkEventArgs doWorkEventArgs)
+        {
+            List<string> list = doWorkEventArgs.Argument as List<string>;
+            String gasid = list[0];
+            String gasmac = list[1];
+            doWorkEventArgs.Result = service.SGMSaleGas_ValidateGasStationLogin(gasid, gasmac);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -45,19 +76,12 @@ namespace SGM_SaleGas
             // request server
             string GASSTATION_ID = txtLoginCode.Text;
             string GASSTATION_MACADDRESS = GetMacAddress();
-
-            String stResponse = service.SGMSaleGas_ValidateGasStationLogin(GASSTATION_ID, GASSTATION_MACADDRESS);
-            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);     
-            if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-            {
-                this.Hide();
-                if (Program.ReaderPort != null)
-                    Program.ReaderPort.DataReceived -= serialDatahandler;
-                new frmSGMSaleGas().ShowDialog();
-                this.Close();
-            }
-            else
-                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+            List<string> args = new List<string>();
+            args.Add(GASSTATION_ID);
+            args.Add(GASSTATION_MACADDRESS);
+            
+            waitingFrm.ShowMe();
+            _bw.RunWorkerAsync(args);
         }
 
         private bool ValidateLoginCode()
