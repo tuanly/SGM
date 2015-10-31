@@ -128,7 +128,7 @@ namespace SGM_Management
 
         private void btnReport_Click(object sender, EventArgs e)
         {
-            showFrom(new frmSGMReport(), btnReport);
+            showFrom(new frmSGMReport(this), btnReport);
         }
 
         private void btnExit_Click_1(object sender, EventArgs e)

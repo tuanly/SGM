@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
+using SGM_WaitingIdicator;
 
 namespace SGM_Management
 {
@@ -15,16 +16,21 @@ namespace SGM_Management
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
         private JSonHelper m_jsHelper;
         private frmSGMMessage frmMsg = null;
+
+        private WaitingForm waitingFrm;
+
         public frmSGMLogin()
         {
             InitializeComponent();
             m_jsHelper = new JSonHelper();
             frmMsg = new frmSGMMessage();
+            waitingFrm = new WaitingForm(this);
         }
 
         private void frmSGMLogin_Load(object sender, EventArgs e)
         {
-
+            waitingFrm._bw.DoWork += Login;
+            waitingFrm._bw.RunWorkerCompleted += LoginCompleted;
         }
 
         private bool ValidateLoginCode()
@@ -65,17 +71,19 @@ namespace SGM_Management
         {
             Login();
         }
-
-        private void Login()
+        
+        private void Login(object sender, DoWorkEventArgs doWorkEventArgs)
         {
-            if (ValidateLoginCode() == false)
-                return;
-
-            // request server
-            string SYS_ADMIN = txtAdmin.Text;
-            string SYS_PWD = txtPwd.Text;
-
-            String stResponse = service.SGMManager_ValidateAdminLogin(SYS_ADMIN, SYS_PWD);
+            List<string> list = doWorkEventArgs.Argument as List<string>;
+            String SYS_ADMIN = list[0];
+            String SYS_PWD = list[1];
+            doWorkEventArgs.Result = service.SGMManager_ValidateAdminLogin(SYS_ADMIN, SYS_PWD);
+        }
+        
+        private void LoginCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            waitingFrm.HideMe();
+            String stResponse = e.Result as String;
             DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
@@ -89,7 +97,21 @@ namespace SGM_Management
             }
             else
                 frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-               
+        }
+        
+        private void Login()
+        {
+            if (ValidateLoginCode() == false)
+                return;
+
+            // request server
+            string SYS_ADMIN = txtAdmin.Text;
+            string SYS_PWD = txtPwd.Text;
+            List<string> args = new List<string>();
+            args.Add(SYS_ADMIN);
+            args.Add(SYS_PWD);
+            waitingFrm.ShowMe();
+            waitingFrm._bw.RunWorkerAsync(args);
         }
     }
 }
