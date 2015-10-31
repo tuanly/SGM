@@ -22,7 +22,6 @@ namespace SGM_SaleGas
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
         private frmSGMMessage frmMsg = null;
         private SerialDataReceivedEventHandler serialDatahandler = null;
-        private readonly BackgroundWorker _bw = new BackgroundWorker();
         private WaitingForm waitingFrm;
 
         public frmSGMLogin()
@@ -38,8 +37,8 @@ namespace SGM_SaleGas
         {
             errorProvider.SetIconAlignment(txtLoginCode, ErrorIconAlignment.TopRight);
 
-            _bw.DoWork += Login;
-            _bw.RunWorkerCompleted += LoginCompleted;
+            waitingFrm._bw.DoWork += Login;
+            waitingFrm._bw.RunWorkerCompleted += LoginCompleted;
         }
 
         private void LoginCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -79,9 +78,8 @@ namespace SGM_SaleGas
             List<string> args = new List<string>();
             args.Add(GASSTATION_ID);
             args.Add(GASSTATION_MACADDRESS);
-            
             waitingFrm.ShowMe();
-            _bw.RunWorkerAsync(args);
+            waitingFrm._bw.RunWorkerAsync(args);
         }
 
         private bool ValidateLoginCode()

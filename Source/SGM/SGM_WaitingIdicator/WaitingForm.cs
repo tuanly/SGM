@@ -12,6 +12,8 @@ namespace SGM_WaitingIdicator
     public partial class WaitingForm : Form
     {
         private Form _parent;
+        public readonly BackgroundWorker _bw = new BackgroundWorker();
+
         public WaitingForm(Form parent)
         {
             InitializeComponent();

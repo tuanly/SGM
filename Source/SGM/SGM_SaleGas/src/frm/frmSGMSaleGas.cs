@@ -22,8 +22,8 @@ namespace SGM_SaleGas
         JSonHelper m_jsHelper;
         SerialDataReceivedEventHandler serailReaderHandler = null;
 
-        private readonly BackgroundWorker _bw = new BackgroundWorker();
-        private WaitingForm waitingFrm;
+        private WaitingForm scanWaitingFrm;
+        private WaitingForm buyWaitingFrm;
 
         private enum gasTransactType
         {
@@ -41,7 +41,14 @@ namespace SGM_SaleGas
             InitializeComponent();
             m_jsHelper = new JSonHelper();
             frmMsg = new frmSGMMessage();
-            waitingFrm = new WaitingForm(this);
+            
+            scanWaitingFrm = new WaitingForm(this);
+            scanWaitingFrm._bw.DoWork += DoScan;
+            scanWaitingFrm._bw.RunWorkerCompleted += DoScanCompleted;
+            
+            buyWaitingFrm = new WaitingForm(this);
+            buyWaitingFrm._bw.DoWork += DoBuy;
+            buyWaitingFrm._bw.RunWorkerCompleted += DoBuyCompleted;
         }
 
         private void frmSGMSaleGas_Load(object sender, EventArgs e)
@@ -136,9 +143,15 @@ namespace SGM_SaleGas
 
         }
 
-        private void ScanCard(string cardId)
+        private void DoScan(object sender, DoWorkEventArgs doWorkEventArgs)
         {
-            String stResponse = service.SGMSaleGas_ValidateCardId(cardId);
+            String cardId = (String) doWorkEventArgs.Argument;
+            doWorkEventArgs.Result = service.SGMSaleGas_ValidateCardId(cardId);
+        }
+        private void DoScanCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            scanWaitingFrm.HideMe();
+            String stResponse = e.Result as String;
             DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
@@ -194,6 +207,34 @@ namespace SGM_SaleGas
             }
         }
 
+        private void DoBuy(object sender, DoWorkEventArgs doWorkEventArgs)
+        {
+            String jsonSale = (String)doWorkEventArgs.Argument;
+            doWorkEventArgs.Result = service.SGMSaleGas_GasBuying(jsonSale, "admin");
+        }
+        private void DoBuyCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            buyWaitingFrm.HideMe();
+            String stResponse = e.Result as String;
+            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+            if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+            {
+                frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GAS_BUYING_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                _cardDTO.CardRemainingMoney = _cardDTO.CardRemainingMoney - _moneyBuying;
+                txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
+                calculatePay();
+            }
+            else
+            {
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+            }
+        }
+        private void ScanCard(string cardId)
+        {
+            scanWaitingFrm.ShowMe();
+            scanWaitingFrm._bw.RunWorkerAsync(cardId);
+        }
+
         private void btnCardDetail_Click(object sender, EventArgs e)
         {
             ScanCard(_cardId);
@@ -228,19 +269,8 @@ namespace SGM_SaleGas
             dto.SaleGasCurrentPrice = rbGas92.Checked ? _rechargeDTO.RechargeGas92Price : rbGas95.Checked ? _rechargeDTO.RechargeGas95Price : _rechargeDTO.RechargeGasDOPrice;
             DataTransfer df = new DataTransfer();
             df.ResponseDataSaleGasDTO = dto;
-            string stResponse = service.SGMSaleGas_GasBuying(JSonHelper.ConvertObjectToJSon(df), "admin");
-            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
-            if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-            {
-                frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GAS_BUYING_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
-                _cardDTO.CardRemainingMoney = _cardDTO.CardRemainingMoney - _moneyBuying;
-                txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
-                calculatePay();
-            }
-            else
-            {
-                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-            }
+            buyWaitingFrm.ShowMe();
+            buyWaitingFrm._bw.RunWorkerAsync(JSonHelper.ConvertObjectToJSon(df));
         }
 
         private void txtMoney_TextChanged(object sender, EventArgs e)
