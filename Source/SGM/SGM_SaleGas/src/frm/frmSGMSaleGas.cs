@@ -25,7 +25,12 @@ namespace SGM_SaleGas
 
         private WaitingForm scanWaitingFrm;
         private WaitingForm buyWaitingFrm;
+        private frmSGMCardDetail frmCardInfo = null;
         private bool m_bCardReaded = false;
+
+        private int m_iCurrentPriceGas92 = 0;
+        private int m_iCurrentPriceGas95 = 0;
+        private int m_iCurrentPriceGasDO = 0;
         private enum gasTransactType
         {
             gas92,
@@ -37,13 +42,16 @@ namespace SGM_SaleGas
         private string _cardId = "card0001";
         private int _moneyBuying = 20000;
 
-        public frmSGMSaleGas(GasStationDTO gasStationDTO)
+        public frmSGMSaleGas(GasStationDTO gasStationDTO, int priceGas92, int priceGas95, int priceGasDO)
         {
             InitializeComponent();
             _gasStationDTO = gasStationDTO;
+            m_iCurrentPriceGas92 = priceGas92;
+            m_iCurrentPriceGas95 = priceGas95;
+            m_iCurrentPriceGasDO = priceGasDO;
             m_jsHelper = new JSonHelper();
             frmMsg = new frmSGMMessage();
-            
+            frmCardInfo = new frmSGMCardDetail(_cardDTO, _rechargeDTO);
             scanWaitingFrm = new WaitingForm(this);
             scanWaitingFrm._bw.DoWork += DoScan;
             scanWaitingFrm._bw.RunWorkerCompleted += DoScanCompleted;
@@ -51,6 +59,8 @@ namespace SGM_SaleGas
             buyWaitingFrm = new WaitingForm(this);
             buyWaitingFrm._bw.DoWork += DoBuy;
             buyWaitingFrm._bw.RunWorkerCompleted += DoBuyCompleted;
+
+            
         }
 
         private void frmSGMSaleGas_Load(object sender, EventArgs e)
@@ -65,12 +75,14 @@ namespace SGM_SaleGas
             txtMoney.Text = _moneyBuying.ToString(MONEY_FORMAT);
             lblTitle.Text = _gasStationDTO.GasStationName;
             resetForm();
+            tblCurrentPrice.Text = SGMText.SALEGAS_CURRENT_PRICE + SGMText.GAS_92_TEXT + " : " + m_iCurrentPriceGas92 + " - " + SGMText.GAS_95_TEXT + " : " + m_iCurrentPriceGas95 + " - " + SGMText.GAS_DO_TEXT + " : " + m_iCurrentPriceGasDO;
         }
 
         private void EnableTransaction(bool yes, bool choice)
         {
             if (choice)
                 rbGas92.Enabled = rbGas95.Enabled = rbGasDO.Enabled = yes;
+            txtGasBuying.Enabled = yes;
             btnBuy.Enabled = yes;
             btnCardDetail.Enabled = yes;
         }
@@ -189,13 +201,13 @@ namespace SGM_SaleGas
                         }
 
                         //txtCardID.Text = _cardDTO.CardID;
-                        //txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
+                        txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
                         //updateGasChoice(rbGas92.Checked ? gasTransactType.gas92 : rbGas95.Checked ? gasTransactType.gas95 : gasTransactType.gasDO);
                         if (_cardDTO.CardUnlockState == false)
                         {
                             frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GAS_CARD_LOCK, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
-                            _cardDTO = null;
-                            _rechargeDTO = null;
+                            //_cardDTO = null;
+                            //_rechargeDTO = null;
                             EnableTransaction(false, true);
                         }
                         btnCardDetail.Enabled = true;
@@ -244,7 +256,11 @@ namespace SGM_SaleGas
 
         private void btnCardDetail_Click(object sender, EventArgs e)
         {
-            ScanCard(_cardId);
+            if (_cardDTO != null && _rechargeDTO != null)
+            {
+                frmCardInfo = new frmSGMCardDetail(_cardDTO, _rechargeDTO);
+                frmCardInfo.ShowDialog();
+            }
         }
 
         private void CardReaderReceivedHandler(
@@ -254,7 +270,7 @@ namespace SGM_SaleGas
             
             try
             {
-                if (!frmMsg.Visible)
+                if (!frmMsg.Visible && !frmCardInfo.Visible)
                 {
                     SerialPort sp = (SerialPort)sender;
                     String data = sp.ReadLine();
@@ -296,6 +312,8 @@ namespace SGM_SaleGas
         }
         private void resetForm()
         {
+            _cardDTO = null;
+            _rechargeDTO = null;
             txtCardID.Text = "";
             txtCardMoney.Text = 0.ToString(MONEY_FORMAT);
             rbGas92.Checked = true;
@@ -309,7 +327,7 @@ namespace SGM_SaleGas
             txtMoneyBuying.Text = 0.ToString(MONEY_FORMAT);
             txtMoneyAfter.Text = 0.ToString(MONEY_FORMAT);
             btnCardDetail.Enabled = false;
-
+            tblCurrentPrice.Text = "";
         }
 
         private void timeCardReader_Tick(object sender, EventArgs e)
@@ -320,5 +338,6 @@ namespace SGM_SaleGas
                 ScanCard(txtCardID.Text);
             }
         }
+        
     }
 }

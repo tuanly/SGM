@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMSaleGas));
             this.lblTitle = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tblCurrentPrice = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnCardDetail = new System.Windows.Forms.Button();
             this.txtCardMoney = new System.Windows.Forms.TextBox();
@@ -45,6 +45,8 @@
             this.rbGas95 = new System.Windows.Forms.RadioButton();
             this.rbGas92 = new System.Windows.Forms.RadioButton();
             this.grBill = new System.Windows.Forms.GroupBox();
+            this.txtMoneyBefore = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.txtGasType = new System.Windows.Forms.TextBox();
@@ -55,8 +57,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtMoneyBuying = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtMoneyBefore = new System.Windows.Forms.TextBox();
             this.timeCardReader = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -77,18 +77,18 @@
             this.lblTitle.Text = "TRẠM XĂNG DẦU HAMACO";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label1
+            // tblCurrentPrice
             // 
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(0, 662);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(20, 5, 0, 0);
-            this.label1.Size = new System.Drawing.Size(818, 35);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Giá xăng hiện tại: DO : 25 000, X92: 23 000, X95: 27 000";
+            this.tblCurrentPrice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.tblCurrentPrice.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tblCurrentPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tblCurrentPrice.ForeColor = System.Drawing.Color.Red;
+            this.tblCurrentPrice.Location = new System.Drawing.Point(0, 662);
+            this.tblCurrentPrice.Name = "tblCurrentPrice";
+            this.tblCurrentPrice.Padding = new System.Windows.Forms.Padding(20, 5, 0, 0);
+            this.tblCurrentPrice.Size = new System.Drawing.Size(818, 35);
+            this.tblCurrentPrice.TabIndex = 1;
+            this.tblCurrentPrice.Text = "Giá xăng hiện tại: DO : 25 000, X92: 23 000, X95: 27 000";
             // 
             // groupBox1
             // 
@@ -259,6 +259,26 @@
             this.grBill.TabStop = false;
             this.grBill.Text = "Thanh toán cho thẻ:";
             // 
+            // txtMoneyBefore
+            // 
+            this.txtMoneyBefore.Enabled = false;
+            this.txtMoneyBefore.Location = new System.Drawing.Point(148, 112);
+            this.txtMoneyBefore.Name = "txtMoneyBefore";
+            this.txtMoneyBefore.ReadOnly = true;
+            this.txtMoneyBefore.Size = new System.Drawing.Size(304, 35);
+            this.txtMoneyBefore.TabIndex = 17;
+            this.txtMoneyBefore.Text = "20. 000";
+            this.txtMoneyBefore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(34, 119);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(107, 29);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "Ban đầu:";
+            // 
             // txtPrice
             // 
             this.txtPrice.Enabled = false;
@@ -361,26 +381,6 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Trừ:";
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(34, 119);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(107, 29);
-            this.label9.TabIndex = 16;
-            this.label9.Text = "Ban đầu:";
-            // 
-            // txtMoneyBefore
-            // 
-            this.txtMoneyBefore.Enabled = false;
-            this.txtMoneyBefore.Location = new System.Drawing.Point(148, 112);
-            this.txtMoneyBefore.Name = "txtMoneyBefore";
-            this.txtMoneyBefore.ReadOnly = true;
-            this.txtMoneyBefore.Size = new System.Drawing.Size(304, 35);
-            this.txtMoneyBefore.TabIndex = 17;
-            this.txtMoneyBefore.Text = "20. 000";
-            this.txtMoneyBefore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // timeCardReader
             // 
             this.timeCardReader.Enabled = true;
@@ -395,7 +395,7 @@
             this.Controls.Add(this.grBill);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tblCurrentPrice);
             this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -418,7 +418,7 @@
         #endregion
 
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label tblCurrentPrice;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtCardMoney;
         private System.Windows.Forms.Label label3;

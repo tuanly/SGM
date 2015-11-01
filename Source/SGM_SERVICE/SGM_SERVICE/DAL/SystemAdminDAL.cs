@@ -322,9 +322,15 @@ namespace SGM.ServicesCore.DAL
                         {
                             dataResult.ResponseDataInt = Int32.Parse(tblResult.Rows[0]["SYS_GAS95_NEW_PRICE"].ToString());
                         }
-                        else
+                        else if (iGasType == SystemAdminDTO.GAS_TYPE_DO)
                         {
                             dataResult.ResponseDataInt = Int32.Parse(tblResult.Rows[0]["SYS_GASDO_NEW_PRICE"].ToString());
+                        }
+                        else
+                        {
+                            dataResult.ResponseCurrentPriceGas92 = Int32.Parse(tblResult.Rows[0]["SYS_GAS92_NEW_PRICE"].ToString());
+                            dataResult.ResponseCurrentPriceGas95 = Int32.Parse(tblResult.Rows[0]["SYS_GAS92_NEW_PRICE"].ToString());
+                            dataResult.ResponseCurrentPriceGasDO = Int32.Parse(tblResult.Rows[0]["SYS_GAS92_NEW_PRICE"].ToString());
                         }
                     }
                     else
@@ -337,9 +343,15 @@ namespace SGM.ServicesCore.DAL
                         {
                             dataResult.ResponseDataInt = Int32.Parse(tblResult.Rows[0]["SYS_GAS95_CURRENT_PRICE"].ToString());
                         }
-                        else
+                        else if (iGasType == SystemAdminDTO.GAS_TYPE_DO)
                         {
                             dataResult.ResponseDataInt = Int32.Parse(tblResult.Rows[0]["SYS_GASDO_CURRENT_PRICE"].ToString());
+                        }
+                        else
+                        {
+                            dataResult.ResponseCurrentPriceGas92 = Int32.Parse(tblResult.Rows[0]["SYS_GAS92_CURRENT_PRICE"].ToString());
+                            dataResult.ResponseCurrentPriceGas95 = Int32.Parse(tblResult.Rows[0]["SYS_GAS95_CURRENT_PRICE"].ToString());
+                            dataResult.ResponseCurrentPriceGasDO = Int32.Parse(tblResult.Rows[0]["SYS_GASDO_CURRENT_PRICE"].ToString());
                         }
                     }
                     dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;

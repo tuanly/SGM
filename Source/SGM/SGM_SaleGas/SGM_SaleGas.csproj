@@ -65,6 +65,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\frm\frmSGMCardDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMCardDetail.Designer.cs">
+      <DependentUpon>frmSGMCardDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\frm\frmSGMConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,6 +97,9 @@
     <Compile Include="src\frm\frmSGMSaleGas.Designer.cs">
       <DependentUpon>frmSGMSaleGas.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="src\frm\frmSGMCardDetail.resx">
+      <DependentUpon>frmSGMCardDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\frm\frmSGMConfig.resx">
       <DependentUpon>frmSGMConfig.cs</DependentUpon>
     </EmbeddedResource>

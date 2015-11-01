@@ -17,6 +17,12 @@ namespace SGM.ServicesCore.BLL
         {
             GasStationDAL dalGasStation = new GasStationDAL();
             DataTransfer response = dalGasStation.ValidateGasStationLogin(stGasStationID, stGasStationMacAddress);
+            
+            SystemAdminDAL dalSystemAdmin = new SystemAdminDAL();
+            DataTransfer responseAdmin = dalSystemAdmin.GetCurrentPrice(SystemAdminDTO.GAS_TYPE_ALL);
+            response.ResponseCurrentPriceGas92 = responseAdmin.ResponseCurrentPriceGas92;
+            response.ResponseCurrentPriceGas95 = responseAdmin.ResponseCurrentPriceGas95;
+            response.ResponseCurrentPriceGasDO = responseAdmin.ResponseCurrentPriceGasDO;
             return JSonHelper.ConvertObjectToJSon(response);
         }
 

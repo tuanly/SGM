@@ -10,6 +10,7 @@ namespace SGM_Core.DTO
         public static int GAS_TYPE_92 = 0;
         public static int GAS_TYPE_95 = 1;
         public static int GAS_TYPE_DO = 2;
+        public static int GAS_TYPE_ALL = 3;
 
         private string m_stSysAdmin;    //admin account, primate key
         private string m_stSysPwd;      //admin password

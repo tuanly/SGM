@@ -15,7 +15,7 @@ namespace SGM_Core.Utils
         public static int RESPONSE_CODE_SUCCESS = 0;
         public static int RESPONSE_CODE_FAIL = 1;
 
-        private int m_stResponseCode;
+        private int m_iResponseCode;
         private string m_stResponseErrorMsg;
         private string m_stResponseErrorMsgDetail;
         private string m_stResponseDataString;
@@ -28,10 +28,14 @@ namespace SGM_Core.Utils
         private SaleGasDTO m_dtoResponseDataSaleGasDTO;
         private SystemAdminDTO m_dtoResponseDataSystemAdminDTO;
         private DataSet m_dsResponseDataSet;
+
+        private int m_iCurrentPriceGas92;
+        private int m_iCurrentPriceGas95;
+        private int m_iCurrentPriceGasDO;
         
         public DataTransfer()
         {
-            m_stResponseCode = RESPONSE_CODE_NONE;
+            m_iResponseCode = RESPONSE_CODE_NONE;
             m_stResponseErrorMsg = "";
             m_stResponseErrorMsgDetail = "";
             m_stResponseDataString = "";
@@ -43,6 +47,10 @@ namespace SGM_Core.Utils
             m_dtoResponseDataSaleGasDTO = null;
             m_dtoResponseDataSystemAdminDTO = null;
             m_dsResponseDataSet = null;
+
+            m_iCurrentPriceGas92 = 0;
+            m_iCurrentPriceGas95 = 0;
+            m_iCurrentPriceGasDO = 0;
         }
         //public DataTransfer(string json)
         //{
@@ -50,8 +58,26 @@ namespace SGM_Core.Utils
         //}
         public int ResponseCode
         {
-            get { return m_stResponseCode; }
-            set { m_stResponseCode = value; }
+            get { return m_iResponseCode; }
+            set { m_iResponseCode = value; }
+        }
+
+        public int ResponseCurrentPriceGas92
+        {
+            get { return m_iCurrentPriceGas92; }
+            set { m_iCurrentPriceGas92 = value; }
+        }
+
+        public int ResponseCurrentPriceGas95
+        {
+            get { return m_iCurrentPriceGas95; }
+            set { m_iCurrentPriceGas95 = value; }
+        }
+
+        public int ResponseCurrentPriceGasDO
+        {
+            get { return m_iCurrentPriceGasDO; }
+            set { m_iCurrentPriceGasDO = value; }
         }
 
         public string ResponseErrorMsg
