@@ -183,7 +183,7 @@ namespace SGM.ServicesCore.DAL
             DataTransfer dataResult = new DataTransfer();
             try
             {
-                string query = string.Format("SELECT ISNULL(GASSTATION_MACADDRESS,'NULL') AS RESULT FROM GAS_STATION WHERE (GASSTATION_MACADDRESS IS NULL OR GASSTATION_MACADDRESS = @GASSTATION_MACADDRESS) AND GASSTATION_ID = @GASSTATION_ID");
+                string query = string.Format("SELECT ISNULL(GASSTATION_MACADDRESS,'NULL') AS RESULT, * FROM GAS_STATION WHERE (GASSTATION_MACADDRESS IS NULL OR GASSTATION_MACADDRESS = @GASSTATION_MACADDRESS) AND GASSTATION_ID = @GASSTATION_ID");
                 SqlParameter[] sqlParameters = new SqlParameter[2];               
                 sqlParameters[0] = new SqlParameter("@GASSTATION_MACADDRESS", SqlDbType.NVarChar);
                 sqlParameters[0].Value = Convert.ToString(stGasStationMacAddress);
@@ -193,8 +193,17 @@ namespace SGM.ServicesCore.DAL
                 if (tblResult.Rows.Count > 0)
                 {
                     dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
-                    DataRow dr = tblResult.Rows[0];
-                    string result = dr["RESULT"].ToString();                   
+                    DataRow dr = tblResult.Rows[0];                  
+
+                    GasStationDTO dtoGasStation = new GasStationDTO();
+                    dtoGasStation.GasStationID = dr["GASSTATION_ID"].ToString();
+                    dtoGasStation.GasStationName = dr["GASSTATION_NAME"].ToString();
+                    dtoGasStation.GasStationAddress = dr["GASSTATION_ADDRESS"].ToString();
+                    dtoGasStation.GasStationDescription = dr["GASSTATION_DESCRIPTION"].ToString();
+                    dtoGasStation.GasStationMacAddress = dr["GASSTATION_MACADDRESS"].ToString();
+                    dataResult.ResponseDataGasStationDTO = dtoGasStation;
+
+                    string result = dr["RESULT"].ToString();
                     if (result.Equals("NULL")) //insert mac address
                     {
                         SqlParameter[] sqlParametersUpdate = new SqlParameter[2];

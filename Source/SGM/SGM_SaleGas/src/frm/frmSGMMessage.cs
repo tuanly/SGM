@@ -77,7 +77,7 @@ namespace SGM_SaleGas
         {            
             updateMsg(type);
             this.lblMessage.Text = msg;
-            this.Text = title;
+            this.Text = title;           
             this.ShowDialog();
             return m_iMsgResult;
         }

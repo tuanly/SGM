@@ -60,8 +60,8 @@ namespace SGM.ServicesCore.DAL
                 sqlParameters[3].Value = Convert.ToDateTime(dtoCard.CardBuyDate);
                 sqlParameters[4] = new SqlParameter("@RECHARGE_ID", SqlDbType.Int);
                 sqlParameters[4].Value = Convert.ToInt32(dtoCard.RechargeID);
-                sqlParameters[5] = new SqlParameter("@CUS_ID", SqlDbType.Int);
-                sqlParameters[5].Value = Convert.ToInt32(dtoCard.CustomerID);
+                sqlParameters[5] = new SqlParameter("@CUS_ID", SqlDbType.NVarChar);
+                sqlParameters[5].Value = Convert.ToString(dtoCard.CustomerID);
                 insertResult = m_dbConnection.ExecuteInsertQuery(query, sqlParameters);
             }
             catch (Exception ex)
@@ -145,7 +145,7 @@ namespace SGM.ServicesCore.DAL
         }
         public DataTable ValidateCardID(string stCardID)
         {
-            string query = string.Format("SELECT * FROM CARD c, RECHARGE r WHERE c.CARD_ID = @CARD_ID AND c.CARD_ID = r.CARD_ID");
+            string query = string.Format("SELECT * FROM CARD c, RECHARGE r WHERE c.CARD_ID = @CARD_ID AND c.RECHARGE_ID = r.RECHARGE_ID");
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
             sqlParameters[0].Value = Convert.ToString(stCardID);

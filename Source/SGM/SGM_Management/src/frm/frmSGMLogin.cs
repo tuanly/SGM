@@ -88,7 +88,7 @@ namespace SGM_Management
             if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
                 this.Hide();
-               frmSGMReport a = new frmSGMReport();
+                frmGSMMain a = new frmGSMMain();
                // frmSGMUpdateStore a = new frmSGMUpdateStore();
                 //frmSGMUpdateAccount a = new frmSGMUpdateAccount();
                // a.SetCurrentAdminDTO(dataResponse.ResponseDataSystemAdminDTO);

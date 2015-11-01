@@ -19,12 +19,13 @@ namespace SGM_SaleGas
         private frmSGMMessage frmMsg = null;
         CardDTO _cardDTO;
         RechargeDTO _rechargeDTO;
+        GasStationDTO _gasStationDTO;
         JSonHelper m_jsHelper;
         SerialDataReceivedEventHandler serailReaderHandler = null;
 
         private WaitingForm scanWaitingFrm;
         private WaitingForm buyWaitingFrm;
-
+        private bool m_bCardReaded = false;
         private enum gasTransactType
         {
             gas92,
@@ -36,9 +37,10 @@ namespace SGM_SaleGas
         private string _cardId = "card0001";
         private int _moneyBuying = 20000;
 
-        public frmSGMSaleGas()
+        public frmSGMSaleGas(GasStationDTO gasStationDTO)
         {
             InitializeComponent();
+            _gasStationDTO = gasStationDTO;
             m_jsHelper = new JSonHelper();
             frmMsg = new frmSGMMessage();
             
@@ -58,9 +60,11 @@ namespace SGM_SaleGas
             RFIDReader.RegistryReaderListener(Program.ReaderPort, serailReaderHandler);
             _cardDTO = null;
             _rechargeDTO = null;
-
+           
             EnableTransaction(false, true);
             txtMoney.Text = _moneyBuying.ToString(MONEY_FORMAT);
+            lblTitle.Text = _gasStationDTO.GasStationName;
+            resetForm();
         }
 
         private void EnableTransaction(bool yes, bool choice)
@@ -68,6 +72,7 @@ namespace SGM_SaleGas
             if (choice)
                 rbGas92.Enabled = rbGas95.Enabled = rbGasDO.Enabled = yes;
             btnBuy.Enabled = yes;
+            btnCardDetail.Enabled = yes;
         }
 
         private void updateGasChoice(gasTransactType t)
@@ -120,17 +125,17 @@ namespace SGM_SaleGas
 
         private void rbGas95_CheckedChanged(object sender, EventArgs e)
         {
-            updateGasChoice(gasTransactType.gas95);
+           // updateGasChoice(gasTransactType.gas95);
         }
 
         private void rbGas92_CheckedChanged(object sender, EventArgs e)
         {
-            updateGasChoice(gasTransactType.gas92);
+         //   updateGasChoice(gasTransactType.gas92);
         }
 
         private void rbGasDO_CheckedChanged(object sender, EventArgs e)
         {
-            updateGasChoice(gasTransactType.gasDO);
+          //  updateGasChoice(gasTransactType.gasDO);
         }
 
         private void label8_Click(object sender, EventArgs e)
@@ -183,9 +188,9 @@ namespace SGM_SaleGas
                             _rechargeDTO.CardID = dr["CARD_ID"].ToString();
                         }
 
-                        txtCardID.Text = _cardDTO.CardID;
-                        txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
-                        updateGasChoice(rbGas92.Checked ? gasTransactType.gas92 : rbGas95.Checked ? gasTransactType.gas95 : gasTransactType.gasDO);
+                        //txtCardID.Text = _cardDTO.CardID;
+                        //txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
+                        //updateGasChoice(rbGas92.Checked ? gasTransactType.gas92 : rbGas95.Checked ? gasTransactType.gas95 : gasTransactType.gasDO);
                         if (_cardDTO.CardUnlockState == false)
                         {
                             frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GAS_CARD_LOCK, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
@@ -193,10 +198,12 @@ namespace SGM_SaleGas
                             _rechargeDTO = null;
                             EnableTransaction(false, true);
                         }
+                        btnCardDetail.Enabled = true;
                     }
                     else
                     {
                         // >>>
+                        
                     }
                 }
             }
@@ -247,9 +254,14 @@ namespace SGM_SaleGas
             
             try
             {
-                SerialPort sp = (SerialPort)sender;
-
-                txtCardID.Invoke(new MethodInvoker(delegate { txtCardID.Text = sp.ReadLine(); }));
+                if (!frmMsg.Visible)
+                {
+                    SerialPort sp = (SerialPort)sender;
+                    String data = sp.ReadLine();
+                    if (data != null && data.Length > 1) ;
+                    txtCardID.Invoke(new MethodInvoker(delegate { txtCardID.Text = data.Substring(0, data.Length - 1); }));
+                    m_bCardReaded = true;
+                }
             }
             catch (TimeoutException ex)
             {
@@ -281,6 +293,32 @@ namespace SGM_SaleGas
         private void frmSGMSaleGas_FormClosing(object sender, FormClosingEventArgs e)
         {
             RFIDReader.UnRegistryReaderListener(Program.ReaderPort, serailReaderHandler);
+        }
+        private void resetForm()
+        {
+            txtCardID.Text = "";
+            txtCardMoney.Text = 0.ToString(MONEY_FORMAT);
+            rbGas92.Checked = true;
+            txtMoney.Text = 0.ToString(MONEY_FORMAT);
+            btnBuy.Enabled = false;
+            grBill.Text = SGMText.SALEGAS_MAIN_BILL;
+            txtGasBuying.Text = 0.ToString(MONEY_FORMAT);
+            txtGasType.Text = "";
+            txtPrice.Text = 0.ToString(MONEY_FORMAT);
+            txtMoneyBefore.Text = 0.ToString(MONEY_FORMAT);
+            txtMoneyBuying.Text = 0.ToString(MONEY_FORMAT);
+            txtMoneyAfter.Text = 0.ToString(MONEY_FORMAT);
+            btnCardDetail.Enabled = false;
+
+        }
+
+        private void timeCardReader_Tick(object sender, EventArgs e)
+        {
+            if (m_bCardReaded)
+            {
+                m_bCardReaded = false;
+                ScanCard(txtCardID.Text);
+            }
         }
     }
 }

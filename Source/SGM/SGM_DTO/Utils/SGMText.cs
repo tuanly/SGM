@@ -82,5 +82,6 @@ namespace SGM_Core.Utils
         public static string REPORT_INPUT_DATE_ERROR = "Chọn khoảng thời gian ko hợp lệ!";
 
         public static string SALEGAS_LOGIN_INPUT_ERROR = "Lỗi, Chưa nhập mã đăng nhập!";
+        public static string SALEGAS_MAIN_BILL = "Thanh Toán cho Thẻ : ";
     }
 }

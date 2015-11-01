@@ -15,7 +15,7 @@ namespace SGM_Management
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmGSMMain());
+            Application.Run(new frmSGMLogin());
         }
         public static SerialPort ReaderPort;
     }
