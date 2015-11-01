@@ -65,7 +65,7 @@ namespace SGM_Management
                     break;
                 }
                 float tmp;
-                if (float.TryParse(txt, out tmp) == false)
+                if (float.TryParse(txt, out tmp) == false || tmp < 0)
                 {
                     errorProvider1.SetError(f[i], SGMText.UPDATE_PRICE_INPUT_ERR);
                     bValidate = false;
