@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
 using SGM_WaitingIdicator;
-
+using System.Threading.Tasks;
 
 namespace SGM_Management
 {
@@ -17,8 +17,7 @@ namespace SGM_Management
     {
         private SGM_Service.ServiceSoapClient m_service = null;
         private frmSGMMessage frmMSg = null;
-        private WaitingForm waitingFrm;
-
+        
         private SystemAdminDTO m_currentAdminDTO = null;
         public void SetCurrentAdminDTO(SystemAdminDTO _ad)
         {
@@ -30,7 +29,6 @@ namespace SGM_Management
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
             frmMSg = new frmSGMMessage();
-            waitingFrm = new WaitingForm(this);
         }
 
         private void frmSGMUpdatePrice_Load(object sender, EventArgs e)
@@ -39,8 +37,7 @@ namespace SGM_Management
             dateTimePicker1.CustomFormat = "dd/MM/yyyy hh:mm:ss tt";
 
             DataToUIView();
-            waitingFrm._bw.DoWork += DoUpdate;
-            waitingFrm._bw.RunWorkerCompleted += DoUpdateCompleted;
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this);
         }
 
         
@@ -86,33 +83,29 @@ namespace SGM_Management
             request.ResponseDataSystemAdminDTO = m_currentAdminDTO;
             String jsRequest = JSonHelper.ConvertObjectToJSon(request);
 
-            waitingFrm.ShowMe();
-            waitingFrm._bw.RunWorkerAsync(jsRequest);
-        }
-
-        private void DoUpdate(object sender, DoWorkEventArgs doWorkEventArgs)
-        {
-            String jsRequest = (String)doWorkEventArgs.Argument;
-            doWorkEventArgs.Result = m_service.SGMManager_UpdateSystemPrice(jsRequest);
-        }
-
-        private void DoUpdateCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            waitingFrm.HideMe();
-            String stResponse = e.Result as String;
-            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
-            if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
+            Task<String> task = Task.Factory.StartNew(() =>
             {
-                frmMSg.ShowMsg(SGMText.SGM_INFO, SGMText.ADMIN_UPDATE_PRICE_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
-                DataToUIView();
-            }
-            else
+                return m_service.SGMManager_UpdateSystemPrice(jsRequest);
+            });
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
-                frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                m_currentAdminDTO.SysGas92CurrentPrice = int.Parse(txtGas92CurrentPrice.Text);
-                m_currentAdminDTO.SysGas95CurrentPrice = int.Parse(txtGas95CurrentPrice.Text);
-                m_currentAdminDTO.SysGasDOCurrentPrice = int.Parse(txtGasDOCurrentPrice.Text);
-            }
+                SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
+                String stResponse = task.Result as String;
+                DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+                if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                {
+                    frmMSg.ShowMsg(SGMText.SGM_INFO, SGMText.ADMIN_UPDATE_PRICE_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                    DataToUIView();
+                }
+                else
+                {
+                    frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                    m_currentAdminDTO.SysGas92CurrentPrice = int.Parse(txtGas92CurrentPrice.Text);
+                    m_currentAdminDTO.SysGas95CurrentPrice = int.Parse(txtGas95CurrentPrice.Text);
+                    m_currentAdminDTO.SysGasDOCurrentPrice = int.Parse(txtGasDOCurrentPrice.Text);
+                }
+            });
         }
 
         private void DataToUIView()

@@ -10,6 +10,7 @@ using System.IO.Ports;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
 using SGM_WaitingIdicator;
+using System.Threading.Tasks;
 
 namespace SGM_SaleGas
 {
@@ -23,8 +24,6 @@ namespace SGM_SaleGas
         JSonHelper m_jsHelper;
         SerialDataReceivedEventHandler serailReaderHandler = null;
 
-        private WaitingForm scanWaitingFrm;
-        private WaitingForm buyWaitingFrm;
         private frmSGMCardDetail frmCardInfo = null;
         private bool m_bCardReaded = false;
 
@@ -52,19 +51,11 @@ namespace SGM_SaleGas
             m_jsHelper = new JSonHelper();
             frmMsg = new frmSGMMessage();
             frmCardInfo = new frmSGMCardDetail(_cardDTO, _rechargeDTO);
-            scanWaitingFrm = new WaitingForm(this);
-            scanWaitingFrm._bw.DoWork += DoScan;
-            scanWaitingFrm._bw.RunWorkerCompleted += DoScanCompleted;
-            
-            buyWaitingFrm = new WaitingForm(this);
-            buyWaitingFrm._bw.DoWork += DoBuy;
-            buyWaitingFrm._bw.RunWorkerCompleted += DoBuyCompleted;
-
-            
         }
 
         private void frmSGMSaleGas_Load(object sender, EventArgs e)
         {
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this);
 
             serailReaderHandler = new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
             RFIDReader.RegistryReaderListener(Program.ReaderPort, serailReaderHandler);
@@ -160,100 +151,75 @@ namespace SGM_SaleGas
 
         }
 
-        private void DoScan(object sender, DoWorkEventArgs doWorkEventArgs)
-        {
-            String cardId = (String) doWorkEventArgs.Argument;
-            doWorkEventArgs.Result = service.SGMSaleGas_ValidateCardId(cardId);
-        }
-        private void DoScanCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            scanWaitingFrm.HideMe();
-            String stResponse = e.Result as String;
-            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
-            if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-            {
-                EnableTransaction(true, true);
-                using (DataSet ds = dataResponse.ResponseDataSet)
-                {
-                    DataTable tblCard = ds.Tables[0];
-                    if (tblCard.Rows.Count == 1)
-                    {
-                        _cardDTO = new CardDTO();
-                        _rechargeDTO = new RechargeDTO();
-
-                        foreach (DataRow dr in tblCard.Rows)
-                        {
-                            _cardDTO.CardID = dr["CARD_ID"].ToString(); ;
-                            _cardDTO.CardUnlockState = Boolean.Parse(dr["CARD_STATE"].ToString());
-                            _cardDTO.CardRemainingMoney = Int32.Parse(dr["CARD_MONEY"].ToString());
-                            _cardDTO.CardBuyDate = DateTime.Parse(dr["CARD_BUY_DATE"].ToString());
-                            _cardDTO.RechargeID = Int32.Parse(dr["RECHARGE_ID"].ToString());
-                            _cardDTO.CustomerID = dr["CUS_ID"].ToString();
-
-                            _rechargeDTO.RechargeID = Int32.Parse(dr["RECHARGE_ID"].ToString());
-                            _rechargeDTO.RechargeDate = DateTime.Parse(dr["RECHARGE_DATE"].ToString());
-                            _rechargeDTO.RechargeGas92Price = Int32.Parse(dr["RECHARGE_GAS92_PRICE"].ToString());
-                            _rechargeDTO.RechargeGas95Price = Int32.Parse(dr["RECHARGE_GAS95_PRICE"].ToString());
-                            _rechargeDTO.RechargeGasDOPrice = Int32.Parse(dr["RECHARGE_GASDO_PRICE"].ToString());
-                            _rechargeDTO.RechargeMoney = Int32.Parse(dr["RECHARGE_MONEY"].ToString());
-                            _rechargeDTO.RechargeNote = dr["RECHARGE_MONEY"].ToString();
-                            _rechargeDTO.CardID = dr["CARD_ID"].ToString();
-                        }
-
-                        //txtCardID.Text = _cardDTO.CardID;
-                        txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
-                        //updateGasChoice(rbGas92.Checked ? gasTransactType.gas92 : rbGas95.Checked ? gasTransactType.gas95 : gasTransactType.gasDO);
-                        if (_cardDTO.CardUnlockState == false)
-                        {
-                            frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GAS_CARD_LOCK, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
-                            //_cardDTO = null;
-                            //_rechargeDTO = null;
-                            EnableTransaction(false, true);
-                        }
-                        btnCardDetail.Enabled = true;
-                    }
-                    else
-                    {
-                        // >>>
-                        
-                    }
-                }
-            }
-            else
-            {
-                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                EnableTransaction(false, true);
-            }
-        }
-
-        private void DoBuy(object sender, DoWorkEventArgs doWorkEventArgs)
-        {
-            String jsonSale = (String)doWorkEventArgs.Argument;
-            doWorkEventArgs.Result = service.SGMSaleGas_GasBuying(jsonSale, "admin");
-        }
-        private void DoBuyCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            buyWaitingFrm.HideMe();
-            String stResponse = e.Result as String;
-            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
-            if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-            {
-                frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GAS_BUYING_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
-                _cardDTO.CardRemainingMoney = _cardDTO.CardRemainingMoney - _moneyBuying;
-                txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
-                calculatePay();
-            }
-            else
-            {
-                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-            }
-        }
         private void ScanCard(string cardId)
         {
-            scanWaitingFrm.ShowMe();
-            scanWaitingFrm._bw.RunWorkerAsync(cardId);
-        }
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
+            Task<String> task = Task.Factory.StartNew(() =>
+            {
+                return service.SGMSaleGas_ValidateCardId(cardId);
+            });
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+            {
+                SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
+                String stResponse = task.Result as String;
+                DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+                if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                {
+                    EnableTransaction(true, true);
+                    using (DataSet ds = dataResponse.ResponseDataSet)
+                    {
+                        DataTable tblCard = ds.Tables[0];
+                        if (tblCard.Rows.Count == 1)
+                        {
+                            _cardDTO = new CardDTO();
+                            _rechargeDTO = new RechargeDTO();
 
+                            foreach (DataRow dr in tblCard.Rows)
+                            {
+                                _cardDTO.CardID = dr["CARD_ID"].ToString(); ;
+                                _cardDTO.CardUnlockState = Boolean.Parse(dr["CARD_STATE"].ToString());
+                                _cardDTO.CardRemainingMoney = Int32.Parse(dr["CARD_MONEY"].ToString());
+                                _cardDTO.CardBuyDate = DateTime.Parse(dr["CARD_BUY_DATE"].ToString());
+                                _cardDTO.RechargeID = Int32.Parse(dr["RECHARGE_ID"].ToString());
+                                _cardDTO.CustomerID = dr["CUS_ID"].ToString();
+
+                                _rechargeDTO.RechargeID = Int32.Parse(dr["RECHARGE_ID"].ToString());
+                                _rechargeDTO.RechargeDate = DateTime.Parse(dr["RECHARGE_DATE"].ToString());
+                                _rechargeDTO.RechargeGas92Price = Int32.Parse(dr["RECHARGE_GAS92_PRICE"].ToString());
+                                _rechargeDTO.RechargeGas95Price = Int32.Parse(dr["RECHARGE_GAS95_PRICE"].ToString());
+                                _rechargeDTO.RechargeGasDOPrice = Int32.Parse(dr["RECHARGE_GASDO_PRICE"].ToString());
+                                _rechargeDTO.RechargeMoney = Int32.Parse(dr["RECHARGE_MONEY"].ToString());
+                                _rechargeDTO.RechargeNote = dr["RECHARGE_MONEY"].ToString();
+                                _rechargeDTO.CardID = dr["CARD_ID"].ToString();
+                            }
+
+                            //txtCardID.Text = _cardDTO.CardID;
+                            txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
+                            //updateGasChoice(rbGas92.Checked ? gasTransactType.gas92 : rbGas95.Checked ? gasTransactType.gas95 : gasTransactType.gasDO);
+                            if (_cardDTO.CardUnlockState == false)
+                            {
+                                frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GAS_CARD_LOCK, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                                //_cardDTO = null;
+                                //_rechargeDTO = null;
+                                EnableTransaction(false, true);
+                            }
+                            btnCardDetail.Enabled = true;
+                        }
+                        else
+                        {
+                            // >>>
+
+                        }
+                    }
+                }
+                else
+                {
+                    frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                    EnableTransaction(false, true);
+                }         
+            });
+        }
+       
         private void btnCardDetail_Click(object sender, EventArgs e)
         {
             if (_cardDTO != null && _rechargeDTO != null)
@@ -297,8 +263,28 @@ namespace SGM_SaleGas
             dto.SaleGasCurrentPrice = rbGas92.Checked ? _rechargeDTO.RechargeGas92Price : rbGas95.Checked ? _rechargeDTO.RechargeGas95Price : _rechargeDTO.RechargeGasDOPrice;
             DataTransfer df = new DataTransfer();
             df.ResponseDataSaleGasDTO = dto;
-            buyWaitingFrm.ShowMe();
-            buyWaitingFrm._bw.RunWorkerAsync(JSonHelper.ConvertObjectToJSon(df));
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
+            Task<String> task = Task.Factory.StartNew(() =>
+            {
+                return service.SGMSaleGas_GasBuying(JSonHelper.ConvertObjectToJSon(df), "admin");
+            });
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+            {
+                SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
+                String stResponse = task.Result as String;
+                DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+                if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                {
+                    frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GAS_BUYING_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                    _cardDTO.CardRemainingMoney = _cardDTO.CardRemainingMoney - _moneyBuying;
+                    txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
+                    calculatePay();
+                }
+                else
+                {
+                    frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                }
+            });
         }
 
         private void txtMoney_TextChanged(object sender, EventArgs e)

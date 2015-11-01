@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
 using SGM_WaitingIdicator;
+using System.Threading.Tasks;
 
 namespace SGM_Management
 {
@@ -16,14 +17,12 @@ namespace SGM_Management
     {
         private SGM_Service.ServiceSoapClient m_service = null;
         private frmSGMMessage frmMsg = null;
-        private WaitingForm waitingFrm;
 
         public frmSGMUpdateStore()
         {
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
             frmMsg = new frmSGMMessage();
-            waitingFrm = new WaitingForm(this);
         }
 
         private SystemAdminDTO m_currentAdminDTO = null;
@@ -35,8 +34,7 @@ namespace SGM_Management
         private void frmSGMUpdateStore_Load(object sender, EventArgs e)
         {
             DataToUIView();
-            waitingFrm._bw.DoWork += DoUpdate;
-            waitingFrm._bw.RunWorkerCompleted += DoUpdateCompleted;
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this);
         }
 
         private void DataToUIView()
@@ -90,33 +88,29 @@ namespace SGM_Management
             DataTransfer request = new DataTransfer();
             request.ResponseDataSystemAdminDTO = m_currentAdminDTO;
             string jsRequest = JSonHelper.ConvertObjectToJSon(request);
-            waitingFrm.ShowMe();
-            waitingFrm._bw.RunWorkerAsync(jsRequest);
-        }
-
-        private void DoUpdate(object sender, DoWorkEventArgs doWorkEventArgs)
-        {
-            String jsRequest = (String)doWorkEventArgs.Argument;
-            doWorkEventArgs.Result = m_service.SGMManager_UpdateSystemStore(jsRequest);
-        }
-
-        private void DoUpdateCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            waitingFrm.HideMe();
-            String stResponse = e.Result as String;
-            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
-            if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
+            Task<String> task = Task.Factory.StartNew(() =>
             {
-                frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.ADMIN_UPDATE_TOTAL_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
-                DataToUIView();
-            }
-            else
+                return m_service.SGMManager_UpdateSystemStore(jsRequest);
+            });
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
-                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                m_currentAdminDTO.SysGas92Total = float.Parse(txtGas92Current.Text);
-                m_currentAdminDTO.SysGas95Total = float.Parse(txtGas95Current.Text);
-                m_currentAdminDTO.SysGasDOTotal = float.Parse(txtGasDOCurrent.Text);
-            }
+                SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
+                String stResponse = task.Result as String;
+                DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+                if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                {
+                    frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.ADMIN_UPDATE_TOTAL_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                    DataToUIView();
+                }
+                else
+                {
+                    frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                    m_currentAdminDTO.SysGas92Total = float.Parse(txtGas92Current.Text);
+                    m_currentAdminDTO.SysGas95Total = float.Parse(txtGas95Current.Text);
+                    m_currentAdminDTO.SysGasDOTotal = float.Parse(txtGasDOCurrent.Text);
+                }
+            });
         }
     }
 }

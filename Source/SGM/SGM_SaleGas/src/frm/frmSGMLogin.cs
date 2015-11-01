@@ -13,7 +13,7 @@ using System.IO.Ports;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
 using SGM_WaitingIdicator;
-using System.Threading;
+using System.Threading.Tasks;
 
 namespace SGM_SaleGas
 {
@@ -22,7 +22,6 @@ namespace SGM_SaleGas
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
         private frmSGMMessage frmMsg = null;
         private SerialDataReceivedEventHandler serialDatahandler = null;
-        private WaitingForm waitingFrm;
 
         public frmSGMLogin()
         {
@@ -30,41 +29,12 @@ namespace SGM_SaleGas
             frmMsg = new frmSGMMessage();
             serialDatahandler = new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
             RFIDReader.RegistryReaderListener(Program.ReaderPort, serialDatahandler);
-            waitingFrm = new WaitingForm(this);
         }
 
         private void frmSGMLogin_Load(object sender, EventArgs e)
         {
             errorProvider.SetIconAlignment(txtLoginCode, ErrorIconAlignment.TopRight);
-
-            waitingFrm._bw.DoWork += Login;
-            waitingFrm._bw.RunWorkerCompleted += LoginCompleted;
-        }
-
-        private void LoginCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            waitingFrm.HideMe();
-            String stResponse = e.Result as String;
-            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
-            if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-            {
-                this.Hide();
-                if (Program.ReaderPort != null)
-                    Program.ReaderPort.DataReceived -= serialDatahandler;
-
-                new frmSGMSaleGas(dataResponse.ResponseDataGasStationDTO, dataResponse.ResponseCurrentPriceGas92, dataResponse.ResponseCurrentPriceGas95, dataResponse.ResponseCurrentPriceGasDO).ShowDialog();
-                this.Close();
-            }
-            else
-                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-        }
-
-        private void Login(object sender, DoWorkEventArgs doWorkEventArgs)
-        {
-            List<string> list = doWorkEventArgs.Argument as List<string>;
-            String gasid = list[0];
-            String gasmac = list[1];
-            doWorkEventArgs.Result = service.SGMSaleGas_ValidateGasStationLogin(gasid, gasmac);
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this);
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -76,11 +46,28 @@ namespace SGM_SaleGas
             // request server
             string GASSTATION_ID = txtLoginCode.Text;
             string GASSTATION_MACADDRESS = GetMacAddress();
-            List<string> args = new List<string>();
-            args.Add(GASSTATION_ID);
-            args.Add(GASSTATION_MACADDRESS);
-            waitingFrm.ShowMe();
-            waitingFrm._bw.RunWorkerAsync(args);
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
+            Task<String> task = Task.Factory.StartNew(() =>
+            {
+                return service.SGMSaleGas_ValidateGasStationLogin(GASSTATION_ID, GASSTATION_MACADDRESS);
+            });
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+            {
+                SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
+                String stResponse = task.Result as String;
+                DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+                if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                {
+                    this.Hide();
+                    if (Program.ReaderPort != null)
+                        Program.ReaderPort.DataReceived -= serialDatahandler;
+
+                    new frmSGMSaleGas(dataResponse.ResponseDataGasStationDTO, dataResponse.ResponseCurrentPriceGas92, dataResponse.ResponseCurrentPriceGas95, dataResponse.ResponseCurrentPriceGasDO).ShowDialog();
+                    this.Close();
+                }
+                else
+                    frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+            });
         }
 
         private bool ValidateLoginCode()
@@ -129,9 +116,6 @@ namespace SGM_SaleGas
             catch (TimeoutException)
             {
             }
-        
-           
-
         }
 
         private void frmSGMLogin_FormClosing(object sender, FormClosingEventArgs e)

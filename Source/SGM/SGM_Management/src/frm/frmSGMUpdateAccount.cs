@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
 using SGM_WaitingIdicator;
+using System.Threading.Tasks;
 
 namespace SGM_Management
 {
@@ -18,13 +19,11 @@ namespace SGM_Management
 
         private SystemAdminDTO m_currentAdminDTO = null;
         private frmSGMMessage frmMsg = null;
-        private WaitingForm waitingFrm;
 
         public frmSGMUpdateAccount()
         {
             InitializeComponent();
             frmMsg = new frmSGMMessage();
-            waitingFrm = new WaitingForm(this);
         }
 
         public void SetCurrentAdminDTO(SystemAdminDTO ad)
@@ -71,8 +70,7 @@ namespace SGM_Management
 
         private void frmSGMUpdateAccount_Load(object sender, EventArgs e)
         {
-            waitingFrm._bw.DoWork += DoUpdate;
-            waitingFrm._bw.RunWorkerCompleted += DoUpdateCompleted;
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this);
         }
 
         private void btnReset_Click(object sender, EventArgs e)
@@ -84,25 +82,24 @@ namespace SGM_Management
         {
             if (!ValidateInput())
                 return;
-            waitingFrm.ShowMe();
-            waitingFrm._bw.RunWorkerAsync();
-        }
-        private void DoUpdate(object sender, DoWorkEventArgs doWorkEventArgs)
-        {
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
             string SYS_ADMIN = txtAdmin.Text;
             string SYS_PWD = txtPwd.Text;
-            doWorkEventArgs.Result = service.SGMManager_UpdateAdminAccount(m_currentAdminDTO.SysAdminAccount, SYS_ADMIN, SYS_PWD);
+            Task<String> task = Task.Factory.StartNew(() =>
+            {
+                return service.SGMManager_UpdateAdminAccount(m_currentAdminDTO.SysAdminAccount, SYS_ADMIN, SYS_PWD);
+            });
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+            {
+                SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
+                String stResponse = task.Result as String;
+                DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+                if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                    frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.SYS_ADMIN_CHANGE_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                else
+                    frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+            });
         }
-
-        private void DoUpdateCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            waitingFrm.HideMe();
-            String stResponse = e.Result as String;
-            DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
-            if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-                frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.SYS_ADMIN_CHANGE_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
-            else
-                frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-        }
+        
     }
 }

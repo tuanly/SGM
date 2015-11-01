@@ -12,12 +12,16 @@ namespace SGM_WaitingIdicator
     public partial class WaitingForm : Form
     {
         private Form _parent;
-        public readonly BackgroundWorker _bw = new BackgroundWorker();
+        public ProgressReporter progressReporter = new ProgressReporter();
+        public static WaitingForm waitingFrm = new WaitingForm();
 
-        public WaitingForm(Form parent)
+        public void SetParentForm(Form parent)
+        {
+            _parent = parent;
+        }
+        public WaitingForm()
         {
             InitializeComponent();
-            _parent = parent;
         }
 
         public void ShowMe()
@@ -32,5 +36,22 @@ namespace SGM_WaitingIdicator
             _parent.Enabled = true;
             base.Hide();
         }
+
+        /*
+         * This is template to add waiting idicator
+         * 
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
+            Task<String> task = Task.Factory.StartNew(() =>
+            {
+	            return service.DoingSomething(args);
+            });
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+            {
+	            SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
+	            String stResponse = task.Result as String;
+                ....
+            });
+         * 
+         * */
     }
 }
