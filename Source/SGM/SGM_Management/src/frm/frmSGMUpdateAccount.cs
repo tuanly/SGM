@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
 using SGM_WaitingIdicator;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SGM_Management
@@ -98,7 +99,7 @@ namespace SGM_Management
                     frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.SYS_ADMIN_CHANGE_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
                 else
                     frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-            });
+            }, SynchronizationContext.Current);
         }
         
     }

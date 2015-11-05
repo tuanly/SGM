@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
 using SGM_WaitingIdicator;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SGM_Management
@@ -105,7 +106,7 @@ namespace SGM_Management
                     m_currentAdminDTO.SysGas95CurrentPrice = int.Parse(txtGas95CurrentPrice.Text);
                     m_currentAdminDTO.SysGasDOCurrentPrice = int.Parse(txtGasDOCurrentPrice.Text);
                 }
-            });
+            }, SynchronizationContext.Current);
         }
 
         private void DataToUIView()

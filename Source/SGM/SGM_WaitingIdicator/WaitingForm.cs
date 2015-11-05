@@ -49,8 +49,8 @@ namespace SGM_WaitingIdicator
             {
 	            SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
 	            String stResponse = task.Result as String;
-                ....
-            });
+                ...... parse result here ................
+            }, SynchronizationContext.Current);
          * 
          * */
     }

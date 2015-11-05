@@ -10,6 +10,7 @@ using System.IO.Ports;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
 using SGM_WaitingIdicator;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SGM_SaleGas
@@ -216,8 +217,8 @@ namespace SGM_SaleGas
                 {
                     frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                     EnableTransaction(false, true);
-                }         
-            });
+                }
+            }, SynchronizationContext.Current);
         }
        
         private void btnCardDetail_Click(object sender, EventArgs e)
@@ -240,8 +241,8 @@ namespace SGM_SaleGas
                 {
                     SerialPort sp = (SerialPort)sender;
                     String data = sp.ReadLine();
-                    if (data != null && data.Length > 1) ;
-                    txtCardID.Invoke(new MethodInvoker(delegate { txtCardID.Text = data.Substring(0, data.Length - 1); }));
+                    if (data != null && data.Length > 1) 
+                        txtCardID.Invoke(new MethodInvoker(delegate { txtCardID.Text = data.Substring(0, data.Length - 1); }));
                     m_bCardReaded = true;
                 }
             }
@@ -284,7 +285,7 @@ namespace SGM_SaleGas
                 {
                     frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 }
-            });
+            }, SynchronizationContext.Current);
         }
 
         private void txtMoney_TextChanged(object sender, EventArgs e)

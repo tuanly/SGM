@@ -28,15 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.idicatorUC1 = new SGM_WaitingIdicator.IdicatorUC();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // idicatorUC1
+            // pictureBox1
             // 
-            this.idicatorUC1.Location = new System.Drawing.Point(0, 0);
-            this.idicatorUC1.Name = "idicatorUC1";
-            this.idicatorUC1.Size = new System.Drawing.Size(100, 100);
-            this.idicatorUC1.TabIndex = 0;
+            this.pictureBox1.Image = global::WaitingIdicator.Properties.Resources.idicator;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // WaitingForm
             // 
@@ -45,18 +48,20 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(100, 100);
             this.ControlBox = false;
-            this.Controls.Add(this.idicatorUC1);
+            this.Controls.Add(this.pictureBox1);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "WaitingForm";
             this.Text = "Waiting...";
             this.TransparencyKey = System.Drawing.SystemColors.Control;
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private IdicatorUC idicatorUC1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+
     }
 }

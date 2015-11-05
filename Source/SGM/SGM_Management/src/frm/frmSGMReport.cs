@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
 using SGM_WaitingIdicator;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SGM_Management
@@ -80,7 +81,7 @@ namespace SGM_Management
                     {
                         frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);                    
                     }
-                });
+                }, SynchronizationContext.Current);
             }
         }
 
@@ -118,7 +119,7 @@ namespace SGM_Management
                 {
                     frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 }
-            });
+            }, SynchronizationContext.Current);
         }
 
         private bool ValidateDataSaleGasInput()
@@ -181,7 +182,7 @@ namespace SGM_Management
                 {
                     frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 }
-            });
+            }, SynchronizationContext.Current);
         }
 
         private void LoadCustomerList()
@@ -217,7 +218,7 @@ namespace SGM_Management
                 {
                     frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 }
-            });
+            }, SynchronizationContext.Current);
         }
     }
 }

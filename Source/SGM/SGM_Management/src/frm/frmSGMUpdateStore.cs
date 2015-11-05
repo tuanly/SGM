@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
 using SGM_WaitingIdicator;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SGM_Management
@@ -110,7 +111,7 @@ namespace SGM_Management
                     m_currentAdminDTO.SysGas95Total = float.Parse(txtGas95Current.Text);
                     m_currentAdminDTO.SysGasDOTotal = float.Parse(txtGasDOCurrent.Text);
                 }
-            });
+            }, SynchronizationContext.Current);
         }
     }
 }

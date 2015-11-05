@@ -13,6 +13,7 @@ using System.IO.Ports;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
 using SGM_WaitingIdicator;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SGM_SaleGas
@@ -67,7 +68,7 @@ namespace SGM_SaleGas
                 }
                 else
                     frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-            });
+            }, SynchronizationContext.Current);
         }
 
         private bool ValidateLoginCode()
