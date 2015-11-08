@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMSaleGas));
             this.lblTitle = new System.Windows.Forms.Label();
-            this.tblCurrentPrice = new System.Windows.Forms.Label();
+            this.lblCurrentPrice = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnCardDetail = new System.Windows.Forms.Button();
             this.txtCardMoney = new System.Windows.Forms.TextBox();
@@ -58,9 +58,11 @@
             this.txtMoneyBuying = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.timeCardReader = new System.Windows.Forms.Timer(this.components);
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.grBill.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -77,18 +79,18 @@
             this.lblTitle.Text = "TRẠM XĂNG DẦU HAMACO";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // tblCurrentPrice
+            // lblCurrentPrice
             // 
-            this.tblCurrentPrice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tblCurrentPrice.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tblCurrentPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tblCurrentPrice.ForeColor = System.Drawing.Color.Red;
-            this.tblCurrentPrice.Location = new System.Drawing.Point(0, 662);
-            this.tblCurrentPrice.Name = "tblCurrentPrice";
-            this.tblCurrentPrice.Padding = new System.Windows.Forms.Padding(20, 5, 0, 0);
-            this.tblCurrentPrice.Size = new System.Drawing.Size(818, 35);
-            this.tblCurrentPrice.TabIndex = 1;
-            this.tblCurrentPrice.Text = "Giá xăng hiện tại: DO : 25 000, X92: 23 000, X95: 27 000";
+            this.lblCurrentPrice.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblCurrentPrice.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lblCurrentPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentPrice.ForeColor = System.Drawing.Color.Red;
+            this.lblCurrentPrice.Location = new System.Drawing.Point(0, 662);
+            this.lblCurrentPrice.Name = "lblCurrentPrice";
+            this.lblCurrentPrice.Padding = new System.Windows.Forms.Padding(20, 5, 0, 0);
+            this.lblCurrentPrice.Size = new System.Drawing.Size(818, 35);
+            this.lblCurrentPrice.TabIndex = 1;
+            this.lblCurrentPrice.Text = "Giá xăng hiện tại: DO : 25 000, X92: 23 000, X95: 27 000";
             // 
             // groupBox1
             // 
@@ -387,6 +389,10 @@
             this.timeCardReader.Interval = 500;
             this.timeCardReader.Tick += new System.EventHandler(this.timeCardReader_Tick);
             // 
+            // errorProvider
+            // 
+            this.errorProvider.ContainerControl = this;
+            // 
             // frmSGMSaleGas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -395,7 +401,7 @@
             this.Controls.Add(this.grBill);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.tblCurrentPrice);
+            this.Controls.Add(this.lblCurrentPrice);
             this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -411,6 +417,7 @@
             this.groupBox2.PerformLayout();
             this.grBill.ResumeLayout(false);
             this.grBill.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -418,7 +425,7 @@
         #endregion
 
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Label tblCurrentPrice;
+        private System.Windows.Forms.Label lblCurrentPrice;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtCardMoney;
         private System.Windows.Forms.Label label3;
@@ -445,5 +452,6 @@
         private System.Windows.Forms.TextBox txtMoneyBefore;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Timer timeCardReader;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

@@ -23,6 +23,7 @@ namespace SGM.ServicesCore.BLL
             response.ResponseCurrentPriceGas92 = responseAdmin.ResponseCurrentPriceGas92;
             response.ResponseCurrentPriceGas95 = responseAdmin.ResponseCurrentPriceGas95;
             response.ResponseCurrentPriceGasDO = responseAdmin.ResponseCurrentPriceGasDO;
+            response.ResponseDataSystemAdminDTO = responseAdmin.ResponseDataSystemAdminDTO;
             return JSonHelper.ConvertObjectToJSon(response);
         }
 
@@ -58,22 +59,11 @@ namespace SGM.ServicesCore.BLL
                 if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                 {
                     response = GasBuyingUpdateSysAdmin(sys_admin, saleGasDTO);
-                    if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-                    {
-                        response.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
-                        response.ResponseErrorMsg = SGMText.GAS_BUYING_SUCCESS;
-                    }
-                    else
-                    {
-                    }
+                    
                 }
-                else
-                {
-                }
+              
             }
-            else
-            {
-            }
+           
             return JSonHelper.ConvertObjectToJSon(response);
         }
 

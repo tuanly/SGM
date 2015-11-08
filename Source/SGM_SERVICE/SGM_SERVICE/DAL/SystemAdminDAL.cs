@@ -309,6 +309,7 @@ namespace SGM.ServicesCore.DAL
             {
                 string query = string.Format("SELECT (CAST(SYS_APPLY_DATE AS FLOAT) - CAST(GETDATE() AS FLOAT)) AS RESULT_DATE, * FROM SYSTEM_ADMIN");
                 DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, new SqlParameter[0]);
+
                 if (tblResult.Rows.Count > 0)
                 {
                     double resultDate = Double.Parse(tblResult.Rows[0]["RESULT_DATE"].ToString());
@@ -354,6 +355,21 @@ namespace SGM.ServicesCore.DAL
                             dataResult.ResponseCurrentPriceGasDO = Int32.Parse(tblResult.Rows[0]["SYS_GASDO_CURRENT_PRICE"].ToString());
                         }
                     }
+                    SystemAdminDTO dtoSysAdmin = new SystemAdminDTO();
+                    dtoSysAdmin.SysAdminAccount = tblResult.Rows[0]["SYS_ADMIN"].ToString();
+                    dtoSysAdmin.SysAdminPwd = tblResult.Rows[0]["SYS_PWD"].ToString();
+                    dtoSysAdmin.SysGas92Total = float.Parse(tblResult.Rows[0]["SYS_GAS92_TOTAL"].ToString());
+                    dtoSysAdmin.SysGas95Total = float.Parse(tblResult.Rows[0]["SYS_GAS95_TOTAL"].ToString());
+                    dtoSysAdmin.SysGasDOTotal = float.Parse(tblResult.Rows[0]["SYS_GASDO_TOTAL"].ToString());
+                    dtoSysAdmin.SysGas92CurrentPrice = Int32.Parse(tblResult.Rows[0]["SYS_GAS92_CURRENT_PRICE"].ToString());
+                    dtoSysAdmin.SysGas95CurrentPrice = Int32.Parse(tblResult.Rows[0]["SYS_GAS95_CURRENT_PRICE"].ToString());
+                    dtoSysAdmin.SysGasDOCurrentPrice = Int32.Parse(tblResult.Rows[0]["SYS_GASDO_CURRENT_PRICE"].ToString());
+                    dtoSysAdmin.SysGas92NewPrice = Int32.Parse(tblResult.Rows[0]["SYS_GAS92_NEW_PRICE"].ToString());
+                    dtoSysAdmin.SysGas95NewPrice = Int32.Parse(tblResult.Rows[0]["SYS_GAS95_NEW_PRICE"].ToString());
+                    dtoSysAdmin.SysGasDONewPrice = Int32.Parse(tblResult.Rows[0]["SYS_GASDO_NEW_PRICE"].ToString());
+                    dtoSysAdmin.SysApplyDate = DateTime.Parse(tblResult.Rows[0]["SYS_APPLY_DATE"].ToString());
+
+                    dataResult.ResponseDataSystemAdminDTO = dtoSysAdmin;
                     dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
                 }
                 else

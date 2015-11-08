@@ -26,8 +26,9 @@ namespace SGM_Core.Utils
         public static string GAS_95_TEXT = "Xăng 95";
         public static string GAS_DO_TEXT = "Dầu DO";
         public static string GAS_CARD_LOCK = "Thẻ xăng đã bị khóa.";
-        public static string GAS_BUYING_SUCCESS = "Mua xăng thành công.";
-        public static string GAS_BUYING_FAIL = "Mua xăng không thành công.";
+        
+        
+
         public static string UPDATE_PRICE_INPUT_NULL = "Chưa nhập giá!";
         public static string UPDATE_PRICE_INPUT_ERR = "Giá không hợp lệ!";
 
@@ -86,5 +87,10 @@ namespace SGM_Core.Utils
         public static string SALEGAS_CARDINFO_LOCK = "Đang bị khóa.";
         public static string SALEGAS_CARDINFO_UNLOCK = "Đang hoạt động.";
         public static string SALEGAS_CURRENT_PRICE = "Giá xăng hiện tại: ";
+        public static string GAS_BUYING_SUCCESS = "Mua xăng thành công.";
+        public static string GAS_BUYING_FAIL = "Mua xăng không thành công.";
+        public static string GAS_BUYING_INPUT_MONEY_INVALID = "Số tiền không hợp lệ!";
+        public static string GAS_BUYING_INPUT_MONEY_FAIL = "Số tiền trong thẻ không đủ!";
+        public static string GAS_BUYING_INPUT_TOTAL_GAS_FAIL = "Số xăng trong kho không đủ!";
     }
 }
