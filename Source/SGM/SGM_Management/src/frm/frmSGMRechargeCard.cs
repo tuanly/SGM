@@ -9,6 +9,9 @@ using System.Windows.Forms;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
 using System.IO.Ports;
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace SGM_Management
 {
     public partial class frmSGMRechargeCard : Form
@@ -82,7 +85,7 @@ namespace SGM_Management
             {
                 DataTransfer response = null;
                 DataTransfer request = new DataTransfer();
-                string jsResult = "";
+                Task<String> task;
                 if (m_bRecharge)
                 {
                     RechargeDTO dtoRecharge = new RechargeDTO();
@@ -94,22 +97,49 @@ namespace SGM_Management
                     dtoRecharge.RechargeNote = txtRechargeNote.Text.Trim();
                     dtoRecharge.CardID = txtCardID.Text.Trim();
                     request.ResponseDataRechargeDTO = dtoRecharge;
-                    jsResult = m_service.SGMManager_AddRechargeCard(JSonHelper.ConvertObjectToJSon(request));
-                    response = JSonHelper.ConvertJSonToObject(jsResult);
-                    if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                    task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                    () =>
                     {
-                        jsResult = m_service.SGMManager_UpdateRechargeIDForCard(txtCardID.Text.Trim());
-                        response = JSonHelper.ConvertJSonToObject(jsResult);
+                        return m_service.SGMManager_AddRechargeCard(JSonHelper.ConvertObjectToJSon(request));
+                    });
+                    SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                    {
+	                    String stResponse = task.Result as String;
+                        response = JSonHelper.ConvertJSonToObject(stResponse);
                         if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                         {
-                            jsResult = m_service.SGMManager_UpdateMoneyForCard(txtCardID.Text.Trim(), m_iCurrentCardMoney + Int32.Parse(txtCardMoney.Text.Trim()));
-                            response = JSonHelper.ConvertJSonToObject(jsResult);
-                            if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                            task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                            () =>
                             {
-                                this.Close();
-                            }
+                                return m_service.SGMManager_UpdateRechargeIDForCard(txtCardID.Text.Trim());
+                            });
+                            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                            {
+	                            stResponse = task.Result as String;
+                                response = JSonHelper.ConvertJSonToObject(stResponse);
+                                if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                                {
+                                    task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                                    () =>
+                                    {
+                                        return m_service.SGMManager_UpdateMoneyForCard(txtCardID.Text.Trim(), m_iCurrentCardMoney + Int32.Parse(txtCardMoney.Text.Trim()));
+                                    });
+                                    SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                                    {
+	                                    stResponse = task.Result as String;
+                                        response = JSonHelper.ConvertJSonToObject(stResponse);
+                                        if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                                        {
+                                            this.Close();
+                                        }
+                                    }, SynchronizationContext.Current);
+                                    
+                                }
+                            }, SynchronizationContext.Current);
+                            
                         }
-                    }
+                    }, SynchronizationContext.Current);
+                    
                 }
                 else
                 {
@@ -122,36 +152,59 @@ namespace SGM_Management
                     dtoCard.CustomerID = m_stCusID;
 
                     request.ResponseDataCardDTO = dtoCard;
-                    jsResult = m_service.SGMManager_AddNewCard(JSonHelper.ConvertObjectToJSon(request));
-                    response = JSonHelper.ConvertJSonToObject(jsResult);
-                    if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                    task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                    () =>
                     {
-                        RechargeDTO dtoRecharge = new RechargeDTO();
-                        dtoRecharge.RechargeDate = dtpRechargeDate.Value;
-                        dtoRecharge.RechargeGas92Price = m_iPriceGas92;
-                        dtoRecharge.RechargeGas95Price = m_iPriceGas95;
-                        dtoRecharge.RechargeGasDOPrice = m_iPriceGasDO;
-                        dtoRecharge.RechargeMoney = Int32.Parse(txtCardMoney.Text.Trim());
-                        dtoRecharge.RechargeNote = txtRechargeNote.Text.Trim();
-                        dtoRecharge.CardID = txtCardID.Text.Trim();
-                        request.ResponseDataRechargeDTO = dtoRecharge;
-                        jsResult = m_service.SGMManager_AddRechargeCard(JSonHelper.ConvertObjectToJSon(request));
-                        response = JSonHelper.ConvertJSonToObject(jsResult);
+                        return m_service.SGMManager_AddNewCard(JSonHelper.ConvertObjectToJSon(request));
+                    });
+                    SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                    {
+	                    String stResponse = task.Result as String;
+                        response = JSonHelper.ConvertJSonToObject(stResponse);
                         if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                         {
-                            jsResult = m_service.SGMManager_UpdateRechargeIDForCard(txtCardID.Text.Trim());
-                            response = JSonHelper.ConvertJSonToObject(jsResult);
+                            RechargeDTO dtoRecharge = new RechargeDTO();
+                            dtoRecharge.RechargeDate = dtpRechargeDate.Value;
+                            dtoRecharge.RechargeGas92Price = m_iPriceGas92;
+                            dtoRecharge.RechargeGas95Price = m_iPriceGas95;
+                            dtoRecharge.RechargeGasDOPrice = m_iPriceGasDO;
+                            dtoRecharge.RechargeMoney = Int32.Parse(txtCardMoney.Text.Trim());
+                            dtoRecharge.RechargeNote = txtRechargeNote.Text.Trim();
+                            dtoRecharge.CardID = txtCardID.Text.Trim();
+                            request.ResponseDataRechargeDTO = dtoRecharge;
+                            task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                            () =>
+                            {
+                                return m_service.SGMManager_AddRechargeCard(JSonHelper.ConvertObjectToJSon(request));
+                            });
+                            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                            {
+	                            stResponse = task.Result as String;
+                                response = JSonHelper.ConvertJSonToObject(stResponse);
+                                if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                                {
+                                    task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                                    () =>
+                                    {
+                                        return m_service.SGMManager_UpdateRechargeIDForCard(txtCardID.Text.Trim());
+                                    });
+                                    SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                                    {
+	                                    stResponse = task.Result as String;
+                                        response = JSonHelper.ConvertJSonToObject(stResponse);
+                                        if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                                        {
+                                            this.Close();
+                                        }
+                                        else
+                                        {
+                                            frmMsg.ShowMsg(SGMText.SGM_ERROR, response.ResponseErrorMsg + " : " + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                                        }
+                                    }, SynchronizationContext.Current);
+                                }
+                            }, SynchronizationContext.Current);
                         }
-                    }
-                }
-                
-                if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-                {
-                    this.Close();
-                }
-                else
-                {
-                    frmMsg.ShowMsg(SGMText.SGM_ERROR, response.ResponseErrorMsg + " : " + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                    }, SynchronizationContext.Current);
                 }
             }
         }
@@ -183,22 +236,31 @@ namespace SGM_Management
             }
             else if (!m_bRecharge)
             {
-                String jsonResponse = m_service.SGMManager_CheckCardExist(txtCardID.Text.Trim());
-                DataTransfer response = JSonHelper.ConvertJSonToObject(jsonResponse);
-                if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                () =>
                 {
-                    if (response.ResponseDataBool)
+                    return m_service.SGMManager_CheckCardExist(txtCardID.Text.Trim());
+                });
+                SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                {
+	                String stResponse = task.Result as String;
+                    DataTransfer response = JSonHelper.ConvertJSonToObject(stResponse);
+                    if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                     {
-                        errProvider.SetError(txtCardID, SGMText.CARD_DATA_INPUT_EXIST_CARD_ID_ERR);
+                        if (response.ResponseDataBool)
+                        {
+                            errProvider.SetError(txtCardID, SGMText.CARD_DATA_INPUT_EXIST_CARD_ID_ERR);
+                            bValidate = false;
+                        }
+                    }
+                    else
+                    {
+                        errProvider.SetError(txtCardID, SGMText.CARD_GET_CARD_ERR);
+                        frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.CARD_GET_CARD_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                         bValidate = false;
                     }
-                }
-                else
-                {
-                    errProvider.SetError(txtCardID, SGMText.CARD_GET_CARD_ERR);
-                    frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.CARD_GET_CARD_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                    bValidate = false;
-                }
+                }, SynchronizationContext.Current);
+                
             }
             if (txtCardMoney.Text.Trim().Equals(""))
             {

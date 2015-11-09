@@ -83,16 +83,16 @@ namespace SGM_Management
         {
             if (!ValidateInput())
                 return;
-            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
+            
             string SYS_ADMIN = txtAdmin.Text;
             string SYS_PWD = txtPwd.Text;
-            Task<String> task = Task.Factory.StartNew(() =>
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () =>
             {
                 return service.SGMManager_UpdateAdminAccount(m_currentAdminDTO.SysAdminAccount, SYS_ADMIN, SYS_PWD);
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
-                SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
                 String stResponse = task.Result as String;
                 DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
                 if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)

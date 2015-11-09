@@ -59,14 +59,14 @@ namespace SGM_Management
             DateTime date_end = dtpSaleGasEnd.Value;
             String gasStationId = (cboGasStation.SelectedItem as ComboboxItem).Value.ToString();
             {
-                SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
-                Task<String> task = Task.Factory.StartNew(() =>
+                Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                () =>
                 {
                     return m_service.SGMSaleGas_GetSaleGasReport(gasStationId, date_begin, date_end);
                 });
+                
                 SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
                 {
-                    SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
                     String stResponse = task.Result as String;
                     DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
                     if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
@@ -97,15 +97,14 @@ namespace SGM_Management
             DateTime date_begin = dtpRechargeCardBegin.Value;
             DateTime date_end = dtpRechargeCardEnd.Value;
             String customerId = (cboRechargeCardCustomer.SelectedItem as ComboboxItem).Value.ToString();
-            
-            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
-            Task<String> task = Task.Factory.StartNew(() =>
+
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () =>
             {
                 return m_service.SGMSaleGas_GetCardReport(customerId, date_begin, date_end);
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
-                SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
                 String stResponse = task.Result as String;
                 DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
                 if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
@@ -152,14 +151,13 @@ namespace SGM_Management
         private void LoadGasStationList()
         {
             cboGasStation.Items.Clear();
-            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
-            Task<String> task = Task.Factory.StartNew(() =>
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () =>
             {
                 return m_service.SGMSaleGas_GetGasStationList();
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
-                SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
                 String stResponse = task.Result as String;
                 DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
                 if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
@@ -188,14 +186,13 @@ namespace SGM_Management
         private void LoadCustomerList()
         {
             cboRechargeCardCustomer.Items.Clear();
-            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
-            Task<String> task = Task.Factory.StartNew(() =>
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () =>
             {
                 return m_service.SGMSaleGas_GetCustomerList();
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
-                SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
                 String stResponse = task.Result as String;
                 DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
                 if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)

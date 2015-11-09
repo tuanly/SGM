@@ -195,14 +195,12 @@ namespace SGM_SaleGas
 
         private void ScanCard(string cardId)
         {
-            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
-            Task<String> task = Task.Factory.StartNew(() =>
-            {
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () => {
                 return service.SGMSaleGas_ValidateCardId(cardId);
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
-                SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
                 String stResponse = task.Result as String;
                 DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
                 if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
@@ -318,14 +316,13 @@ namespace SGM_SaleGas
             dto.SaleGasCurrentPrice = m_iCurrentPrice;
             DataTransfer df = new DataTransfer();
             df.ResponseDataSaleGasDTO = dto;
-            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
-            Task<String> task = Task.Factory.StartNew(() =>
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () =>
             {
                 return service.SGMSaleGas_GasBuying(JSonHelper.ConvertObjectToJSon(df), "admin");
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
-                SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
                 String stResponse = task.Result as String;
                 DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
                 if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)

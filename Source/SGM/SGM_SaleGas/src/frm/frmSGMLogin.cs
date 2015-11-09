@@ -47,14 +47,12 @@ namespace SGM_SaleGas
             // request server
             string GASSTATION_ID = txtLoginCode.Text;
             string GASSTATION_MACADDRESS = GetMacAddress();
-            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
-            Task<String> task = Task.Factory.StartNew(() =>
-            {
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () => {
                 return service.SGMSaleGas_ValidateGasStationLogin(GASSTATION_ID, GASSTATION_MACADDRESS);
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
-                SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
                 String stResponse = task.Result as String;
                 DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
                 if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)

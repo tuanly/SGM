@@ -40,14 +40,13 @@ namespace SGM_WaitingIdicator
         /*
          * This is template to add waiting idicator
          * 
-            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
-            Task<String> task = Task.Factory.StartNew(() =>
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () =>
             {
-	            return service.DoingSomething(args);
+                return m_service.DoSomethings();
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
-	            SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
 	            String stResponse = task.Result as String;
                 ...... parse result here ................
             }, SynchronizationContext.Current);

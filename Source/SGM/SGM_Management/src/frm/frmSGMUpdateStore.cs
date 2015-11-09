@@ -89,14 +89,13 @@ namespace SGM_Management
             DataTransfer request = new DataTransfer();
             request.ResponseDataSystemAdminDTO = m_currentAdminDTO;
             string jsRequest = JSonHelper.ConvertObjectToJSon(request);
-            SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
-            Task<String> task = Task.Factory.StartNew(() =>
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () =>
             {
                 return m_service.SGMManager_UpdateSystemStore(jsRequest);
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
-                SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
                 String stResponse = task.Result as String;
                 DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
                 if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)

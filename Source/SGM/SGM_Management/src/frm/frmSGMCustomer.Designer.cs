@@ -124,6 +124,7 @@
             this.btnDelCard.TabIndex = 16;
             this.btnDelCard.Text = "Hủy Thẻ";
             this.btnDelCard.UseVisualStyleBackColor = true;
+            this.btnDelCard.Click += new System.EventHandler(this.btnDelCard_Click);
             // 
             // btnLockCard
             // 

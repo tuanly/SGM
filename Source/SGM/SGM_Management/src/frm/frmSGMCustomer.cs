@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SGM_Management
 {
@@ -96,14 +98,21 @@ namespace SGM_Management
                 DataTransfer request = new DataTransfer();
                 request.ResponseDataCustomerDTO = cus;
                 string jsRequest = JSonHelper.ConvertObjectToJSon(request);
-                string response = m_service.SGMManager_AddNewCustomer(jsRequest);
-                DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
-                if (dataResponse.ResponseCode != DataTransfer.RESPONSE_CODE_SUCCESS)
-                {                    
-                    frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                    return;
-                }
-               
+                Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                () =>
+                {
+                    return m_service.SGMManager_AddNewCustomer(jsRequest);
+                });
+                SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                {
+	                String stResponse = task.Result as String;
+                    DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+                    if (dataResponse.ResponseCode != DataTransfer.RESPONSE_CODE_SUCCESS)
+                    {                    
+                        frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                        return;
+                    }
+                }, SynchronizationContext.Current);
                 LoadCustomerList();
                 SelectCustomeRow(cus.CustomerID);
                 UpdateStateControls(false);               
@@ -122,22 +131,31 @@ namespace SGM_Management
             }
             else if (!txtCusID.Text.Trim().Equals(m_stCusIDEdit))
             {
-                String jsonResponse = m_service.SGMManager_CheckCustomerExist(txtCusID.Text.Trim());
-                DataTransfer response = JSonHelper.ConvertJSonToObject(jsonResponse);
-                if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                () =>
                 {
-                    if (response.ResponseDataBool)
+                    return m_service.SGMManager_CheckCustomerExist(txtCusID.Text.Trim());
+                });
+                SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                {
+	                String stResponse = task.Result as String;
+                    DataTransfer response = JSonHelper.ConvertJSonToObject(stResponse);
+                    if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                     {
-                        errProvider.SetError(txtCusID, SGMText.CUSTOMER_DATA_INPUT_EXIST_CUS_ID_ERR);
+                        if (response.ResponseDataBool)
+                        {
+                            errProvider.SetError(txtCusID, SGMText.CUSTOMER_DATA_INPUT_EXIST_CUS_ID_ERR);
+                            bValidate = false;
+                        }
+                    }
+                    else
+                    {
+                        errProvider.SetError(txtCusID, SGMText.CUSTOMER_GET_CUS_ERR);                  
+                        frmMSg.ShowMsg(SGMText.SGM_ERROR, SGMText.CUSTOMER_GET_CUS_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                         bValidate = false;
                     }
-                }
-                else
-                {
-                    errProvider.SetError(txtCusID, SGMText.CUSTOMER_GET_CUS_ERR);                  
-                    frmMSg.ShowMsg(SGMText.SGM_ERROR, SGMText.CUSTOMER_GET_CUS_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                    bValidate = false;
-                }
+                }, SynchronizationContext.Current);
+                
             }
             if (txtCusName.Text.Trim().Equals(""))
             {
@@ -167,59 +185,76 @@ namespace SGM_Management
 
         private void LoadCustomerList()
         {
-
-            string jsResponse = m_service.SGMManager_GetCustomer(m_stSearchValue, false);
-            DataTransfer response = JSonHelper.ConvertJSonToObject(jsResponse);
-            dgvCusList.Rows.Clear();
-            m_dsCustomer = response.ResponseDataSet;
-            int iOldSelected = m_iCurrentCustomerIndex;
-            if (m_dsCustomer != null)
-            {                
-                for (int i = 0; i < m_dsCustomer.Tables[0].Rows.Count; i++)
-                {                   
-                    dgvCusList.Rows.Add();
-                    dgvCusList.Rows[i].Cells[0].Value = (i + 1);
-                    dgvCusList.Rows[i].Cells[1].Value = m_dsCustomer.Tables[0].Rows[i]["CUS_NAME"] + " (" + m_dsCustomer.Tables[0].Rows[i]["CUS_ID"] + ")";
-                }
-                if (iOldSelected >= 0)
-                    m_iCurrentCustomerIndex = iOldSelected;
-                if (m_iCurrentCustomerIndex >= dgvCusList.Rows.Count)
-                    m_iCurrentCustomerIndex = -1;
-                if (m_iCurrentCustomerIndex >= 0)
-                    dgvCusList.Rows[m_iCurrentCustomerIndex].Selected = true;
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () =>
+            {
+                return m_service.SGMManager_GetCustomer(m_stSearchValue, false);
+            });
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+            {
+	            String stResponse = task.Result as String;
+                DataTransfer response = JSonHelper.ConvertJSonToObject(stResponse);
+                dgvCusList.Rows.Clear();
+                m_dsCustomer = response.ResponseDataSet;
+                int iOldSelected = m_iCurrentCustomerIndex;
+                if (m_dsCustomer != null)
+                {                
+                    for (int i = 0; i < m_dsCustomer.Tables[0].Rows.Count; i++)
+                    {                   
+                        dgvCusList.Rows.Add();
+                        dgvCusList.Rows[i].Cells[0].Value = (i + 1);
+                        dgvCusList.Rows[i].Cells[1].Value = m_dsCustomer.Tables[0].Rows[i]["CUS_NAME"] + " (" + m_dsCustomer.Tables[0].Rows[i]["CUS_ID"] + ")";
+                    }
+                    if (iOldSelected >= 0)
+                        m_iCurrentCustomerIndex = iOldSelected;
+                    if (m_iCurrentCustomerIndex >= dgvCusList.Rows.Count)
+                        m_iCurrentCustomerIndex = -1;
+                    if (m_iCurrentCustomerIndex >= 0)
+                        dgvCusList.Rows[m_iCurrentCustomerIndex].Selected = true;
                 
-            }
+                }    
+            }, SynchronizationContext.Current);
+            
         }
 
         private void LoadCardList()
         {
             if (m_iCurrentCustomerIndex >= 0)
             {
-                string jsResponse = m_service.SGMManager_GetCardsOfCustomer(m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString());
-                DataTransfer response = JSonHelper.ConvertJSonToObject(jsResponse);
-                dgvCardList.Rows.Clear();
-                m_dsCard = response.ResponseDataSet;
-                int iOldSelected = m_iCurrentCardIndex;
-                if (m_dsCard != null)
+                Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                () =>
                 {
-                    for (int i = 0; i < m_dsCard.Tables[0].Rows.Count; i++)
+                    return m_service.SGMManager_GetCardsOfCustomer(m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString());
+                });
+                SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                {
+	                String stResponse = task.Result as String;
+                    DataTransfer response = JSonHelper.ConvertJSonToObject(stResponse);
+                    dgvCardList.Rows.Clear();
+                    m_dsCard = response.ResponseDataSet;
+                    int iOldSelected = m_iCurrentCardIndex;
+                    if (m_dsCard != null)
                     {
-                        dgvCardList.Rows.Add();
-                        dgvCardList.Rows[i].Cells[0].Value = (i + 1);
-                        dgvCardList.Rows[i].Cells[1].Value = m_dsCard.Tables[0].Rows[i]["CARD_ID"] ;
-                        dgvCardList.Rows[i].Cells[2].Value = m_dsCard.Tables[0].Rows[i]["CARD_MONEY"];
-                        dgvCardList.Rows[i].Cells[3].Value = m_dsCard.Tables[0].Rows[i]["RECHARGE_MONEY"];
-                        dgvCardList.Rows[i].Cells[4].Value = m_dsCard.Tables[0].Rows[i]["CARD_BUY_DATE"];
-                        dgvCardList.Rows[i].Cells[5].Value = m_dsCard.Tables[0].Rows[i]["RECHARGE_DATE"];
-                        dgvCardList.Rows[i].Cells[6].Value = !Boolean.Parse(m_dsCard.Tables[0].Rows[i]["CARD_STATE"].ToString());
+                        for (int i = 0; i < m_dsCard.Tables[0].Rows.Count; i++)
+                        {
+                            dgvCardList.Rows.Add();
+                            dgvCardList.Rows[i].Cells[0].Value = (i + 1);
+                            dgvCardList.Rows[i].Cells[1].Value = m_dsCard.Tables[0].Rows[i]["CARD_ID"] ;
+                            dgvCardList.Rows[i].Cells[2].Value = m_dsCard.Tables[0].Rows[i]["CARD_MONEY"];
+                            dgvCardList.Rows[i].Cells[3].Value = m_dsCard.Tables[0].Rows[i]["RECHARGE_MONEY"];
+                            dgvCardList.Rows[i].Cells[4].Value = m_dsCard.Tables[0].Rows[i]["CARD_BUY_DATE"];
+                            dgvCardList.Rows[i].Cells[5].Value = m_dsCard.Tables[0].Rows[i]["RECHARGE_DATE"];
+                            dgvCardList.Rows[i].Cells[6].Value = !Boolean.Parse(m_dsCard.Tables[0].Rows[i]["CARD_STATE"].ToString());
+                        }
+                        if (iOldSelected >= 0)
+                            m_iCurrentCardIndex = iOldSelected;
+                        if (m_iCurrentCardIndex >= dgvCusList.Rows.Count)
+                            m_iCurrentCardIndex = -1;
+                        if (m_iCurrentCardIndex >= 0)
+                            dgvCardList.Rows[m_iCurrentCardIndex].Selected = true;
                     }
-                    if (iOldSelected >= 0)
-                        m_iCurrentCardIndex = iOldSelected;
-                    if (m_iCurrentCardIndex >= dgvCusList.Rows.Count)
-                        m_iCurrentCardIndex = -1;
-                    if (m_iCurrentCardIndex >= 0)
-                        dgvCardList.Rows[m_iCurrentCardIndex].Selected = true;
-                }
+                }, SynchronizationContext.Current);
+                
             }
         }
 
@@ -306,17 +341,25 @@ namespace SGM_Management
 
                     if ((frmMSg.ShowMsg(SGMText.SGM_WARNING, SGMText.CUSTOMER_DEL_CUS_WARNING + "\n" + cusID + " : " + cusName, SGMMessageType.SGM_MESSAGE_TYPE_QUES) == SGMMessageResult.SGM_MESSAGE_RESULT_OK))
                     {
-                        string jsResponse = m_service.SGMManager_DelCustomer(cusID);
-                        DataTransfer response = JSonHelper.ConvertJSonToObject(jsResponse);
-                        if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                        Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                        () =>
                         {
-                            frmMSg.ShowMsg(SGMText.SGM_INFO, SGMText.CUSTOMER_DEL_CUS_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
-                            LoadCustomerList();
-                        }
-                        else
+                            return m_service.SGMManager_DelCustomer(cusID);
+                        });
+                        SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
                         {
-                            frmMSg.ShowMsg(SGMText.SGM_ERROR, response.ResponseErrorMsg + "\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                        }
+	                        String stResponse = task.Result as String;
+                            DataTransfer response = JSonHelper.ConvertJSonToObject(stResponse);
+                            if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                            {
+                                frmMSg.ShowMsg(SGMText.SGM_INFO, SGMText.CUSTOMER_DEL_CUS_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                                LoadCustomerList();
+                            }
+                            else
+                            {
+                                frmMSg.ShowMsg(SGMText.SGM_ERROR, response.ResponseErrorMsg + "\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                            }
+                        }, SynchronizationContext.Current);
                     }                    
                 }
                 
@@ -352,13 +395,22 @@ namespace SGM_Management
                     DataTransfer request = new DataTransfer();
                     request.ResponseDataCustomerDTO = cus;
                     string jsRequest = JSonHelper.ConvertObjectToJSon(request);
-                    string response = m_service.SGMManager_UpdateCustomer(jsRequest, m_stCusIDEdit);
-                    DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
-                    if (dataResponse.ResponseCode != DataTransfer.RESPONSE_CODE_SUCCESS)
+                    Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                    () =>
                     {
-                        frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                        return;
-                    }
+                        return m_service.SGMManager_UpdateCustomer(jsRequest, m_stCusIDEdit);
+                    });
+                    SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                    {
+	                    String stResponse = task.Result as String;
+                        DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+                        if (dataResponse.ResponseCode != DataTransfer.RESPONSE_CODE_SUCCESS)
+                        {
+                            frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                            return;
+                        }
+                    }, SynchronizationContext.Current);
+                    
                     m_stCusIDEdit = "";
                     btnEdit.Text = "&Sửa";
                     LoadCustomerList();
@@ -425,17 +477,25 @@ namespace SGM_Management
                 bool bUnLock = Boolean.Parse(m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_STATE"].ToString());
                 bUnLock = !bUnLock;
                 string stCardID = m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_ID"].ToString();
-                string response = m_service.SGMManager_UpdateCardState(stCardID, bUnLock);
-                DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
-                if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                () =>
                 {
+                    return m_service.SGMManager_UpdateCardState(stCardID, bUnLock);
+                });
+                SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                {
+	                String stResponse = task.Result as String;
+                    DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+                    if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                    {
                    
                     LoadCardList();
-                }
-                else
-                {
+                    }
+                    else
+                    {
                     frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + " :  " + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                }
+                    }
+                }, SynchronizationContext.Current);
             }
         }
 
@@ -457,6 +517,11 @@ namespace SGM_Management
                                  "    + Dầu DO : " + m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["RECHARGE_GASDO_PRICE"] + "\n";
                 frmMSg.ShowMsg(SGMText.SGM_INFO, logInfo, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
             }
+        }
+
+        private void btnDelCard_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

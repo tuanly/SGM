@@ -8,6 +8,8 @@ using System.Windows.Forms;
 using SGM_Core.DTO;
 using SGM_Core.Utils;
 using System.IO.Ports;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SGM_Management
 {
@@ -49,30 +51,38 @@ namespace SGM_Management
 
         private void LoadGasStationList()
         {
-            string jsResponse = m_service.SGMManager_GetGasStation(null);
-            DataTransfer response = JSonHelper.ConvertJSonToObject(jsResponse);
-            dgvGSList.Rows.Clear();
-            m_dsGasStation = response.ResponseDataSet;
-            int iOldSelected = m_iCurrentGSIndex;
-            if (m_dsGasStation != null)
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () =>
             {
-                for (int i = 0; i < m_dsGasStation.Tables[0].Rows.Count; i++)
+                return m_service.SGMManager_GetGasStation(null);
+            });
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+            {
+	            String stResponse = task.Result as String;
+                DataTransfer response = JSonHelper.ConvertJSonToObject(stResponse);
+                dgvGSList.Rows.Clear();
+                m_dsGasStation = response.ResponseDataSet;
+                int iOldSelected = m_iCurrentGSIndex;
+                if (m_dsGasStation != null)
                 {
-                    dgvGSList.Rows.Add();
-                    dgvGSList.Rows[i].Cells[0].Value = (i + 1);
-                    dgvGSList.Rows[i].Cells[1].Value = m_dsGasStation.Tables[0].Rows[i]["GASSTATION_ID"];
-                    dgvGSList.Rows[i].Cells[2].Value = m_dsGasStation.Tables[0].Rows[i]["GASSTATION_NAME"];
-                    dgvGSList.Rows[i].Cells[3].Value = m_dsGasStation.Tables[0].Rows[i]["GASSTATION_ADDRESS"];
+                    for (int i = 0; i < m_dsGasStation.Tables[0].Rows.Count; i++)
+                    {
+                        dgvGSList.Rows.Add();
+                        dgvGSList.Rows[i].Cells[0].Value = (i + 1);
+                        dgvGSList.Rows[i].Cells[1].Value = m_dsGasStation.Tables[0].Rows[i]["GASSTATION_ID"];
+                        dgvGSList.Rows[i].Cells[2].Value = m_dsGasStation.Tables[0].Rows[i]["GASSTATION_NAME"];
+                        dgvGSList.Rows[i].Cells[3].Value = m_dsGasStation.Tables[0].Rows[i]["GASSTATION_ADDRESS"];
                     
-                }
-                if (iOldSelected >= 0)
-                    m_iCurrentGSIndex = iOldSelected;
-                if (m_iCurrentGSIndex >= dgvGSList.Rows.Count)
-                    m_iCurrentGSIndex = -1;
-                if (m_iCurrentGSIndex >= 0)
-                    dgvGSList.Rows[m_iCurrentGSIndex].Selected = true;
+                    }
+                    if (iOldSelected >= 0)
+                        m_iCurrentGSIndex = iOldSelected;
+                    if (m_iCurrentGSIndex >= dgvGSList.Rows.Count)
+                        m_iCurrentGSIndex = -1;
+                    if (m_iCurrentGSIndex >= 0)
+                        dgvGSList.Rows[m_iCurrentGSIndex].Selected = true;
 
-            }
+                }    
+            }, SynchronizationContext.Current);
         }
         private bool ValidateDataInput()
         {
@@ -85,22 +95,31 @@ namespace SGM_Management
             }
             else if (!txtGSCode.Text.Trim().Equals(m_stGSIDEdit))
             {
-                String jsonResponse = m_service.SGMManager_CheckGasStationExist(txtGSCode.Text.Trim());
-                DataTransfer response = JSonHelper.ConvertJSonToObject(jsonResponse);
-                if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                () =>
                 {
-                    if (response.ResponseDataBool)
+                    return m_service.SGMManager_CheckGasStationExist(txtGSCode.Text.Trim());
+                });
+                SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                {
+	                String stResponse = task.Result as String;
+                    DataTransfer response = JSonHelper.ConvertJSonToObject(stResponse);
+                    if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                     {
-                        errProvider.SetError(txtGSCode, SGMText.GASSTATION_DATA_INPUT_EXIST_GS_ID_ERR);
+                        if (response.ResponseDataBool)
+                        {
+                            errProvider.SetError(txtGSCode, SGMText.GASSTATION_DATA_INPUT_EXIST_GS_ID_ERR);
+                            bValidate = false;
+                        }
+                    }
+                    else
+                    {
+                        errProvider.SetError(txtGSCode, SGMText.GASSTATION_GET_GS_ERR);                    
+					    frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.CUSTOMER_GET_CUS_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                         bValidate = false;
                     }
-                }
-                else
-                {
-                    errProvider.SetError(txtGSCode, SGMText.GASSTATION_GET_GS_ERR);                    
-					frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.CUSTOMER_GET_CUS_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                    bValidate = false;
-                }
+                }, SynchronizationContext.Current);
+                
             }
             if (txtGSName.Text.Trim().Equals(""))
             {
@@ -198,13 +217,22 @@ namespace SGM_Management
                 DataTransfer request = new DataTransfer();
                 request.ResponseDataGasStationDTO = gas;
                 string jsRequest = JSonHelper.ConvertObjectToJSon(request);
-                string response = m_service.SGMManager_AddNewGasStaion(jsRequest);
-                DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
-                if (dataResponse.ResponseCode != DataTransfer.RESPONSE_CODE_SUCCESS)
-                {                    
-					frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                    return;
-                }
+                Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                () =>
+                {
+                    return m_service.SGMManager_AddNewGasStaion(jsRequest);
+                });
+                SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                {
+	                String stResponse = task.Result as String;
+                    DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+                    if (dataResponse.ResponseCode != DataTransfer.RESPONSE_CODE_SUCCESS)
+                    {                    
+					    frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                        return;
+                    }
+                }, SynchronizationContext.Current);
+                
 
                 LoadGasStationList();
                 SelectGSRow(gas.GasStationID);
@@ -231,17 +259,26 @@ namespace SGM_Management
 				
                 if (frmMsg.ShowMsg(SGMText.SGM_WARNING, SGMText.CUSTOMER_DEL_CUS_WARNING + "\n" + gasID + " : " + gasName, SGMMessageType.SGM_MESSAGE_TYPE_QUES) == SGMMessageResult.SGM_MESSAGE_RESULT_OK)
                 {
-                    string jsResponse = m_service.SGMManager_DelGasStion(gasID);
-                    DataTransfer response = JSonHelper.ConvertJSonToObject(jsResponse);
-                    if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-                    {                        
-                        frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GASSTATION_DEL_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
-                        LoadGasStationList();
-                    }
-                    else
-                    {                        
-                        frmMsg.ShowMsg(SGMText.SGM_ERROR, response.ResponseErrorMsg + "\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                    }
+                    Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                    () =>
+                    {
+                        return m_service.SGMManager_DelGasStion(gasID);
+                    });
+                    SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                    {
+	                    String stResponse = task.Result as String;
+                        DataTransfer response = JSonHelper.ConvertJSonToObject(stResponse);
+                        if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                        {                        
+                            frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GASSTATION_DEL_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                            LoadGasStationList();
+                        }
+                        else
+                        {                        
+                            frmMsg.ShowMsg(SGMText.SGM_ERROR, response.ResponseErrorMsg + "\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                        }
+                    }, SynchronizationContext.Current);
+                    
                 }
             }
         }
@@ -273,13 +310,22 @@ namespace SGM_Management
                     DataTransfer request = new DataTransfer();
                     request.ResponseDataGasStationDTO = gas;
                     string jsRequest = JSonHelper.ConvertObjectToJSon(request);
-                    string response = m_service.SGMManager_UpdateGasStation(jsRequest, m_stGSIDEdit);
-                    DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(response);
-                    if (dataResponse.ResponseCode != DataTransfer.RESPONSE_CODE_SUCCESS)
-                    {                        
-                        frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                        return;
-                    }
+                    Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                    () =>
+                    {
+                        return m_service.SGMManager_UpdateGasStation(jsRequest, m_stGSIDEdit);
+                    });
+                    SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+                    {
+	                    String stResponse = task.Result as String;
+                        DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+                        if (dataResponse.ResponseCode != DataTransfer.RESPONSE_CODE_SUCCESS)
+                        {                        
+                            frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                            return;
+                        }
+                    }, SynchronizationContext.Current);
+                    
                     m_stGSIDEdit = "";
                     btnEdit.Text = "&Sửa";
                     LoadGasStationList();
