@@ -101,7 +101,7 @@ namespace SGM_Management
             Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
             () =>
             {
-                return m_service.SGMSaleGas_GetCardReport(customerId, date_begin, date_end);
+                return m_service.SGMSaleGas_GetCardReport(customerId, date_begin, date_end, txtRechargeCardID.Text.Trim());
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
@@ -124,9 +124,14 @@ namespace SGM_Management
         private bool ValidateDataSaleGasInput()
         {
             bool validate = true;
-            if (dtpSaleGasBegin.Value > dtpSaleGasEnd.Value)
+            if (dtpSaleGasBegin.Value.Date > dtpSaleGasEnd.Value.Date)
             {                
                 frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.REPORT_INPUT_DATE_ERROR, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                validate = false;
+            }
+            else if (cboGasStation.Items.Count <= 0)
+            {
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.REPORT_INPUT_GASSTATION_EMPTY, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 validate = false;
             }
             return validate;
@@ -134,14 +139,14 @@ namespace SGM_Management
         private bool ValidateDataCardInput()
         {
             bool validate = true;
-            if (dtpRechargeCardBegin.Value > dtpRechargeCardEnd.Value)
+            if (dtpRechargeCardBegin.Value.Date > dtpRechargeCardEnd.Value.Date)
             {
                 frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.REPORT_INPUT_DATE_ERROR, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 validate = false;
             }
-            else if (cboGasStation.Items.Count <= 0)
+            else if (cboRechargeCardCustomer.Items.Count <= 0)
             {
-                frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.REPORT_INPUT_GASSTATION_EMPTY, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.REPORT_INPUT_CUSTOMER_EMPTY, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 validate = false;
             }
             return validate;
@@ -210,6 +215,10 @@ namespace SGM_Management
                     DataTable tblResult = ds.Tables[0];
                     if (tblResult.Rows.Count > 0)
                     {
+                        ComboboxItem itemAll = new ComboboxItem();
+                        itemAll.Text = SGMText.REPORT_ALL;
+                        itemAll.Value = "";
+                        cboRechargeCardCustomer.Items.Add(itemAll);
                         foreach (DataRow dr in tblResult.Rows)
                         {
                             ComboboxItem item = new ComboboxItem();

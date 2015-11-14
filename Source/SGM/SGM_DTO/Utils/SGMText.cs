@@ -81,7 +81,8 @@ namespace SGM_Core.Utils
 
         public static string REPORT_NO_DATA = "Không có dữ liệu!";
         public static string REPORT_INPUT_DATE_ERROR = "Chọn khoảng thời gian ko hợp lệ!";
-        public static string REPORT_INPUT_GASSTATION_EMPTY = "Danh sách trạm xăng rỗng";
+        public static string REPORT_INPUT_GASSTATION_EMPTY = "Danh sách Trạm Xăng rỗng";
+        public static string REPORT_INPUT_CUSTOMER_EMPTY = "Danh sách Khách Hàng rỗng";
         public static string REPORT_ALL = "Tất Cả";
 
         public static string SALEGAS_LOGIN_INPUT_ERROR = "Lỗi, Chưa nhập mã đăng nhập!";

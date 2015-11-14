@@ -300,6 +300,7 @@
             // 
             // cboRechargeCardCustomer
             // 
+            this.cboRechargeCardCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboRechargeCardCustomer.FormattingEnabled = true;
             this.cboRechargeCardCustomer.Location = new System.Drawing.Point(90, 23);
             this.cboRechargeCardCustomer.Name = "cboRechargeCardCustomer";

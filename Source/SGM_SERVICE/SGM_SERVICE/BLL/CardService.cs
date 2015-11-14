@@ -69,9 +69,9 @@ namespace SGM.ServicesCore.BLL
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
 
-        public string GetCardReport(string stGasStationID, DateTime dateStart, DateTime dateEnd)
+        public string GetCardReport(string stGasStationID, DateTime dateStart, DateTime dateEnd, string stCardID)
         {
-            DataTransfer dataResult = m_dalCard.GetCardReport(stGasStationID, dateStart, dateEnd);
+            DataTransfer dataResult = m_dalCard.GetCardReport(stGasStationID, dateStart, dateEnd, stCardID);
             return JSonHelper.ConvertObjectToJSon(dataResult);
         }
     }
