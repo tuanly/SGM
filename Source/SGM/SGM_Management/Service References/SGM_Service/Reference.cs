@@ -437,13 +437,17 @@ namespace SGM_Management.SGM_Service {
         [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
         public System.DateTime dateEnd;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string stCardID;
+        
         public SGMSaleGas_GetSaleGasReportRequestBody() {
         }
         
-        public SGMSaleGas_GetSaleGasReportRequestBody(string stGasStationID, System.DateTime dateStart, System.DateTime dateEnd) {
+        public SGMSaleGas_GetSaleGasReportRequestBody(string stGasStationID, System.DateTime dateStart, System.DateTime dateEnd, string stCardID) {
             this.stGasStationID = stGasStationID;
             this.dateStart = dateStart;
             this.dateEnd = dateEnd;
+            this.stCardID = stCardID;
         }
     }
     
@@ -2231,12 +2235,13 @@ namespace SGM_Management.SGM_Service {
             return base.Channel.SGMSaleGas_GetSaleGasReport(request);
         }
         
-        public string SGMSaleGas_GetSaleGasReport(string stGasStationID, System.DateTime dateStart, System.DateTime dateEnd) {
+        public string SGMSaleGas_GetSaleGasReport(string stGasStationID, System.DateTime dateStart, System.DateTime dateEnd, string stCardID) {
             SGM_Management.SGM_Service.SGMSaleGas_GetSaleGasReportRequest inValue = new SGM_Management.SGM_Service.SGMSaleGas_GetSaleGasReportRequest();
             inValue.Body = new SGM_Management.SGM_Service.SGMSaleGas_GetSaleGasReportRequestBody();
             inValue.Body.stGasStationID = stGasStationID;
             inValue.Body.dateStart = dateStart;
             inValue.Body.dateEnd = dateEnd;
+            inValue.Body.stCardID = stCardID;
             SGM_Management.SGM_Service.SGMSaleGas_GetSaleGasReportResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMSaleGas_GetSaleGasReport(inValue);
             return retVal.Body.SGMSaleGas_GetSaleGasReportResult;
         }

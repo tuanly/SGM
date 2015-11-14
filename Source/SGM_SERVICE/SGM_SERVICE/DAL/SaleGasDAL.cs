@@ -131,22 +131,56 @@ namespace SGM.ServicesCore.DAL
             return result;
         }
 
-        public DataTransfer GetSaleGasReport(string stGasStationID, DateTime dateStart, DateTime dateEnd)
+        public DataTransfer GetSaleGasReport(string stGasStationID, DateTime dateStart, DateTime dateEnd, string stCardID)
         {
             DataTransfer res = new DataTransfer();
             try
             {
-                string query = string.Format("SELECT * FROM SALE_GAS WHERE GASSTATION_ID = @GASSTATION_ID AND SALEGAS_DATE BETWEEN @STARTDATE AND @ENDDATE");
-                SqlParameter[] sqlParameters = new SqlParameter[3];
-                sqlParameters[0] = new SqlParameter("@GASSTATION_ID", SqlDbType.Int);
-                sqlParameters[0].Value = stGasStationID;
-                sqlParameters[1] = new SqlParameter("@STARTDATE", SqlDbType.DateTime);
-                sqlParameters[1].Value = dateStart;
-                sqlParameters[2] = new SqlParameter("@ENDDATE", SqlDbType.DateTime);
-                sqlParameters[2].Value = dateEnd;
+                int numParam = 2;
+                string query = string.Format("SELECT * FROM SALE_GAS, GAS_STATION, CARD, CUSTOMER WHERE SALEGAS_DATE BETWEEN @STARTDATE AND @ENDDATE AND GAS_STATION.GASSTATION_ID = SALE_GAS.GASSTATION_ID AND SALE_GAS.CARD_ID = CARD.CARD_ID AND CARD.CUS_ID = CUSTOMER.CUS_ID ");
+                
+                if (!stGasStationID.Equals(""))
+                {
+                    numParam++;
+                    query += string.Format(" AND GAS_STATION.GASSTATION_ID = @GASSTATION_ID");
+                }
+                if (!stCardID.Trim().Equals(""))
+                {
+                    numParam++;
+                    query += string.Format(" AND SALE_GAS.CARD_ID = @CARD_ID");
+                }
+                //res.ResponseDataString = query;
+                SqlParameter[] sqlParameters = new SqlParameter[numParam];
+                sqlParameters[0] = new SqlParameter("@STARTDATE", SqlDbType.DateTime);
+                sqlParameters[0].Value = dateStart;
+                sqlParameters[1] = new SqlParameter("@ENDDATE", SqlDbType.DateTime);
+                sqlParameters[1].Value = dateEnd;
+                if (numParam == 3)
+                {
+                    if (!stGasStationID.Equals(""))
+                    {
+                        sqlParameters[2] = new SqlParameter("@GASSTATION_ID", SqlDbType.NVarChar);
+                        sqlParameters[2].Value = stGasStationID;
+                    }
+                    else
+                    {
+                        sqlParameters[2] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
+                        sqlParameters[2].Value = stCardID;
+                    }
+                }
+                else if (numParam == 4)
+                {
+                    sqlParameters[2] = new SqlParameter("@GASSTATION_ID", SqlDbType.NVarChar);
+                    sqlParameters[2].Value = stGasStationID;
+                    sqlParameters[3] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
+                    sqlParameters[3].Value = stCardID;
+                }
+
+                
+                
                 DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
                 res.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
-                if (tblResult.Rows.Count > 0)
+                if (tblResult != null && tblResult.Rows.Count > 0)
                 {
                     DataSet ds = new DataSet();
                     ds.Tables.Add(tblResult.Copy());
@@ -156,8 +190,9 @@ namespace SGM.ServicesCore.DAL
             catch (Exception e)
             {
                 res.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                res.ResponseErrorMsg = e.Message;
+                res.ResponseErrorMsg = e.StackTrace;
             }
+
             return res;
         }
     }

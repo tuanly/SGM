@@ -179,6 +179,7 @@
             // 
             // cboGasStation
             // 
+            this.cboGasStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboGasStation.FormattingEnabled = true;
             this.cboGasStation.Location = new System.Drawing.Point(90, 23);
             this.cboGasStation.Name = "cboGasStation";

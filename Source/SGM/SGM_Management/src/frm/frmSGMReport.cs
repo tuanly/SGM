@@ -62,7 +62,7 @@ namespace SGM_Management
                 Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
                 () =>
                 {
-                    return m_service.SGMSaleGas_GetSaleGasReport(gasStationId, date_begin, date_end);
+                    return m_service.SGMSaleGas_GetSaleGasReport(gasStationId, date_begin, date_end, txtSaleGasCardID.Text.Trim());
                 });
                 
                 SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
@@ -139,6 +139,11 @@ namespace SGM_Management
                 frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.REPORT_INPUT_DATE_ERROR, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 validate = false;
             }
+            else if (cboGasStation.Items.Count <= 0)
+            {
+                frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.REPORT_INPUT_GASSTATION_EMPTY, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                validate = false;
+            }
             return validate;
         }
 
@@ -166,6 +171,10 @@ namespace SGM_Management
                     DataTable tblResult = ds.Tables[0];
                     if (tblResult.Rows.Count > 0)
                     {
+                        ComboboxItem itemAll = new ComboboxItem();
+                        itemAll.Text = SGMText.REPORT_ALL;
+                        itemAll.Value = "";
+                        cboGasStation.Items.Add(itemAll);
                         foreach (DataRow dr in tblResult.Rows)
                         {
                             ComboboxItem item = new ComboboxItem();

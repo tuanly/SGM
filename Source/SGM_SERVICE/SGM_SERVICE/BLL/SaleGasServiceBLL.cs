@@ -90,10 +90,10 @@ namespace SGM.ServicesCore.BLL
             return dalCard.UpdateSaleGas(dtoCard);
         }
 
-        public string GetSaleGasReport(string stGasStationID, DateTime dateStart, DateTime dateEnd)
+        public string GetSaleGasReport(string stGasStationID, DateTime dateStart, DateTime dateEnd, string stCardID)
         {
             SaleGasDAL dal = new SaleGasDAL();
-            DataTransfer dataResult = dal.GetSaleGasReport(stGasStationID, dateStart, dateEnd);
+            DataTransfer dataResult = dal.GetSaleGasReport(stGasStationID, dateStart, dateEnd, stCardID);
             return JSonHelper.ConvertObjectToJSon(dataResult);
         }
     }

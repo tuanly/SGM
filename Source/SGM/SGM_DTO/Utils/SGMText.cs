@@ -81,6 +81,8 @@ namespace SGM_Core.Utils
 
         public static string REPORT_NO_DATA = "Không có dữ liệu!";
         public static string REPORT_INPUT_DATE_ERROR = "Chọn khoảng thời gian ko hợp lệ!";
+        public static string REPORT_INPUT_GASSTATION_EMPTY = "Danh sách trạm xăng rỗng";
+        public static string REPORT_ALL = "Tất Cả";
 
         public static string SALEGAS_LOGIN_INPUT_ERROR = "Lỗi, Chưa nhập mã đăng nhập!";
         public static string SALEGAS_MAIN_BILL = "Thanh Toán cho Thẻ : ";
@@ -92,5 +94,7 @@ namespace SGM_Core.Utils
         public static string GAS_BUYING_INPUT_MONEY_INVALID = "Số tiền không hợp lệ!";
         public static string GAS_BUYING_INPUT_MONEY_FAIL = "Số tiền trong thẻ không đủ!";
         public static string GAS_BUYING_INPUT_TOTAL_GAS_FAIL = "Số xăng trong kho không đủ!";
+
+        
     }
 }
