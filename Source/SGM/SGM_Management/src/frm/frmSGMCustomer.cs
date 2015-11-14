@@ -9,6 +9,7 @@ using SGM_Core.DTO;
 using SGM_Core.Utils;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO.Ports;
 
 namespace SGM_Management
 {
@@ -24,11 +25,17 @@ namespace SGM_Management
 
         private int m_iCurrentCardIndex = -1;
         private frmSGMMessage frmMSg = null;
+        private SerialDataReceivedEventHandler serialDatahandler = null;
+        
+        frmSGMRechargeCard frmRechard = null;
         public frmSGMCustomer()
         {
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
             frmMSg = new frmSGMMessage();
+            frmRechard = new frmSGMRechargeCard();
+            serialDatahandler = new SerialDataReceivedEventHandler(CardReaderReceivedHandler);
+            RFIDReader.RegistryReaderListener(Program.ReaderPort, serialDatahandler);
         }
 
         private void UpdateStateControls(bool isEditMode)
@@ -65,21 +72,24 @@ namespace SGM_Management
 
         private void btnBuyCard_Click(object sender, EventArgs e)
         {
-            frmSGMRechargeCard frmRechard = new frmSGMRechargeCard();
+                     
             frmRechard.StateRecharge = false;
             frmRechard.CusID = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString();
-            frmRechard.ShowDialog();
-            LoadCardList();
+            frmRechard.ShowRecharge(this);
+           
+            //LoadCardList();
+           
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (btnAdd.Text.Equals("&Thêm"))
             {
-                txtCusID.Focus();
+                
                 btnAdd.Text = "&Lưu";
                 UpdateStateControls(true);               
-                clearInput();            
+                clearInput();
+                txtCusID.Focus();
             }
             else
             {               
@@ -112,11 +122,12 @@ namespace SGM_Management
                         frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                         return;
                     }
+                    LoadCustomerList();
+                    SelectCustomeRow(cus.CustomerID);
+                    UpdateStateControls(false);
+                    btnAdd.Text = "&Thêm";
                 }, SynchronizationContext.Current);
-                LoadCustomerList();
-                SelectCustomeRow(cus.CustomerID);
-                UpdateStateControls(false);               
-                btnAdd.Text = "&Thêm";
+                
             }           
         }
 
@@ -220,7 +231,7 @@ namespace SGM_Management
             
         }
 
-        private void LoadCardList()
+        public void LoadCardList()
         {
             if (m_iCurrentCustomerIndex >= 0)
             {
@@ -415,13 +426,14 @@ namespace SGM_Management
                             frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                             return;
                         }
+                        m_stCusIDEdit = "";
+                        btnEdit.Text = "&Sửa";
+                        LoadCustomerList();
+                        SelectCustomeRow(cus.CustomerID);
+                        UpdateStateControls(false);
                     }, SynchronizationContext.Current);
                     
-                    m_stCusIDEdit = "";
-                    btnEdit.Text = "&Sửa";
-                    LoadCustomerList();
-                    SelectCustomeRow(cus.CustomerID);
-                    UpdateStateControls(false);
+                    
                 }
             }
             
@@ -446,13 +458,16 @@ namespace SGM_Management
 
         private void btnRecharge_Click(object sender, EventArgs e)
         {
+           
             frmSGMRechargeCard frmRechard = new frmSGMRechargeCard();
             frmRechard.StateRecharge = true;
             frmRechard.CardID = m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_ID"].ToString();
             frmRechard.CurrentCardMoney = Int32.Parse(m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_MONEY"].ToString());
             frmRechard.CusID = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString();
-            frmRechard.ShowDialog();
-            LoadCardList();
+            frmRechard.ShowRecharge(this);
+           
+           
+            //LoadCardList();
         }
 
         private void dgvCardList_SelectionChanged(object sender, EventArgs e)
@@ -473,6 +488,7 @@ namespace SGM_Management
                     btnRecharge.Enabled = false;
                     btnLockCard.Text = "&Mở khóa Thẻ";
                 }
+                btnLockCard.Enabled = true;
             }
         }
 
@@ -528,6 +544,59 @@ namespace SGM_Management
         private void btnDelCard_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void frmSGMCustomer_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            RFIDReader.UnRegistryReaderListener(Program.ReaderPort, serialDatahandler);
+        }
+        private void CardReaderReceivedHandler(
+                       object sender,
+                       SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                SerialPort sp = (SerialPort)sender;
+                if (txtCusID.Enabled == true)
+                {
+                    txtCusID.Invoke(new MethodInvoker(delegate { txtCusID.Text = sp.ReadLine(); }));
+                }
+                else
+                {
+                    bool isSearch = false;
+                    txtSearch.Invoke(new MethodInvoker(delegate { isSearch = txtSearch.Focused; }));
+                    if (isSearch)
+                    {
+                        txtSearch.Invoke(new MethodInvoker(delegate { txtSearch.Text = sp.ReadLine(); }));
+                        this.Invoke(new MethodInvoker(delegate { searchCustomer(); }));
+                    }
+                    else if (!frmRechard.Visible)
+                    {
+                        this.Invoke(new MethodInvoker(delegate { searchCardID(sp.ReadLine()); }));
+                    }
+                    
+                }
+            }
+            catch (TimeoutException)
+            {
+            }
+
+
+
+        }
+
+        private void searchCardID(String cardID)
+        {
+            if (dgvCardList.Rows.Count > 0)
+            {
+                for (int i = 0; i < dgvCardList.Rows.Count; i++)
+                {
+                    if ((dgvCardList.Rows[i].Cells["colCardID"].Value + "\r" ).Equals(cardID))
+                    {
+                        dgvCardList.Rows[i].Selected = true;
+                    }
+                }
+            }
         }
     }
 }

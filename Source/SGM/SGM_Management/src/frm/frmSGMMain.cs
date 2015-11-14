@@ -41,6 +41,7 @@ namespace SGM_Management
                 m_btnCurrenButton = btnHome;
                 m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
             }
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this);
         }
 
         private void button3_Click(object sender, EventArgs e)

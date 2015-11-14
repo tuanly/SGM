@@ -197,10 +197,11 @@ namespace SGM_Management
         {
             if (btnAdd.Text.Equals("&Thêm"))
             {
-                txtGSCode.Focus();
+                
                 btnAdd.Text = "&Lưu";
                 UpdateStateControls(true);
                 clearInput();
+                txtGSCode.Focus();
             }
             else
             {
@@ -231,13 +232,15 @@ namespace SGM_Management
 					    frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                         return;
                     }
+                    btnAdd.Text = "&Thêm";
+                    LoadGasStationList();
+                    SelectGSRow(gas.GasStationID);
+                    UpdateStateControls(false);
+                    
                 }, SynchronizationContext.Current);
                 
 
-                LoadGasStationList();
-                SelectGSRow(gas.GasStationID);
-                UpdateStateControls(false);
-                btnAdd.Text = "&Thêm";
+                
             } 
         }
 
@@ -271,6 +274,8 @@ namespace SGM_Management
                         if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                         {                        
                             frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GASSTATION_DEL_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                            if (m_iCurrentGSIndex == dgvGSList.RowCount - 1)
+                                m_iCurrentGSIndex--;
                             LoadGasStationList();
                         }
                         else
@@ -324,13 +329,14 @@ namespace SGM_Management
                             frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg + "\n" + dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                             return;
                         }
+                        m_stGSIDEdit = "";
+                        btnEdit.Text = "&Sửa";
+                        LoadGasStationList();
+                        SelectGSRow(gas.GasStationID);
+                        UpdateStateControls(false);
                     }, SynchronizationContext.Current);
                     
-                    m_stGSIDEdit = "";
-                    btnEdit.Text = "&Sửa";
-                    LoadGasStationList();
-                    SelectGSRow(gas.GasStationID);
-                    UpdateStateControls(false);
+                   
                 }
             }
         }

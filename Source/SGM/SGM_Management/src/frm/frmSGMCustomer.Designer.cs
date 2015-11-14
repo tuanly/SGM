@@ -524,6 +524,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSGMCustomer";
             this.Text = "SGM - Quản lý Khách Hàng";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSGMCustomer_FormClosing);
             this.Load += new System.EventHandler(this.frmSGMCustomer_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

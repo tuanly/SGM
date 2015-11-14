@@ -28,6 +28,7 @@ namespace SGM_Management
         private SGM_Service.ServiceSoapClient m_service;
         private frmSGMMessage frmMsg = null;
         private SerialDataReceivedEventHandler serialDatahandler = null;
+        private frmSGMCustomer frmParent;
         public frmSGMRechargeCard()
         {
             InitializeComponent();
@@ -211,18 +212,7 @@ namespace SGM_Management
 
         private void frmSGMRechargeCard_Load(object sender, EventArgs e)
         {
-            if (m_bRecharge)
-            {               
-                txtCardID.Enabled = false;
-                txtCardID.Text = m_stCardID;
-            }
-            else
-            {
-                txtCardID.Enabled = true;
-                ResetInput();
-                txtCardID.Focus();
-            }
-            GetPriceGas();
+            
         }
 
         private bool ValidateDataInput()
@@ -309,31 +299,45 @@ namespace SGM_Management
 
         private void GetPriceGas()
         {
-           bool bHasErr = true;
-                DataTransfer dataResult = JSonHelper.ConvertJSonToObject(m_service.SGMManager_GetCurrentPrice(SystemAdminDTO.GAS_TYPE_92));
+           
+           Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+               () =>
+               {
+                   return m_service.SGMManager_GetCurrentPrice(SystemAdminDTO.GAS_TYPE_92);
+               });
+           SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+           {
+               bool bHasErr = true;
+               String stResponse = task.Result as String;
+               DataTransfer dataResult = JSonHelper.ConvertJSonToObject(stResponse);
+               if (dataResult.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+               {
+                   m_iPriceGas92 = dataResult.ResponseDataInt;
+                   dataResult = JSonHelper.ConvertJSonToObject(m_service.SGMManager_GetCurrentPrice(SystemAdminDTO.GAS_TYPE_95));
+                   if (dataResult.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                   {
+                       m_iPriceGas95 = dataResult.ResponseDataInt;
+                       dataResult = JSonHelper.ConvertJSonToObject(m_service.SGMManager_GetCurrentPrice(SystemAdminDTO.GAS_TYPE_DO));
+                       if (dataResult.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                       {
+                           m_iPriceGasDO = dataResult.ResponseDataInt;
+                           bHasErr = false;
+                       }
+                   }
+               }
+               if (bHasErr)
+               {
+                   m_iPriceGas92 = m_iPriceGas95 = m_iPriceGasDO = 0;
+                   frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.SYS_ADMIN_GET_PRICE_ERR + "\n" + dataResult.ResponseErrorMsg + ":" + dataResult.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+               }
 
-                if (dataResult.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-                {
-                    m_iPriceGas92 = dataResult.ResponseDataInt;
-                    dataResult = JSonHelper.ConvertJSonToObject(m_service.SGMManager_GetCurrentPrice(SystemAdminDTO.GAS_TYPE_95));
-                    if (dataResult.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-                    {
-                        m_iPriceGas95 = dataResult.ResponseDataInt;
-                        dataResult = JSonHelper.ConvertJSonToObject(m_service.SGMManager_GetCurrentPrice(SystemAdminDTO.GAS_TYPE_DO));
-                        if (dataResult.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-                        {
-                            m_iPriceGasDO = dataResult.ResponseDataInt;
-                            bHasErr = false;
-                        }
-                    }                    
-                }
-                if (bHasErr)
-                {
-                    m_iPriceGas92 = m_iPriceGas95 = m_iPriceGasDO = 0;
-                    frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.SYS_ADMIN_GET_PRICE_ERR + "\n" + dataResult.ResponseErrorMsg + ":" + dataResult.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                }
+               txtRechargeGasPrice.Text = SGMText.GAS_92_TEXT + " : " + m_iPriceGas92 + "đ - " + SGMText.GAS_95_TEXT + " : " + m_iPriceGas95 + "đ - " + SGMText.GAS_DO_TEXT + " : " + m_iPriceGasDO + "đ";
+               this.Enabled = true;
+               ShowDialog();
+           }, SynchronizationContext.Current);
 
-                txtRechargeGasPrice.Text = SGMText.GAS_92_TEXT + " : " + m_iPriceGas92 + "đ - " + SGMText.GAS_95_TEXT + " : " + m_iPriceGas95 + "đ - " + SGMText.GAS_DO_TEXT + " : " + m_iPriceGasDO + "đ";
+               
+                
         }
         private void CardReaderReceivedHandler(
                        object sender,
@@ -342,7 +346,7 @@ namespace SGM_Management
             try
             {
                 SerialPort sp = (SerialPort)sender;
-                if (txtCardID.Enabled == true)
+                if (txtCardID.Enabled == true && this.Visible)
                 {
                     txtCardID.Invoke(new MethodInvoker(delegate { txtCardID.Text = sp.ReadLine(); }));
                 }
@@ -358,6 +362,25 @@ namespace SGM_Management
         private void frmSGMRechargeCard_FormClosing(object sender, FormClosingEventArgs e)
         {
             RFIDReader.UnRegistryReaderListener(Program.ReaderPort, serialDatahandler);
+            frmParent.LoadCardList();
+        }
+        
+        public void ShowRecharge(frmSGMCustomer frmParent)
+        {
+            this.frmParent = frmParent;
+          
+            if (m_bRecharge)
+            {
+                txtCardID.Enabled = false;
+                txtCardID.Text = m_stCardID;
+            }
+            else
+            {
+                txtCardID.Enabled = true;
+                ResetInput();
+                txtCardID.Focus();
+            }
+            GetPriceGas();
         }
 
     }
