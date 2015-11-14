@@ -291,14 +291,20 @@ namespace SGM_Management
 
         private void txtCardMoney_KeyPress(object sender, KeyPressEventArgs e)
         {
-            int isNumber = 0;
-            e.Handled = !int.TryParse(e.KeyChar.ToString(), out isNumber);
+            if (e.KeyChar != (char)Keys.Back)
+            {
+                int isNumber = 0;
+                e.Handled = !int.TryParse(e.KeyChar.ToString(), out isNumber);
+            }
         }
 
         private void txtRechargeMoney_KeyPress(object sender, KeyPressEventArgs e)
         {
-            int isNumber = 0;
-            e.Handled = !int.TryParse(e.KeyChar.ToString(), out isNumber);
+            if (e.KeyChar != (char)Keys.Back)
+            {
+                int isNumber = 0;
+                e.Handled = !int.TryParse(e.KeyChar.ToString(), out isNumber);
+            }
         }
 
         private void GetPriceGas()

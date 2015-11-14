@@ -25,6 +25,8 @@ namespace SGM_SaleGas
         SystemAdminDTO _adminDTO;
         JSonHelper m_jsHelper;
         SerialDataReceivedEventHandler serailReaderHandler = null;
+        private const int TIME_OUT_RESET = 120;
+        private int m_iTimeOutReset = 0;
 
         private frmSGMCardDetail frmCardInfo = null;
         private bool m_bCardReaded = false;
@@ -46,7 +48,7 @@ namespace SGM_SaleGas
         }
 
         private string MONEY_FORMAT = "#,##0";
-        private string _cardId = "card0001";
+        //private string _cardId = "card0001";
         private int _moneyBuying = 20000;
 
         public frmSGMSaleGas(SystemAdminDTO adminDTO, GasStationDTO gasStationDTO, int priceGas92, int priceGas95, int priceGasDO)
@@ -92,32 +94,35 @@ namespace SGM_SaleGas
         }
 
         private void updateGasChoice(gasTransactType t)
-        {           
-            switch (t)
+        {
+            if (_rechargeDTO != null)
             {
-                case gasTransactType.gas92:
-                    txtGasType.Text = SGMText.GAS_92_TEXT;
-                    m_iCurrentPrice = m_iCurrentPriceGas92;
-                    m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGas92Price ? _rechargeDTO.RechargeGas92Price : m_iCurrentPrice;
-                    txtPrice.Text = _rechargeDTO.RechargeGas92Price.ToString(MONEY_FORMAT);
-                    m_iCurrentTotal = _adminDTO.SysGas92Total;
-                    break;
-                case gasTransactType.gas95:
-                    txtGasType.Text = SGMText.GAS_95_TEXT;
-                    m_iCurrentPrice = m_iCurrentPriceGas95;
-                    m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGas95Price ? _rechargeDTO.RechargeGas95Price : m_iCurrentPrice;
-                    txtPrice.Text = _rechargeDTO.RechargeGas95Price.ToString(MONEY_FORMAT);
-                    m_iCurrentTotal = _adminDTO.SysGas95Total;
-                    break;
-                case gasTransactType.gasDO:
-                    txtGasType.Text = SGMText.GAS_DO_TEXT;
-                    m_iCurrentPrice = m_iCurrentPriceGasDO;
-                    m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGasDOPrice ? _rechargeDTO.RechargeGasDOPrice : m_iCurrentPrice;
-                    txtPrice.Text = _rechargeDTO.RechargeGasDOPrice.ToString(MONEY_FORMAT);
-                    m_iCurrentTotal = _adminDTO.SysGasDOTotal;
-                    break;
+                switch (t)
+                {
+                    case gasTransactType.gas92:
+                        txtGasType.Text = SGMText.GAS_92_TEXT;
+                        m_iCurrentPrice = m_iCurrentPriceGas92;
+                        m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGas92Price ? _rechargeDTO.RechargeGas92Price : m_iCurrentPrice;
+                        txtPrice.Text = _rechargeDTO.RechargeGas92Price.ToString(MONEY_FORMAT);
+                        m_iCurrentTotal = _adminDTO.SysGas92Total;
+                        break;
+                    case gasTransactType.gas95:
+                        txtGasType.Text = SGMText.GAS_95_TEXT;
+                        m_iCurrentPrice = m_iCurrentPriceGas95;
+                        m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGas95Price ? _rechargeDTO.RechargeGas95Price : m_iCurrentPrice;
+                        txtPrice.Text = _rechargeDTO.RechargeGas95Price.ToString(MONEY_FORMAT);
+                        m_iCurrentTotal = _adminDTO.SysGas95Total;
+                        break;
+                    case gasTransactType.gasDO:
+                        txtGasType.Text = SGMText.GAS_DO_TEXT;
+                        m_iCurrentPrice = m_iCurrentPriceGasDO;
+                        m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGasDOPrice ? _rechargeDTO.RechargeGasDOPrice : m_iCurrentPrice;
+                        txtPrice.Text = _rechargeDTO.RechargeGasDOPrice.ToString(MONEY_FORMAT);
+                        m_iCurrentTotal = _adminDTO.SysGasDOTotal;
+                        break;
+                }
+                calculatePay();
             }
-            calculatePay();
         }
 
         private void calculatePay()
@@ -171,16 +176,19 @@ namespace SGM_SaleGas
         private void rbGas95_CheckedChanged(object sender, EventArgs e)
         {
             updateGasChoice(gasTransactType.gas95);
+            m_iTimeOutReset = 0;
         }
 
         private void rbGas92_CheckedChanged(object sender, EventArgs e)
         {
             updateGasChoice(gasTransactType.gas92);
+            m_iTimeOutReset = 0;
         }
 
         private void rbGasDO_CheckedChanged(object sender, EventArgs e)
         {
             updateGasChoice(gasTransactType.gasDO);
+            m_iTimeOutReset = 0;
         }
 
         private void label8_Click(object sender, EventArgs e)
@@ -250,6 +258,7 @@ namespace SGM_SaleGas
                             m_bBuy = false;
                             updateGasChoice(rbGas92.Checked ? gasTransactType.gas92 : rbGas95.Checked ? gasTransactType.gas95 : gasTransactType.gasDO);
                             txtMoney.Focus();
+                            m_iTimeOutReset = 0;
                         }
                         else
                         {
@@ -275,6 +284,7 @@ namespace SGM_SaleGas
                 frmCardInfo = new frmSGMCardDetail(_cardDTO, _rechargeDTO);
                 frmCardInfo.ShowDialog();
             }
+            m_iTimeOutReset = 0;
         }
 
         private void CardReaderReceivedHandler(
@@ -301,6 +311,7 @@ namespace SGM_SaleGas
 
         private void btnBuy_Click(object sender, EventArgs e)
         {
+            m_iTimeOutReset = 0;
             if (txtMoney.Text == "0")
             {
                 errorProvider.SetError(txtMoney, SGMText.GAS_BUYING_INPUT_MONEY_INVALID);
@@ -328,7 +339,7 @@ namespace SGM_SaleGas
                 if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                 {
                     m_bBuy = true;
-                    frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GAS_BUYING_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                    //frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GAS_BUYING_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
                    // _cardDTO.CardRemainingMoney = _cardDTO.CardRemainingMoney - _moneyBuying;
                    // txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
                    // calculatePay();
@@ -337,6 +348,7 @@ namespace SGM_SaleGas
                     txtCardID.Text = "";
                     txtCardMoney.Text = "";
                     txtMoney.Text = "0";
+                   
                     
                 }
                 else
@@ -397,6 +409,29 @@ namespace SGM_SaleGas
                 m_bCardReaded = false;
                 ScanCard(txtCardID.Text);
             }
+        }
+
+        private void txtMoney_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            
+            if (e.KeyChar != (char)Keys.Back)
+            {
+                int isNumber = 0;
+                e.Handled = !int.TryParse(e.KeyChar.ToString(), out isNumber);
+            }
+        }
+
+        private void timeMain_Tick(object sender, EventArgs e)
+        {
+            if (m_iTimeOutReset++ > TIME_OUT_RESET)
+            {
+                m_iTimeOutReset = 0;
+                resetForm();
+                EnableTransaction(false, !false);
+                if (frmCardInfo != null && frmCardInfo.Visible)
+                    frmCardInfo.Close();
+            }
+            
         }
         
     }

@@ -59,6 +59,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.timeCardReader = new System.Windows.Forms.Timer(this.components);
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.timeMain = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.grBill.SuspendLayout();
@@ -196,6 +197,7 @@
             this.txtMoney.Text = "20,000";
             this.txtMoney.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtMoney.TextChanged += new System.EventHandler(this.txtMoney_TextChanged);
+            this.txtMoney.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMoney_KeyPress);
             // 
             // rbGasDO
             // 
@@ -393,6 +395,12 @@
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // timeMain
+            // 
+            this.timeMain.Enabled = true;
+            this.timeMain.Interval = 500;
+            this.timeMain.Tick += new System.EventHandler(this.timeMain_Tick);
+            // 
             // frmSGMSaleGas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -453,5 +461,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Timer timeCardReader;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.Timer timeMain;
     }
 }
