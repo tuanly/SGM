@@ -38,7 +38,7 @@ namespace SGM_Management
             dateTimePicker1.CustomFormat = "dd/MM/yyyy hh:mm:ss tt";
 
             DataToUIView();
-            SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this);
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this.ParentForm);
         }
 
         

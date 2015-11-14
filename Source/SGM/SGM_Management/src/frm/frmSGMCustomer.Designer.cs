@@ -523,7 +523,6 @@
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSGMCustomer";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SGM - Quản lý Khách Hàng";
             this.Load += new System.EventHandler(this.frmSGMCustomer_Load);
             this.groupBox2.ResumeLayout(false);

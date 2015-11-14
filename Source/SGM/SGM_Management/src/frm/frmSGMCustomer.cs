@@ -197,7 +197,7 @@ namespace SGM_Management
                 dgvCusList.Rows.Clear();
                 m_dsCustomer = response.ResponseDataSet;
                 int iOldSelected = m_iCurrentCustomerIndex;
-                if (m_dsCustomer != null)
+                if (m_dsCustomer != null && dgvCusList.ColumnCount > 0)
                 {                
                     for (int i = 0; i < m_dsCustomer.Tables[0].Rows.Count; i++)
                     {                   
@@ -211,8 +211,11 @@ namespace SGM_Management
                         m_iCurrentCustomerIndex = -1;
                     if (m_iCurrentCustomerIndex >= 0)
                         dgvCusList.Rows[m_iCurrentCustomerIndex].Selected = true;
+                   
                 
-                }    
+                }
+                //if (dgvCardList.Rows.Count <= 0)
+                    LoadCardList();
             }, SynchronizationContext.Current);
             
         }
@@ -224,7 +227,10 @@ namespace SGM_Management
                 Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
                 () =>
                 {
-                    return m_service.SGMManager_GetCardsOfCustomer(m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString());
+                    string cusID = "";
+                    if (m_dsCustomer != null && m_dsCustomer.Tables.Count > 0 && m_dsCustomer.Tables[0].Rows.Count > m_iCurrentCustomerIndex)
+                        cusID = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString();
+                    return m_service.SGMManager_GetCardsOfCustomer(cusID);
                 });
                 SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
                 {
@@ -233,7 +239,7 @@ namespace SGM_Management
                     dgvCardList.Rows.Clear();
                     m_dsCard = response.ResponseDataSet;
                     int iOldSelected = m_iCurrentCardIndex;
-                    if (m_dsCard != null)
+                    if (m_dsCard != null && dgvCardList.ColumnCount > 0)
                     {
                         for (int i = 0; i < m_dsCard.Tables[0].Rows.Count; i++)
                         {
@@ -250,7 +256,7 @@ namespace SGM_Management
                             m_iCurrentCardIndex = iOldSelected;
                         if (m_iCurrentCardIndex >= dgvCusList.Rows.Count)
                             m_iCurrentCardIndex = -1;
-                        if (m_iCurrentCardIndex >= 0)
+                        if (m_iCurrentCardIndex >= 0 && m_iCurrentCardIndex < dgvCardList.RowCount)
                             dgvCardList.Rows[m_iCurrentCardIndex].Selected = true;
                     }
                 }, SynchronizationContext.Current);

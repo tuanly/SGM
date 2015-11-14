@@ -52,6 +52,7 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "WaitingForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Waiting...";
             this.TransparencyKey = System.Drawing.SystemColors.Control;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

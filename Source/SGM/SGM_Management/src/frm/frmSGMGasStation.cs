@@ -63,7 +63,7 @@ namespace SGM_Management
                 dgvGSList.Rows.Clear();
                 m_dsGasStation = response.ResponseDataSet;
                 int iOldSelected = m_iCurrentGSIndex;
-                if (m_dsGasStation != null)
+                if (m_dsGasStation != null && dgvGSList.ColumnCount > 0)
                 {
                     for (int i = 0; i < m_dsGasStation.Tables[0].Rows.Count; i++)
                     {

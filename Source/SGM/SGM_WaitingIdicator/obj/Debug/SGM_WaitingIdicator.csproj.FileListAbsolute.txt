@@ -21,3 +21,4 @@ C:\Users\tuanly\Dropbox\MySoftware\SaleGasManager\trunk\Source\SGM\SGM_WaitingId
 C:\Users\tuanly\Dropbox\MySoftware\SaleGasManager\trunk\Source\SGM\SGM_WaitingIdicator\obj\Debug\WaitingIdicator.dll
 C:\Users\tuanly\Dropbox\MySoftware\SaleGasManager\trunk\Source\SGM\SGM_WaitingIdicator\obj\Debug\WaitingIdicator.pdb
 C:\SGM\trunk\Source\SGM\SGM_WaitingIdicator\obj\Debug\SGM_WaitingIdicator.csprojResolveAssemblyReference.cache
+C:\Users\tuanly\Dropbox\MySoftware\SaleGasManager\trunk\Source\SGM\SGM_WaitingIdicator\obj\Debug\SGM_WaitingIdicator.csprojResolveAssemblyReference.cache
