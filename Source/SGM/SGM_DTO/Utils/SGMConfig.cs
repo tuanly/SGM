@@ -9,5 +9,6 @@ namespace SGM_Core.Utils
     {
         public static bool Flag_Debug = false;
         public static bool Flag_DisableReader = false;
+        public static int TIME_OUT = 10000;//milisecond
     }
 }

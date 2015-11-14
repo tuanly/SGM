@@ -13,7 +13,7 @@ namespace SGM_WaitingIdicator
         {
             //frmMsg = new frmSGMMessage();
         }
-        
+
         public Task<TResult> RegisterTask<TResult>(Func<TResult> action)
         {
             if (System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() == false)
@@ -22,24 +22,42 @@ namespace SGM_WaitingIdicator
                 return null;
             }
             SGM_WaitingIdicator.WaitingForm.waitingFrm.ShowMe();
-            return Task.Factory.StartNew<TResult>(() => { return action(); });
+            return Task.Factory.StartNew<TResult>(() => 
+            {
+                try
+                {
+                    return action();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString());//SGM_Core.Utils.SGMText.APP_SERVICE_TIME_OUT);
+                    return default(TResult);
+                }
+            });
         }
 
         public Task RegisterContinuation<TResult>(Task<TResult> task, Action action, SynchronizationContext currentContext)
         {
             if (task == null)
-                return null; 
+                return null;
 
             return task.ContinueWith(delegate 
             {
-                if (currentContext == null)
+                if (task.Result == null)
                 {
                     SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
-                    action();
                 }
                 else
                 {
-                    currentContext.Post(delegate { SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe(); action(); }, null);
+                    if (currentContext == null)
+                    {
+                        SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
+                        action();
+                    }
+                    else
+                    {
+                        currentContext.Post(delegate { SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe(); action(); }, null);
+                    }
                 }
             }, TaskScheduler.Current);
         }

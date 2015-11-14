@@ -12,6 +12,7 @@ namespace SGM_Core.Utils
         public static string SGM_INFO = "Thông báo";
 
         public static string APP_NO_INTERNET_CONNECTION = "Lỗi, không có kết nối mạng!";
+        public static string APP_SERVICE_TIME_OUT = "Lỗi, quá thời gian xử lý!";
 
         public static string GAS_STATION_LOGON_ID_INVALID = "Lỗi, ID đăng nhập không hợp lệ!";
         public static string GAS_STATION_LOGON_ERR = "Lỗi, Không thể đăng nhập hệ thống!";
