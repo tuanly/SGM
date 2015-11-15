@@ -34,6 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.EnterpriseServices" />
@@ -50,8 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DynamicRDLCGenerator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportBuilderEntities.cs" />
     <Compile Include="Service References\SGM_Service\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -123,6 +127,7 @@
     <Compile Include="src\frm\frmSGMUpdateStore.Designer.cs">
       <DependentUpon>frmSGMUpdateStore.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="customer_report.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -133,6 +138,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="sale_report.rdlc" />
     <EmbeddedResource Include="src\frm\frmSGMConfig.resx">
       <DependentUpon>frmSGMConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -166,6 +172,7 @@
     <EmbeddedResource Include="src\frm\frmSGMUpdateStore.resx">
       <DependentUpon>frmSGMUpdateStore.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="_sale_report.rdlc" />
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -11,9 +11,14 @@ using SGM_Core.Utils;
 using SGM_WaitingIdicator;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Reporting.WinForms;
+using ReportBuilderEntities;
+using DynamicRDLCGenerator;
 
 namespace SGM_Management
 {
+    
+
     public partial class frmSGMReport : Form
     {
         public class ComboboxItem
@@ -72,7 +77,45 @@ namespace SGM_Management
                     if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                     {
                         if (dataResponse.ResponseDataSet != null)
+                        {
                             dgvSaleGasHistory.DataSource = dataResponse.ResponseDataSet.Tables[0];
+                            
+                            salesReportViewer.Reset();
+                            String tableName = dataResponse.ResponseDataSet.Tables[0].TableName;
+                            DataTable data = dataResponse.ResponseDataSet.Tables[0];
+                            salesReportViewer.LocalReport.DataSources.Add(new ReportDataSource(tableName, data));
+
+                            ReportBuilder reportBuilder = new ReportBuilder();
+                            reportBuilder.DataSource = dataResponse.ResponseDataSet;
+                            reportBuilder.Page = new ReportPage();
+                            //ReportSections reportFooter = new ReportSections();
+                            //ReportItems reportFooterItems = new ReportItems();
+                            //ReportTextBoxControl[] footerTxt = new ReportTextBoxControl[3];
+                            //footerTxt[0] = new ReportTextBoxControl() { Name = "txtCopyright", ValueOrExpression = new string[] { string.Format("Copyright {0}", DateTime.Now.Year) } };
+                            //footerTxt[1] = new ReportTextBoxControl() { Name = "ExecutionTime", ValueOrExpression = new string[] { "Report Generated On " + DateTime.Now.ToString() } };
+                            //footerTxt[2] = new ReportTextBoxControl() { Name = "PageNumber", ValueOrExpression = new string[] { "Page ", ReportGlobalParameters.CurrentPageNumber, " of ", ReportGlobalParameters.TotalPages } };
+
+                            //reportFooterItems.TextBoxControls = footerTxt;
+                            //reportFooter.ReportControlItems = reportFooterItems;
+                            //reportBuilder.Page.ReportFooter = reportFooter;
+
+                            ReportSections reportHeader = new ReportSections();
+                            reportHeader.Size = new ReportScale();
+                            reportHeader.Size.Height = 0.1;
+
+                            ReportItems reportHeaderItems = new ReportItems();
+                            ReportTextBoxControl[] headerTxt = new ReportTextBoxControl[1];
+                            headerTxt[0] = new ReportTextBoxControl() { Name = "txtReportTitle", ValueOrExpression = new string[] { string.Format("Sales Report: {0}", DateTime.Now) } };
+
+                            reportHeaderItems.TextBoxControls = headerTxt;
+                            reportHeader.ReportControlItems = reportHeaderItems;
+                            reportBuilder.Page.ReportHeader = reportHeader;
+
+                            salesReportViewer.LocalReport.LoadReportDefinition(ReportEngine.GenerateReport(reportBuilder));
+                            
+                            salesReportViewer.RefreshReport();
+
+                        }
                         else
                             frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.REPORT_NO_DATA, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
                         
@@ -110,7 +153,34 @@ namespace SGM_Management
                 if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                 {
                     if (dataResponse.ResponseDataSet != null)
+                    {
                         dgvRechargeCardHistory.DataSource = dataResponse.ResponseDataSet.Tables[0];
+                        cardReportViewer.Reset();
+                        String tableName = dataResponse.ResponseDataSet.Tables[0].TableName;
+                        DataTable data = dataResponse.ResponseDataSet.Tables[0];
+                        cardReportViewer.LocalReport.DataSources.Add(new ReportDataSource(tableName, data));
+
+                        ReportBuilder reportBuilder = new ReportBuilder();
+                        reportBuilder.DataSource = dataResponse.ResponseDataSet;
+                        reportBuilder.Page = new ReportPage();
+                        
+
+                        ReportSections reportHeader = new ReportSections();
+                        reportHeader.Size = new ReportScale();
+                        reportHeader.Size.Height = 0.1;
+
+                        ReportItems reportHeaderItems = new ReportItems();
+                        ReportTextBoxControl[] headerTxt = new ReportTextBoxControl[1];
+                        headerTxt[0] = new ReportTextBoxControl() { Name = "txtReportTitle", ValueOrExpression = new string[] { string.Format("Sales Report: {0}", DateTime.Now) } };
+
+                        reportHeaderItems.TextBoxControls = headerTxt;
+                        reportHeader.ReportControlItems = reportHeaderItems;
+                        reportBuilder.Page.ReportHeader = reportHeader;
+
+                        cardReportViewer.LocalReport.LoadReportDefinition(ReportEngine.GenerateReport(reportBuilder));
+
+                        cardReportViewer.RefreshReport();
+                    }
                     else
                         frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.REPORT_NO_DATA, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
                 }
