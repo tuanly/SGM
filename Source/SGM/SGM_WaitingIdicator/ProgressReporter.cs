@@ -43,22 +43,17 @@ namespace SGM_WaitingIdicator
 
             return task.ContinueWith(delegate 
             {
-                if (task.Result == null)
+                if (currentContext == null)
                 {
                     SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
+                    if (task.Result != null) 
+                        action();
                 }
                 else
                 {
-                    if (currentContext == null)
-                    {
-                        SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe();
-                        action();
-                    }
-                    else
-                    {
-                        currentContext.Post(delegate { SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe(); action(); }, null);
-                    }
+                    currentContext.Post(delegate { SGM_WaitingIdicator.WaitingForm.waitingFrm.HideMe(); if (task.Result != null) action(); }, null);
                 }
+                
             }, TaskScheduler.Current);
         }
     }
