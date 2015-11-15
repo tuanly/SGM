@@ -172,7 +172,6 @@
     <EmbeddedResource Include="src\frm\frmSGMUpdateStore.resx">
       <DependentUpon>frmSGMUpdateStore.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="_sale_report.rdlc" />
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
