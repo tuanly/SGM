@@ -26,12 +26,6 @@ namespace SGM_Management
             frmMsg = new frmSGMMessage();
         }
 
-        private SystemAdminDTO m_currentAdminDTO = null;
-        public void SetCurrentAdminDTO(SystemAdminDTO _ad)
-        {
-            m_currentAdminDTO = _ad;
-        }
-
         private void frmSGMUpdateStore_Load(object sender, EventArgs e)
         {
             DataToUIView();
@@ -40,11 +34,11 @@ namespace SGM_Management
 
         private void DataToUIView()
         {
-            if (m_currentAdminDTO != null)
+            if (frmGSMMain.s_currentAdminDTO != null)
             {
-                txtGas92Current.Text = m_currentAdminDTO.SysGas92Total.ToString();
-                txtGas95Current.Text = m_currentAdminDTO.SysGas95Total.ToString();
-                txtGasDOCurrent.Text = m_currentAdminDTO.SysGasDOTotal.ToString();
+                txtGas92Current.Text = frmGSMMain.s_currentAdminDTO.SysGas92Total.ToString();
+                txtGas95Current.Text = frmGSMMain.s_currentAdminDTO.SysGas95Total.ToString();
+                txtGasDOCurrent.Text = frmGSMMain.s_currentAdminDTO.SysGasDOTotal.ToString();
             }
         }
 
@@ -82,12 +76,12 @@ namespace SGM_Management
             {
                 return;
             }
-            m_currentAdminDTO.SysGas92Total = float.Parse(txtGas92Current.Text) + float.Parse(txtGas92New.Text);
-            m_currentAdminDTO.SysGas95Total = float.Parse(txtGas95Current.Text) + float.Parse(txtGas95New.Text);
-            m_currentAdminDTO.SysGasDOTotal = float.Parse(txtGasDOCurrent.Text) + float.Parse(txtGasDONew.Text);
+            frmGSMMain.s_currentAdminDTO.SysGas92Total = float.Parse(txtGas92Current.Text) + float.Parse(txtGas92New.Text);
+            frmGSMMain.s_currentAdminDTO.SysGas95Total = float.Parse(txtGas95Current.Text) + float.Parse(txtGas95New.Text);
+            frmGSMMain.s_currentAdminDTO.SysGasDOTotal = float.Parse(txtGasDOCurrent.Text) + float.Parse(txtGasDONew.Text);
 
             DataTransfer request = new DataTransfer();
-            request.ResponseDataSystemAdminDTO = m_currentAdminDTO;
+            request.ResponseDataSystemAdminDTO = frmGSMMain.s_currentAdminDTO;
             string jsRequest = JSonHelper.ConvertObjectToJSon(request);
             Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
             () =>
@@ -106,9 +100,9 @@ namespace SGM_Management
                 else
                 {
                     frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                    m_currentAdminDTO.SysGas92Total = float.Parse(txtGas92Current.Text);
-                    m_currentAdminDTO.SysGas95Total = float.Parse(txtGas95Current.Text);
-                    m_currentAdminDTO.SysGasDOTotal = float.Parse(txtGasDOCurrent.Text);
+                    frmGSMMain.s_currentAdminDTO.SysGas92Total = float.Parse(txtGas92Current.Text);
+                    frmGSMMain.s_currentAdminDTO.SysGas95Total = float.Parse(txtGas95Current.Text);
+                    frmGSMMain.s_currentAdminDTO.SysGasDOTotal = float.Parse(txtGasDOCurrent.Text);
                 }
             }, SynchronizationContext.Current);
         }

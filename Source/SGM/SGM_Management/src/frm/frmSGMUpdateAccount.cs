@@ -18,7 +18,6 @@ namespace SGM_Management
     {
         private SGM_Service.ServiceSoapClient service = new SGM_Service.ServiceSoapClient();
 
-        private SystemAdminDTO m_currentAdminDTO = null;
         private frmSGMMessage frmMsg = null;
 
         public frmSGMUpdateAccount()
@@ -27,10 +26,6 @@ namespace SGM_Management
             frmMsg = new frmSGMMessage();
         }
 
-        public void SetCurrentAdminDTO(SystemAdminDTO ad)
-        {
-            m_currentAdminDTO = ad;
-        }
         private bool ValidateInput()
         {
             bool check = true;
@@ -89,7 +84,7 @@ namespace SGM_Management
             Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
             () =>
             {
-                return service.SGMManager_UpdateAdminAccount(m_currentAdminDTO.SysAdminAccount, SYS_ADMIN, SYS_PWD);
+                return service.SGMManager_UpdateAdminAccount(frmGSMMain.s_currentAdminDTO.SysAdminAccount, SYS_ADMIN, SYS_PWD);
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {

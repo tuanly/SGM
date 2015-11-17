@@ -19,12 +19,6 @@ namespace SGM_Management
         private SGM_Service.ServiceSoapClient m_service = null;
         private frmSGMMessage frmMSg = null;
         
-        private SystemAdminDTO m_currentAdminDTO = null;
-        public void SetCurrentAdminDTO(SystemAdminDTO _ad)
-        {
-            m_currentAdminDTO = _ad;
-        }
-
         public frmSGMUpdatePrice()
         {
             InitializeComponent();
@@ -75,13 +69,13 @@ namespace SGM_Management
             {
                 return;
             }
-            m_currentAdminDTO.SysApplyDate = dateTimePicker1.Value;
-            m_currentAdminDTO.SysGas92CurrentPrice = m_currentAdminDTO.SysGas92NewPrice = Int32.Parse(txtGas92NewPrice.Text);
-            m_currentAdminDTO.SysGas95CurrentPrice = m_currentAdminDTO.SysGas95NewPrice = Int32.Parse(txtGas95NewPrice.Text);
-            m_currentAdminDTO.SysGasDOCurrentPrice = m_currentAdminDTO.SysGasDONewPrice = Int32.Parse(txtGasDONewPrice.Text);
+            frmGSMMain.s_currentAdminDTO.SysApplyDate = dateTimePicker1.Value;
+            frmGSMMain.s_currentAdminDTO.SysGas92CurrentPrice = frmGSMMain.s_currentAdminDTO.SysGas92NewPrice = Int32.Parse(txtGas92NewPrice.Text);
+            frmGSMMain.s_currentAdminDTO.SysGas95CurrentPrice = frmGSMMain.s_currentAdminDTO.SysGas95NewPrice = Int32.Parse(txtGas95NewPrice.Text);
+            frmGSMMain.s_currentAdminDTO.SysGasDOCurrentPrice = frmGSMMain.s_currentAdminDTO.SysGasDONewPrice = Int32.Parse(txtGasDONewPrice.Text);
 
             DataTransfer request = new DataTransfer();
-            request.ResponseDataSystemAdminDTO = m_currentAdminDTO;
+            request.ResponseDataSystemAdminDTO = frmGSMMain.s_currentAdminDTO;
             String jsRequest = JSonHelper.ConvertObjectToJSon(request);
 
             Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
@@ -101,20 +95,20 @@ namespace SGM_Management
                 else
                 {
                     frmMSg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-                    m_currentAdminDTO.SysGas92CurrentPrice = int.Parse(txtGas92CurrentPrice.Text);
-                    m_currentAdminDTO.SysGas95CurrentPrice = int.Parse(txtGas95CurrentPrice.Text);
-                    m_currentAdminDTO.SysGasDOCurrentPrice = int.Parse(txtGasDOCurrentPrice.Text);
+                    frmGSMMain.s_currentAdminDTO.SysGas92CurrentPrice = int.Parse(txtGas92CurrentPrice.Text);
+                    frmGSMMain.s_currentAdminDTO.SysGas95CurrentPrice = int.Parse(txtGas95CurrentPrice.Text);
+                    frmGSMMain.s_currentAdminDTO.SysGasDOCurrentPrice = int.Parse(txtGasDOCurrentPrice.Text);
                 }
             }, SynchronizationContext.Current);
         }
 
         private void DataToUIView()
         {
-            if (m_currentAdminDTO != null)
+            if (frmGSMMain.s_currentAdminDTO != null)
             {
-                txtGas92CurrentPrice.Text = m_currentAdminDTO.SysGas92CurrentPrice.ToString();
-                txtGas95CurrentPrice.Text = m_currentAdminDTO.SysGas95CurrentPrice.ToString();
-                txtGasDOCurrentPrice.Text = m_currentAdminDTO.SysGasDOCurrentPrice.ToString();
+                txtGas92CurrentPrice.Text = frmGSMMain.s_currentAdminDTO.SysGas92CurrentPrice.ToString();
+                txtGas95CurrentPrice.Text = frmGSMMain.s_currentAdminDTO.SysGas95CurrentPrice.ToString();
+                txtGasDOCurrentPrice.Text = frmGSMMain.s_currentAdminDTO.SysGasDOCurrentPrice.ToString();
             }
         }
     }

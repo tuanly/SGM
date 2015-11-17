@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using SGM_Core.DTO;
 
 namespace SGM_Management
 {
@@ -18,6 +19,10 @@ namespace SGM_Management
         private Color BUTTON_COLOR_SELECTED = Color.SpringGreen;
         private Button m_btnCurrenButton = null;
         private Form m_frmCurrent = null;
+
+        
+        public static SystemAdminDTO s_currentAdminDTO = null;
+
         public frmGSMMain()
         {
             InitializeComponent();
