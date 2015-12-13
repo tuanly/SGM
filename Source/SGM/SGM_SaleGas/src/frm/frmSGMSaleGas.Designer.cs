@@ -59,12 +59,10 @@
             this.txtMoneyBuying = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.timeCardReader = new System.Windows.Forms.Timer(this.components);
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.timeMain = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.grBill.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -405,10 +403,6 @@
             this.timeCardReader.Interval = 500;
             this.timeCardReader.Tick += new System.EventHandler(this.timeCardReader_Tick);
             // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            // 
             // timeMain
             // 
             this.timeMain.Enabled = true;
@@ -439,7 +433,6 @@
             this.groupBox2.PerformLayout();
             this.grBill.ResumeLayout(false);
             this.grBill.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -474,7 +467,6 @@
         private System.Windows.Forms.TextBox txtMoneyBefore;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Timer timeCardReader;
-        private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Timer timeMain;
         private System.Windows.Forms.TextBox txtCardName;
     }

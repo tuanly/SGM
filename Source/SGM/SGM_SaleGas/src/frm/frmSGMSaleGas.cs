@@ -128,7 +128,7 @@ namespace SGM_SaleGas
         private void calculatePay()
         {
             //EnableTransaction(true, false);
-            errorProvider.Clear();
+            SGMHelper.Clear();
             btnBuy.Enabled = true;
             try
             {
@@ -149,13 +149,13 @@ namespace SGM_SaleGas
                         }
                         else
                         {
-                            errorProvider.SetError(txtMoney, SGMText.GAS_BUYING_INPUT_MONEY_FAIL);
+                            SGMHelper.ShowToolTip(txtMoney, SGMText.GAS_BUYING_INPUT_MONEY_FAIL);
                             btnBuy.Enabled = false;
                         }
                     }
                     else
                     {
-                        errorProvider.SetError(txtMoney, SGMText.GAS_BUYING_INPUT_TOTAL_GAS_FAIL);
+                        SGMHelper.ShowToolTip(txtMoney, SGMText.GAS_BUYING_INPUT_TOTAL_GAS_FAIL);
                         btnBuy.Enabled = false;
                     }
                 }
@@ -316,7 +316,7 @@ namespace SGM_SaleGas
             m_iTimeOutReset = 0;
             if (txtMoney.Text == "0")
             {
-                errorProvider.SetError(txtMoney, SGMText.GAS_BUYING_INPUT_MONEY_INVALID);
+                SGMHelper.ShowToolTip(txtMoney, SGMText.GAS_BUYING_INPUT_MONEY_INVALID);
                 return;
             }
             SaleGasDTO dto = new SaleGasDTO();
@@ -404,7 +404,7 @@ namespace SGM_SaleGas
             txtMoneyBefore.Text = 0.ToString(MONEY_FORMAT);
             txtMoneyBuying.Text = 0.ToString(MONEY_FORMAT);
             txtMoneyAfter.Text = 0.ToString(MONEY_FORMAT);
-            errorProvider.Clear();
+            SGMHelper.Clear();
             grBill.Text = SGMText.SALEGAS_MAIN_BILL;
         }
 

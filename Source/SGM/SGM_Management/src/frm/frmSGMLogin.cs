@@ -36,22 +36,22 @@ namespace SGM_Management
             bool check = true;
             if (string.IsNullOrEmpty(txtAdmin.Text))
             {
-                errorProvider1.SetError(txtAdmin, "Tên Admin ?");
+                SGMHelper.ShowToolTip(txtAdmin, "Tên Admin ?");
                 check = false;
             }
             else
             {
-                errorProvider1.SetError(txtAdmin, null);
+                SGMHelper.HideTooltip(txtAdmin);
             }
 
             if (string.IsNullOrEmpty(txtPwd.Text))
             {
-                errorProvider1.SetError(txtPwd, "Mật khẩu ?");
+                SGMHelper.ShowToolTip(txtPwd, "Mật khẩu ?");
                 check = false;
             }
             else
             {
-                errorProvider1.SetError(txtPwd, null);
+                SGMHelper.HideTooltip(txtPwd);
             }
             return check;
         }

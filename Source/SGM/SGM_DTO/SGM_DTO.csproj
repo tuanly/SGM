@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,7 @@
     <Compile Include="DTO\SystemAdminDTO.cs" />
     <Compile Include="Utils\RFIDReader.cs" />
     <Compile Include="Utils\SGMConfig.cs" />
+    <Compile Include="Utils\SGMHelper.cs" />
     <Compile Include="Utils\SGMText.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

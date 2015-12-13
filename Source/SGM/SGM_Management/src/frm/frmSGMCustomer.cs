@@ -59,7 +59,7 @@ namespace SGM_Management
             btnDelete.Enabled = (!isEditMode && (dgvCusList.RowCount > 0));
             btnAdd.Enabled = (!isEditMode || btnAdd.Text.Equals("&Lưu"));
             btnEdit.Enabled = ((!isEditMode && (dgvCusList.RowCount > 0)) || (isEditMode && btnEdit.Text.Equals("&Lưu")));
-            errProvider.Clear();
+            SGMHelper.Clear();
         }
         private void frmSGMCustomer_Load(object sender, EventArgs e)
         {
@@ -134,10 +134,10 @@ namespace SGM_Management
         private bool ValidateDataInput()
         {
             bool bValidate = true;
-            errProvider.Clear();
+            SGMHelper.Clear();
             if (txtCusID.Text.Trim().Equals(""))
             {
-                errProvider.SetError(txtCusID, SGMText.CUSTOMER_DATA_INPUT_CUS_ID_ERR);
+                SGMHelper.ShowToolTip(txtCusID, SGMText.CUSTOMER_DATA_INPUT_CUS_ID_ERR);
                 bValidate = false;
             }
             else if (!txtCusID.Text.Trim().Equals(m_stCusIDEdit))
@@ -155,13 +155,13 @@ namespace SGM_Management
                     {
                         if (response.ResponseDataBool)
                         {
-                            errProvider.SetError(txtCusID, SGMText.CUSTOMER_DATA_INPUT_EXIST_CUS_ID_ERR);
+                            SGMHelper.ShowToolTip(txtCusID, SGMText.CUSTOMER_DATA_INPUT_EXIST_CUS_ID_ERR);
                             bValidate = false;
                         }
                     }
                     else
                     {
-                        errProvider.SetError(txtCusID, SGMText.CUSTOMER_GET_CUS_ERR);                  
+                        SGMHelper.ShowToolTip(txtCusID, SGMText.CUSTOMER_GET_CUS_ERR);                  
                         frmMSg.ShowMsg(SGMText.SGM_ERROR, SGMText.CUSTOMER_GET_CUS_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                         bValidate = false;
                     }
@@ -170,17 +170,17 @@ namespace SGM_Management
             }
             if (txtCusName.Text.Trim().Equals(""))
             {
-                errProvider.SetError(txtCusName, SGMText.CUSTOMER_DATA_INPUT_CUS_NAME_ERR);
+                SGMHelper.ShowToolTip(txtCusName, SGMText.CUSTOMER_DATA_INPUT_CUS_NAME_ERR);
                 bValidate = false;
             }
             if (txtCusBirthday.Text.Trim().Equals(""))
             {
-                errProvider.SetError(txtCusBirthday, SGMText.CUSTOMER_DATA_INPUT_CUS_BIRTHDAY_ERR);
+                SGMHelper.ShowToolTip(txtCusBirthday, SGMText.CUSTOMER_DATA_INPUT_CUS_BIRTHDAY_ERR);
                 bValidate = false;
             }
             if (txtCusVisa.Text.Trim().Equals(""))
             {
-                errProvider.SetError(txtCusVisa, SGMText.CUSTOMER_DATA_INPUT_CUS_VISA_ERR);
+                SGMHelper.ShowToolTip(txtCusVisa, SGMText.CUSTOMER_DATA_INPUT_CUS_VISA_ERR);
                 bValidate = false;
             }
             return bValidate;

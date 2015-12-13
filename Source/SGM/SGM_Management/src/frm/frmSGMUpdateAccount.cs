@@ -32,34 +32,34 @@ namespace SGM_Management
             if (txtAdmin.Text == string.Empty)
             {
                 check = false;
-                errorProvider1.SetError(txtAdmin, "Tài khoản ?");
+                SGMHelper.ShowToolTip(txtAdmin, "Tài khoản ?");
             }
             else
-                errorProvider1.SetError(txtAdmin, null);
+                SGMHelper.ShowToolTip(txtAdmin, "");
 
             if (txtPwd.Text == string.Empty)
             {
                 check = false;
-                errorProvider1.SetError(txtPwd, "Mật khẩu ?");
+                SGMHelper.ShowToolTip(txtPwd, "Mật khẩu ?");
             }
             else
-                errorProvider1.SetError(txtPwd, null);
+                SGMHelper.ShowToolTip(txtPwd, "");
 
             if (txtPwdRepeat.Text == string.Empty)
             {
                 check = false;
-                errorProvider1.SetError(txtPwdRepeat, "Nhập lại mật khẩu.");
+                SGMHelper.ShowToolTip(txtPwdRepeat, "Nhập lại mật khẩu.");
             }
             else
-                errorProvider1.SetError(txtPwdRepeat, null);
+                SGMHelper.ShowToolTip(txtPwdRepeat, "");
 
             if (txtPwd.Text != txtPwdRepeat.Text)
             {
                 check = false;
-                errorProvider1.SetError(txtPwdRepeat, "Mật khẩu không khớp.");
+                SGMHelper.ShowToolTip(txtPwdRepeat, "Mật khẩu không khớp.");
             }
             else
-                errorProvider1.SetError(txtPwdRepeat, null);
+                SGMHelper.ShowToolTip(txtPwdRepeat, "");
 
             return check;
         }

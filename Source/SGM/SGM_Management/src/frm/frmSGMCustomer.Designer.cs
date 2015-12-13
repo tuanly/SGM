@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMCustomer));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -65,7 +64,6 @@
             this.colCardDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCardRechargeDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCardState = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.dgvCusList = new System.Windows.Forms.DataGridView();
             this.colCusIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,7 +78,6 @@
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCusList)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -410,10 +407,6 @@
             this.colCardState.HeaderText = "Thẻ bị khóa";
             this.colCardState.Name = "colCardState";
             // 
-            // errProvider
-            // 
-            this.errProvider.ContainerControl = this;
-            // 
             // dgvCusList
             // 
             this.dgvCusList.AllowUserToAddRows = false;
@@ -532,7 +525,6 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCardList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCusList)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
@@ -568,7 +560,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button btnBuyCard;
-        private System.Windows.Forms.ErrorProvider errProvider;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button btnSearch;

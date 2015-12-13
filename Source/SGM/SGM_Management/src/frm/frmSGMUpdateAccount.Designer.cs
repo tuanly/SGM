@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMUpdateAccount));
             this.label1 = new System.Windows.Forms.Label();
             this.txtAdmin = new System.Windows.Forms.TextBox();
@@ -38,8 +37,6 @@
             this.btnReset = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPwdRepeat = new System.Windows.Forms.TextBox();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -112,10 +109,6 @@
             this.txtPwdRepeat.Size = new System.Drawing.Size(216, 20);
             this.txtPwdRepeat.TabIndex = 2;
             // 
-            // errorProvider1
-            // 
-            this.errorProvider1.ContainerControl = this;
-            // 
             // frmSGMUpdateAccount
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -136,7 +129,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SGM - Cập Nhật Tài Khoản";
             this.Load += new System.EventHandler(this.frmSGMUpdateAccount_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,6 +144,5 @@
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtPwdRepeat;
-        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

@@ -28,13 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMLogin));
             this.label1 = new System.Windows.Forms.Label();
             this.txtLoginCode = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
-            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -64,10 +61,6 @@
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // errorProvider
-            // 
-            this.errorProvider.ContainerControl = this;
-            // 
             // frmSGMLogin
             // 
             this.AcceptButton = this.btnLogin;
@@ -85,7 +78,6 @@
             this.Text = "SGM - Đăng Nhập";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSGMLogin_FormClosing);
             this.Load += new System.EventHandler(this.frmSGMLogin_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -96,6 +88,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtLoginCode;
         private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }

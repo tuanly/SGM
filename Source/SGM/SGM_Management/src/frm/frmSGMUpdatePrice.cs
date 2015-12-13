@@ -39,7 +39,6 @@ namespace SGM_Management
         private bool ValidateDataInput()
         {
             bool bValidate = true;
-            errorProvider1.Clear();
             Control[] f = { txtGas92NewPrice, 
                               txtGas95NewPrice,
                               txtGasDONewPrice
@@ -47,15 +46,16 @@ namespace SGM_Management
             for (int i = 0; i < f.Length; i++)
             {
                 String txt = f[i].Text.Trim();
+                SGMHelper.ShowToolTip(f[i], "");
                 if (txt.Equals(""))
                 {
-                    errorProvider1.SetError(f[i], SGMText.UPDATE_PRICE_INPUT_NULL);
+                    SGMHelper.ShowToolTip(f[i], SGMText.UPDATE_PRICE_INPUT_NULL);
                     bValidate = false;
                     break;
                 }
                 if (!txt.All(Char.IsDigit) || Int32.Parse(txt) < 0)
                 {
-                    errorProvider1.SetError(f[i], SGMText.UPDATE_PRICE_INPUT_ERR);
+                    SGMHelper.ShowToolTip(f[i], SGMText.UPDATE_PRICE_INPUT_ERR);
                     bValidate = false;
                     break;
                 }

@@ -28,7 +28,7 @@ namespace SGM_WaitingIdicator
         {
             _parent.Enabled = false;
             base.Show();
-            SetDesktopLocation(_parent.Left + _parent.Width / 2 - Width / 2, _parent.Top + _parent.Height / 2 - Height / 2);
+            SetDesktopLocation(_parent.Left + _parent.Width / 2 - Width / 2 + 20, _parent.Top + _parent.Height / 2 - Height / 2);
         }
 
         public void HideMe()

@@ -218,10 +218,15 @@ namespace SGM_Management
         private bool ValidateDataInput()
         {
             bool bValidate = true;
-            errProvider.Clear();
+            
+            SGMHelper.ShowToolTip(txtCardID, "");
+            SGMHelper.ShowToolTip(txtCardMoney, "");
+            SGMHelper.ShowToolTip(txtRechargeMoney, "");
+            SGMHelper.ShowToolTip(dtpRechargeDate, "");
+            
             if (txtCardID.Text.Trim().Equals(""))
             {
-                errProvider.SetError(txtCardID, SGMText.CARD_DATA_INPUT_CARD_ID_ERR);
+                SGMHelper.ShowToolTip(txtCardID, SGMText.CARD_DATA_INPUT_CARD_ID_ERR);
                 bValidate = false;
             }
             else if (!m_bRecharge)
@@ -239,13 +244,13 @@ namespace SGM_Management
                     {
                         if (response.ResponseDataBool)
                         {
-                            errProvider.SetError(txtCardID, SGMText.CARD_DATA_INPUT_EXIST_CARD_ID_ERR);
+                            SGMHelper.ShowToolTip(txtCardID, SGMText.CARD_DATA_INPUT_EXIST_CARD_ID_ERR);
                             bValidate = false;
                         }
                     }
                     else
                     {
-                        errProvider.SetError(txtCardID, SGMText.CARD_GET_CARD_ERR);
+                        SGMHelper.ShowToolTip(txtCardID, SGMText.CARD_GET_CARD_ERR);
                         frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.CARD_GET_CARD_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                         bValidate = false;
                     }
@@ -254,24 +259,24 @@ namespace SGM_Management
             }
             if (txtCardMoney.Text.Trim().Equals(""))
             {
-                errProvider.SetError(txtCardMoney, SGMText.CARD_DATA_INPUT_CARD_MONEY_ERR);
+                SGMHelper.ShowToolTip(txtCardMoney, SGMText.CARD_DATA_INPUT_CARD_MONEY_ERR);
                 bValidate = false;
             }
             else if (txtRechargeMoney.Text.Trim().Equals(""))
             {
-                errProvider.SetError(txtRechargeMoney, SGMText.CARD_DATA_INPUT_CARD_PRICE_ERR);
+                SGMHelper.ShowToolTip(txtRechargeMoney, SGMText.CARD_DATA_INPUT_CARD_PRICE_ERR);
                 bValidate = false;
             }
             else if (Int32.Parse(txtCardMoney.Text.Trim()) < Int32.Parse(txtRechargeMoney.Text.Trim()))
             {
-                errProvider.SetError(txtRechargeMoney, SGMText.CARD_DATA_INPUT_CARD_MONEY_PRICE_ERR);
+                SGMHelper.ShowToolTip(txtRechargeMoney, SGMText.CARD_DATA_INPUT_CARD_MONEY_PRICE_ERR);
                 bValidate = false;
             }
             //if (!m_bStateUpdate)
             {
                 if (dtpRechargeDate.Value.Date < DateTime.Now.Date)
                 {
-                    errProvider.SetError(dtpRechargeDate, SGMText.CARD_DATA_INPUT_DATE_ERR);
+                    SGMHelper.ShowToolTip(dtpRechargeDate, SGMText.CARD_DATA_INPUT_DATE_ERR);
                     bValidate = false;
                 }
             }

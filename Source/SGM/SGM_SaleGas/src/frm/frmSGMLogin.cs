@@ -34,7 +34,6 @@ namespace SGM_SaleGas
 
         private void frmSGMLogin_Load(object sender, EventArgs e)
         {
-            errorProvider.SetIconAlignment(txtLoginCode, ErrorIconAlignment.TopRight);
             SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this);
         }
 
@@ -71,19 +70,21 @@ namespace SGM_SaleGas
 
         private bool ValidateLoginCode()
         {
+            bool check = true;
             if (string.IsNullOrEmpty(txtLoginCode.Text))
             {
-                errorProvider.SetError(txtLoginCode, SGMText.SALEGAS_LOGIN_INPUT_ERROR);
+                SGMHelper.ShowToolTip(txtLoginCode, SGMText.SALEGAS_LOGIN_INPUT_ERROR);
+                check = false;
             }
             //else if (!Regex.IsMatch(txtLoginCode.Text, @"[A-Za-z][A-Za-z0-9]{2,7}"))
             //{
-            //    errorProvider.SetError(txtLoginCode, "Invalid format!");
+            //    SGMHelper.ShowToolTip(txtLoginCode, "Invalid format!");
             //}
             else
             {
-                errorProvider.SetError(txtLoginCode, null);
+                SGMHelper.ShowToolTip(txtLoginCode, "");
             }
-            return string.IsNullOrEmpty(errorProvider.GetError(txtLoginCode));
+            return check;
         }
 
         private string GetMacAddress()

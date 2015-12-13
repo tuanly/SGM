@@ -45,24 +45,24 @@ namespace SGM_Management
         private bool ValidateDataInput()
         {
             bool bValidate = true;
-            errorProvider1.Clear();
             Control[] f = { txtGas92New, 
                               txtGas95New,
                               txtGasDONew
                           };
             for (int i = 0; i < f.Length; i++)
             {
+                SGMHelper.ShowToolTip(f[i], "");
                 String txt = f[i].Text.Trim();
                 if (txt.Equals(""))
                 {
-                    errorProvider1.SetError(f[i], SGMText.UPDATE_PRICE_INPUT_NULL);
+                    SGMHelper.ShowToolTip(f[i], SGMText.UPDATE_PRICE_INPUT_NULL);
                     bValidate = false;
                     break;
                 }
                 float tmp;
                 if (float.TryParse(txt, out tmp) == false || tmp < 0)
                 {
-                    errorProvider1.SetError(f[i], SGMText.UPDATE_PRICE_INPUT_ERR);
+                    SGMHelper.ShowToolTip(f[i], SGMText.UPDATE_PRICE_INPUT_ERR);
                     bValidate = false;
                     break;
                 }
