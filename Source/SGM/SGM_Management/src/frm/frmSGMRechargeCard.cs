@@ -346,9 +346,11 @@ namespace SGM_Management
             try
             {
                 SerialPort sp = (SerialPort)sender;
+		String data = sp.ReadLine();
                 if (txtCardID.Enabled == true && this.Visible)
                 {
-                    txtCardID.Invoke(new MethodInvoker(delegate { txtCardID.Text = sp.ReadLine(); }));
+		    if (data != null && data.Length > 1)
+                    	txtCardID.Invoke(new MethodInvoker(delegate { txtCardID.Text = data.Substring(0, data.Length - 1); }));
                 }
             }
             catch (TimeoutException)

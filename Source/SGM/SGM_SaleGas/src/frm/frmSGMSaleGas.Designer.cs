@@ -33,6 +33,7 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblCurrentPrice = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtCardName = new System.Windows.Forms.TextBox();
             this.btnCardDetail = new System.Windows.Forms.Button();
             this.txtCardMoney = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -95,6 +96,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtCardName);
             this.groupBox1.Controls.Add(this.btnCardDetail);
             this.groupBox1.Controls.Add(this.txtCardMoney);
             this.groupBox1.Controls.Add(this.label3);
@@ -109,9 +111,21 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin thẻ:";
             // 
+            // txtCardName
+            // 
+            this.txtCardName.Enabled = false;
+            this.txtCardName.ForeColor = System.Drawing.Color.Teal;
+            this.txtCardName.Location = new System.Drawing.Point(123, 46);
+            this.txtCardName.Name = "txtCardName";
+            this.txtCardName.ReadOnly = true;
+            this.txtCardName.Size = new System.Drawing.Size(236, 35);
+            this.txtCardName.TabIndex = 5;
+            this.txtCardName.Text = "N/A";
+            this.txtCardName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // btnCardDetail
             // 
-            this.btnCardDetail.Location = new System.Drawing.Point(298, 47);
+            this.btnCardDetail.Location = new System.Drawing.Point(365, 47);
             this.btnCardDetail.Name = "btnCardDetail";
             this.btnCardDetail.Size = new System.Drawing.Size(42, 33);
             this.btnCardDetail.TabIndex = 0;
@@ -123,10 +137,10 @@
             // 
             this.txtCardMoney.Enabled = false;
             this.txtCardMoney.ForeColor = System.Drawing.Color.Teal;
-            this.txtCardMoney.Location = new System.Drawing.Point(473, 44);
+            this.txtCardMoney.Location = new System.Drawing.Point(510, 44);
             this.txtCardMoney.Name = "txtCardMoney";
             this.txtCardMoney.ReadOnly = true;
-            this.txtCardMoney.Size = new System.Drawing.Size(289, 35);
+            this.txtCardMoney.Size = new System.Drawing.Size(269, 35);
             this.txtCardMoney.TabIndex = 4;
             this.txtCardMoney.Text = "0,000";
             this.txtCardMoney.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -134,7 +148,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(373, 46);
+            this.label3.Location = new System.Drawing.Point(410, 46);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(94, 29);
             this.label3.TabIndex = 3;
@@ -144,7 +158,7 @@
             // 
             this.txtCardID.Enabled = false;
             this.txtCardID.ForeColor = System.Drawing.Color.Teal;
-            this.txtCardID.Location = new System.Drawing.Point(108, 46);
+            this.txtCardID.Location = new System.Drawing.Point(122, 46);
             this.txtCardID.Name = "txtCardID";
             this.txtCardID.ReadOnly = true;
             this.txtCardID.Size = new System.Drawing.Size(189, 35);
@@ -155,11 +169,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 46);
+            this.label2.Location = new System.Drawing.Point(6, 46);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 29);
+            this.label2.Size = new System.Drawing.Size(107, 29);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Thẻ :";
+            this.label2.Text = "Chủ thẻ :";
             // 
             // groupBox2
             // 
@@ -462,5 +476,6 @@
         private System.Windows.Forms.Timer timeCardReader;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Timer timeMain;
+        private System.Windows.Forms.TextBox txtCardName;
     }
 }

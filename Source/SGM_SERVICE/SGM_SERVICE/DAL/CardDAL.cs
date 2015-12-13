@@ -144,8 +144,8 @@ namespace SGM.ServicesCore.DAL
             return result;
         }
         public DataTable ValidateCardID(string stCardID)
-        {
-            string query = string.Format("SELECT * FROM CARD c, RECHARGE r WHERE c.CARD_ID = @CARD_ID AND c.RECHARGE_ID = r.RECHARGE_ID");
+        {            
+            string query = string.Format("SELECT * FROM CARD c, RECHARGE r, CUSTOMER cu WHERE c.CARD_ID = @CARD_ID AND c.RECHARGE_ID = r.RECHARGE_ID AND cu.CUS_ID = c.CUS_ID");
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
             sqlParameters[0].Value = Convert.ToString(stCardID);

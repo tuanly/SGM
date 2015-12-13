@@ -557,25 +557,31 @@ namespace SGM_Management
             try
             {
                 SerialPort sp = (SerialPort)sender;
-                if (txtCusID.Enabled == true)
+                String data = sp.ReadLine();
+                if (data != null && data.Length > 1)
                 {
-                    txtCusID.Invoke(new MethodInvoker(delegate { txtCusID.Text = sp.ReadLine(); }));
+                    if (txtCusID.Enabled == true)
+                    {
+                        txtCusID.Invoke(new MethodInvoker(delegate { txtCusID.Text = data.Substring(0, data.Length - 1); }));
+                    }
+                    else
+                    {
+                        bool isSearch = false;
+                        txtSearch.Invoke(new MethodInvoker(delegate { isSearch = txtSearch.Focused; }));
+                        if (isSearch)
+                        {                          
+                            txtSearch.Invoke(new MethodInvoker(delegate { txtSearch.Text = data.Substring(0, data.Length - 1); }));
+                            this.Invoke(new MethodInvoker(delegate { searchCustomer(); }));
+                        }
+                        else if (!frmRechard.Visible)
+                        {
+                            this.Invoke(new MethodInvoker(delegate { searchCardID(data.Substring(0, data.Length - 1)); }));
+                        }
+
+                    }
                 }
-                else
-                {
-                    bool isSearch = false;
-                    txtSearch.Invoke(new MethodInvoker(delegate { isSearch = txtSearch.Focused; }));
-                    if (isSearch)
-                    {
-                        txtSearch.Invoke(new MethodInvoker(delegate { txtSearch.Text = sp.ReadLine(); }));
-                        this.Invoke(new MethodInvoker(delegate { searchCustomer(); }));
-                    }
-                    else if (!frmRechard.Visible)
-                    {
-                        this.Invoke(new MethodInvoker(delegate { searchCardID(sp.ReadLine()); }));
-                    }
                     
-                }
+                
             }
             catch (TimeoutException)
             {

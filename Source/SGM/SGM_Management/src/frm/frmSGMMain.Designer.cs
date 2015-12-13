@@ -63,7 +63,7 @@
             // 
             this.panelMain.Panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelMain.Panel2.BackgroundImage")));
             this.panelMain.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelMain.Size = new System.Drawing.Size(732, 502);
+            this.panelMain.Size = new System.Drawing.Size(853, 550);
             this.panelMain.SplitterDistance = 244;
             this.panelMain.TabIndex = 0;
             // 
@@ -286,7 +286,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 502);
+            this.ClientSize = new System.Drawing.Size(853, 550);
             this.Controls.Add(this.panelMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmGSMMain";

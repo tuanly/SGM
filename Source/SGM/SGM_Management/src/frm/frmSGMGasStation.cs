@@ -347,9 +347,11 @@ namespace SGM_Management
             try
             {
                 SerialPort sp = (SerialPort)sender;
+		String data = sp.ReadLine();
                 if (txtGSCode.Enabled == true)
                 {
-                    txtGSCode.Invoke(new MethodInvoker(delegate { txtGSCode.Text = sp.ReadLine(); }));
+		    if (data != null && data.Length > 1)
+                    	txtGSCode.Invoke(new MethodInvoker(delegate { txtGSCode.Text = data.Substring(0, data.Length - 1); }));
                 }
             }
             catch (TimeoutException)

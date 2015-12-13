@@ -58,6 +58,8 @@ namespace SGM_Management
             {
                 m_frmCurrentForm.Close();
                 this.panelMain.Panel2.Controls.Clear();
+                System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGSMMain));
+                this.panelMain.Panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelMain.Panel2.BackgroundImage")));
             }
         }
 
@@ -75,7 +77,10 @@ namespace SGM_Management
             frm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             frm.WindowState = FormWindowState.Maximized;
             frm.Dock = DockStyle.Fill;
+
+
             this.panelMain.Panel2.Controls.Clear();
+            this.panelMain.Panel2.BackgroundImage = null;
             this.panelMain.Panel2.Controls.Add(frm);
             frm.Show();
         }

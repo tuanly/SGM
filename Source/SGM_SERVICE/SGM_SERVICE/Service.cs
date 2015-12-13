@@ -28,6 +28,7 @@ public class Service : System.Web.Services.WebService
         m_bllReportService = new ReportServiceBLL();
         m_bllCardService = new CardService();
         m_bllGasStationService = new GasStationServiceBLL();
+        
     }
 
     [WebMethod]

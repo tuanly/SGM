@@ -108,9 +108,11 @@ namespace SGM_SaleGas
         {
             try
             {
-                SerialPort sp = (SerialPort)sender;           
-                
-                txtLoginCode.Invoke(new MethodInvoker(delegate { txtLoginCode.Text = sp.ReadLine(); }));
+                SerialPort sp = (SerialPort)sender;
+                String data = sp.ReadLine();
+                if (data != null && data.Length > 1)
+                    txtLoginCode.Invoke(new MethodInvoker(delegate { txtLoginCode.Text = data.Substring(0, data.Length - 1); }));
+               // txtLoginCode.Invoke(new MethodInvoker(delegate { txtLoginCode.Text = sp.ReadLine(); }));
             }
             catch (TimeoutException)
             {

@@ -241,11 +241,13 @@ namespace SGM_SaleGas
                                 _rechargeDTO.RechargeMoney = Int32.Parse(dr["RECHARGE_MONEY"].ToString());
                                 _rechargeDTO.RechargeNote = dr["RECHARGE_MONEY"].ToString();
                                 _rechargeDTO.CardID = dr["CARD_ID"].ToString();
+                                txtCardName.Text = dr["CUS_NAME"].ToString();
                             }
 
                             //txtCardID.Text = _cardDTO.CardID;
                             txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
-                            //updateGasChoice(rbGas92.Checked ? gasTransactType.gas92 : rbGas95.Checked ? gasTransactType.gas95 : gasTransactType.gasDO);
+                             // get name customer
+                            updateGasChoice(rbGas92.Checked ? gasTransactType.gas92 : rbGas95.Checked ? gasTransactType.gas95 : gasTransactType.gasDO);
                             if (_cardDTO.CardUnlockState == false)
                             {
                                 frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GAS_CARD_LOCK, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
@@ -256,7 +258,7 @@ namespace SGM_SaleGas
                             grBill.Text = SGMText.SALEGAS_MAIN_BILL;
                             btnCardDetail.Enabled = true;
                             m_bBuy = false;
-                            updateGasChoice(rbGas92.Checked ? gasTransactType.gas92 : rbGas95.Checked ? gasTransactType.gas95 : gasTransactType.gasDO);
+                            
                             txtMoney.Focus();
                             m_iTimeOutReset = 0;
                         }
@@ -344,11 +346,14 @@ namespace SGM_SaleGas
                    // txtCardMoney.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
                    // calculatePay();
                     EnableTransaction(false, false);
-                    grBill.Text = SGMText.SALEGAS_MAIN_BILL + txtCardID.Text;
+                    grBill.Text = SGMText.SALEGAS_MAIN_BILL + txtCardName.Text;
                     txtCardID.Text = "";
                     txtCardMoney.Text = "";
                     txtMoney.Text = "0";
-                   
+                    txtCardName.Text = "";
+                    //rbGas92.Enabled = false;
+                    //rbGas95.Enabled = false;
+                    //rbGasDO.Enabled = false;
                     
                 }
                 else
@@ -374,6 +379,7 @@ namespace SGM_SaleGas
             _cardDTO = null;
             _rechargeDTO = null;
             txtCardID.Text = "";
+            txtCardName.Text = "";
             txtCardMoney.Text = 0.ToString(MONEY_FORMAT);
             rbGas92.Checked = true;
             txtMoney.Text = 0.ToString(MONEY_FORMAT);            
