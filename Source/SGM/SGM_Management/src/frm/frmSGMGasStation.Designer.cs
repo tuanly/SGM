@@ -52,6 +52,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnReset = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGSList)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -60,6 +61,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnReset);
             this.groupBox1.Controls.Add(this.txtMacAddress);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
@@ -83,7 +85,7 @@
             this.txtMacAddress.Enabled = false;
             this.txtMacAddress.Location = new System.Drawing.Point(100, 121);
             this.txtMacAddress.Name = "txtMacAddress";
-            this.txtMacAddress.Size = new System.Drawing.Size(480, 20);
+            this.txtMacAddress.Size = new System.Drawing.Size(382, 20);
             this.txtMacAddress.TabIndex = 9;
             // 
             // label5
@@ -263,6 +265,17 @@
             // 
             this.errProvider.ContainerControl = this;
             // 
+            // btnReset
+            // 
+            this.btnReset.Enabled = false;
+            this.btnReset.Location = new System.Drawing.Point(488, 119);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(92, 23);
+            this.btnReset.TabIndex = 10;
+            this.btnReset.Text = "&Xóa Địa Chỉ";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
             // frmGasStation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -310,5 +323,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colAddress;
         private System.Windows.Forms.TextBox txtMacAddress;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnReset;
     }
 }

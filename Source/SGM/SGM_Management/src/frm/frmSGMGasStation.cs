@@ -298,6 +298,7 @@ namespace SGM_Management
                     m_stGSIDEdit = m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTATION_ID"].ToString();
                     btnEdit.Text = "&Lưu";
                     UpdateStateControls(true);
+                    btnReset.Enabled = true;
                     txtGSCode.Focus();
                 }
                 else
@@ -311,7 +312,7 @@ namespace SGM_Management
                     gas.GasStationName = txtGSName.Text.Trim();
                     gas.GasStationAddress = txtGSAddress.Text.Trim();
                     gas.GasStationDescription = txtGSDes.Text.Trim();
-                  
+                    gas.GasStationMacAddress = txtMacAddress.Text.Trim();
                     DataTransfer request = new DataTransfer();
                     request.ResponseDataGasStationDTO = gas;
                     string jsRequest = JSonHelper.ConvertObjectToJSon(request);
@@ -331,6 +332,7 @@ namespace SGM_Management
                         }
                         m_stGSIDEdit = "";
                         btnEdit.Text = "&Sửa";
+                        btnReset.Enabled = false;
                         LoadGasStationList();
                         SelectGSRow(gas.GasStationID);
                         UpdateStateControls(false);
@@ -365,6 +367,11 @@ namespace SGM_Management
         private void frmGasStation_FormClosing(object sender, FormClosingEventArgs e)
         {
             RFIDReader.UnRegistryReaderListener(Program.ReaderPort, serialDatahandler);
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            txtMacAddress.Text = "";
         }
     }
 }
