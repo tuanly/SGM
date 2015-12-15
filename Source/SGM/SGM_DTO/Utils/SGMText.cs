@@ -80,7 +80,17 @@ namespace SGM_Core.Utils
         public static string GASSTATION_DATA_INPUT_EXIST_GS_ID_ERR = "Lỗi! Mã Cây Xăng này đã tồn tại!";
         public static string GASSTATION_DATA_INPUT_GS_ID_ERR = "Lỗi! Chưa nhập Mã Cây Xăng.";
         public static string GASSTATION_DATA_INPUT_GS_NAME_ERR = "Lỗi! Chưa nhập Tên Cây Xăng.";
-        public static string GASSTATION_DATA_INPUT_GS_ADDRESS_ERR = "Lỗi! Chưa nhập Địa chỉ.";
+        public static string GASSTATION_DATA_INPUT_GS_ADDRESS_ERR = "Lỗi! Chưa nhập Địa chỉ Cây Xăng.";
+
+        public static string GASSTORE_GET_GS_ERR = "Lỗi! Không thể lấy thông tin kho xăng.";
+        public static string GASSTORE_ADD_NEW_GS_ERR = "Lỗi! Không thể thêm kho xăng.";
+        public static string GASSTORE_UPDATE_ERR = "Lỗi! Không thể cập nhật kho xăng.";
+        public static string GASSTORE_DEL_ERR = "Lỗi! Không thể xóa kho xăng.";
+        public static string GASSTORE_DEL_SUCCESS = "Kho xăng đã xóa thành công.";
+        public static string GASSTORE_DATA_INPUT_EXIST_GS_ID_ERR = "Lỗi! Mã kho Xăng này đã tồn tại!";
+        public static string GASSTORE_DATA_INPUT_GS_ID_ERR = "Lỗi! Chưa nhập Mã kho Xăng.";
+        public static string GASSTORE_DATA_INPUT_GS_NAME_ERR = "Lỗi! Chưa nhập Tên kho Xăng.";
+        public static string GASSTORE_DATA_INPUT_GS_ADDRESS_ERR = "Lỗi! Chưa nhập Địa chỉ Kho Xăng.";
 
         public static string REPORT_NO_DATA = "Không có dữ liệu!";
         public static string REPORT_INPUT_DATE_ERROR = "Chọn khoảng thời gian ko hợp lệ!";

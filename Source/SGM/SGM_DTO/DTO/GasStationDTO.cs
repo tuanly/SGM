@@ -11,6 +11,7 @@ namespace SGM_Core.DTO
         private string m_stGasStationAddress;
         private string m_stGasStationDescription;
         private string m_stGasStationMacAddress;
+        private string m_stGasStoreID;
 
         public GasStationDTO()
         {
@@ -49,6 +50,12 @@ namespace SGM_Core.DTO
         {
             get { return m_stGasStationMacAddress; }
             set { m_stGasStationMacAddress = value; }
+        }
+
+        public string GasStoreID
+        {
+            get { return m_stGasStoreID; }
+            set { m_stGasStoreID = value; }
         }
     }
 }

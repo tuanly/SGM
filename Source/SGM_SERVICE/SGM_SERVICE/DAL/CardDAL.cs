@@ -32,6 +32,7 @@ namespace SGM.ServicesCore.DAL
                     dtoCard.CardID = dr["CARD_ID"].ToString(); ;
                     dtoCard.CardUnlockState = Boolean.Parse(dr["CARD_STATE"].ToString());
                     dtoCard.CardRemainingMoney = Int32.Parse(dr["CARD_MONEY"].ToString());
+                    dtoCard.CardMoneyEx = Int32.Parse(dr["CARD_MONEY_EX"].ToString());
                     dtoCard.CardBuyDate = DateTime.Parse(dr["CARD_BUY_DATE"].ToString());
                     dtoCard.RechargeID = Int32.Parse(dr["RECHARGE_ID"].ToString());
                     dtoCard.CustomerID = dr["CUS_ID"].ToString();
@@ -48,20 +49,22 @@ namespace SGM.ServicesCore.DAL
             bool insertResult = true;
             try
             {
-                string query = string.Format("INSERT INTO CARD (CARD_ID, CARD_STATE, CARD_MONEY, CARD_BUY_DATE, RECHARGE_ID, CUS_ID) VALUES (@CARD_ID, @CARD_STATE, @CARD_MONEY, @CARD_BUY_DATE, @RECHARGE_ID, @CUS_ID)");
-                SqlParameter[] sqlParameters = new SqlParameter[6];
+                string query = string.Format("INSERT INTO CARD (CARD_ID, CARD_STATE, CARD_MONEY, CARD_MONEY_EX, CARD_BUY_DATE, RECHARGE_ID, CUS_ID) VALUES (@CARD_ID, @CARD_STATE, @CARD_MONEY, @CARD_MONEY_EX, @CARD_BUY_DATE, @RECHARGE_ID, @CUS_ID)");
+                SqlParameter[] sqlParameters = new SqlParameter[7];
                 sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
                 sqlParameters[0].Value = Convert.ToString(dtoCard.CardID);
                 sqlParameters[1] = new SqlParameter("@CARD_STATE", SqlDbType.Bit);
                 sqlParameters[1].Value = Convert.ToBoolean(dtoCard.CardUnlockState);
                 sqlParameters[2] = new SqlParameter("@CARD_MONEY", SqlDbType.Int);
                 sqlParameters[2].Value = Convert.ToInt32(dtoCard.CardRemainingMoney);
-                sqlParameters[3] = new SqlParameter("@CARD_BUY_DATE", SqlDbType.DateTime);
-                sqlParameters[3].Value = Convert.ToDateTime(dtoCard.CardBuyDate);
-                sqlParameters[4] = new SqlParameter("@RECHARGE_ID", SqlDbType.Int);
-                sqlParameters[4].Value = Convert.ToInt32(dtoCard.RechargeID);
-                sqlParameters[5] = new SqlParameter("@CUS_ID", SqlDbType.NVarChar);
-                sqlParameters[5].Value = Convert.ToString(dtoCard.CustomerID);
+                sqlParameters[3] = new SqlParameter("@CARD_MONEY_EX", SqlDbType.Int);
+                sqlParameters[3].Value = Convert.ToInt32(dtoCard.CardMoneyEx);
+                sqlParameters[4] = new SqlParameter("@CARD_BUY_DATE", SqlDbType.DateTime);
+                sqlParameters[4].Value = Convert.ToDateTime(dtoCard.CardBuyDate);
+                sqlParameters[5] = new SqlParameter("@RECHARGE_ID", SqlDbType.Int);
+                sqlParameters[5].Value = Convert.ToInt32(dtoCard.RechargeID);
+                sqlParameters[6] = new SqlParameter("@CUS_ID", SqlDbType.NVarChar);
+                sqlParameters[6].Value = Convert.ToString(dtoCard.CustomerID);
                 insertResult = m_dbConnection.ExecuteInsertQuery(query, sqlParameters);
             }
             catch (Exception ex)
@@ -85,18 +88,20 @@ namespace SGM.ServicesCore.DAL
         public bool UpdateCard(CardDTO dtoCard)
         {
             bool result = true;
-            string query = string.Format("UPDATE CARD SET CARD_STATE = @CARD_STATE, CARD_MONEY = @CARD_MONEY, CARD_BUY_DATE = @CARD_BUY_DATE, RECHARGE_ID = @RECHARGE_ID WHERE CARD_ID = @CARD_ID");
-            SqlParameter[] sqlParameters = new SqlParameter[5];
+            string query = string.Format("UPDATE CARD SET CARD_STATE = @CARD_STATE, CARD_MONEY = @CARD_MONEY, CARD_MONEY_EX = @CARD_MONEY_EX, CARD_BUY_DATE = @CARD_BUY_DATE, RECHARGE_ID = @RECHARGE_ID WHERE CARD_ID = @CARD_ID");
+            SqlParameter[] sqlParameters = new SqlParameter[6];
             sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
             sqlParameters[0].Value = Convert.ToString(dtoCard.CardID);
             sqlParameters[1] = new SqlParameter("@CARD_STATE", SqlDbType.Bit);
             sqlParameters[1].Value = Convert.ToBoolean(dtoCard.CardUnlockState);
             sqlParameters[2] = new SqlParameter("@CARD_MONEY", SqlDbType.Int);
             sqlParameters[2].Value = Convert.ToInt32(dtoCard.CardRemainingMoney);
-            sqlParameters[3] = new SqlParameter("@CARD_BUY_DATE", SqlDbType.Int);
-            sqlParameters[3].Value = Convert.ToDateTime(dtoCard.CardBuyDate);
-            sqlParameters[4] = new SqlParameter("@RECHARGE_ID", SqlDbType.Int);
-            sqlParameters[4].Value = Convert.ToInt32(dtoCard.RechargeID);
+            sqlParameters[3] = new SqlParameter("@CARD_MONEY_EX", SqlDbType.Int);
+            sqlParameters[3].Value = Convert.ToInt32(dtoCard.CardMoneyEx);
+            sqlParameters[4] = new SqlParameter("@CARD_BUY_DATE", SqlDbType.Int);
+            sqlParameters[4].Value = Convert.ToDateTime(dtoCard.CardBuyDate);
+            sqlParameters[5] = new SqlParameter("@RECHARGE_ID", SqlDbType.Int);
+            sqlParameters[5].Value = Convert.ToInt32(dtoCard.RechargeID);
             result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
             return result;
         }
@@ -107,12 +112,14 @@ namespace SGM.ServicesCore.DAL
             bool result = true;
             try
             {
-                string query = string.Format("UPDATE CARD SET CARD_MONEY = @CARD_MONEY WHERE CARD_ID = @CARD_ID");
-                SqlParameter[] sqlParameters = new SqlParameter[2];
+                string query = string.Format("UPDATE CARD SET CARD_MONEY = @CARD_MONEY, CARD_MONEY_EX = @CARD_MONEY_EX WHERE CARD_ID = @CARD_ID");
+                SqlParameter[] sqlParameters = new SqlParameter[3];
                 sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
                 sqlParameters[0].Value = Convert.ToString(dtoCard.CardID);
                 sqlParameters[1] = new SqlParameter("@CARD_MONEY", SqlDbType.Int);
                 sqlParameters[1].Value = Convert.ToInt32(dtoCard.CardRemainingMoney);
+                sqlParameters[2] = new SqlParameter("@CARD_MONEY_EX", SqlDbType.Int);
+                sqlParameters[3].Value = Convert.ToInt32(dtoCard.CardMoneyEx);
                 result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
             }
             catch (Exception ex)
@@ -221,6 +228,39 @@ namespace SGM.ServicesCore.DAL
 				sqlParameters[1] = new SqlParameter("@CARD_MONEY", SqlDbType.Int);
                 sqlParameters[1].Value = Convert.ToInt32(iMoney);
                 updateResult = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);                
+            }
+            catch (Exception ex)
+            {
+                updateResult = false;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+            if (updateResult)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+            }
+            else
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.CARD_UPDATE_MONEY_ERR;
+            }
+            return dataResult;
+        }
+
+        public DataTransfer UpdateMoneyForCard(string stCardID, int iMoney, int iMoneyEx)
+        {
+            DataTransfer dataResult = new DataTransfer();
+            bool updateResult = true;
+            try
+            {
+                string query = string.Format("UPDATE CARD SET CARD_MONEY = @CARD_MONEY, CARD_MONEY_EX = @CARD_MONEY_EX WHERE CARD_ID = @CARD_ID");
+                SqlParameter[] sqlParameters = new SqlParameter[3];
+                sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(stCardID);
+                sqlParameters[1] = new SqlParameter("@CARD_MONEY", SqlDbType.Int);
+                sqlParameters[1].Value = Convert.ToInt32(iMoney);
+                sqlParameters[2] = new SqlParameter("@CARD_MONEY_EX", SqlDbType.Int);
+                sqlParameters[2].Value = Convert.ToInt32(iMoneyEx);
+                updateResult = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
             }
             catch (Exception ex)
             {

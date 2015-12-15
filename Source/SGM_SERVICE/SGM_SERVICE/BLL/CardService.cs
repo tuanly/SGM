@@ -57,6 +57,12 @@ namespace SGM.ServicesCore.BLL
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
 		}
 
+        public string UpdateMoneyForCard(string stCardID, int iMoney, int iMoneyEx)
+        {
+            m_dataResponse = m_dalCard.UpdateMoneyForCard(stCardID, iMoney, iMoneyEx);
+            return JSonHelper.ConvertObjectToJSon(m_dataResponse);
+        }
+
         public string GetCardsOfCustomer(string stCusID)
         {
             m_dataResponse = m_dalCard.GetCardsOfCustomer(stCusID);

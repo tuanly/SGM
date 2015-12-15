@@ -9,6 +9,7 @@ namespace SGM_Core.DTO
         private string m_stCardID; //private key
         private bool m_bCardState; //false: lock, true: unlock
         private int m_iCardMoney;  //remaining money in card
+        private int m_iCardMoneyEx; // saving money in card
         private DateTime m_dCardBuyDate; // Date when card is bought
         private int m_iRechargeID;
         private string m_iCustomerID;
@@ -36,6 +37,12 @@ namespace SGM_Core.DTO
         {
             get { return m_iCardMoney; }
             set { m_iCardMoney = value; }
+        }
+
+        public int CardMoneyEx
+        {
+            get { return m_iCardMoneyEx; }
+            set { m_iCardMoneyEx = value; }
         }
 
         public DateTime CardBuyDate

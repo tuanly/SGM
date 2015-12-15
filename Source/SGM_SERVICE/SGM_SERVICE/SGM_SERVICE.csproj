@@ -75,6 +75,7 @@
     <Compile Include="DAL\CustomerDAL.cs" />
     <Compile Include="DAL\DBConnetionDAL.cs" />
     <Compile Include="DAL\GasStationDAL.cs" />
+    <Compile Include="DAL\GasStoreDAL.cs" />
     <Compile Include="DAL\RechargeDAL.cs" />
     <Compile Include="DAL\SaleGasDAL.cs" />
     <Compile Include="DAL\SystemAdminDAL.cs" />

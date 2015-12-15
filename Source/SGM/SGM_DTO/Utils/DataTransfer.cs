@@ -27,6 +27,7 @@ namespace SGM_Core.Utils
         private RechargeDTO m_dtoResponseDataRechargeDTO;
         private SaleGasDTO m_dtoResponseDataSaleGasDTO;
         private SystemAdminDTO m_dtoResponseDataSystemAdminDTO;
+        private GasStoreDTO m_dtoResponseDataGasStoreDTO;
         private DataSet m_dsResponseDataSet;
 
         private int m_iCurrentPriceGas92;
@@ -46,6 +47,7 @@ namespace SGM_Core.Utils
             m_dtoResponseDataRechargeDTO = null;
             m_dtoResponseDataSaleGasDTO = null;
             m_dtoResponseDataSystemAdminDTO = null;
+            m_dtoResponseDataGasStoreDTO = null;
             m_dsResponseDataSet = null;
 
             m_iCurrentPriceGas92 = 0;
@@ -137,6 +139,12 @@ namespace SGM_Core.Utils
             get { return m_dtoResponseDataSystemAdminDTO; }
             set { m_dtoResponseDataSystemAdminDTO = value; }
         }
+        public GasStoreDTO ResponseDataGasStoreDTO
+        {
+            get { return m_dtoResponseDataGasStoreDTO; }
+            set { m_dtoResponseDataGasStoreDTO = value; }
+        }
+        
         public DataSet ResponseDataSet
         {
             get { return m_dsResponseDataSet; }

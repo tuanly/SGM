@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="DTO\CardDTO.cs" />
     <Compile Include="DTO\CustomerDTO.cs" />
+    <Compile Include="DTO\GasStoreDTO.cs" />
     <Compile Include="Utils\DataTransfer.cs" />
     <Compile Include="DTO\GasStationDTO.cs" />
     <Compile Include="Utils\JSonHelper.cs" />
