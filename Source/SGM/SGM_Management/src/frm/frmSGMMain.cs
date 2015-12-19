@@ -127,7 +127,7 @@ namespace SGM_Management
 
         private void btnUpdateStore_Click(object sender, EventArgs e)
         {
-            showFrom(new frmSGMUpdateStore(), btnUpdateStore);
+            showFrom(new frmSGMStore(), btnStore);
         }
 
         private void btnAccount_Click(object sender, EventArgs e)
@@ -257,27 +257,27 @@ namespace SGM_Management
 
         private void btnUpdateStore_MouseMove(object sender, MouseEventArgs e)
         {
-            if (m_btnCurrenButton != btnUpdateStore)
-                btnUpdateStore.BackColor = BUTTON_COLOR_FOCUS;
+            if (m_btnCurrenButton != btnStore)
+                btnStore.BackColor = BUTTON_COLOR_FOCUS;
         }
 
         private void btnUpdateStore_Leave(object sender, EventArgs e)
         {
-            if (m_btnCurrenButton != btnUpdateStore)
-                btnUpdateStore.BackColor = BUTTON_COLOR_NORMAL;
+            if (m_btnCurrenButton != btnStore)
+                btnStore.BackColor = BUTTON_COLOR_NORMAL;
             //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
         }
 
         private void btnUpdateStore_Enter(object sender, EventArgs e)
         {
-            if (m_btnCurrenButton != btnUpdateStore) 
-                btnUpdateStore.BackColor = BUTTON_COLOR_FOCUS;
+            if (m_btnCurrenButton != btnStore) 
+                btnStore.BackColor = BUTTON_COLOR_FOCUS;
         }
 
         private void btnUpdateStore_MouseLeave(object sender, EventArgs e)
         {
-            if (m_btnCurrenButton != btnUpdateStore)
-                btnUpdateStore.BackColor = BUTTON_COLOR_NORMAL;
+            if (m_btnCurrenButton != btnStore)
+                btnStore.BackColor = BUTTON_COLOR_NORMAL;
             //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
         }
 

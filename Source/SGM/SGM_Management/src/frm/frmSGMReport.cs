@@ -282,22 +282,26 @@ namespace SGM_Management
                 if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                 {
                     DataSet ds = dataResponse.ResponseDataSet;
-                    DataTable tblResult = ds.Tables[0];
-                    if (tblResult.Rows.Count > 0)
+                    if (ds != null)
                     {
-                        ComboboxItem itemAll = new ComboboxItem();
-                        itemAll.Text = SGMText.REPORT_ALL;
-                        itemAll.Value = "";
-                        cboRechargeCardCustomer.Items.Add(itemAll);
-                        foreach (DataRow dr in tblResult.Rows)
+                        DataTable tblResult = ds.Tables[0];
+                        if (tblResult.Rows.Count > 0)
                         {
-                            ComboboxItem item = new ComboboxItem();
-                            item.Text = dr["CUS_NAME"].ToString();
-                            item.Value = dr["CUS_ID"].ToString();
-                            cboRechargeCardCustomer.Items.Add(item);
+                            ComboboxItem itemAll = new ComboboxItem();
+                            itemAll.Text = SGMText.REPORT_ALL;
+                            itemAll.Value = "";
+                            cboRechargeCardCustomer.Items.Add(itemAll);
+                            foreach (DataRow dr in tblResult.Rows)
+                            {
+                                ComboboxItem item = new ComboboxItem();
+                                item.Text = dr["CUS_NAME"].ToString();
+                                item.Value = dr["CUS_ID"].ToString();
+                                cboRechargeCardCustomer.Items.Add(item);
+                            }
+                            cboRechargeCardCustomer.SelectedIndex = 0;
                         }
-                        cboRechargeCardCustomer.SelectedIndex = 0;
                     }
+                    
                 }
                 else
                 {

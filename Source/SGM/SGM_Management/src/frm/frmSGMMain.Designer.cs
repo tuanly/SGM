@@ -35,7 +35,7 @@
             this.btnGasStation = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnUpdatePrice = new System.Windows.Forms.Button();
-            this.btnUpdateStore = new System.Windows.Forms.Button();
+            this.btnStore = new System.Windows.Forms.Button();
             this.btnCustomer = new System.Windows.Forms.Button();
             this.btnConfig = new System.Windows.Forms.Button();
             this.btnAccount = new System.Windows.Forms.Button();
@@ -74,9 +74,9 @@
             this.tableLayoutPanel1.Controls.Add(this.btnExit, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.btnGasStation, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.btnHome, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnUpdatePrice, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btnUpdateStore, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.btnCustomer, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnUpdatePrice, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.btnStore, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnCustomer, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.btnConfig, 0, 7);
             this.tableLayoutPanel1.Controls.Add(this.btnAccount, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.btnReport, 0, 5);
@@ -177,26 +177,26 @@
             this.btnUpdatePrice.MouseLeave += new System.EventHandler(this.btnUpdatePrice_MouseLeave);
             this.btnUpdatePrice.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnUpdatePrice_MouseMove);
             // 
-            // btnUpdateStore
+            // btnStore
             // 
-            this.btnUpdateStore.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnUpdateStore.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnUpdateStore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdateStore.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdateStore.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnUpdateStore.Location = new System.Drawing.Point(0, 200);
-            this.btnUpdateStore.Margin = new System.Windows.Forms.Padding(0);
-            this.btnUpdateStore.Name = "btnUpdateStore";
-            this.btnUpdateStore.Size = new System.Drawing.Size(244, 50);
-            this.btnUpdateStore.TabIndex = 4;
-            this.btnUpdateStore.Text = "Cập Nhật Kho >>";
-            this.btnUpdateStore.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnUpdateStore.UseVisualStyleBackColor = false;
-            this.btnUpdateStore.Click += new System.EventHandler(this.btnUpdateStore_Click);
-            this.btnUpdateStore.Enter += new System.EventHandler(this.btnUpdateStore_Enter);
-            this.btnUpdateStore.Leave += new System.EventHandler(this.btnUpdateStore_Leave);
-            this.btnUpdateStore.MouseLeave += new System.EventHandler(this.btnUpdateStore_MouseLeave);
-            this.btnUpdateStore.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnUpdateStore_MouseMove);
+            this.btnStore.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnStore.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnStore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStore.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStore.ForeColor = System.Drawing.Color.DarkGreen;
+            this.btnStore.Location = new System.Drawing.Point(0, 200);
+            this.btnStore.Margin = new System.Windows.Forms.Padding(0);
+            this.btnStore.Name = "btnStore";
+            this.btnStore.Size = new System.Drawing.Size(244, 50);
+            this.btnStore.TabIndex = 4;
+            this.btnStore.Text = "Quản Lý Kho >>";
+            this.btnStore.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnStore.UseVisualStyleBackColor = false;
+            this.btnStore.Click += new System.EventHandler(this.btnUpdateStore_Click);
+            this.btnStore.Enter += new System.EventHandler(this.btnUpdateStore_Enter);
+            this.btnStore.Leave += new System.EventHandler(this.btnUpdateStore_Leave);
+            this.btnStore.MouseLeave += new System.EventHandler(this.btnUpdateStore_MouseLeave);
+            this.btnStore.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnUpdateStore_MouseMove);
             // 
             // btnCustomer
             // 
@@ -311,7 +311,7 @@
         private System.Windows.Forms.Button btnGasStation;
         private System.Windows.Forms.Button btnHome;
         private System.Windows.Forms.Button btnUpdatePrice;
-        private System.Windows.Forms.Button btnUpdateStore;
+        private System.Windows.Forms.Button btnStore;
         private System.Windows.Forms.Button btnAccount;
         private System.Windows.Forms.Button btnCustomer;
         private System.Windows.Forms.Button btnConfig;
