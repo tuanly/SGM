@@ -247,7 +247,7 @@ namespace DynamicRDLCGenerator
         }
         static string GetSortingDetails(ReportBuilder reportBuilder)
         {
-            return "";
+            //return "";
             ReportTable[] tables = reportBuilder.Body.ReportControlItems.ReportTable;
             ReportColumns[] columns = reportBuilder.Body.ReportControlItems.ReportTable[0].ReportDataColumns;
             ReportTextBoxControl sortColumn = new ReportTextBoxControl();

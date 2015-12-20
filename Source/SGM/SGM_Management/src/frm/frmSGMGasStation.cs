@@ -265,7 +265,7 @@ namespace SGM_Management
                     Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
                     () =>
                     {
-                        return m_service.SGMManager_DelGasStion(gasID);
+                        return m_service.SGMManager_DelGasStore(gasID);
                     });
                     SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
                     {

@@ -48,7 +48,7 @@ namespace SGM.ServicesCore.BLL
             m_dataResponse = m_dalGasStation.UpdateGasStation(m_dataRequest.ResponseDataGasStationDTO, stGasStationID);
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
-        public string DelGasStion(string stGasStationID)
+        public string DelGasStation(string stGasStationID)
         {
             m_dataResponse = m_dalGasStation.DeleteGasStation(stGasStationID);
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
