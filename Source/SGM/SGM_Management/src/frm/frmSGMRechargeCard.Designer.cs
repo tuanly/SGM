@@ -32,7 +32,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtRechargeNote = new System.Windows.Forms.TextBox();
             this.txtRechargeGasPrice = new System.Windows.Forms.TextBox();
-            this.txtRechargeMoney = new System.Windows.Forms.TextBox();
+            this.txtExMoney = new System.Windows.Forms.TextBox();
             this.dtpRechargeDate = new System.Windows.Forms.DateTimePicker();
             this.txtCardMoney = new System.Windows.Forms.TextBox();
             this.txtCardID = new System.Windows.Forms.TextBox();
@@ -50,7 +50,7 @@
             // 
             this.groupBox1.Controls.Add(this.txtRechargeNote);
             this.groupBox1.Controls.Add(this.txtRechargeGasPrice);
-            this.groupBox1.Controls.Add(this.txtRechargeMoney);
+            this.groupBox1.Controls.Add(this.txtExMoney);
             this.groupBox1.Controls.Add(this.dtpRechargeDate);
             this.groupBox1.Controls.Add(this.txtCardMoney);
             this.groupBox1.Controls.Add(this.txtCardID);
@@ -83,36 +83,37 @@
             this.txtRechargeGasPrice.Size = new System.Drawing.Size(453, 20);
             this.txtRechargeGasPrice.TabIndex = 3;
             // 
-            // txtRechargeMoney
+            // txtExMoney
             // 
-            this.txtRechargeMoney.Location = new System.Drawing.Point(314, 59);
-            this.txtRechargeMoney.Name = "txtRechargeMoney";
-            this.txtRechargeMoney.Size = new System.Drawing.Size(133, 20);
-            this.txtRechargeMoney.TabIndex = 2;
-            this.txtRechargeMoney.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRechargeMoney_KeyPress);
+            this.txtExMoney.Enabled = false;
+            this.txtExMoney.Location = new System.Drawing.Point(402, 59);
+            this.txtExMoney.Name = "txtExMoney";
+            this.txtExMoney.Size = new System.Drawing.Size(175, 20);
+            this.txtExMoney.TabIndex = 2;
+            this.txtExMoney.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRechargeMoney_KeyPress);
             // 
             // dtpRechargeDate
             // 
             this.dtpRechargeDate.CustomFormat = "dd/MM/yyyy";
             this.dtpRechargeDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpRechargeDate.Location = new System.Drawing.Point(314, 21);
+            this.dtpRechargeDate.Location = new System.Drawing.Point(402, 21);
             this.dtpRechargeDate.Name = "dtpRechargeDate";
-            this.dtpRechargeDate.Size = new System.Drawing.Size(133, 20);
+            this.dtpRechargeDate.Size = new System.Drawing.Size(175, 20);
             this.dtpRechargeDate.TabIndex = 6;
             // 
             // txtCardMoney
             // 
-            this.txtCardMoney.Location = new System.Drawing.Point(76, 59);
+            this.txtCardMoney.Location = new System.Drawing.Point(125, 59);
             this.txtCardMoney.Name = "txtCardMoney";
-            this.txtCardMoney.Size = new System.Drawing.Size(133, 20);
+            this.txtCardMoney.Size = new System.Drawing.Size(176, 20);
             this.txtCardMoney.TabIndex = 1;
             this.txtCardMoney.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCardMoney_KeyPress);
             // 
             // txtCardID
             // 
-            this.txtCardID.Location = new System.Drawing.Point(76, 23);
+            this.txtCardID.Location = new System.Drawing.Point(125, 23);
             this.txtCardID.Name = "txtCardID";
-            this.txtCardID.Size = new System.Drawing.Size(133, 20);
+            this.txtCardID.Size = new System.Drawing.Size(176, 20);
             this.txtCardID.TabIndex = 0;
             // 
             // label7
@@ -136,7 +137,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(227, 24);
+            this.label5.Location = new System.Drawing.Point(319, 24);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(81, 13);
             this.label5.TabIndex = 5;
@@ -145,20 +146,20 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(226, 59);
+            this.label4.Location = new System.Drawing.Point(318, 59);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.Size = new System.Drawing.Size(78, 13);
             this.label4.TabIndex = 4;
-            this.label4.Text = "Giá mua:";
+            this.label4.Text = "Số tiền tích lũy";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(27, 59);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(43, 13);
+            this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Số tiền:";
+            this.label3.Text = "Số tiền nạp:";
             // 
             // label1
             // 
@@ -212,7 +213,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DateTimePicker dtpRechargeDate;
         private System.Windows.Forms.TextBox txtCardMoney;
-        private System.Windows.Forms.TextBox txtRechargeMoney;
+        private System.Windows.Forms.TextBox txtExMoney;
         private System.Windows.Forms.TextBox txtRechargeNote;
         private System.Windows.Forms.TextBox txtRechargeGasPrice;
         private System.Windows.Forms.Button btnUpdateCard;

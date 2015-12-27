@@ -221,12 +221,14 @@ namespace SGM.ServicesCore.DAL
             bool updateResult = true;
             try
             {
-                string query = string.Format("UPDATE CARD SET CARD_MONEY = @CARD_MONEY WHERE CARD_ID = @CARD_ID");
-                SqlParameter[] sqlParameters = new SqlParameter[2];
+                string query = string.Format("UPDATE CARD SET CARD_MONEY = @CARD_MONEY, CARD_MONEY_EX = @CARD_MONEY_EX WHERE CARD_ID = @CARD_ID");
+                SqlParameter[] sqlParameters = new SqlParameter[3];
                 sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
                 sqlParameters[0].Value = Convert.ToString(stCardID);
 				sqlParameters[1] = new SqlParameter("@CARD_MONEY", SqlDbType.Int);
                 sqlParameters[1].Value = Convert.ToInt32(iMoney);
+                sqlParameters[2] = new SqlParameter("@CARD_MONEY_EX", SqlDbType.Int);
+                sqlParameters[2].Value = Convert.ToInt32(0);
                 updateResult = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);                
             }
             catch (Exception ex)

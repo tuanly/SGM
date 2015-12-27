@@ -258,7 +258,7 @@ namespace SGM_Management
                             dgvCardList.Rows[i].Cells[0].Value = (i + 1);
                             dgvCardList.Rows[i].Cells[1].Value = m_dsCard.Tables[0].Rows[i]["CARD_ID"] ;
                             dgvCardList.Rows[i].Cells[2].Value = m_dsCard.Tables[0].Rows[i]["CARD_MONEY"];
-                            dgvCardList.Rows[i].Cells[3].Value = m_dsCard.Tables[0].Rows[i]["RECHARGE_MONEY"];
+                            dgvCardList.Rows[i].Cells[3].Value = m_dsCard.Tables[0].Rows[i]["CARD_MONEY_EX"];
                             dgvCardList.Rows[i].Cells[4].Value = m_dsCard.Tables[0].Rows[i]["CARD_BUY_DATE"];
                             dgvCardList.Rows[i].Cells[5].Value = m_dsCard.Tables[0].Rows[i]["RECHARGE_DATE"];
                             dgvCardList.Rows[i].Cells[6].Value = !Boolean.Parse(m_dsCard.Tables[0].Rows[i]["CARD_STATE"].ToString());
@@ -461,6 +461,7 @@ namespace SGM_Management
            
             frmSGMRechargeCard frmRechard = new frmSGMRechargeCard();
             frmRechard.StateRecharge = true;
+            frmRechard.StateChangeCard = false;
             frmRechard.CardID = m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_ID"].ToString();
             frmRechard.CurrentCardMoney = Int32.Parse(m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_MONEY"].ToString());
             frmRechard.CusID = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString();
@@ -481,12 +482,14 @@ namespace SGM_Management
                     
                     btnRecharge.Enabled = true;
                     btnLockCard.Text = "&Khóa Thẻ";
+                    btnChangeCard.Enabled = false;
                 }
                 else
                 {
                    
                     btnRecharge.Enabled = false;
                     btnLockCard.Text = "&Mở khóa Thẻ";
+                    btnChangeCard.Enabled = true;
                 }
                 btnLockCard.Enabled = true;
             }
@@ -543,7 +546,12 @@ namespace SGM_Management
 
         private void btnDelCard_Click(object sender, EventArgs e)
         {
-
+            frmRechard.StateRecharge = false;
+            frmRechard.StateChangeCard = true;
+            frmRechard.CusID = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString();
+            frmRechard.CurrentCardMoney = Int32.Parse(m_dsCard.Tables[0].Rows[m_iCurrentCustomerIndex]["CARD_MONEY"].ToString());
+            frmRechard.ExCardMoney = Int32.Parse(m_dsCard.Tables[0].Rows[m_iCurrentCustomerIndex]["CARD_MONEY_EX"].ToString());
+            frmRechard.ShowRecharge(this);
         }
 
         private void frmSGMCustomer_FormClosing(object sender, FormClosingEventArgs e)

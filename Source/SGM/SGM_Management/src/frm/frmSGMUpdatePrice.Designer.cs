@@ -41,9 +41,10 @@
             this.txtGas95NewPrice = new System.Windows.Forms.TextBox();
             this.txtGas92NewPrice = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dtpNew = new System.Windows.Forms.DateTimePicker();
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.dtpOld = new System.Windows.Forms.DateTimePicker();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -115,7 +116,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 85);
+            this.label5.Location = new System.Drawing.Point(12, 111);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(45, 13);
             this.label5.TabIndex = 11;
@@ -123,7 +124,7 @@
             // 
             // txtGasDONewPrice
             // 
-            this.txtGasDONewPrice.Location = new System.Drawing.Point(344, 81);
+            this.txtGasDONewPrice.Location = new System.Drawing.Point(344, 107);
             this.txtGasDONewPrice.Name = "txtGasDONewPrice";
             this.txtGasDONewPrice.Size = new System.Drawing.Size(98, 20);
             this.txtGasDONewPrice.TabIndex = 14;
@@ -131,7 +132,7 @@
             // 
             // txtGas95NewPrice
             // 
-            this.txtGas95NewPrice.Location = new System.Drawing.Point(215, 81);
+            this.txtGas95NewPrice.Location = new System.Drawing.Point(215, 107);
             this.txtGas95NewPrice.Name = "txtGas95NewPrice";
             this.txtGas95NewPrice.Size = new System.Drawing.Size(98, 20);
             this.txtGas95NewPrice.TabIndex = 13;
@@ -139,7 +140,7 @@
             // 
             // txtGas92NewPrice
             // 
-            this.txtGas92NewPrice.Location = new System.Drawing.Point(89, 81);
+            this.txtGas92NewPrice.Location = new System.Drawing.Point(89, 107);
             this.txtGas92NewPrice.Name = "txtGas92NewPrice";
             this.txtGas92NewPrice.Size = new System.Drawing.Size(98, 20);
             this.txtGas92NewPrice.TabIndex = 12;
@@ -148,33 +149,24 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 123);
+            this.label6.Location = new System.Drawing.Point(12, 149);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 13);
             this.label6.TabIndex = 15;
             this.label6.Text = "Ngày áp dụng:";
             // 
-            // dateTimePicker1
+            // dtpNew
             // 
-            this.dateTimePicker1.CustomFormat = "hh:mm";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(89, 119);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(98, 20);
-            this.dateTimePicker1.TabIndex = 16;
-            // 
-            // dateTimePicker2
-            // 
-            this.dateTimePicker2.CustomFormat = "dd/MM/yyyy";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(215, 118);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(227, 20);
-            this.dateTimePicker2.TabIndex = 17;
+            this.dtpNew.CustomFormat = "dd/MM/yyyy hh:mm:ss tt";
+            this.dtpNew.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpNew.Location = new System.Drawing.Point(89, 145);
+            this.dtpNew.Name = "dtpNew";
+            this.dtpNew.Size = new System.Drawing.Size(353, 20);
+            this.dtpNew.TabIndex = 16;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(177, 156);
+            this.btnUpdate.Location = new System.Drawing.Point(177, 182);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(112, 24);
             this.btnUpdate.TabIndex = 18;
@@ -182,14 +174,34 @@
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
+            // dtpOld
+            // 
+            this.dtpOld.CustomFormat = "dd/MM/yyyy hh:mm:ss tt";
+            this.dtpOld.Enabled = false;
+            this.dtpOld.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpOld.Location = new System.Drawing.Point(89, 74);
+            this.dtpOld.Name = "dtpOld";
+            this.dtpOld.Size = new System.Drawing.Size(353, 20);
+            this.dtpOld.TabIndex = 20;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 78);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Ngày áp dụng:";
+            // 
             // frmSGMUpdatePrice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(467, 191);
+            this.ClientSize = new System.Drawing.Size(467, 218);
+            this.Controls.Add(this.dtpOld);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.btnUpdate);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dtpNew);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtGasDONewPrice);
             this.Controls.Add(this.txtGas95NewPrice);
@@ -226,8 +238,9 @@
         private System.Windows.Forms.TextBox txtGas95NewPrice;
         private System.Windows.Forms.TextBox txtGas92NewPrice;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.DateTimePicker dtpNew;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.DateTimePicker dtpOld;
+        private System.Windows.Forms.Label label7;
     }
 }

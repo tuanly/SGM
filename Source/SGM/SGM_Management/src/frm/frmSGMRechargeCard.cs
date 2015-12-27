@@ -17,9 +17,11 @@ namespace SGM_Management
     public partial class frmSGMRechargeCard : Form
     {
         private bool m_bRecharge;
+        private bool m_bChangeCard;
         private string m_stCusID;
         private string m_stCardID;
         private int m_iCurrentCardMoney;
+        private int m_iExCardMoney;
         private CardDTO m_cardDTO;
         private int m_iPriceGas95;
         private int m_iPriceGas92;
@@ -33,6 +35,7 @@ namespace SGM_Management
         {
             InitializeComponent();
             m_bRecharge = false;
+            m_bChangeCard = false;
             m_stCusID = "";
             m_stCardID = "";
             m_cardDTO = null;
@@ -64,17 +67,27 @@ namespace SGM_Management
             get { return m_bRecharge; }
             set { m_bRecharge = value; }
         }
+        public bool StateChangeCard
+        {
+            get { return m_bChangeCard; }
+            set { m_bChangeCard = value; }
+        }
         public int CurrentCardMoney
         {
             get { return m_iCurrentCardMoney; }
             set { m_iCurrentCardMoney = value; }
+        }
+        public int ExCardMoney
+        {
+            get { return m_iExCardMoney; }
+            set { m_iExCardMoney = value; }
         }
         private void ResetInput()
         {
             txtCardID.Text = "";
             txtCardMoney.Text = "";
             txtRechargeGasPrice.Text = "";
-            txtRechargeMoney.Text = "";
+            txtExMoney.Text = "0";
             txtRechargeNote.Text = "";
             //cbCardLocked.Checked = false;
             dtpRechargeDate.Value = DateTime.Now;
@@ -95,6 +108,7 @@ namespace SGM_Management
                     dtoRecharge.RechargeGas95Price = m_iPriceGas95;
                     dtoRecharge.RechargeGasDOPrice = m_iPriceGasDO;
                     dtoRecharge.RechargeMoney = Int32.Parse(txtCardMoney.Text.Trim());
+                    dtoRecharge.RechargeMoneyEx = Int32.Parse(txtExMoney.Text.Trim());
                     dtoRecharge.RechargeNote = txtRechargeNote.Text.Trim();
                     dtoRecharge.CardID = txtCardID.Text.Trim();
                     request.ResponseDataRechargeDTO = dtoRecharge;
@@ -123,7 +137,7 @@ namespace SGM_Management
                                     task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
                                     () =>
                                     {
-                                        return m_service.SGMManager_UpdateMoneyForCard(txtCardID.Text.Trim(), m_iCurrentCardMoney + Int32.Parse(txtCardMoney.Text.Trim()));
+                                        return m_service.SGMManager_UpdateMoneyForCard(txtCardID.Text.Trim(), m_iCurrentCardMoney + Int32.Parse(txtCardMoney.Text.Trim()) + Int32.Parse(txtExMoney.Text.Trim()));
                                     });
                                     SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
                                     {
@@ -148,6 +162,7 @@ namespace SGM_Management
                     dtoCard.CardID = txtCardID.Text.Trim();
                     dtoCard.CardUnlockState = true;
                     dtoCard.CardRemainingMoney = Int32.Parse(txtCardMoney.Text.Trim());
+                    dtoCard.CardMoneyEx = 0;
                     dtoCard.CardBuyDate = dtpRechargeDate.Value;
                     dtoCard.RechargeID = -1;
                     dtoCard.CustomerID = m_stCusID;
@@ -221,7 +236,7 @@ namespace SGM_Management
             
             SGMHelper.ShowToolTip(txtCardID, "");
             SGMHelper.ShowToolTip(txtCardMoney, "");
-            SGMHelper.ShowToolTip(txtRechargeMoney, "");
+            SGMHelper.ShowToolTip(txtExMoney, "");
             SGMHelper.ShowToolTip(dtpRechargeDate, "");
             
             if (txtCardID.Text.Trim().Equals(""))
@@ -262,16 +277,16 @@ namespace SGM_Management
                 SGMHelper.ShowToolTip(txtCardMoney, SGMText.CARD_DATA_INPUT_CARD_MONEY_ERR);
                 bValidate = false;
             }
-            else if (txtRechargeMoney.Text.Trim().Equals(""))
-            {
-                SGMHelper.ShowToolTip(txtRechargeMoney, SGMText.CARD_DATA_INPUT_CARD_PRICE_ERR);
-                bValidate = false;
-            }
-            else if (Int32.Parse(txtCardMoney.Text.Trim()) < Int32.Parse(txtRechargeMoney.Text.Trim()))
-            {
-                SGMHelper.ShowToolTip(txtRechargeMoney, SGMText.CARD_DATA_INPUT_CARD_MONEY_PRICE_ERR);
-                bValidate = false;
-            }
+            //else if (txtRechargeMoney.Text.Trim().Equals(""))
+            //{
+            //    SGMHelper.ShowToolTip(txtRechargeMoney, SGMText.CARD_DATA_INPUT_CARD_PRICE_ERR);
+            //    bValidate = false;
+            //}
+            //else if (Int32.Parse(txtCardMoney.Text.Trim()) < Int32.Parse(txtExMoney.Text.Trim()))
+            //{
+            //    SGMHelper.ShowToolTip(txtExMoney, SGMText.CARD_DATA_INPUT_CARD_MONEY_PRICE_ERR);
+            //    bValidate = false;
+            //}
             //if (!m_bStateUpdate)
             {
                 if (dtpRechargeDate.Value.Date < DateTime.Now.Date)
@@ -380,11 +395,26 @@ namespace SGM_Management
             {
                 txtCardID.Enabled = false;
                 txtCardID.Text = m_stCardID;
+                txtExMoney.Text = m_iExCardMoney.ToString();
             }
             else
             {
+                
                 txtCardID.Enabled = true;
                 ResetInput();
+                if (m_bChangeCard)
+                {
+                    txtCardMoney.Enabled = false;
+                    //txtExMoney.Enabled = false;
+                    txtCardMoney.Text = m_iCurrentCardMoney.ToString();
+                    txtExMoney.Text = m_iExCardMoney.ToString();
+                }
+                else
+                {
+                    txtCardMoney.Enabled = true;
+                    //txtExMoney.Enabled = true;
+                   
+                }
                 txtCardID.Focus();
             }
             GetPriceGas();

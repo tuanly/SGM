@@ -12,6 +12,7 @@ namespace SGM_Core.DTO
         private int m_iRechargeGas95Price;      //price of gas 95 when recharge
         private int m_iRechargeGasDOPrice;      //price of gas Do when recharge
         private int m_iRechargeMoney;
+        private int m_iRechargeMoneyEx;
         private string m_stRechargeNote;
         private string m_stCardID;  //forgein key
 
@@ -59,6 +60,12 @@ namespace SGM_Core.DTO
         {
             get { return m_iRechargeMoney; }
             set { m_iRechargeMoney = value; }
+        }
+
+        public int RechargeMoneyEx
+        {
+            get { return m_iRechargeMoneyEx; }
+            set { m_iRechargeMoneyEx = value; }
         }
 
         public string RechargeNote

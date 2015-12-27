@@ -27,9 +27,7 @@ namespace SGM_Management
         }
 
         private void frmSGMUpdatePrice_Load(object sender, EventArgs e)
-        {
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-            dateTimePicker1.CustomFormat = "dd/MM/yyyy hh:mm:ss tt";
+        {       
 
             DataToUIView();
             SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this.ParentForm);
@@ -69,7 +67,7 @@ namespace SGM_Management
             {
                 return;
             }
-            frmGSMMain.s_currentAdminDTO.SysApplyDate = dateTimePicker1.Value;
+            frmGSMMain.s_currentAdminDTO.SysApplyDate = dtpNew.Value;
             frmGSMMain.s_currentAdminDTO.SysGas92CurrentPrice = frmGSMMain.s_currentAdminDTO.SysGas92NewPrice = Int32.Parse(txtGas92NewPrice.Text);
             frmGSMMain.s_currentAdminDTO.SysGas95CurrentPrice = frmGSMMain.s_currentAdminDTO.SysGas95NewPrice = Int32.Parse(txtGas95NewPrice.Text);
             frmGSMMain.s_currentAdminDTO.SysGasDOCurrentPrice = frmGSMMain.s_currentAdminDTO.SysGasDONewPrice = Int32.Parse(txtGasDONewPrice.Text);
@@ -109,6 +107,7 @@ namespace SGM_Management
                 txtGas92CurrentPrice.Text = frmGSMMain.s_currentAdminDTO.SysGas92CurrentPrice.ToString();
                 txtGas95CurrentPrice.Text = frmGSMMain.s_currentAdminDTO.SysGas95CurrentPrice.ToString();
                 txtGasDOCurrentPrice.Text = frmGSMMain.s_currentAdminDTO.SysGasDOCurrentPrice.ToString();
+                dtpOld.Value = frmGSMMain.s_currentAdminDTO.SysApplyDate;
             }
         }
     }

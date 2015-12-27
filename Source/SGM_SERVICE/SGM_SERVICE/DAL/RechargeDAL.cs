@@ -36,7 +36,8 @@ namespace SGM.ServicesCore.DAL
                     dtoRecharge.RechargeGas95Price = Int32.Parse(dr["RECHARGE_GAS95_PRICE"].ToString());
                     dtoRecharge.RechargeGasDOPrice = Int32.Parse(dr["RECHARGE_GASDO_PRICE"].ToString());
                     dtoRecharge.RechargeMoney = Int32.Parse(dr["RECHARGE_MONEY"].ToString());
-                    dtoRecharge.RechargeNote = dr["RECHARGE_MONEY"].ToString();
+                    dtoRecharge.RechargeMoneyEx = Int32.Parse(dr["RECHARGE_MONEY_EX"].ToString());
+                    dtoRecharge.RechargeNote = dr["RECHARGE_NOTE"].ToString();
                     dtoRecharge.CardID = dr["CARD_ID"].ToString();                   
                 }
             }
@@ -49,10 +50,10 @@ namespace SGM.ServicesCore.DAL
             bool insertResult = true;
             try
             {
-                string query = string.Format("INSERT INTO RECHARGE (RECHARGE_DATE, RECHARGE_GAS92_PRICE, RECHARGE_GAS95_PRICE, RECHARGE_GASDO_PRICE, RECHARGE_MONEY, RECHARGE_NOTE, CARD_ID)" +
-                                                           " VALUES (@RECHARGE_DATE, @RECHARGE_GAS92_PRICE, @RECHARGE_GAS95_PRICE, @RECHARGE_GASDO_PRICE, @RECHARGE_MONEY, @RECHARGE_NOTE, @CARD_ID)");
+                string query = string.Format("INSERT INTO RECHARGE (RECHARGE_DATE, RECHARGE_GAS92_PRICE, RECHARGE_GAS95_PRICE, RECHARGE_GASDO_PRICE, RECHARGE_MONEY, RECHARGE_MONEY_EX, RECHARGE_NOTE, CARD_ID)" +
+                                                           " VALUES (@RECHARGE_DATE, @RECHARGE_GAS92_PRICE, @RECHARGE_GAS95_PRICE, @RECHARGE_GASDO_PRICE, @RECHARGE_MONEY, @RECHARGE_MONEY_EX, @RECHARGE_NOTE, @CARD_ID)");
                 
-                SqlParameter[] sqlParameters = new SqlParameter[7];               
+                SqlParameter[] sqlParameters = new SqlParameter[8];               
                 sqlParameters[0] = new SqlParameter("@RECHARGE_DATE", SqlDbType.DateTime);
                 sqlParameters[0].Value = Convert.ToDateTime(dtoRecharge.RechargeDate);
                 sqlParameters[1] = new SqlParameter("@RECHARGE_GAS92_PRICE", SqlDbType.Int);
@@ -63,10 +64,12 @@ namespace SGM.ServicesCore.DAL
                 sqlParameters[3].Value = Convert.ToInt32(dtoRecharge.RechargeGasDOPrice);
                 sqlParameters[4] = new SqlParameter("@RECHARGE_MONEY", SqlDbType.Int);
                 sqlParameters[4].Value = Convert.ToInt32(dtoRecharge.RechargeMoney);
-                sqlParameters[5] = new SqlParameter("@RECHARGE_NOTE", SqlDbType.NVarChar);
-                sqlParameters[5].Value = Convert.ToString(dtoRecharge.RechargeNote);
-                sqlParameters[6] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
-                sqlParameters[6].Value = Convert.ToString(dtoRecharge.CardID);
+                sqlParameters[5] = new SqlParameter("@RECHARGE_MONEY_EX", SqlDbType.Int);
+                sqlParameters[5].Value = Convert.ToInt32(dtoRecharge.RechargeMoneyEx);
+                sqlParameters[6] = new SqlParameter("@RECHARGE_NOTE", SqlDbType.NVarChar);
+                sqlParameters[6].Value = Convert.ToString(dtoRecharge.RechargeNote);
+                sqlParameters[7] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
+                sqlParameters[7].Value = Convert.ToString(dtoRecharge.CardID);
                 
 
                 insertResult = m_dbConnection.ExecuteInsertQuery(query, sqlParameters);
@@ -91,26 +94,27 @@ namespace SGM.ServicesCore.DAL
         public bool UpdateRecharge(RechargeDTO dtoRecharge)
         {
             bool result = true;
-            string query = string.Format("UPDATE RECHARGE SET RECHARGE_DATE = @RECHARGE_DATE, RECHARGE_MONEY = @RECHARGE_MONEY, RECHARGE_NOTE = @RECHARGE_NOTE, " + 
+            string query = string.Format("UPDATE RECHARGE SET RECHARGE_DATE = @RECHARGE_DATE, RECHARGE_MONEY = @RECHARGE_MONEY, RECHARGE_MONEY_EX = @RECHARGE_MONEY_EX, RECHARGE_NOTE = @RECHARGE_NOTE, " + 
                                                             " RECHARGE_GAS92_PRICE = @RECHARGE_GAS92_PRICE, RECHARGE_GAS95_PRICE = @RECHARGE_GAS95_PRICE, RECHARGE_GASDO_PRICE = @RECHARGE_GASDO_PRICE, CARD_ID = @CARD_ID " +
                                                       " WHERE RECHARGE_ID = @RECHARGE_ID"
                                                       );
-            SqlParameter[] sqlParameters = new SqlParameter[8];
-            sqlParameters[0] = new SqlParameter("@RECHARGE_ID", SqlDbType.Int);
-            sqlParameters[0].Value = Convert.ToInt32(dtoRecharge.RechargeID);
-            sqlParameters[1] = new SqlParameter("@RECHARGE_DATE", SqlDbType.DateTime);
-            sqlParameters[1].Value = Convert.ToDateTime(dtoRecharge.RechargeDate);
-            sqlParameters[4] = new SqlParameter("@RECHARGE_GAS92_PRICE", SqlDbType.Int);
-            sqlParameters[4].Value = Convert.ToInt32(dtoRecharge.RechargeGas92Price);
-            sqlParameters[5] = new SqlParameter("@RECHARGE_GAS95_PRICE", SqlDbType.Int);
-            sqlParameters[5].Value = Convert.ToInt32(dtoRecharge.RechargeGas95Price);
-            sqlParameters[6] = new SqlParameter("@RECHARGE_GASDO_PRICE", SqlDbType.Int);
-            sqlParameters[6].Value = Convert.ToInt32(dtoRecharge.RechargeGasDOPrice);
-            sqlParameters[8] = new SqlParameter("@RECHARGE_NOTE", SqlDbType.NVarChar);
-            sqlParameters[8].Value = Convert.ToString(dtoRecharge.RechargeNote);
-            sqlParameters[9] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
-            sqlParameters[9].Value = Convert.ToString(dtoRecharge.CardID);
-
+            SqlParameter[] sqlParameters = new SqlParameter[9];
+            sqlParameters[0] = new SqlParameter("@RECHARGE_DATE", SqlDbType.DateTime);
+            sqlParameters[0].Value = Convert.ToDateTime(dtoRecharge.RechargeDate);
+            sqlParameters[1] = new SqlParameter("@RECHARGE_GAS92_PRICE", SqlDbType.Int);
+            sqlParameters[1].Value = Convert.ToInt32(dtoRecharge.RechargeGas92Price);
+            sqlParameters[2] = new SqlParameter("@RECHARGE_GAS95_PRICE", SqlDbType.Int);
+            sqlParameters[2].Value = Convert.ToInt32(dtoRecharge.RechargeGas95Price);
+            sqlParameters[3] = new SqlParameter("@RECHARGE_GASDO_PRICE", SqlDbType.Int);
+            sqlParameters[3].Value = Convert.ToInt32(dtoRecharge.RechargeGasDOPrice);
+            sqlParameters[4] = new SqlParameter("@RECHARGE_MONEY", SqlDbType.Int);
+            sqlParameters[4].Value = Convert.ToInt32(dtoRecharge.RechargeMoney);
+            sqlParameters[5] = new SqlParameter("@RECHARGE_MONEY_EX", SqlDbType.Int);
+            sqlParameters[5].Value = Convert.ToInt32(dtoRecharge.RechargeMoneyEx);
+            sqlParameters[6] = new SqlParameter("@RECHARGE_NOTE", SqlDbType.NVarChar);
+            sqlParameters[6].Value = Convert.ToString(dtoRecharge.RechargeNote);
+            sqlParameters[7] = new SqlParameter("@RECHARGE_ID", SqlDbType.NVarChar);
+            sqlParameters[7].Value = Convert.ToString(dtoRecharge.RechargeID);
             result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
             return result;
         }
