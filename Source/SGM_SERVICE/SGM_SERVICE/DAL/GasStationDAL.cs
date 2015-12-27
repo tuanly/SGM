@@ -73,8 +73,8 @@ namespace SGM.ServicesCore.DAL
             try
             {
 
-                string query = string.Format("INSERT INTO GAS_STATION (GASSTATION_ID, GASSTATION_NAME, GASSTATION_ADDRESS, GASSTATION_DESCRIPTION) VALUES (@GASSTATION_ID, @GASSTATION_NAME, @GASSTATION_ADDRESS, @GASSTATION_DESCRIPTION)");
-                SqlParameter[] sqlParameters = new SqlParameter[4];
+                string query = string.Format("INSERT INTO GAS_STATION (GASSTATION_ID, GASSTATION_NAME, GASSTATION_ADDRESS, GASSTATION_DESCRIPTION, GASSTORE_ID) VALUES (@GASSTATION_ID, @GASSTATION_NAME, @GASSTATION_ADDRESS, @GASSTATION_DESCRIPTION, @GASSTORE_ID)");
+                SqlParameter[] sqlParameters = new SqlParameter[5];
                 sqlParameters[0] = new SqlParameter("@GASSTATION_ID", SqlDbType.NVarChar);
                 sqlParameters[0].Value = Convert.ToString(dtoGasStation.GasStationID);
                 sqlParameters[1] = new SqlParameter("@GASSTATION_NAME", SqlDbType.NVarChar);
@@ -83,8 +83,8 @@ namespace SGM.ServicesCore.DAL
                 sqlParameters[2].Value = Convert.ToString(dtoGasStation.GasStationAddress);
                 sqlParameters[3] = new SqlParameter("@GASSTATION_DESCRIPTION", SqlDbType.NVarChar);
                 sqlParameters[3].Value = Convert.ToString(dtoGasStation.GasStationDescription);
-                //sqlParameters[4] = new SqlParameter("@GASSTATION_MACADDRESS", SqlDbType.NVarChar);
-                //sqlParameters[4].Value = Convert.ToString(dtoGasStation.GasStationMacAddress);
+                sqlParameters[4] = new SqlParameter("@GASSTORE_ID", SqlDbType.NVarChar);
+                sqlParameters[4].Value = Convert.ToString(dtoGasStation.GasStoreID);
                 insertResult = m_dbConnection.ExecuteInsertQuery(query, sqlParameters);
 
                 
@@ -114,8 +114,8 @@ namespace SGM.ServicesCore.DAL
             bool updateResult = true;
             try
             {
-                string query = string.Format("UPDATE GAS_STATION SET GASSTATION_ID = @GASSTATION_ID_NEW, GASSTATION_NAME = @GASSTATION_NAME, GASSTATION_ADDRESS = @GASSTATION_ADDRESS, GASSTATION_DESCRIPTION = @GASSTATION_DESCRIPTION, GASSTATION_MACADDRESS = @GASSTATION_MACADDRESS WHERE GASSTATION_ID = @GASSTATION_ID_OLD");
-                SqlParameter[] sqlParameters = new SqlParameter[6];
+                string query = string.Format("UPDATE GAS_STATION SET GASSTATION_ID = @GASSTATION_ID_NEW, GASSTATION_NAME = @GASSTATION_NAME, GASSTATION_ADDRESS = @GASSTATION_ADDRESS, GASSTATION_DESCRIPTION = @GASSTATION_DESCRIPTION, GASSTATION_MACADDRESS = @GASSTATION_MACADDRESS, GASSTORE_ID = @GASSTORE_ID WHERE GASSTATION_ID = @GASSTATION_ID_OLD");
+                SqlParameter[] sqlParameters = new SqlParameter[7];
                 sqlParameters[0] = new SqlParameter("@GASSTATION_ID_NEW", SqlDbType.NVarChar);
                 sqlParameters[0].Value = Convert.ToString(dtoGasStation.GasStationID);
                 sqlParameters[1] = new SqlParameter("@GASSTATION_NAME", SqlDbType.NVarChar);
@@ -129,8 +129,10 @@ namespace SGM.ServicesCore.DAL
                     sqlParameters[4].Value = DBNull.Value;
                 else
                     sqlParameters[4].Value = Convert.ToString(dtoGasStation.GasStationMacAddress);
-                sqlParameters[5] = new SqlParameter("@GASSTATION_ID_OLD", SqlDbType.NVarChar);
-                sqlParameters[5].Value = Convert.ToString(stGasStationID);
+                sqlParameters[5] = new SqlParameter("@GASSTORE_ID", SqlDbType.NVarChar);
+                sqlParameters[5].Value = Convert.ToString(dtoGasStation.GasStoreID);
+                sqlParameters[6] = new SqlParameter("@GASSTATION_ID_OLD", SqlDbType.NVarChar);
+                sqlParameters[6].Value = Convert.ToString(stGasStationID);
                 updateResult = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);                
             }
             catch (Exception ex)

@@ -246,7 +246,7 @@ namespace SGM.ServicesCore.DAL
             try
             {
                 string query = string.Format("SELECT * FROM GAS_STORE");
-                
+            
                 DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, new SqlParameter[0]);
                 if (tblResult.Rows.Count > 0)
                 {

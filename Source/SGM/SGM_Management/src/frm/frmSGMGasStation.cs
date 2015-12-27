@@ -15,6 +15,16 @@ namespace SGM_Management
 {
     public partial class frmGasStation : Form
     {
+        public class ComboboxItem
+        {
+            public string Text { get; set; }
+            public object Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text;
+            }
+        }
         private SGM_Service.ServiceSoapClient m_service = null;
         private DataSet m_dsGasStation;
         private int m_iCurrentGSIndex = -1;
@@ -32,7 +42,8 @@ namespace SGM_Management
 
         private void UpdateStateControls(bool isEditMode)
         {          
-            dgvGSList.Enabled = !isEditMode;          
+            dgvGSList.Enabled = !isEditMode;
+            cboGasStore.Enabled = isEditMode;
             txtGSCode.Enabled = isEditMode;
             txtGSName.Enabled = isEditMode;
             txtGSDes.Enabled = isEditMode;
@@ -45,10 +56,48 @@ namespace SGM_Management
         }
         private void frmGasStation_Load(object sender, EventArgs e)
         {
+            LoadGasStoreList();
             LoadGasStationList();
             UpdateStateControls(false);
         }
-
+        private void LoadGasStoreList()
+        {
+            cboGasStore.Items.Clear();
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () =>
+            {
+                return m_service.SGMManager_GetGasStoreList();
+            });
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+            {
+                String stResponse = task.Result as String;
+                DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+                if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                {
+                    DataSet ds = dataResponse.ResponseDataSet;
+                    DataTable tblResult = ds.Tables[0];
+                    if (tblResult.Rows.Count > 0)
+                    {
+                        ComboboxItem itemAll = new ComboboxItem();
+                        itemAll.Text = "";
+                        itemAll.Value = "";
+                        cboGasStore.Items.Add(itemAll);
+                        foreach (DataRow dr in tblResult.Rows)
+                        {
+                            ComboboxItem item = new ComboboxItem();
+                            item.Text = dr["GASSTORE_NAME"].ToString();
+                            item.Value = dr["GASSTORE_ID"].ToString();
+                            cboGasStore.Items.Add(item);
+                        }
+                        cboGasStore.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                }
+            }, SynchronizationContext.Current);
+        }
         private void LoadGasStationList()
         {
             Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
@@ -87,12 +136,12 @@ namespace SGM_Management
         private bool ValidateDataInput()
         {
             bool bValidate = true;
-            errProvider.Clear();
+            errProvider.Clear();            
             if (txtGSCode.Text.Trim().Equals(""))
             {
                 errProvider.SetError(txtGSCode, SGMText.GASSTATION_DATA_INPUT_GS_ID_ERR);
                 bValidate = false;
-            }
+            }            
             else if (!txtGSCode.Text.Trim().Equals(m_stGSIDEdit))
             {
                 Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
@@ -102,7 +151,7 @@ namespace SGM_Management
                 });
                 SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
                 {
-	                String stResponse = task.Result as String;
+                    String stResponse = task.Result as String;
                     DataTransfer response = JSonHelper.ConvertJSonToObject(stResponse);
                     if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                     {
@@ -114,12 +163,17 @@ namespace SGM_Management
                     }
                     else
                     {
-                        errProvider.SetError(txtGSCode, SGMText.GASSTATION_GET_GS_ERR);                    
-					    frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.CUSTOMER_GET_CUS_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                        errProvider.SetError(txtGSCode, SGMText.GASSTATION_GET_GS_ERR);
+                        frmMsg.ShowMsg(SGMText.SGM_ERROR, SGMText.CUSTOMER_GET_CUS_ERR + "\n" + response.ResponseErrorMsg + ":\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                         bValidate = false;
                     }
                 }, SynchronizationContext.Current);
-                
+
+            }
+            if (cboGasStore.Text.Equals(""))
+            {
+                errProvider.SetError(cboGasStore, SGMText.GASSTATION_DATA_INPUT_GS_GASTORE_ERR);
+                bValidate = false;
             }
             if (txtGSName.Text.Trim().Equals(""))
             {
@@ -141,6 +195,7 @@ namespace SGM_Management
                 m_iCurrentGSIndex = dgvGSList.SelectedRows[0].Index;
                 if (m_iCurrentGSIndex < m_dsGasStation.Tables[0].Rows.Count)
                 {
+                    cboGasStore.SelectedValue  = m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTORE_ID"].ToString();
                     txtGSCode.Text = m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTATION_ID"].ToString();
                     txtGSName.Text = m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTATION_NAME"].ToString();
                     txtGSAddress.Text = m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTATION_ADDRESS"].ToString();
@@ -167,7 +222,8 @@ namespace SGM_Management
             txtGSName.Text = "";
             txtGSAddress.Text = "";
             txtGSDes.Text = "";
-            txtMacAddress.Text = "";            
+            txtMacAddress.Text = "";
+            cboGasStore.SelectedText = "";
         }
 
         private void dgvGSList_SelectionChanged(object sender, EventArgs e)
@@ -214,7 +270,8 @@ namespace SGM_Management
                 gas.GasStationName = txtGSName.Text.Trim();
                 gas.GasStationAddress = txtGSAddress.Text.Trim();
                 gas.GasStationDescription = txtGSDes.Text.Trim();
-               
+                gas.GasStoreID = ((ComboboxItem)cboGasStore.SelectedItem).Value.ToString();
+
                 DataTransfer request = new DataTransfer();
                 request.ResponseDataGasStationDTO = gas;
                 string jsRequest = JSonHelper.ConvertObjectToJSon(request);
@@ -265,7 +322,7 @@ namespace SGM_Management
                     Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
                     () =>
                     {
-                        return m_service.SGMManager_DelGasStore(gasID);
+                        return m_service.SGMManager_DelGasStation(gasID);
                     });
                     SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
                     {
@@ -313,6 +370,8 @@ namespace SGM_Management
                     gas.GasStationAddress = txtGSAddress.Text.Trim();
                     gas.GasStationDescription = txtGSDes.Text.Trim();
                     gas.GasStationMacAddress = txtMacAddress.Text.Trim();
+                    gas.GasStoreID = ((ComboboxItem)cboGasStore.SelectedItem).Value.ToString();
+
                     DataTransfer request = new DataTransfer();
                     request.ResponseDataGasStationDTO = gas;
                     string jsRequest = JSonHelper.ConvertObjectToJSon(request);

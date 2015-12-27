@@ -239,6 +239,12 @@ public class Service : System.Web.Services.WebService
         return m_bllGasStoreService.DelGasStore(stGasStoreID);
     }
 
+    [WebMethod]
+    public string SGMManager_GetGasStoreList()
+    {
+        return m_bllGasStoreService.GetGasStores();
+    }
+
 }
     
 

@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGasStation));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnReset = new System.Windows.Forms.Button();
             this.txtMacAddress = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,7 +53,8 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btnReset = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.cboGasStore = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGSList)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -61,6 +63,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cboGasStore);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.btnReset);
             this.groupBox1.Controls.Add(this.txtMacAddress);
             this.groupBox1.Controls.Add(this.label5);
@@ -79,6 +83,17 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin chi tiết:";
+            // 
+            // btnReset
+            // 
+            this.btnReset.Enabled = false;
+            this.btnReset.Location = new System.Drawing.Point(488, 119);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(92, 23);
+            this.btnReset.TabIndex = 10;
+            this.btnReset.Text = "&Xóa Địa Chỉ";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // txtMacAddress
             // 
@@ -265,16 +280,23 @@
             // 
             this.errProvider.ContainerControl = this;
             // 
-            // btnReset
+            // label6
             // 
-            this.btnReset.Enabled = false;
-            this.btnReset.Location = new System.Drawing.Point(488, 119);
-            this.btnReset.Name = "btnReset";
-            this.btnReset.Size = new System.Drawing.Size(92, 23);
-            this.btnReset.TabIndex = 10;
-            this.btnReset.Text = "&Xóa Địa Chỉ";
-            this.btnReset.UseVisualStyleBackColor = true;
-            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(256, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Thuộc Kho: ";
+            // 
+            // cboGasStore
+            // 
+            this.cboGasStore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboGasStore.FormattingEnabled = true;
+            this.cboGasStore.Location = new System.Drawing.Point(328, 26);
+            this.cboGasStore.Name = "cboGasStore";
+            this.cboGasStore.Size = new System.Drawing.Size(252, 21);
+            this.cboGasStore.TabIndex = 12;
             // 
             // frmGasStation
             // 
@@ -324,5 +346,7 @@
         private System.Windows.Forms.TextBox txtMacAddress;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cboGasStore;
     }
 }
