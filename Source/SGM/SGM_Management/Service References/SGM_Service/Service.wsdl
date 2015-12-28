@@ -287,6 +287,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="SGMManager_ChangeCard">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="oldCardID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsRechargeDTO" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_ChangeCardResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_ChangeCardResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="SGMManager_UpdateRechargeIDForCard">
         <s:complexType>
           <s:sequence>
@@ -619,6 +634,12 @@
   <wsdl:message name="SGMManager_AddRechargeCardSoapOut">
     <wsdl:part name="parameters" element="tns:SGMManager_AddRechargeCardResponse" />
   </wsdl:message>
+  <wsdl:message name="SGMManager_ChangeCardSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_ChangeCard" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_ChangeCardSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_ChangeCardResponse" />
+  </wsdl:message>
   <wsdl:message name="SGMManager_UpdateRechargeIDForCardSoapIn">
     <wsdl:part name="parameters" element="tns:SGMManager_UpdateRechargeIDForCard" />
   </wsdl:message>
@@ -789,6 +810,10 @@
     <wsdl:operation name="SGMManager_AddRechargeCard">
       <wsdl:input message="tns:SGMManager_AddRechargeCardSoapIn" />
       <wsdl:output message="tns:SGMManager_AddRechargeCardSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_ChangeCard">
+      <wsdl:input message="tns:SGMManager_ChangeCardSoapIn" />
+      <wsdl:output message="tns:SGMManager_ChangeCardSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="SGMManager_UpdateRechargeIDForCard">
       <wsdl:input message="tns:SGMManager_UpdateRechargeIDForCardSoapIn" />
@@ -1026,6 +1051,15 @@
     </wsdl:operation>
     <wsdl:operation name="SGMManager_AddRechargeCard">
       <soap:operation soapAction="http://tempuri.org/SGMManager_AddRechargeCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_ChangeCard">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_ChangeCard" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1344,6 +1378,15 @@
     </wsdl:operation>
     <wsdl:operation name="SGMManager_AddRechargeCard">
       <soap12:operation soapAction="http://tempuri.org/SGMManager_AddRechargeCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_ChangeCard">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_ChangeCard" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

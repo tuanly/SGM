@@ -45,6 +45,25 @@ namespace SGM.ServicesCore.BLL
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
 
+        public string ChangeCard(string oldCardID, string jsRechargeDTO)
+        {
+            m_dataRequest = JSonHelper.ConvertJSonToObject(jsRechargeDTO);
+            m_dataResponse = m_dalRecharge.AddRecharge(m_dataRequest.ResponseDataRechargeDTO);
+            if (m_dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+            {
+                DataTransfer dataResponseUpdateCard = m_dalCard.UpdateMoneyForCard(oldCardID, 0);
+                
+                if (dataResponseUpdateCard.ResponseCode == DataTransfer.RESPONSE_CODE_FAIL)
+                {
+                    m_dataResponse.ResponseCode = dataResponseUpdateCard.ResponseCode;
+                    m_dataResponse.ResponseErrorMsg = dataResponseUpdateCard.ResponseErrorMsg;
+                    m_dataResponse.ResponseErrorMsgDetail = dataResponseUpdateCard.ResponseErrorMsgDetail;
+                    //rollback here
+                }
+            }          
+            return JSonHelper.ConvertObjectToJSon(m_dataResponse);
+        }
+
         public string UpdateRechargeIDForCard(string stCardID)
         {           
             m_dataResponse = m_dalCard.UpdateRechargeIDForCard(stCardID);

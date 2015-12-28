@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGasStation));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboGasStore = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnReset = new System.Windows.Forms.Button();
             this.txtMacAddress = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -53,8 +55,6 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.errProvider = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label6 = new System.Windows.Forms.Label();
-            this.cboGasStore = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGSList)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -84,13 +84,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin chi tiết:";
             // 
+            // cboGasStore
+            // 
+            this.cboGasStore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboGasStore.FormattingEnabled = true;
+            this.cboGasStore.Location = new System.Drawing.Point(328, 26);
+            this.cboGasStore.Name = "cboGasStore";
+            this.cboGasStore.Size = new System.Drawing.Size(252, 21);
+            this.cboGasStore.TabIndex = 2;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(256, 29);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Thuộc Kho: ";
+            // 
             // btnReset
             // 
             this.btnReset.Enabled = false;
             this.btnReset.Location = new System.Drawing.Point(488, 119);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(92, 23);
-            this.btnReset.TabIndex = 10;
+            this.btnReset.TabIndex = 6;
             this.btnReset.Text = "&Xóa Địa Chỉ";
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
@@ -101,7 +119,7 @@
             this.txtMacAddress.Location = new System.Drawing.Point(100, 121);
             this.txtMacAddress.Name = "txtMacAddress";
             this.txtMacAddress.Size = new System.Drawing.Size(382, 20);
-            this.txtMacAddress.TabIndex = 9;
+            this.txtMacAddress.TabIndex = 5;
             // 
             // label5
             // 
@@ -127,28 +145,29 @@
             this.txtGSDes.Multiline = true;
             this.txtGSDes.Name = "txtGSDes";
             this.txtGSDes.Size = new System.Drawing.Size(480, 35);
-            this.txtGSDes.TabIndex = 6;
+            this.txtGSDes.TabIndex = 7;
             // 
             // txtGSAddress
             // 
             this.txtGSAddress.Location = new System.Drawing.Point(100, 85);
             this.txtGSAddress.Name = "txtGSAddress";
             this.txtGSAddress.Size = new System.Drawing.Size(480, 20);
-            this.txtGSAddress.TabIndex = 5;
+            this.txtGSAddress.TabIndex = 4;
+            this.txtGSAddress.TextChanged += new System.EventHandler(this.txtGSAddress_TextChanged);
             // 
             // txtGSName
             // 
             this.txtGSName.Location = new System.Drawing.Point(100, 56);
             this.txtGSName.Name = "txtGSName";
             this.txtGSName.Size = new System.Drawing.Size(480, 20);
-            this.txtGSName.TabIndex = 4;
+            this.txtGSName.TabIndex = 3;
             // 
             // txtGSCode
             // 
             this.txtGSCode.Location = new System.Drawing.Point(100, 26);
             this.txtGSCode.Name = "txtGSCode";
             this.txtGSCode.Size = new System.Drawing.Size(139, 20);
-            this.txtGSCode.TabIndex = 3;
+            this.txtGSCode.TabIndex = 1;
             // 
             // label3
             // 
@@ -241,7 +260,7 @@
             this.btnEdit.Location = new System.Drawing.Point(195, 19);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
-            this.btnEdit.TabIndex = 7;
+            this.btnEdit.TabIndex = 9;
             this.btnEdit.Text = "&Sửa";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
@@ -251,7 +270,7 @@
             this.btnCancel.Location = new System.Drawing.Point(407, 19);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 9;
+            this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "&Bỏ Qua";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
@@ -261,7 +280,7 @@
             this.btnAdd.Location = new System.Drawing.Point(90, 19);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 6;
+            this.btnAdd.TabIndex = 8;
             this.btnAdd.Text = "&Thêm";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
@@ -271,7 +290,7 @@
             this.btnDelete.Location = new System.Drawing.Point(306, 19);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnDelete.TabIndex = 8;
+            this.btnDelete.TabIndex = 10;
             this.btnDelete.Text = "&Xóa";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -279,24 +298,6 @@
             // errProvider
             // 
             this.errProvider.ContainerControl = this;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(256, 29);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Thuộc Kho: ";
-            // 
-            // cboGasStore
-            // 
-            this.cboGasStore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboGasStore.FormattingEnabled = true;
-            this.cboGasStore.Location = new System.Drawing.Point(328, 26);
-            this.cboGasStore.Name = "cboGasStore";
-            this.cboGasStore.Size = new System.Drawing.Size(252, 21);
-            this.cboGasStore.TabIndex = 12;
             // 
             // frmGasStation
             // 

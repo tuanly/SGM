@@ -191,7 +191,10 @@ namespace SGM_Management
                             task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
                             () =>
                             {
-                                return m_service.SGMManager_AddRechargeCard(JSonHelper.ConvertObjectToJSon(request));
+                                if (m_bChangeCard)
+                                    return m_service.SGMManager_ChangeCard(m_stCardID, JSonHelper.ConvertObjectToJSon(request));
+                                else
+                                    return m_service.SGMManager_AddRechargeCard(JSonHelper.ConvertObjectToJSon(request));
                             });
                             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
                             {

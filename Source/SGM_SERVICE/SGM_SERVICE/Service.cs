@@ -155,6 +155,12 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public string SGMManager_ChangeCard(string oldCardID, string jsRechargeDTO)
+    {
+        return m_bllCardService.ChangeCard(oldCardID, jsRechargeDTO);
+    }
+
+    [WebMethod]
     public string SGMManager_UpdateRechargeIDForCard(string stCardID)
     {
         return m_bllCardService.UpdateRechargeIDForCard(stCardID);

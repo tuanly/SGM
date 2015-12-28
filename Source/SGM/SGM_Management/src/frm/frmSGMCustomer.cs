@@ -548,6 +548,7 @@ namespace SGM_Management
         {
             frmRechard.StateRecharge = false;
             frmRechard.StateChangeCard = true;
+            frmRechard.CardID = m_dsCard.Tables[0].Rows[m_iCurrentCardIndex]["CARD_ID"].ToString();
             frmRechard.CusID = m_dsCustomer.Tables[0].Rows[m_iCurrentCustomerIndex]["CUS_ID"].ToString();
             frmRechard.CurrentCardMoney = Int32.Parse(m_dsCard.Tables[0].Rows[m_iCurrentCustomerIndex]["CARD_MONEY"].ToString());
             frmRechard.ExCardMoney = Int32.Parse(m_dsCard.Tables[0].Rows[m_iCurrentCustomerIndex]["CARD_MONEY_EX"].ToString());

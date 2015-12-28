@@ -432,5 +432,10 @@ namespace SGM_Management
         {
             txtMacAddress.Text = "";
         }
+
+        private void txtGSAddress_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
