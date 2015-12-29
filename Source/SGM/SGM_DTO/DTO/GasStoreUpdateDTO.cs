@@ -6,7 +6,10 @@ namespace SGM_Core.DTO
 {
     public class GasStoreUpdateDTO
     {
-        private int m_iGSUpdateID;        //primate key       
+        private int m_iGSUpdateID;        //primate key      
+        private float m_iGSUpdateGas92Total;   //total gas92 in store
+        private float m_iGSUpdateGas95Total;   //total gas95 in store
+        private float m_iGSUpdateGasDOTotal;   //total gasDO in store
         private float m_iGSUpdateGas92Add;   //added gas92 in store
         private float m_iGSUpdateGas95Add;   //added gas95 in store
         private float m_iGSUpdateGasDOAdd;   //added gasDO in store
@@ -17,6 +20,9 @@ namespace SGM_Core.DTO
         public GasStoreUpdateDTO()
         {
             m_iGSUpdateID = 0;
+            m_iGSUpdateGas92Total = 0;
+            m_iGSUpdateGas95Total = 0;
+            m_iGSUpdateGasDOTotal = 0;
             m_iGSUpdateGas92Add = 0;
             m_iGSUpdateGas95Add = 0;
             m_iGSUpdateGasDOAdd = 0;
@@ -30,7 +36,23 @@ namespace SGM_Core.DTO
             get { return m_iGSUpdateID; }
             set { m_iGSUpdateID = value; }
         }
+        public float GSUpdateGas92Total
+        {
+            get { return m_iGSUpdateGas92Total; }
+            set { m_iGSUpdateGas92Total = value; }
+        }
 
+        public float GSUpdateGas95Total
+        {
+            get { return m_iGSUpdateGas95Total; }
+            set { m_iGSUpdateGas95Total = value; }
+        }
+
+        public float GSUpdateGasDOTotal
+        {
+            get { return m_iGSUpdateGasDOTotal; }
+            set { m_iGSUpdateGasDOTotal = value; }
+        }
         public float GSUpdateGas92Add
         {
             get { return m_iGSUpdateGas92Add; }

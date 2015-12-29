@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7316AB0D-F802-4196-B966-593847BC03AD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SGM_Management</RootNamespace>
+    <AssemblyName>SGM_Management</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>sgm_icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DynamicRDLCGenerator.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportBuilderEntities.cs" />
+    <Compile Include="Service References\SGM_Service\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="src\frm\frmSGMConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMConfig.Designer.cs">
+      <DependentUpon>frmSGMConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\frm\frmSGMGasStation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMGasStation.Designer.cs">
+      <DependentUpon>frmSGMGasStation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\frm\frmSGMMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMMain.Designer.cs">
+      <DependentUpon>frmSGMMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\frm\frmSGMMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMMessage.Designer.cs">
+      <DependentUpon>frmSGMMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\frm\frmSGMCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMCustomer.Designer.cs">
+      <DependentUpon>frmSGMCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\frm\frmSGMRechargeCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMRechargeCard.Designer.cs">
+      <DependentUpon>frmSGMRechargeCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\frm\frmSGMReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMReport.Designer.cs">
+      <DependentUpon>frmSGMReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\frm\frmSGMStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMStore.Designer.cs">
+      <DependentUpon>frmSGMStore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\frm\frmSGMUpdateAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMUpdateAccount.Designer.cs">
+      <DependentUpon>frmSGMUpdateAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\frm\frmSGMLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMLogin.Designer.cs">
+      <DependentUpon>frmSGMLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\frm\frmSGMUpdatePrice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMUpdatePrice.Designer.cs">
+      <DependentUpon>frmSGMUpdatePrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\frm\frmSGMUpdateStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\frmSGMUpdateStore.Designer.cs">
+      <DependentUpon>frmSGMUpdateStore.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="customer_report.rdlc" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="sale_report.rdlc" />
+    <EmbeddedResource Include="src\frm\frmSGMConfig.resx">
+      <DependentUpon>frmSGMConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\frm\frmSGMGasStation.resx">
+      <DependentUpon>frmSGMGasStation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\frm\frmSGMMain.resx">
+      <DependentUpon>frmSGMMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\frm\frmSGMMessage.resx">
+      <DependentUpon>frmSGMMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\frm\frmSGMCustomer.resx">
+      <DependentUpon>frmSGMCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\frm\frmSGMRechargeCard.resx">
+      <DependentUpon>frmSGMRechargeCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\frm\frmSGMReport.resx">
+      <DependentUpon>frmSGMReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\frm\frmSGMStore.resx">
+      <DependentUpon>frmSGMStore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\frm\frmSGMUpdateAccount.resx">
+      <DependentUpon>frmSGMUpdateAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\frm\frmSGMLogin.resx">
+      <DependentUpon>frmSGMLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\frm\frmSGMUpdatePrice.resx">
+      <DependentUpon>frmSGMUpdatePrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\frm\frmSGMUpdateStore.resx">
+      <DependentUpon>frmSGMUpdateStore.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Service References\SGM_Service\Service.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app_data\sgm_error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SGM_Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SGM_Service\Service.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SGM_Service\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SGM_Service\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\SGM_Service\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SGM_DTO\SGM_DTO.csproj">
+      <Project>{5ABD34AF-902B-408F-85B5-12E0F96E60CF}</Project>
+      <Name>SGM_DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SGM_WaitingIdicator\SGM_WaitingIdicator.csproj">
+      <Project>{DD852908-1C4F-4725-B332-5E5BAB53E2F5}</Project>
+      <Name>SGM_WaitingIdicator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app_data\sgm_info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app_data\sgm_question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app_data\sgm_warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="sgm_icon.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
