@@ -291,5 +291,96 @@ namespace SGM.ServicesCore.DAL
 
             return dataResult;
         }
+
+        public DataTransfer GetGasStoreUpdateHistory(string stGasStoreID)
+        {
+            DataTransfer dataResult = new DataTransfer();
+            try
+            {
+                GasStoreUpdateDTO dtoGasStoreUpdate = null;
+                string query = string.Format("SELECT * FROM GAS_STORE_UPDATE WHERE GASSTORE_ID = @GASSTORE_ID");
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+                sqlParameters[0] = new SqlParameter("@GASSTORE_ID", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(stGasStoreID);
+                DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
+                if (tblResult.Rows.Count > 0)
+                {
+                    dtoGasStoreUpdate = new GasStoreUpdateDTO();
+                    foreach (DataRow dr in tblResult.Rows)
+                    {
+                        dtoGasStoreUpdate.GasStoreID = dr["GASSTORE_ID"].ToString();
+                        dtoGasStoreUpdate.GSUpdateGas92Total = Int32.Parse(dr["GS_GAS92_TOTAL"].ToString());
+                        dtoGasStoreUpdate.GSUpdateGas95Total = Int32.Parse(dr["GS_GAS95_TOTAL"].ToString());
+                        dtoGasStoreUpdate.GSUpdateGasDOTotal = Int32.Parse(dr["GS_GASDO_TOTAL"].ToString());
+                        dtoGasStoreUpdate.GSUpdateGas92Add = Int32.Parse(dr["GS_GAS92_ADD"].ToString());
+                        dtoGasStoreUpdate.GSUpdateGas95Add = Int32.Parse(dr["GS_GAS95_ADD"].ToString());
+                        dtoGasStoreUpdate.GSUpdateGasDOAdd = Int32.Parse(dr["GS_GASDO_ADD"].ToString());
+                        dtoGasStoreUpdate.GSUpdateDate = DateTime.Parse(dr["GS_UPDATE_DATE"].ToString());
+                        dtoGasStoreUpdate.GSUpdateDescription = dr["GS_DESCRIPTION"].ToString();
+                    }
+                }
+                dataResult.ResponseDataGasStoreUpdateDTO = dtoGasStoreUpdate;
+            }
+            catch (Exception ex)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.GASSTORE_GET_GSUPDATE_ERR;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+
+            return dataResult;
+        }
+
+        public DataTransfer AddNewGasStoreUpdate(GasStoreUpdateDTO dtoGasStoreUpdate)
+        {
+
+            DataTransfer dataResult = new DataTransfer();
+            bool insertResult = true;
+            try
+            {
+
+                string query = string.Format("INSERT INTO GAS_STORE_UPDATE (GS_GAS92_TOTAL, GS_GAS95_TOTAL, GS_GASDO_TOTAL, GS_GAS92_ADD, GS_GAS95_ADD, GS_GASDO_ADD, GS_UPDATE_DATE, GS_DESCRIPTION, GASSTORE_ID) VALUES (@GS_GAS92_TOTAL, @GS_GAS95_TOTAL, @GS_GASDO_TOTAL, @GS_GAS92_ADD, @GS_GAS95_ADD, @GS_GASDO_ADD, @GS_UPDATE_DATE, @GS_DESCRIPTION, @GASSTORE_ID)");
+                SqlParameter[] sqlParameters = new SqlParameter[9];
+                sqlParameters[0] = new SqlParameter("@GS_GAS92_TOTAL", SqlDbType.Int);
+                sqlParameters[0].Value = dtoGasStoreUpdate.GSUpdateGas92Total;
+                sqlParameters[1] = new SqlParameter("@GS_GAS95_TOTAL", SqlDbType.Int);
+                sqlParameters[1].Value = dtoGasStoreUpdate.GSUpdateGas95Total;
+                sqlParameters[2] = new SqlParameter("@GS_GASDO_TOTAL", SqlDbType.Int);
+                sqlParameters[2].Value = dtoGasStoreUpdate.GSUpdateGasDOTotal;
+                sqlParameters[3] = new SqlParameter("@GS_GAS92_ADD", SqlDbType.NVarChar);
+                sqlParameters[3].Value = dtoGasStoreUpdate.GSUpdateGas92Add;
+                sqlParameters[4] = new SqlParameter("@GS_GAS95_ADD", SqlDbType.Int);
+                sqlParameters[4].Value = dtoGasStoreUpdate.GSUpdateGas95Add;
+                sqlParameters[5] = new SqlParameter("@GS_GASDO_ADD", SqlDbType.Int);
+                sqlParameters[5].Value = dtoGasStoreUpdate.GSUpdateGasDOAdd;
+                sqlParameters[6] = new SqlParameter("@GS_UPDATE_DATE", SqlDbType.DateTime);
+                sqlParameters[6].Value = Convert.ToDateTime(dtoGasStoreUpdate.GSUpdateDate);
+                sqlParameters[7] = new SqlParameter("@GS_DESCRIPTION", SqlDbType.NVarChar);
+                sqlParameters[7].Value = Convert.ToString(dtoGasStoreUpdate.GSUpdateDescription);
+                sqlParameters[8] = new SqlParameter("@GASSTORE_ID", SqlDbType.NVarChar);
+                sqlParameters[8].Value = Convert.ToString(dtoGasStoreUpdate.GasStoreID);
+
+                insertResult = m_dbConnection.ExecuteInsertQuery(query, sqlParameters);
+
+
+            }
+            catch (Exception ex)
+            {
+                insertResult = false;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+
+
+            if (insertResult)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+            }
+            else
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.GASSTORE_ADD_NEW_GSUPDATE_ERR;
+            }
+            return dataResult;
+        }
     }
 }
