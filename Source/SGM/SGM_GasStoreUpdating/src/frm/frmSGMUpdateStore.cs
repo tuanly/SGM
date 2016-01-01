@@ -19,11 +19,14 @@ namespace SGM_GasStoreUpdating
         private SGM_Service.ServiceSoapClient m_service = null;
         private frmSGMMessage frmMsg = null;
 
-        public frmSGMUpdateStore()
+        GasStoreDTO _storeDTO = null;
+
+        public frmSGMUpdateStore(GasStoreDTO dto)
         {
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
             frmMsg = new frmSGMMessage();
+            _storeDTO = dto;
         }
 
         private void frmSGMUpdateStore_Load(object sender, EventArgs e)
@@ -34,12 +37,19 @@ namespace SGM_GasStoreUpdating
 
         private void DataToUIView()
         {
-            //if (frmGSMMain.s_currentAdminDTO != null)
-            //{
-            //    txtGas92Current.Text = frmGSMMain.s_currentAdminDTO.SysGas92Total.ToString();
-            //    txtGas95Current.Text = frmGSMMain.s_currentAdminDTO.SysGas95Total.ToString();
-            //    txtGasDOCurrent.Text = frmGSMMain.s_currentAdminDTO.SysGasDOTotal.ToString();
-            //}
+            if (_storeDTO == null)
+                return;
+
+            lblTitle.Text = "KHO XĂNG DẦU " + _storeDTO.GasStoreName;
+            txtGas92Current.Text = _storeDTO.GasStoreGas92Total.ToString();
+            txtGas95Current.Text = _storeDTO.GasStoreGas95Total.ToString();
+            txtGasDOCurrent.Text = _storeDTO.GasStoreGasDOTotal.ToString();
+
+            txtGas92New.Text = "";
+            txtGas95New.Text = "";
+            txtGasDONew.Text = "";
+
+            txtNote.Text = "";
         }
 
         private bool ValidateDataInput()
@@ -55,14 +65,14 @@ namespace SGM_GasStoreUpdating
                 String txt = f[i].Text.Trim();
                 if (txt.Equals(""))
                 {
-                    SGMHelper.ShowToolTip(f[i], SGMText.UPDATE_PRICE_INPUT_NULL);
+                    SGMHelper.ShowToolTip(f[i], SGMText.UPDATE_TOTAL_INPUT_NULL);
                     bValidate = false;
                     break;
                 }
                 float tmp;
                 if (float.TryParse(txt, out tmp) == false || tmp < 0)
                 {
-                    SGMHelper.ShowToolTip(f[i], SGMText.UPDATE_PRICE_INPUT_ERR);
+                    SGMHelper.ShowToolTip(f[i], SGMText.UPDATE_TOTAL_INPUT_ERR);
                     bValidate = false;
                     break;
                 }
@@ -72,39 +82,81 @@ namespace SGM_GasStoreUpdating
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            //if (!ValidateDataInput())
-            //{
-            //    return;
-            //}
-            //frmGSMMain.s_currentAdminDTO.SysGas92Total = float.Parse(txtGas92Current.Text) + float.Parse(txtGas92New.Text);
-            //frmGSMMain.s_currentAdminDTO.SysGas95Total = float.Parse(txtGas95Current.Text) + float.Parse(txtGas95New.Text);
-            //frmGSMMain.s_currentAdminDTO.SysGasDOTotal = float.Parse(txtGasDOCurrent.Text) + float.Parse(txtGasDONew.Text);
+            if (_storeDTO == null)
+            {
+                //frmMsg.ShowMsg(SGMText.SGM_ERROR, "DTO NULL", SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                return;
+            }
+            if (!ValidateDataInput())
+            {
+                return;
+            }
+            
+            float gas92Add = float.Parse(txtGas92New.Text);
+            float gas95Add = float.Parse(txtGas95New.Text);
+            float gasDOAdd = float.Parse(txtGasDONew.Text);
 
-            //DataTransfer request = new DataTransfer();
-            //request.ResponseDataSystemAdminDTO = frmGSMMain.s_currentAdminDTO;
-            //string jsRequest = JSonHelper.ConvertObjectToJSon(request);
-            //Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
-            //() =>
-            //{
-            //    return m_service.SGMManager_UpdateSystemStore(jsRequest);
-            //});
-            //SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
-            //{
-            //    String stResponse = task.Result as String;
-            //    DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
-            //    if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-            //    {
-            //        frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.ADMIN_UPDATE_TOTAL_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
-            //        DataToUIView();
-            //    }
-            //    else
-            //    {
-            //        frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
-            //        frmGSMMain.s_currentAdminDTO.SysGas92Total = float.Parse(txtGas92Current.Text);
-            //        frmGSMMain.s_currentAdminDTO.SysGas95Total = float.Parse(txtGas95Current.Text);
-            //        frmGSMMain.s_currentAdminDTO.SysGasDOTotal = float.Parse(txtGasDOCurrent.Text);
-            //    }
-            //}, SynchronizationContext.Current);
+            DataTransfer request = new DataTransfer();
+            
+            GasStoreDTO cloneStoreDTO = new GasStoreDTO(_storeDTO);
+            cloneStoreDTO.GasStoreGas92Total = _storeDTO.GasStoreGas92Total + gas92Add;
+            cloneStoreDTO.GasStoreGas95Total = _storeDTO.GasStoreGas95Total + gas95Add;
+            cloneStoreDTO.GasStoreGasDOTotal = _storeDTO.GasStoreGasDOTotal + gasDOAdd;
+                        
+            request.ResponseDataGasStoreDTO = cloneStoreDTO;
+            string jsRequest = JSonHelper.ConvertObjectToJSon(request);
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () =>
+            {
+                return m_service.SGMManager_UpdateGasStore(jsRequest);
+            });
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+            {
+                String stResponse = task.Result as String;
+                DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+                if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                {
+                    DataTransfer request2 = new DataTransfer();
+                    GasStoreUpdateDTO dto = new GasStoreUpdateDTO();
+                    dto.GasStoreID = _storeDTO.GasStoreID;
+                    dto.GSUpdateDate = DateTime.Now;
+                    dto.GSUpdateDescription = txtNote.Text;
+                    dto.GSUpdateGas92Add = gas92Add;
+                    dto.GSUpdateGas95Add = gas95Add;
+                    dto.GSUpdateGasDOAdd = gasDOAdd;
+                    dto.GSUpdateGas92Total = _storeDTO.GasStoreGas92Total;
+                    dto.GSUpdateGas95Total = _storeDTO.GasStoreGas95Total;
+                    dto.GSUpdateGasDOTotal = _storeDTO.GasStoreGasDOTotal;
+                    request2.ResponseDataGasStoreUpdateDTO = dto;
+                    string jsRequest2 = JSonHelper.ConvertObjectToJSon(request2);
+                    Task<String> task2 = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+                    () =>
+                    {
+                        return m_service.SGMManager_AddNewGasStoreUpdate(jsRequest2);
+                    });
+                    SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task2, () =>
+                    {
+                        String stResponse2 = task2.Result as String;
+                        DataTransfer dataResponse2 = JSonHelper.ConvertJSonToObject(stResponse);
+                        if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                        {
+                            frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.ADMIN_UPDATE_TOTAL_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                            _storeDTO.GasStoreGas92Total = _storeDTO.GasStoreGas92Total + gas92Add;
+                            _storeDTO.GasStoreGas95Total = _storeDTO.GasStoreGas95Total + gas95Add;
+                            _storeDTO.GasStoreGasDOTotal = _storeDTO.GasStoreGasDOTotal + gasDOAdd;
+                            DataToUIView();
+                        }
+                        else
+                        {
+                            frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                        }
+                    }, SynchronizationContext.Current);
+                }
+                else
+                {
+                    frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                }
+            }, SynchronizationContext.Current);
         }
     }
 }

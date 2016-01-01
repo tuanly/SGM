@@ -40,15 +40,15 @@ namespace SGM_GasStoreUpdating
         private void btnLogin_Click(object sender, EventArgs e)
         {
             // validate user input
-            if (ValidateLoginCode() == false)
+            if (ValidateLoginCode() == false) 
                 return;
             
             // request server
-            string GASSTATION_ID = txtLoginCode.Text;
-            string GASSTATION_MACADDRESS = GetMacAddress();
+            string GASSTORE_ID = txtLoginCode.Text;
+            string GASSTORE_MACADDRESS = GetMacAddress();
             Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
             () => {
-                return service.SGMSaleGas_ValidateGasStationLogin(GASSTATION_ID, GASSTATION_MACADDRESS);
+                return service.SGMSaleGas_ValidateGasStoreLogin(GASSTORE_ID, GASSTORE_MACADDRESS);
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
@@ -60,8 +60,8 @@ namespace SGM_GasStoreUpdating
                     if (Program.ReaderPort != null)
                         Program.ReaderPort.DataReceived -= serialDatahandler;
 
-                    //new frmSGMSaleGas(dataResponse.ResponseDataSystemAdminDTO, dataResponse.ResponseDataGasStationDTO, dataResponse.ResponseCurrentPriceGas92, dataResponse.ResponseCurrentPriceGas95, dataResponse.ResponseCurrentPriceGasDO).ShowDialog();
-                    new frmSGMUpdateStore();
+                    frmSGMUpdateStore frm = new frmSGMUpdateStore(dataResponse.ResponseDataGasStoreDTO);
+                    frm.ShowDialog();
                     this.Close();
                 }
                 else

@@ -35,6 +35,9 @@ namespace SGM_Core.Utils
         public static string UPDATE_PRICE_INPUT_NULL = "Chưa nhập giá!";
         public static string UPDATE_PRICE_INPUT_ERR = "Giá không hợp lệ!";
 
+        public static string UPDATE_TOTAL_INPUT_NULL = "Chưa nhập số lượng!";
+        public static string UPDATE_TOTAL_INPUT_ERR = "Số lượng không hợp lệ!";
+
         public static string ADMIN_LOGON_ERROR = "Lỗi, Không thể đăng nhập hệ thống!";
 
         public static string CUSTOMER_DATA_INPUT_CUS_ID_ERR = "Lỗi! Chưa nhập Mã khách hàng.";

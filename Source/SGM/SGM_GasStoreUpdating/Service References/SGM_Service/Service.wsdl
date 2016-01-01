@@ -27,6 +27,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="SGMSaleGas_ValidateGasStoreLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stGasStoreID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="stGasStoreMacAddress" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMSaleGas_ValidateGasStoreLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMSaleGas_ValidateGasStoreLoginResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="SGMSaleGas_ValidateCardId">
         <s:complexType>
           <s:sequence>
@@ -476,8 +491,7 @@
       <s:element name="SGMManager_UpdateGasStore">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="jsonCustomerDTO" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="stGasStoreID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="jsonGasStoreDTO" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -485,6 +499,20 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="SGMManager_UpdateGasStoreResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_AddNewGasStoreUpdate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="jsonGasStoreUpdateDTO" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_AddNewGasStoreUpdateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_AddNewGasStoreUpdateResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -525,6 +553,12 @@
   </wsdl:message>
   <wsdl:message name="SGMSaleGas_ValidateGasStationLoginSoapOut">
     <wsdl:part name="parameters" element="tns:SGMSaleGas_ValidateGasStationLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="SGMSaleGas_ValidateGasStoreLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMSaleGas_ValidateGasStoreLogin" />
+  </wsdl:message>
+  <wsdl:message name="SGMSaleGas_ValidateGasStoreLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMSaleGas_ValidateGasStoreLoginResponse" />
   </wsdl:message>
   <wsdl:message name="SGMSaleGas_ValidateCardIdSoapIn">
     <wsdl:part name="parameters" element="tns:SGMSaleGas_ValidateCardId" />
@@ -718,6 +752,12 @@
   <wsdl:message name="SGMManager_UpdateGasStoreSoapOut">
     <wsdl:part name="parameters" element="tns:SGMManager_UpdateGasStoreResponse" />
   </wsdl:message>
+  <wsdl:message name="SGMManager_AddNewGasStoreUpdateSoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_AddNewGasStoreUpdate" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_AddNewGasStoreUpdateSoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_AddNewGasStoreUpdateResponse" />
+  </wsdl:message>
   <wsdl:message name="SGMManager_DelGasStoreSoapIn">
     <wsdl:part name="parameters" element="tns:SGMManager_DelGasStore" />
   </wsdl:message>
@@ -738,6 +778,10 @@
     <wsdl:operation name="SGMSaleGas_ValidateGasStationLogin">
       <wsdl:input message="tns:SGMSaleGas_ValidateGasStationLoginSoapIn" />
       <wsdl:output message="tns:SGMSaleGas_ValidateGasStationLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMSaleGas_ValidateGasStoreLogin">
+      <wsdl:input message="tns:SGMSaleGas_ValidateGasStoreLoginSoapIn" />
+      <wsdl:output message="tns:SGMSaleGas_ValidateGasStoreLoginSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="SGMSaleGas_ValidateCardId">
       <wsdl:input message="tns:SGMSaleGas_ValidateCardIdSoapIn" />
@@ -867,6 +911,10 @@
       <wsdl:input message="tns:SGMManager_UpdateGasStoreSoapIn" />
       <wsdl:output message="tns:SGMManager_UpdateGasStoreSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="SGMManager_AddNewGasStoreUpdate">
+      <wsdl:input message="tns:SGMManager_AddNewGasStoreUpdateSoapIn" />
+      <wsdl:output message="tns:SGMManager_AddNewGasStoreUpdateSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="SGMManager_DelGasStore">
       <wsdl:input message="tns:SGMManager_DelGasStoreSoapIn" />
       <wsdl:output message="tns:SGMManager_DelGasStoreSoapOut" />
@@ -889,6 +937,15 @@
     </wsdl:operation>
     <wsdl:operation name="SGMSaleGas_ValidateGasStationLogin">
       <soap:operation soapAction="http://tempuri.org/SGMSaleGas_ValidateGasStationLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMSaleGas_ValidateGasStoreLogin">
+      <soap:operation soapAction="http://tempuri.org/SGMSaleGas_ValidateGasStoreLogin" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1184,6 +1241,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SGMManager_AddNewGasStoreUpdate">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_AddNewGasStoreUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SGMManager_DelGasStore">
       <soap:operation soapAction="http://tempuri.org/SGMManager_DelGasStore" style="document" />
       <wsdl:input>
@@ -1216,6 +1282,15 @@
     </wsdl:operation>
     <wsdl:operation name="SGMSaleGas_ValidateGasStationLogin">
       <soap12:operation soapAction="http://tempuri.org/SGMSaleGas_ValidateGasStationLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMSaleGas_ValidateGasStoreLogin">
+      <soap12:operation soapAction="http://tempuri.org/SGMSaleGas_ValidateGasStoreLogin" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1504,6 +1579,15 @@
     </wsdl:operation>
     <wsdl:operation name="SGMManager_UpdateGasStore">
       <soap12:operation soapAction="http://tempuri.org/SGMManager_UpdateGasStore" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_AddNewGasStoreUpdate">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_AddNewGasStoreUpdate" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

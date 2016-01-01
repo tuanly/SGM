@@ -17,6 +17,66 @@ namespace SGM.ServicesCore.DAL
             m_dbConnection = new DBConnetionDAL();
         }
 
+        public DataTransfer ValidateGasStoreLogin(string stGasStoreID, string stGasStoreMacAddress)
+        {
+            DataTransfer dataResult = new DataTransfer();
+            try
+            {
+                string query = string.Format("SELECT ISNULL(GASSTORE_MACADDRESS,'NULL') AS RESULT, * FROM GAS_STORE WHERE (GASSTORE_MACADDRESS IS NULL OR GASSTORE_MACADDRESS = @GASSTORE_MACADDRESS) AND GASSTORE_ID = @GASSTORE_ID");
+                SqlParameter[] sqlParameters = new SqlParameter[2];
+                sqlParameters[0] = new SqlParameter("@GASSTORE_MACADDRESS", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(stGasStoreMacAddress);
+                sqlParameters[1] = new SqlParameter("@GASSTORE_ID", SqlDbType.NVarChar);
+                sqlParameters[1].Value = Convert.ToString(stGasStoreID);
+                DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
+                if (tblResult.Rows.Count > 0)
+                {
+                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+                    DataRow dr = tblResult.Rows[0];
+
+                    GasStoreDTO dtoGasStore = new GasStoreDTO();
+                    dtoGasStore.GasStoreID = dr["GASSTORE_ID"].ToString();
+                    dtoGasStore.GasStoreName = dr["GASSTORE_NAME"].ToString();
+                    dtoGasStore.GasStoreAddress = dr["GASSTORE_ADDRESS"].ToString();
+                    dtoGasStore.GasStoreDescription = dr["GASSTORE_DESCRIPTION"].ToString();
+                    dtoGasStore.GasStoreMacAddress = dr["GASSTORE_MACADDRESS"].ToString();
+                    dtoGasStore.GasStoreGas92Total = float.Parse(dr["GASSTORE_GAS92_TOTAL"].ToString());
+                    dtoGasStore.GasStoreGas95Total = float.Parse(dr["GASSTORE_GAS95_TOTAL"].ToString());
+                    dtoGasStore.GasStoreGasDOTotal = float.Parse(dr["GASSTORE_GASDO_TOTAL"].ToString());
+                    dataResult.ResponseDataGasStoreDTO = dtoGasStore;
+
+                    string result = dr["RESULT"].ToString();
+                    if (result.Equals("NULL")) //insert mac address
+                    {
+                        SqlParameter[] sqlParametersUpdate = new SqlParameter[2];
+                        sqlParametersUpdate[0] = new SqlParameter("@GASSTORE_MACADDRESS", SqlDbType.NVarChar);
+                        sqlParametersUpdate[0].Value = Convert.ToString(stGasStoreMacAddress);
+                        sqlParametersUpdate[1] = new SqlParameter("@GASSTORE_ID", SqlDbType.NVarChar);
+                        sqlParametersUpdate[1].Value = Convert.ToString(stGasStoreID);
+                        query = string.Format("UPDATE GAS_STORE SET GASSTORE_MACADDRESS = @GASSTORE_MACADDRESS WHERE GASSTORE_ID = @GASSTORE_ID");
+                        if (!m_dbConnection.ExecuteUpdateQuery(query, sqlParametersUpdate))
+                        {
+                            dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                            dataResult.ResponseErrorMsg = SGMText.GAS_STATION_LOGON_UPDATE_MACADR_ERR;
+                        }
+                    }
+                }
+                else
+                {
+                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                    dataResult.ResponseErrorMsg = SGMText.GAS_STATION_LOGON_ID_INVALID;
+                }
+            }
+            catch (Exception ex)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.GAS_STATION_LOGON_ERR;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+
+
+            return dataResult;
+        }
 
         public DataTransfer GetGasStore(string stGasStoreID)
         {
@@ -39,9 +99,9 @@ namespace SGM.ServicesCore.DAL
                         dtoGasStore.GasStoreAddress = dr["GASSTORE_ADDRESS"].ToString();
                         dtoGasStore.GasStoreDescription = dr["GASSTORE_DESCRIPTION"].ToString();
                         dtoGasStore.GasStoreMacAddress = dr["GASSTORE_MACADDRESS"].ToString();
-                        dtoGasStore.GasStoreGas92Total = Int32.Parse(dr["GASSTORE_GAS92_TOTAL"].ToString());
-                        dtoGasStore.GasStoreGas95Total = Int32.Parse(dr["GASSTORE_GAS95_TOTAL"].ToString());
-                        dtoGasStore.GasStoreGasDOTotal = Int32.Parse(dr["GASSTORE_GASDO_TOTAL"].ToString());
+                        dtoGasStore.GasStoreGas92Total = float.Parse(dr["GASSTORE_GAS92_TOTAL"].ToString());
+                        dtoGasStore.GasStoreGas95Total = float.Parse(dr["GASSTORE_GAS95_TOTAL"].ToString());
+                        dtoGasStore.GasStoreGasDOTotal = float.Parse(dr["GASSTORE_GASDO_TOTAL"].ToString());
                     }
                 }
                 dataResult.ResponseDataGasStoreDTO = dtoGasStore;
@@ -74,11 +134,11 @@ namespace SGM.ServicesCore.DAL
                 sqlParameters[2].Value = Convert.ToString(dtoGasStore.GasStoreAddress);
                 sqlParameters[3] = new SqlParameter("@GASSTORE_DESCRIPTION", SqlDbType.NVarChar);
                 sqlParameters[3].Value = Convert.ToString(dtoGasStore.GasStoreDescription);
-                sqlParameters[4] = new SqlParameter("@GASSTORE_GAS92_TOTAL", SqlDbType.Int);
+                sqlParameters[4] = new SqlParameter("@GASSTORE_GAS92_TOTAL", SqlDbType.Float);
                 sqlParameters[4].Value = dtoGasStore.GasStoreGas92Total;
-                sqlParameters[5] = new SqlParameter("@GASSTORE_GAS95_TOTAL", SqlDbType.Int);
+                sqlParameters[5] = new SqlParameter("@GASSTORE_GAS95_TOTAL", SqlDbType.Float);
                 sqlParameters[5].Value = dtoGasStore.GasStoreGas95Total;
-                sqlParameters[6] = new SqlParameter("@GASSTORE_GASDO_TOTAL", SqlDbType.Int);
+                sqlParameters[6] = new SqlParameter("@GASSTORE_GASDO_TOTAL", SqlDbType.Float);
                 sqlParameters[6].Value = dtoGasStore.GasStoreGasDOTotal;
                 
                 insertResult = m_dbConnection.ExecuteInsertQuery(query, sqlParameters);
@@ -104,7 +164,7 @@ namespace SGM.ServicesCore.DAL
             return dataResult;
         }
 
-        public DataTransfer UpdateGasStore(GasStoreDTO dtoGasStore, string stGasStoreID)
+        public DataTransfer UpdateGasStore(GasStoreDTO dtoGasStore)
         {           
             DataTransfer dataResult = new DataTransfer();
             bool updateResult = true;
@@ -125,14 +185,14 @@ namespace SGM.ServicesCore.DAL
                     sqlParameters[4].Value = DBNull.Value;
                 else
                     sqlParameters[4].Value = Convert.ToString(dtoGasStore.GasStoreMacAddress);
-                sqlParameters[5] = new SqlParameter("@GASSTORE_GAS92_TOTAL", SqlDbType.Int);
+                sqlParameters[5] = new SqlParameter("@GASSTORE_GAS92_TOTAL", SqlDbType.Float);
                 sqlParameters[5].Value = dtoGasStore.GasStoreGas92Total;
-                sqlParameters[6] = new SqlParameter("@GASSTORE_GAS95_TOTAL", SqlDbType.Int);
+                sqlParameters[6] = new SqlParameter("@GASSTORE_GAS95_TOTAL", SqlDbType.Float);
                 sqlParameters[6].Value = dtoGasStore.GasStoreGas95Total;
-                sqlParameters[7] = new SqlParameter("@GASSTORE_GASDO_TOTAL", SqlDbType.Int);
+                sqlParameters[7] = new SqlParameter("@GASSTORE_GASDO_TOTAL", SqlDbType.Float);
                 sqlParameters[7].Value = dtoGasStore.GasStoreGasDOTotal;
                 sqlParameters[8] = new SqlParameter("@GASSTORE_ID_OLD", SqlDbType.NVarChar);
-                sqlParameters[8].Value = Convert.ToString(stGasStoreID);
+                sqlParameters[8].Value = Convert.ToString(dtoGasStore.GasStoreID);
                 updateResult = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);                
             }
             catch (Exception ex)
@@ -183,63 +243,7 @@ namespace SGM.ServicesCore.DAL
 
             return dataResult;
         }
-        public DataTransfer ValidateGasStoreLogin(string stGasStoreID, string stGasStoreMacAddress)
-        {
-            DataTransfer dataResult = new DataTransfer();
-            try
-            {
-                string query = string.Format("SELECT ISNULL(GASSTORE_MACADDRESS,'NULL') AS RESULT, * FROM GAS_STORE WHERE (GASSTORE_MACADDRESS IS NULL OR GASSTORE_MACADDRESS = @GASSTORE_MACADDRESS) AND GASSTORE_ID = @GASSTORE_ID");
-                SqlParameter[] sqlParameters = new SqlParameter[2];               
-                sqlParameters[0] = new SqlParameter("@GASSTATION_MACADDRESS", SqlDbType.NVarChar);
-                sqlParameters[0].Value = Convert.ToString(stGasStoreMacAddress);
-                sqlParameters[1] = new SqlParameter("@GASSTATION_ID", SqlDbType.NVarChar);
-                sqlParameters[1].Value = Convert.ToString(stGasStoreID);
-                DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
-                if (tblResult.Rows.Count > 0)
-                {
-                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
-                    DataRow dr = tblResult.Rows[0];                  
-
-                    GasStationDTO dtoGasStore = new GasStationDTO();
-                    dtoGasStore.GasStationID = dr["GASSTORE_ID"].ToString();
-                    dtoGasStore.GasStationName = dr["GASSTORE_NAME"].ToString();
-                    dtoGasStore.GasStationAddress = dr["GASSTORE_ADDRESS"].ToString();
-                    dtoGasStore.GasStationDescription = dr["GASSTORE_DESCRIPTION"].ToString();
-                    dtoGasStore.GasStationMacAddress = dr["GASSTORE_MACADDRESS"].ToString();
-                    dataResult.ResponseDataGasStationDTO = dtoGasStore;
-
-                    string result = dr["RESULT"].ToString();
-                    if (result.Equals("NULL")) //insert mac address
-                    {
-                        SqlParameter[] sqlParametersUpdate = new SqlParameter[2];
-                        sqlParametersUpdate[0] = new SqlParameter("@GASSTORE_MACADDRESS", SqlDbType.NVarChar);
-                        sqlParametersUpdate[0].Value = Convert.ToString(stGasStoreMacAddress);
-                        sqlParametersUpdate[1] = new SqlParameter("@GASSTORE_ID", SqlDbType.NVarChar);
-                        sqlParametersUpdate[1].Value = Convert.ToString(stGasStoreID);
-                        query = string.Format("UPDATE GAS_STORE SET GASSTORE_MACADDRESS = @GASSTORE_MACADDRESS WHERE GASSTORE_ID = @GASSTORE_ID");
-                        if (!m_dbConnection.ExecuteUpdateQuery(query, sqlParametersUpdate))
-                        {
-                            dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                            dataResult.ResponseErrorMsg = SGMText.GAS_STATION_LOGON_UPDATE_MACADR_ERR;
-                        }
-                    }                    
-                }
-                else
-                {
-                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                    dataResult.ResponseErrorMsg = SGMText.GAS_STATION_LOGON_ID_INVALID;
-                }
-            }
-            catch (Exception ex)
-            {
-                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                dataResult.ResponseErrorMsg = SGMText.GAS_STATION_LOGON_ERR;
-                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
-            }
-            
-            
-            return dataResult;
-        }
+        
         public DataTransfer GetGasStores()
         {
             DataTransfer dataResult = new DataTransfer();
@@ -309,12 +313,12 @@ namespace SGM.ServicesCore.DAL
                     foreach (DataRow dr in tblResult.Rows)
                     {
                         dtoGasStoreUpdate.GasStoreID = dr["GASSTORE_ID"].ToString();
-                        dtoGasStoreUpdate.GSUpdateGas92Total = Int32.Parse(dr["GS_GAS92_TOTAL"].ToString());
-                        dtoGasStoreUpdate.GSUpdateGas95Total = Int32.Parse(dr["GS_GAS95_TOTAL"].ToString());
-                        dtoGasStoreUpdate.GSUpdateGasDOTotal = Int32.Parse(dr["GS_GASDO_TOTAL"].ToString());
-                        dtoGasStoreUpdate.GSUpdateGas92Add = Int32.Parse(dr["GS_GAS92_ADD"].ToString());
-                        dtoGasStoreUpdate.GSUpdateGas95Add = Int32.Parse(dr["GS_GAS95_ADD"].ToString());
-                        dtoGasStoreUpdate.GSUpdateGasDOAdd = Int32.Parse(dr["GS_GASDO_ADD"].ToString());
+                        dtoGasStoreUpdate.GSUpdateGas92Total = float.Parse(dr["GS_GAS92_TOTAL"].ToString());
+                        dtoGasStoreUpdate.GSUpdateGas95Total = float.Parse(dr["GS_GAS95_TOTAL"].ToString());
+                        dtoGasStoreUpdate.GSUpdateGasDOTotal = float.Parse(dr["GS_GASDO_TOTAL"].ToString());
+                        dtoGasStoreUpdate.GSUpdateGas92Add = float.Parse(dr["GS_GAS92_ADD"].ToString());
+                        dtoGasStoreUpdate.GSUpdateGas95Add = float.Parse(dr["GS_GAS95_ADD"].ToString());
+                        dtoGasStoreUpdate.GSUpdateGasDOAdd = float.Parse(dr["GS_GASDO_ADD"].ToString());
                         dtoGasStoreUpdate.GSUpdateDate = DateTime.Parse(dr["GS_UPDATE_DATE"].ToString());
                         dtoGasStoreUpdate.GSUpdateDescription = dr["GS_DESCRIPTION"].ToString();
                     }
@@ -341,17 +345,17 @@ namespace SGM.ServicesCore.DAL
 
                 string query = string.Format("INSERT INTO GAS_STORE_UPDATE (GS_GAS92_TOTAL, GS_GAS95_TOTAL, GS_GASDO_TOTAL, GS_GAS92_ADD, GS_GAS95_ADD, GS_GASDO_ADD, GS_UPDATE_DATE, GS_DESCRIPTION, GASSTORE_ID) VALUES (@GS_GAS92_TOTAL, @GS_GAS95_TOTAL, @GS_GASDO_TOTAL, @GS_GAS92_ADD, @GS_GAS95_ADD, @GS_GASDO_ADD, @GS_UPDATE_DATE, @GS_DESCRIPTION, @GASSTORE_ID)");
                 SqlParameter[] sqlParameters = new SqlParameter[9];
-                sqlParameters[0] = new SqlParameter("@GS_GAS92_TOTAL", SqlDbType.Int);
+                sqlParameters[0] = new SqlParameter("@GS_GAS92_TOTAL", SqlDbType.Float);
                 sqlParameters[0].Value = dtoGasStoreUpdate.GSUpdateGas92Total;
-                sqlParameters[1] = new SqlParameter("@GS_GAS95_TOTAL", SqlDbType.Int);
+                sqlParameters[1] = new SqlParameter("@GS_GAS95_TOTAL", SqlDbType.Float);
                 sqlParameters[1].Value = dtoGasStoreUpdate.GSUpdateGas95Total;
-                sqlParameters[2] = new SqlParameter("@GS_GASDO_TOTAL", SqlDbType.Int);
+                sqlParameters[2] = new SqlParameter("@GS_GASDO_TOTAL", SqlDbType.Float);
                 sqlParameters[2].Value = dtoGasStoreUpdate.GSUpdateGasDOTotal;
                 sqlParameters[3] = new SqlParameter("@GS_GAS92_ADD", SqlDbType.NVarChar);
                 sqlParameters[3].Value = dtoGasStoreUpdate.GSUpdateGas92Add;
-                sqlParameters[4] = new SqlParameter("@GS_GAS95_ADD", SqlDbType.Int);
+                sqlParameters[4] = new SqlParameter("@GS_GAS95_ADD", SqlDbType.Float);
                 sqlParameters[4].Value = dtoGasStoreUpdate.GSUpdateGas95Add;
-                sqlParameters[5] = new SqlParameter("@GS_GASDO_ADD", SqlDbType.Int);
+                sqlParameters[5] = new SqlParameter("@GS_GASDO_ADD", SqlDbType.Float);
                 sqlParameters[5].Value = dtoGasStoreUpdate.GSUpdateGasDOAdd;
                 sqlParameters[6] = new SqlParameter("@GS_UPDATE_DATE", SqlDbType.DateTime);
                 sqlParameters[6].Value = Convert.ToDateTime(dtoGasStoreUpdate.GSUpdateDate);

@@ -45,6 +45,12 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public string SGMSaleGas_ValidateGasStoreLogin(string stGasStoreID, string stGasStoreMacAddress)
+    {
+        return m_bllGasStoreService.ValidateGasStoreLogin(stGasStoreID, stGasStoreMacAddress);
+    }
+
+    [WebMethod]
     public string SGMSaleGas_ValidateCardId(string strCardId)
     {
         return m_bllSaleGasService.ValidateCardId(strCardId);
@@ -233,11 +239,19 @@ public class Service : System.Web.Services.WebService
         return m_bllGasStoreService.GetGasStore(stGasStoreID);
     }
 
+    // we must use BEGIN TRANSACTION  ....... COMMIT here
     [WebMethod]
-    public string SGMManager_UpdateGasStore(string jsonCustomerDTO, string stGasStoreID)
+    public string SGMManager_UpdateGasStore(string jsonGasStoreDTO) 
     {
-        return m_bllGasStoreService.UpdateGasStore(jsonCustomerDTO, stGasStoreID);
+        return m_bllGasStoreService.UpdateGasStore(jsonGasStoreDTO);
     }
+
+    [WebMethod]
+    public string SGMManager_AddNewGasStoreUpdate(string jsonGasStoreUpdateDTO)
+    {
+        return m_bllGasStoreService.AddNewGasStoreUpdate(jsonGasStoreUpdateDTO);
+    }
+    // end must
 
     [WebMethod]
     public string SGMManager_DelGasStore(string stGasStoreID)

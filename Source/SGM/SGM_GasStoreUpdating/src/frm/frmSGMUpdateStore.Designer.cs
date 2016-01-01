@@ -106,6 +106,7 @@
             this.txtGas92Current.Enabled = false;
             this.txtGas92Current.Location = new System.Drawing.Point(84, 90);
             this.txtGas92Current.Name = "txtGas92Current";
+            this.txtGas92Current.ReadOnly = true;
             this.txtGas92Current.Size = new System.Drawing.Size(79, 20);
             this.txtGas92Current.TabIndex = 5;
             this.txtGas92Current.Text = "100.0";
@@ -116,6 +117,7 @@
             this.txtGas95Current.Enabled = false;
             this.txtGas95Current.Location = new System.Drawing.Point(204, 90);
             this.txtGas95Current.Name = "txtGas95Current";
+            this.txtGas95Current.ReadOnly = true;
             this.txtGas95Current.Size = new System.Drawing.Size(79, 20);
             this.txtGas95Current.TabIndex = 6;
             this.txtGas95Current.Text = "25.50";
@@ -126,6 +128,7 @@
             this.txtGasDOCurrent.Enabled = false;
             this.txtGasDOCurrent.Location = new System.Drawing.Point(339, 90);
             this.txtGasDOCurrent.Name = "txtGasDOCurrent";
+            this.txtGasDOCurrent.ReadOnly = true;
             this.txtGasDOCurrent.Size = new System.Drawing.Size(79, 20);
             this.txtGasDOCurrent.TabIndex = 7;
             this.txtGasDOCurrent.Text = "100000.15";
