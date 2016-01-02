@@ -108,7 +108,7 @@ namespace SGM_GasStoreUpdating
             Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
             () =>
             {
-                return m_service.SGMManager_UpdateGasStore(jsRequest);
+                return m_service.SGMManager_UpdateGasStore(jsRequest, cloneStoreDTO.GasStoreID);
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {

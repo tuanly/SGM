@@ -164,7 +164,7 @@ namespace SGM.ServicesCore.DAL
             return dataResult;
         }
 
-        public DataTransfer UpdateGasStore(GasStoreDTO dtoGasStore)
+        public DataTransfer UpdateGasStore(GasStoreDTO dtoGasStore, string stGasStoreID)
         {           
             DataTransfer dataResult = new DataTransfer();
             bool updateResult = true;
@@ -192,7 +192,7 @@ namespace SGM.ServicesCore.DAL
                 sqlParameters[7] = new SqlParameter("@GASSTORE_GASDO_TOTAL", SqlDbType.Float);
                 sqlParameters[7].Value = dtoGasStore.GasStoreGasDOTotal;
                 sqlParameters[8] = new SqlParameter("@GASSTORE_ID_OLD", SqlDbType.NVarChar);
-                sqlParameters[8].Value = Convert.ToString(dtoGasStore.GasStoreID);
+                sqlParameters[8].Value = Convert.ToString(stGasStoreID);
                 updateResult = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);                
             }
             catch (Exception ex)
@@ -213,6 +213,7 @@ namespace SGM.ServicesCore.DAL
 
             return dataResult;
         }
+        
         public DataTransfer DeleteGasStore(string stGasStoreID)
         {            
             bool delResult = true;

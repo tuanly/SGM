@@ -49,12 +49,14 @@ namespace SGM.ServicesCore.BLL
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
 
-        public string UpdateGasStore(string jsonCustomerDTO)
+        public string UpdateGasStore(string jsonCustomerDTO, string stGasStoreID)
         {
             m_dataRequest = JSonHelper.ConvertJSonToObject(jsonCustomerDTO);
-            m_dataResponse = m_dalGasStore.UpdateGasStore(m_dataRequest.ResponseDataGasStoreDTO);
+            m_dataResponse = m_dalGasStore.UpdateGasStore(m_dataRequest.ResponseDataGasStoreDTO, stGasStoreID);
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
+       
+
         public string DelGasStore(string stGasStoreID)
         {
             m_dataResponse = m_dalGasStore.DeleteGasStore(stGasStoreID);
@@ -73,5 +75,9 @@ namespace SGM.ServicesCore.BLL
             m_dataResponse = m_dalGasStore.AddNewGasStoreUpdate(m_dataRequest.ResponseDataGasStoreUpdateDTO);
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
+
+
+        
+        
     }
 }

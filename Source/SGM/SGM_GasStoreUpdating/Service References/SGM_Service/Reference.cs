@@ -2564,11 +2564,15 @@ namespace SGM_GasStoreUpdating.SGM_Service {
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
         public string jsonGasStoreDTO;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string stGasStoreID;
+        
         public SGMManager_UpdateGasStoreRequestBody() {
         }
         
-        public SGMManager_UpdateGasStoreRequestBody(string jsonGasStoreDTO) {
+        public SGMManager_UpdateGasStoreRequestBody(string jsonGasStoreDTO, string stGasStoreID) {
             this.jsonGasStoreDTO = jsonGasStoreDTO;
+            this.stGasStoreID = stGasStoreID;
         }
     }
     
@@ -3293,10 +3297,11 @@ namespace SGM_GasStoreUpdating.SGM_Service {
             return base.Channel.SGMManager_UpdateGasStore(request);
         }
         
-        public string SGMManager_UpdateGasStore(string jsonGasStoreDTO) {
+        public string SGMManager_UpdateGasStore(string jsonGasStoreDTO, string stGasStoreID) {
             SGM_GasStoreUpdating.SGM_Service.SGMManager_UpdateGasStoreRequest inValue = new SGM_GasStoreUpdating.SGM_Service.SGMManager_UpdateGasStoreRequest();
             inValue.Body = new SGM_GasStoreUpdating.SGM_Service.SGMManager_UpdateGasStoreRequestBody();
             inValue.Body.jsonGasStoreDTO = jsonGasStoreDTO;
+            inValue.Body.stGasStoreID = stGasStoreID;
             SGM_GasStoreUpdating.SGM_Service.SGMManager_UpdateGasStoreResponse retVal = ((SGM_GasStoreUpdating.SGM_Service.ServiceSoap)(this)).SGMManager_UpdateGasStore(inValue);
             return retVal.Body.SGMManager_UpdateGasStoreResult;
         }

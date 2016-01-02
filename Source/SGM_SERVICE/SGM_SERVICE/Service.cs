@@ -240,10 +240,11 @@ public class Service : System.Web.Services.WebService
     }
 
     // we must use BEGIN TRANSACTION  ....... COMMIT here
+   
     [WebMethod]
-    public string SGMManager_UpdateGasStore(string jsonGasStoreDTO) 
+    public string SGMManager_UpdateGasStore(string jsonGasStoreDTO, string stGasStoreID)
     {
-        return m_bllGasStoreService.UpdateGasStore(jsonGasStoreDTO);
+        return m_bllGasStoreService.UpdateGasStore(jsonGasStoreDTO, stGasStoreID);
     }
 
     [WebMethod]
