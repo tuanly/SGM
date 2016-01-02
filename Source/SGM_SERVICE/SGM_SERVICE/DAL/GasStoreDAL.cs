@@ -271,6 +271,39 @@ namespace SGM.ServicesCore.DAL
             return dataResult;
         }
 
+        public DataTransfer GetGasStoresFilter(string stGasStoreID, DateTime fromDate, DateTime toDate)
+        {
+            DataTransfer dataResult = new DataTransfer();
+            try
+            {
+                string query = string.Format("SELECT GS_UPDATE_ID,GS_GAS92_TOTAL,GS_GAS95_TOTAL,GS_GASDO_TOTAL,GS_GAS92_ADD,GS_GAS95_ADD,GS_GASDO_ADD,GS_UPDATE_DATE,GS_DESCRIPTION"
+                                            + " FROM GAS_STORE_UPDATE WHERE GASSTORE_ID = @GASSTORE_ID AND GS_UPDATE_DATE BETWEEN @STARTDATE AND @ENDDATE");
+                SqlParameter[] sqlParameters = new SqlParameter[3];
+                sqlParameters[0] = new SqlParameter("@GASSTORE_ID", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(stGasStoreID);
+                sqlParameters[1] = new SqlParameter("@STARTDATE", SqlDbType.DateTime);
+                sqlParameters[1].Value = fromDate;
+                sqlParameters[2] = new SqlParameter("@ENDDATE", SqlDbType.DateTime);
+                sqlParameters[2].Value = toDate;
+                DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
+                if (tblResult.Rows.Count > 0)
+                {
+                    DataSet ds = new DataSet();
+                    ds.Tables.Add(tblResult.Copy());
+                    dataResult.ResponseDataSet = ds;
+                }
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+            }
+            catch (Exception ex)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.GASSTORE_GET_GS_ERR;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+
+            return dataResult;
+        }
+
         public DataTransfer IsGasStoreExisted(string stGasStoreID)
         {
             DataTransfer dataResult = new DataTransfer();

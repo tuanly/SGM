@@ -541,6 +541,22 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="SGMManager_GetGasStoreUpdateHistory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="stGasStoreID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromDate" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="toDate" type="s:dateTime" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SGMManager_GetGasStoreUpdateHistoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SGMManager_GetGasStoreUpdateHistoryResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="SGMSaleGas_GetGasStationListSoapIn">
@@ -771,6 +787,12 @@
   <wsdl:message name="SGMManager_GetGasStoreListSoapOut">
     <wsdl:part name="parameters" element="tns:SGMManager_GetGasStoreListResponse" />
   </wsdl:message>
+  <wsdl:message name="SGMManager_GetGasStoreUpdateHistorySoapIn">
+    <wsdl:part name="parameters" element="tns:SGMManager_GetGasStoreUpdateHistory" />
+  </wsdl:message>
+  <wsdl:message name="SGMManager_GetGasStoreUpdateHistorySoapOut">
+    <wsdl:part name="parameters" element="tns:SGMManager_GetGasStoreUpdateHistoryResponse" />
+  </wsdl:message>
   <wsdl:portType name="ServiceSoap">
     <wsdl:operation name="SGMSaleGas_GetGasStationList">
       <wsdl:input message="tns:SGMSaleGas_GetGasStationListSoapIn" />
@@ -923,6 +945,10 @@
     <wsdl:operation name="SGMManager_GetGasStoreList">
       <wsdl:input message="tns:SGMManager_GetGasStoreListSoapIn" />
       <wsdl:output message="tns:SGMManager_GetGasStoreListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_GetGasStoreUpdateHistory">
+      <wsdl:input message="tns:SGMManager_GetGasStoreUpdateHistorySoapIn" />
+      <wsdl:output message="tns:SGMManager_GetGasStoreUpdateHistorySoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ServiceSoap" type="tns:ServiceSoap">
@@ -1269,6 +1295,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SGMManager_GetGasStoreUpdateHistory">
+      <soap:operation soapAction="http://tempuri.org/SGMManager_GetGasStoreUpdateHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="ServiceSoap12" type="tns:ServiceSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -1607,6 +1642,15 @@
     </wsdl:operation>
     <wsdl:operation name="SGMManager_GetGasStoreList">
       <soap12:operation soapAction="http://tempuri.org/SGMManager_GetGasStoreList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SGMManager_GetGasStoreUpdateHistory">
+      <soap12:operation soapAction="http://tempuri.org/SGMManager_GetGasStoreUpdateHistory" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

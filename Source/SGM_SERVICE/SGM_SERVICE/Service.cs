@@ -266,6 +266,11 @@ public class Service : System.Web.Services.WebService
         return m_bllGasStoreService.GetGasStores();
     }
 
+    [WebMethod]
+    public string SGMManager_GetGasStoreUpdateHistory(string stGasStoreID, DateTime fromDate, DateTime toDate)
+    {
+        return m_bllGasStoreService.GetGasStoresFilter(stGasStoreID, fromDate, toDate);
+    }
 }
     
 

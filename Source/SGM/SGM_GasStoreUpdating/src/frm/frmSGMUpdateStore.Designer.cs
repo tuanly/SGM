@@ -49,11 +49,16 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.txtNote = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dgvGasStoreUpdate = new System.Windows.Forms.DataGridView();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
+            this.dgvGasStoreUpdate = new System.Windows.Forms.DataGridView();
+            this.label14 = new System.Windows.Forms.Label();
+            this.dtpBegin = new System.Windows.Forms.DateTimePicker();
+            this.label13 = new System.Windows.Forms.Label();
+            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
+            this.btnXemLS = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGasStoreUpdate)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -239,26 +244,6 @@
             this.txtNote.Size = new System.Drawing.Size(334, 40);
             this.txtNote.TabIndex = 19;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.dgvGasStoreUpdate);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 246);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(460, 210);
-            this.groupBox1.TabIndex = 20;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Lịch sử:";
-            // 
-            // dgvGasStoreUpdate
-            // 
-            this.dgvGasStoreUpdate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvGasStoreUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvGasStoreUpdate.Location = new System.Drawing.Point(3, 16);
-            this.dgvGasStoreUpdate.Name = "dgvGasStoreUpdate";
-            this.dgvGasStoreUpdate.Size = new System.Drawing.Size(454, 191);
-            this.dgvGasStoreUpdate.TabIndex = 2;
-            // 
             // lblTitle
             // 
             this.lblTitle.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -272,6 +257,77 @@
             this.lblTitle.TabIndex = 21;
             this.lblTitle.Text = "KHO XĂNG DẦU HẬU GIANG";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // dgvGasStoreUpdate
+            // 
+            this.dgvGasStoreUpdate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGasStoreUpdate.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvGasStoreUpdate.Location = new System.Drawing.Point(3, 52);
+            this.dgvGasStoreUpdate.Name = "dgvGasStoreUpdate";
+            this.dgvGasStoreUpdate.Size = new System.Drawing.Size(454, 155);
+            this.dgvGasStoreUpdate.TabIndex = 2;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(7, 24);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(49, 13);
+            this.label14.TabIndex = 6;
+            this.label14.Text = "Từ ngày:";
+            // 
+            // dtpBegin
+            // 
+            this.dtpBegin.CustomFormat = "dd/MM/yyyy";
+            this.dtpBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpBegin.Location = new System.Drawing.Point(74, 21);
+            this.dtpBegin.Name = "dtpBegin";
+            this.dtpBegin.Size = new System.Drawing.Size(98, 20);
+            this.dtpBegin.TabIndex = 7;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(178, 24);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(56, 13);
+            this.label13.TabIndex = 8;
+            this.label13.Text = "Đến ngày:";
+            // 
+            // dtpEnd
+            // 
+            this.dtpEnd.CustomFormat = "dd/MM/yyyy";
+            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpEnd.Location = new System.Drawing.Point(240, 21);
+            this.dtpEnd.Name = "dtpEnd";
+            this.dtpEnd.Size = new System.Drawing.Size(98, 20);
+            this.dtpEnd.TabIndex = 9;
+            // 
+            // btnXemLS
+            // 
+            this.btnXemLS.Location = new System.Drawing.Point(357, 21);
+            this.btnXemLS.Name = "btnXemLS";
+            this.btnXemLS.Size = new System.Drawing.Size(81, 20);
+            this.btnXemLS.TabIndex = 22;
+            this.btnXemLS.Text = "Xem";
+            this.btnXemLS.UseVisualStyleBackColor = true;
+            this.btnXemLS.Click += new System.EventHandler(this.btnXemLS_Click);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnXemLS);
+            this.groupBox1.Controls.Add(this.dtpEnd);
+            this.groupBox1.Controls.Add(this.label13);
+            this.groupBox1.Controls.Add(this.dtpBegin);
+            this.groupBox1.Controls.Add(this.label14);
+            this.groupBox1.Controls.Add(this.dgvGasStoreUpdate);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox1.Location = new System.Drawing.Point(0, 246);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(460, 210);
+            this.groupBox1.TabIndex = 20;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Lịch sử:";
             // 
             // frmSGMUpdateStore
             // 
@@ -305,8 +361,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SGM - Cập Nhật Tổng Kho";
             this.Load += new System.EventHandler(this.frmSGMUpdateStore_Load);
-            this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGasStoreUpdate)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -334,8 +391,13 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtNote;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dgvGasStoreUpdate;
         private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.DataGridView dgvGasStoreUpdate;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.DateTimePicker dtpBegin;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.DateTimePicker dtpEnd;
+        private System.Windows.Forms.Button btnXemLS;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

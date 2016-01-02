@@ -49,6 +49,12 @@ namespace SGM.ServicesCore.BLL
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
 
+        public string GetGasStoresFilter(string stGasStoreID, DateTime fromDate, DateTime toDate)
+        {
+            m_dataResponse = m_dalGasStore.GetGasStoresFilter(stGasStoreID, fromDate, toDate);
+            return JSonHelper.ConvertObjectToJSon(m_dataResponse);
+        }
+
         public string UpdateGasStore(string jsonCustomerDTO, string stGasStoreID)
         {
             m_dataRequest = JSonHelper.ConvertJSonToObject(jsonCustomerDTO);

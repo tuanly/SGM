@@ -33,6 +33,16 @@ namespace SGM_GasStoreUpdating
         {
             DataToUIView();
             SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this);
+
+            // load update from 6 month recently
+            DateTime now = DateTime.Now;
+            now = new DateTime(now.Year, now.Month, now.Day, 12, 0, 0);
+            dtpEnd.Value = now;
+            DateTime from = now.AddMonths(-6);
+            from = new DateTime(from.Year, from.Month, from.Day, 0, 0, 0);
+            dtpBegin.Value = from;
+
+            RefreshUpdateHistory();
         }
 
         private void DataToUIView()
@@ -78,6 +88,40 @@ namespace SGM_GasStoreUpdating
                 }
             }
             return bValidate;
+        }
+
+        private void RefreshUpdateHistory()
+        {
+            DateTime fromDate = dtpBegin.Value;
+            DateTime toDate = dtpEnd.Value;
+
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () =>
+            {
+                return m_service.SGMManager_GetGasStoreUpdateHistory(_storeDTO.GasStoreID, fromDate, toDate);
+            });
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+            {
+                String stResponse = task.Result as String;
+                DataTransfer response = JSonHelper.ConvertJSonToObject(stResponse);
+                if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                {
+                    if (response.ResponseDataSet != null)
+                    {
+                        dgvGasStoreUpdate.DataSource = response.ResponseDataSet.Tables[0];
+                    }
+                    else
+                    {
+                        dgvGasStoreUpdate.DataSource = null;
+                        dgvGasStoreUpdate.Rows.Clear();
+                    }
+                }
+                else
+                {
+                    //frmMsg.ShowMsg(SGMText.SGM_ERROR, response.ResponseErrorMsg + "\n" + response.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                }
+            }, SynchronizationContext.Current);
+
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -141,10 +185,11 @@ namespace SGM_GasStoreUpdating
                         if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                         {
                             frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.ADMIN_UPDATE_TOTAL_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
-                            _storeDTO.GasStoreGas92Total = _storeDTO.GasStoreGas92Total + gas92Add;
-                            _storeDTO.GasStoreGas95Total = _storeDTO.GasStoreGas95Total + gas95Add;
-                            _storeDTO.GasStoreGasDOTotal = _storeDTO.GasStoreGasDOTotal + gasDOAdd;
+                            _storeDTO.GasStoreGas92Total += gas92Add;
+                            _storeDTO.GasStoreGas95Total += gas95Add;
+                            _storeDTO.GasStoreGasDOTotal += gasDOAdd;
                             DataToUIView();
+                            RefreshUpdateHistory();
                         }
                         else
                         {
@@ -157,6 +202,11 @@ namespace SGM_GasStoreUpdating
                     frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 }
             }, SynchronizationContext.Current);
+        }
+
+        private void btnXemLS_Click(object sender, EventArgs e)
+        {
+            RefreshUpdateHistory();
         }
     }
 }

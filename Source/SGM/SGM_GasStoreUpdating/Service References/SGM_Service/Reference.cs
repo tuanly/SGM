@@ -166,6 +166,10 @@ namespace SGM_GasStoreUpdating.SGM_Service {
         // CODEGEN: Generating message contract since element name SGMManager_GetGasStoreListResult from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_GetGasStoreList", ReplyAction="*")]
         SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreListResponse SGMManager_GetGasStoreList(SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreListRequest request);
+        
+        // CODEGEN: Generating message contract since element name stGasStoreID from namespace http://tempuri.org/ is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMManager_GetGasStoreUpdateHistory", ReplyAction="*")]
+        SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreUpdateHistoryResponse SGMManager_GetGasStoreUpdateHistory(SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreUpdateHistoryRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2807,6 +2811,82 @@ namespace SGM_GasStoreUpdating.SGM_Service {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_GetGasStoreUpdateHistoryRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_GetGasStoreUpdateHistory", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreUpdateHistoryRequestBody Body;
+        
+        public SGMManager_GetGasStoreUpdateHistoryRequest() {
+        }
+        
+        public SGMManager_GetGasStoreUpdateHistoryRequest(SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreUpdateHistoryRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_GetGasStoreUpdateHistoryRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stGasStoreID;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public System.DateTime fromDate;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public System.DateTime toDate;
+        
+        public SGMManager_GetGasStoreUpdateHistoryRequestBody() {
+        }
+        
+        public SGMManager_GetGasStoreUpdateHistoryRequestBody(string stGasStoreID, System.DateTime fromDate, System.DateTime toDate) {
+            this.stGasStoreID = stGasStoreID;
+            this.fromDate = fromDate;
+            this.toDate = toDate;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SGMManager_GetGasStoreUpdateHistoryResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SGMManager_GetGasStoreUpdateHistoryResponse", Namespace="http://tempuri.org/", Order=0)]
+        public SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreUpdateHistoryResponseBody Body;
+        
+        public SGMManager_GetGasStoreUpdateHistoryResponse() {
+        }
+        
+        public SGMManager_GetGasStoreUpdateHistoryResponse(SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreUpdateHistoryResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
+    public partial class SGMManager_GetGasStoreUpdateHistoryResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SGMManager_GetGasStoreUpdateHistoryResult;
+        
+        public SGMManager_GetGasStoreUpdateHistoryResponseBody() {
+        }
+        
+        public SGMManager_GetGasStoreUpdateHistoryResponseBody(string SGMManager_GetGasStoreUpdateHistoryResult) {
+            this.SGMManager_GetGasStoreUpdateHistoryResult = SGMManager_GetGasStoreUpdateHistoryResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ServiceSoapChannel : SGM_GasStoreUpdating.SGM_Service.ServiceSoap, System.ServiceModel.IClientChannel {
     }
@@ -3342,6 +3422,21 @@ namespace SGM_GasStoreUpdating.SGM_Service {
             inValue.Body = new SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreListRequestBody();
             SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreListResponse retVal = ((SGM_GasStoreUpdating.SGM_Service.ServiceSoap)(this)).SGMManager_GetGasStoreList(inValue);
             return retVal.Body.SGMManager_GetGasStoreListResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreUpdateHistoryResponse SGM_GasStoreUpdating.SGM_Service.ServiceSoap.SGMManager_GetGasStoreUpdateHistory(SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreUpdateHistoryRequest request) {
+            return base.Channel.SGMManager_GetGasStoreUpdateHistory(request);
+        }
+        
+        public string SGMManager_GetGasStoreUpdateHistory(string stGasStoreID, System.DateTime fromDate, System.DateTime toDate) {
+            SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreUpdateHistoryRequest inValue = new SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreUpdateHistoryRequest();
+            inValue.Body = new SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreUpdateHistoryRequestBody();
+            inValue.Body.stGasStoreID = stGasStoreID;
+            inValue.Body.fromDate = fromDate;
+            inValue.Body.toDate = toDate;
+            SGM_GasStoreUpdating.SGM_Service.SGMManager_GetGasStoreUpdateHistoryResponse retVal = ((SGM_GasStoreUpdating.SGM_Service.ServiceSoap)(this)).SGMManager_GetGasStoreUpdateHistory(inValue);
+            return retVal.Body.SGMManager_GetGasStoreUpdateHistoryResult;
         }
     }
 }
