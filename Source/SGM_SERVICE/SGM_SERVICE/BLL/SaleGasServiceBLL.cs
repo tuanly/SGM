@@ -17,19 +17,25 @@ namespace SGM.ServicesCore.BLL
         {
             GasStationDAL dalGasStation = new GasStationDAL();
             DataTransfer response = dalGasStation.ValidateGasStationLogin(stGasStationID, stGasStationMacAddress);
-            
-            SystemAdminDAL dalSystemAdmin = new SystemAdminDAL();
-            DataTransfer responseAdmin = dalSystemAdmin.GetCurrentPrice(SystemAdminDTO.GAS_TYPE_ALL);
-            response.ResponseCurrentPriceGas92 = responseAdmin.ResponseCurrentPriceGas92;
-            response.ResponseCurrentPriceGas95 = responseAdmin.ResponseCurrentPriceGas95;
-            response.ResponseCurrentPriceGasDO = responseAdmin.ResponseCurrentPriceGasDO;
-            response.ResponseDataSystemAdminDTO = responseAdmin.ResponseDataSystemAdminDTO;
 
-            GasStoreDAL dalGasStore = new GasStoreDAL();
-            DataTransfer responseGasStore = dalGasStore.GetGasStoreFromGasStation(stGasStationID);
-            response.ResponseGasStoreGas92Total = responseGasStore.ResponseGasStoreGas92Total;
-            response.ResponseGasStoreGas95Total = responseGasStore.ResponseGasStoreGas95Total;
-            response.ResponseGasStoreGasDOTotal = responseGasStore.ResponseGasStoreGasDOTotal;
+            if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+            {
+                SystemAdminDAL dalSystemAdmin = new SystemAdminDAL();
+                DataTransfer responseAdmin = dalSystemAdmin.GetCurrentPrice(SystemAdminDTO.GAS_TYPE_ALL);
+                response.ResponseCurrentPriceGas92 = responseAdmin.ResponseCurrentPriceGas92;
+                response.ResponseCurrentPriceGas95 = responseAdmin.ResponseCurrentPriceGas95;
+                response.ResponseCurrentPriceGasDO = responseAdmin.ResponseCurrentPriceGasDO;
+                response.ResponseDataSystemAdminDTO = responseAdmin.ResponseDataSystemAdminDTO;
+
+                GasStoreDAL dalGasStore = new GasStoreDAL();
+                DataTransfer responseGasStore = dalGasStore.GetGasStoreFromGasStation(stGasStationID);
+                response.ResponseDataGasStoreDTO = responseGasStore.ResponseDataGasStoreDTO;
+                response.ResponseGasStoreGas92Total = responseGasStore.ResponseDataGasStoreDTO.GasStoreGas92Total;
+                response.ResponseGasStoreGas95Total = responseGasStore.ResponseDataGasStoreDTO.GasStoreGas95Total;
+                response.ResponseGasStoreGasDOTotal = responseGasStore.ResponseDataGasStoreDTO.GasStoreGasDOTotal;
+            }
+            
+            
             return JSonHelper.ConvertObjectToJSon(response);
         }
 
@@ -53,7 +59,7 @@ namespace SGM.ServicesCore.BLL
             return JSonHelper.ConvertObjectToJSon(dataResult);
         }
 
-        public string GasBuying(String jsonSaleGasDTO, string sys_admin)
+        public string GasBuying(String jsonSaleGasDTO)
         {
             DataTransfer dataInput = JSonHelper.ConvertJSonToObject(jsonSaleGasDTO);
             SystemAdminDAL dalSystemAd = new SystemAdminDAL();
@@ -63,9 +69,8 @@ namespace SGM.ServicesCore.BLL
             {
                 response = GasBuyingUpdateCard(saleGasDTO.CardID, saleGasDTO.SaleGasCardMoneyAfter);
                 if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
-                {
-                    response = GasBuyingUpdateSysAdmin(sys_admin, saleGasDTO);
-                    
+                {                    
+                    response = GasBuyingUpdateGasStore(saleGasDTO);                    
                 }
               
             }
@@ -73,12 +78,13 @@ namespace SGM.ServicesCore.BLL
             return JSonHelper.ConvertObjectToJSon(response);
         }
 
-        private DataTransfer GasBuyingUpdateSysAdmin(string sys_admin, SaleGasDTO saleGasDTO)
+       
+        private DataTransfer GasBuyingUpdateGasStore(SaleGasDTO saleGasDTO)
         {
-            SystemAdminDAL dal = new SystemAdminDAL();
+            GasStoreDAL dal = new GasStoreDAL();           
             float money = saleGasDTO.SaleGasCardMoneyBefore - saleGasDTO.SaleGasCardMoneyAfter;
             float amount = money / saleGasDTO.SaleGasCurrentPrice;
-            DataTransfer res = dal.UpdateSaleGas(sys_admin, saleGasDTO.SaleGasType, amount);
+            DataTransfer res = dal.UpdateGasStoreTotal(saleGasDTO.GasStoreID, saleGasDTO.SaleGasType, amount);
             return res;
         }
 

@@ -119,7 +119,7 @@ namespace SGM.ServicesCore.DAL
                 sqlParameters[1] = new SqlParameter("@CARD_MONEY", SqlDbType.Int);
                 sqlParameters[1].Value = Convert.ToInt32(dtoCard.CardRemainingMoney);
                 sqlParameters[2] = new SqlParameter("@CARD_MONEY_EX", SqlDbType.Int);
-                sqlParameters[3].Value = Convert.ToInt32(dtoCard.CardMoneyEx);
+                sqlParameters[2].Value = Convert.ToInt32(dtoCard.CardMoneyEx);
                 result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
             }
             catch (Exception ex)
@@ -134,7 +134,7 @@ namespace SGM.ServicesCore.DAL
             else
             {
                 dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                dataResult.ResponseErrorMsg = SGMText.CARD_INSERT_ERR;
+                dataResult.ResponseErrorMsg = 2 + SGMText.CARD_INSERT_ERR;
             }
             
             return dataResult;

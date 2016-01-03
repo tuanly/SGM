@@ -104,6 +104,7 @@ namespace SGM.ServicesCore.DAL
                     }
                 }
                 dataResult.ResponseDataGasStoreDTO = dtoGasStore;
+               
             }
             catch (Exception ex)
             {
@@ -197,6 +198,52 @@ namespace SGM.ServicesCore.DAL
                 dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
                 dataResult.ResponseErrorMsg = SGMText.GASSTORE_ADD_NEW_GS_ERR;
             }
+            return dataResult;
+        }
+
+        public DataTransfer UpdateGasStoreTotal(string stGasStoreID, string stType, float fAmount)
+        {
+            DataTransfer dataResult = new DataTransfer();
+            try
+            {
+                string query = string.Format("UPDATE GAS_STORE SET XX = XX - @YY WHERE GASSTORE_ID = @GASSTORE_ID");
+                SqlParameter[] sqlParameters = new SqlParameter[2];
+                sqlParameters[0] = new SqlParameter("@GASSTORE_ID", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(stGasStoreID);
+                sqlParameters[1] = new SqlParameter("@YY", SqlDbType.Float);
+                sqlParameters[1].Value = (fAmount);
+                if (stType.CompareTo(SaleGasDTO.GAS_TYPE_92) == 0)
+                {
+                    query = query.Replace("XX", "GASSTORE_GAS92_TOTAL");
+                }
+                else if (stType.CompareTo(SaleGasDTO.GAS_TYPE_95) == 0)
+                {
+                    query = query.Replace("XX", "GASSTORE_GAS95_TOTAL");
+                }
+                else if (stType.CompareTo(SaleGasDTO.GAS_TYPE_DO) == 0)
+                {
+                    query = query.Replace("XX", "GASSTORE_GASDO_TOTAL");
+                }
+                dataResult.ResponseDataString = query;
+                bool result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
+                if (result)
+                {
+                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+                    dataResult.ResponseErrorMsg = SGMText.GASSTORE_UPDATE_TOTAL_SUCCESS;
+                }
+                else
+                {
+                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                    dataResult.ResponseErrorMsg = SGMText.GASSTORE_UPDATE_TOTAL_ERR;
+                }
+            }
+            catch (Exception ex)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.GASSTORE_UPDATE_TOTAL_ERR;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+
             return dataResult;
         }
 

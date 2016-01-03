@@ -58,8 +58,8 @@ namespace SGM_Core.Utils
         public static string SYS_ADMIN_GET_PRICE_ERR = "Lỗi! Không thể lấy giá xăng.";
         public static string ADMIN_UPDATE_PRICE_SUCCESS = "Cập nhật giá thành công.";
         public static string ADMIN_UPDATE_PRICE_ERR = "Lỗi! Không thể cập nhật giá.";
-        public static string ADMIN_UPDATE_TOTAL_SUCCESS = "Cập nhật tổng kho thành công.";
-        public static string ADMIN_UPDATE_TOTAL_ERR = "Lỗi! Không thể cập nhật tổng kho.";
+
+       
 
         public static string CARD_DATA_INPUT_EXIST_CARD_ID_ERR = "Lỗi! Card đã tồn tại!";
         public static string CARD_DATA_INPUT_CARD_ID_ERR = "Lỗi! Chưa nhập Mã Thẻ.";
@@ -95,6 +95,8 @@ namespace SGM_Core.Utils
         public static string GASSTORE_DATA_INPUT_GS_ID_ERR = "Lỗi! Chưa nhập Mã Kho Xăng.";
         public static string GASSTORE_DATA_INPUT_GS_NAME_ERR = "Lỗi! Chưa nhập Tên Kho Xăng.";
         public static string GASSTORE_DATA_INPUT_GS_ADDRESS_ERR = "Lỗi! Chưa nhập Địa chỉ Kho Xăng.";
+        public static string GASSTORE_UPDATE_TOTAL_SUCCESS = "Cập nhật tổng kho thành công.";
+        public static string GASSTORE_UPDATE_TOTAL_ERR = "Lỗi! Không thể cập nhật tổng kho.";
 
         public static string GASSTORE_GET_GSUPDATE_ERR = "Lỗi! Không thể lấy lịch sử cập nhật kho xăng.";
         public static string GASSTORE_ADD_NEW_GSUPDATE_ERR = "Lỗi! Không thể cập nhật kho xăng";

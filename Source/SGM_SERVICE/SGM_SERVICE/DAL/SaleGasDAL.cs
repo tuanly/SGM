@@ -50,9 +50,9 @@ namespace SGM.ServicesCore.DAL
             DataTransfer dataResult = new DataTransfer();
             try
             {
-                string query = string.Format("INSERT INTO SALE_GAS (SALEGAS_TYPE, SALEGAS_CURRENT_PRICE, SALEGAS_CARD_PRICE, SALEGAS_CARD_MONEY_BEFORE, SALEGAS_CARD_MONEY_AFTER, SALEGAS_DATE, GASSTATION_ID, CARD_ID)" +
-                                                               " VALUES (@SALEGAS_TYPE, @SALEGAS_CURRENT_PRICE, @SALEGAS_CARD_PRICE, @SALEGAS_CARD_MONEY_BEFORE, @SALEGAS_CARD_MONEY_AFTER, @SALEGAS_DATE, @GASSTATION_ID, @CARD_ID)");
-                SqlParameter[] sqlParameters = new SqlParameter[8];
+                string query = string.Format("INSERT INTO SALE_GAS (SALEGAS_TYPE, SALEGAS_CURRENT_PRICE, SALEGAS_CARD_PRICE, SALEGAS_CARD_MONEY_BEFORE, SALEGAS_CARD_MONEY_AFTER, SALEGAS_CARD_MONEY_SAVING, SALEGAS_DATE, GASSTATION_ID, CARD_ID)" +
+                                                               " VALUES (@SALEGAS_TYPE, @SALEGAS_CURRENT_PRICE, @SALEGAS_CARD_PRICE, @SALEGAS_CARD_MONEY_BEFORE, @SALEGAS_CARD_MONEY_AFTER, @SALEGAS_CARD_MONEY_SAVING, @SALEGAS_DATE, @GASSTATION_ID, @CARD_ID)");
+                SqlParameter[] sqlParameters = new SqlParameter[9];
                 sqlParameters[0] = new SqlParameter("@SALEGAS_TYPE", SqlDbType.NVarChar);
                 sqlParameters[0].Value = Convert.ToString(dtoSaleGas.SaleGasType);
                 sqlParameters[1] = new SqlParameter("@SALEGAS_CURRENT_PRICE", SqlDbType.Int);
@@ -70,8 +70,11 @@ namespace SGM.ServicesCore.DAL
                 sqlParameters[7] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
                 sqlParameters[7].Value = Convert.ToString(dtoSaleGas.CardID);
 
+                sqlParameters[8] = new SqlParameter("@SALEGAS_CARD_MONEY_SAVING", SqlDbType.Int);
+                sqlParameters[8].Value = Convert.ToInt32(dtoSaleGas.SaleGasCardMoneySaving);
+
                 result = m_dbConnection.ExecuteInsertQuery(query, sqlParameters);
-                dataResult.ResponseErrorMsgDetail = query;
+                
             }
             catch (Exception ex)
             {
@@ -85,7 +88,7 @@ namespace SGM.ServicesCore.DAL
             else
             {
                 dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                dataResult.ResponseErrorMsg = SGMText.CARD_INSERT_ERR;
+                dataResult.ResponseErrorMsg = 1 + SGMText.CARD_INSERT_ERR;
             }
             return dataResult;
         }
@@ -94,9 +97,9 @@ namespace SGM.ServicesCore.DAL
         {
             bool result = true;
             string query = string.Format("UPDATE SALE_GAS SET SALEGAS_TYPE = @SALEGAS_TYPE, SALEGAS_CURRENT_PRICE = @SALEGAS_CURRENT_PRICE, SALEGAS_CARD_PRICE = @SALEGAS_CARD_PRICE, " +
-                                                            " SALEGAS_CARD_MONEY_BEFORE = @SALEGAS_CARD_MONEY_BEFORE, SALEGAS_CARD_MONEY_AFTER = @SALEGAS_CARD_MONEY_AFTER, SALEGAS_DATE = @SALEGAS_DATE, GASSTATION_ID = @GASSTATION_ID, CARD_ID = @CARD_ID " +
+                                                            " SALEGAS_CARD_MONEY_BEFORE = @SALEGAS_CARD_MONEY_BEFORE, SALEGAS_CARD_MONEY_AFTER = @SALEGAS_CARD_MONEY_AFTER, SALEGAS_CARD_MONEY_SAVING = @SALEGAS_CARD_MONEY_SAVING, SALEGAS_DATE = @SALEGAS_DATE, GASSTATION_ID = @GASSTATION_ID, CARD_ID = @CARD_ID " +
                                                       " WHERE SALEGAS_ID = @SALEGAS_ID");
-            SqlParameter[] sqlParameters = new SqlParameter[9];
+            SqlParameter[] sqlParameters = new SqlParameter[10];
             sqlParameters[0] = new SqlParameter("@SALEGAS_ID", SqlDbType.Int);
             sqlParameters[0].Value = Convert.ToInt32(dtoSaleGas.SaleGasID);
             sqlParameters[1] = new SqlParameter("@SALEGAS_TYPE", SqlDbType.NVarChar);
@@ -115,6 +118,8 @@ namespace SGM.ServicesCore.DAL
             sqlParameters[7].Value = Convert.ToString(dtoSaleGas.GasStationID);
             sqlParameters[8] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
             sqlParameters[8].Value = Convert.ToString(dtoSaleGas.CardID);
+            sqlParameters[9] = new SqlParameter("@SALEGAS_CARD_MONEY_SAVING", SqlDbType.NVarChar);
+            sqlParameters[9].Value = Convert.ToInt32(dtoSaleGas.SaleGasCardMoneySaving);
 
             result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
             return result;

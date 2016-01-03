@@ -184,7 +184,7 @@ namespace SGM_GasStoreUpdating
                         DataTransfer dataResponse2 = JSonHelper.ConvertJSonToObject(stResponse);
                         if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                         {
-                            frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.ADMIN_UPDATE_TOTAL_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
+                            frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.GASSTORE_UPDATE_TOTAL_SUCCESS, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
                             _storeDTO.GasStoreGas92Total += gas92Add;
                             _storeDTO.GasStoreGas95Total += gas95Add;
                             _storeDTO.GasStoreGasDOTotal += gasDOAdd;

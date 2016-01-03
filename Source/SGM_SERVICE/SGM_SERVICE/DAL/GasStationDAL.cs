@@ -51,6 +51,7 @@ namespace SGM.ServicesCore.DAL
                         dtoGasStation.GasStationAddress = dr["GASSTATION_ADDRESS"].ToString();
                         dtoGasStation.GasStationDescription = dr["GASSTATION_DESCRIPTION"].ToString();
                         dtoGasStation.GasStationMacAddress = dr["GASSTATION_MACADDRESS"].ToString();
+                        dtoGasStation.GasStoreID = dr["GASSTORE_ID"].ToString();
                     }
                 }
                 dataResult.ResponseDataGasStationDTO = dtoGasStation;
@@ -206,6 +207,7 @@ namespace SGM.ServicesCore.DAL
                     dtoGasStation.GasStationAddress = dr["GASSTATION_ADDRESS"].ToString();
                     dtoGasStation.GasStationDescription = dr["GASSTATION_DESCRIPTION"].ToString();
                     dtoGasStation.GasStationMacAddress = dr["GASSTATION_MACADDRESS"].ToString();
+                    dtoGasStation.GasStoreID = dr["GASSTORE_ID"].ToString();
                     dataResult.ResponseDataGasStationDTO = dtoGasStation;
 
                     string result = dr["RESULT"].ToString();

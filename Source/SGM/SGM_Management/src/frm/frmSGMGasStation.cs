@@ -88,6 +88,7 @@ namespace SGM_Management
                             item.Text = dr["GASSTORE_NAME"].ToString();
                             item.Value = dr["GASSTORE_ID"].ToString();
                             cboGasStore.Items.Add(item);
+                            
                         }
                         cboGasStore.SelectedIndex = 0;
                     }
@@ -195,7 +196,7 @@ namespace SGM_Management
                 m_iCurrentGSIndex = dgvGSList.SelectedRows[0].Index;
                 if (m_iCurrentGSIndex < m_dsGasStation.Tables[0].Rows.Count)
                 {
-                    cboGasStore.SelectedValue  = m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTORE_ID"].ToString();
+                    updateComboBox(cboGasStore , m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTORE_ID"].ToString());
                     txtGSCode.Text = m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTATION_ID"].ToString();
                     txtGSName.Text = m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTATION_NAME"].ToString();
                     txtGSAddress.Text = m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTATION_ADDRESS"].ToString();
@@ -216,6 +217,18 @@ namespace SGM_Management
 
         }
 
+        private void updateComboBox(ComboBox cbo, string value)
+        {
+            for (int i = 0; i < cbo.Items.Count; i++)
+            {
+                ComboboxItem item = (ComboboxItem)cbo.Items[i];
+                if (item.Value.Equals(value))
+                {
+                    cbo.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
         private void clearInput()
         {
             txtGSCode.Text = "";

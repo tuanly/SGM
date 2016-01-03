@@ -124,51 +124,7 @@ namespace SGM.ServicesCore.DAL
             return result;
         }
 
-        public DataTransfer UpdateSaleGas(string admin, string type, float amount)
-        {
-            DataTransfer dataResult = new DataTransfer();
-            try
-            {
-                string query = string.Format("UPDATE SYSTEM_ADMIN SET XX = XX - @YY WHERE SYS_ADMIN = @SYS_ADMIN");
-                SqlParameter[] sqlParameters = new SqlParameter[2];
-                sqlParameters[0] = new SqlParameter("@SYS_ADMIN", SqlDbType.NVarChar);
-                sqlParameters[0].Value = Convert.ToString(admin);
-                sqlParameters[1] = new SqlParameter("@YY", SqlDbType.Float);
-                sqlParameters[1].Value = (amount);
-                if (type.CompareTo(SaleGasDTO.GAS_TYPE_92) == 0)
-                {
-                    query = query.Replace("XX", "SYS_GAS92_TOTAL");
-                }
-                else if (type.CompareTo(SaleGasDTO.GAS_TYPE_95) == 0)
-                {
-                    query = query.Replace("XX", "SYS_GAS95_TOTAL");
-                }
-                else if (type.CompareTo(SaleGasDTO.GAS_TYPE_DO) == 0)
-                {
-                    query = query.Replace("XX", "SYS_GASDO_TOTAL");
-                }
-
-                bool result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
-                if (result)
-                {
-                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
-                    dataResult.ResponseErrorMsg = SGMText.ADMIN_UPDATE_TOTAL_SUCCESS;
-                }
-                else
-                {
-                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                    dataResult.ResponseErrorMsg = SGMText.ADMIN_UPDATE_TOTAL_ERR;
-                }
-            }
-            catch (Exception ex)
-            {
-                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                dataResult.ResponseErrorMsg = SGMText.ADMIN_UPDATE_TOTAL_ERR;
-                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
-            }
-
-            return dataResult;
-        }
+       
 
         public DataTransfer UpdateSystemAdminPrice(SystemAdminDTO dtoSysAdmin)
         {

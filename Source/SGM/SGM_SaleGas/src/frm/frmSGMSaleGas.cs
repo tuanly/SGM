@@ -38,6 +38,8 @@ namespace SGM_SaleGas
         private float m_iCurrentTotalGas92 = 0;
         private float m_iCurrentTotalGas95 = 0;
         private float m_iCurrentTotalGasDO = 0;
+
+       
       
 
         private int m_iApplyPrice = 0;
@@ -60,6 +62,7 @@ namespace SGM_SaleGas
             InitializeComponent();
             _adminDTO = adminDTO;
             _gasStationDTO = gasStationDTO;
+           
             m_iCurrentPriceGas92 = priceGas92;
             m_iCurrentPriceGas95 = priceGas95;
             m_iCurrentPriceGasDO = priceGasDO;
@@ -334,12 +337,14 @@ namespace SGM_SaleGas
             dto.SaleGasCardMoneyBefore = Int32.Parse(txtMoneyBefore.Text, System.Globalization.NumberStyles.Currency);
             dto.SaleGasCardMoneyAfter = Int32.Parse(txtMoneyAfter.Text, System.Globalization.NumberStyles.Currency);
             dto.SaleGasCurrentPrice = m_iCurrentPrice;
+            dto.GasStoreID = _gasStationDTO.GasStoreID;
             DataTransfer df = new DataTransfer();
             df.ResponseDataSaleGasDTO = dto;
+            
             Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
             () =>
             {
-                return service.SGMSaleGas_GasBuying(JSonHelper.ConvertObjectToJSon(df), "admin");
+                return service.SGMSaleGas_GasBuying(JSonHelper.ConvertObjectToJSon(df));
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
