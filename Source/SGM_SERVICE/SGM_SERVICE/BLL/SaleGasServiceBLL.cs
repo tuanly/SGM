@@ -24,6 +24,12 @@ namespace SGM.ServicesCore.BLL
             response.ResponseCurrentPriceGas95 = responseAdmin.ResponseCurrentPriceGas95;
             response.ResponseCurrentPriceGasDO = responseAdmin.ResponseCurrentPriceGasDO;
             response.ResponseDataSystemAdminDTO = responseAdmin.ResponseDataSystemAdminDTO;
+
+            GasStoreDAL dalGasStore = new GasStoreDAL();
+            DataTransfer responseGasStore = dalGasStore.GetGasStoreFromGasStation(stGasStationID);
+            response.ResponseGasStoreGas92Total = responseGasStore.ResponseGasStoreGas92Total;
+            response.ResponseGasStoreGas95Total = responseGasStore.ResponseGasStoreGas95Total;
+            response.ResponseGasStoreGasDOTotal = responseGasStore.ResponseGasStoreGasDOTotal;
             return JSonHelper.ConvertObjectToJSon(response);
         }
 

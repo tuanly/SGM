@@ -34,6 +34,10 @@ namespace SGM_SaleGas
         private int m_iCurrentPriceGas92 = 0;
         private int m_iCurrentPriceGas95 = 0;
         private int m_iCurrentPriceGasDO = 0;
+
+        private float m_iCurrentTotalGas92 = 0;
+        private float m_iCurrentTotalGas95 = 0;
+        private float m_iCurrentTotalGasDO = 0;
       
 
         private int m_iApplyPrice = 0;
@@ -51,7 +55,7 @@ namespace SGM_SaleGas
         //private string _cardId = "card0001";
         private int _moneyBuying = 20000;
 
-        public frmSGMSaleGas(SystemAdminDTO adminDTO, GasStationDTO gasStationDTO, int priceGas92, int priceGas95, int priceGasDO)
+        public frmSGMSaleGas(SystemAdminDTO adminDTO, GasStationDTO gasStationDTO, int priceGas92, int priceGas95, int priceGasDO, float totalGas92, float totalGas95, float totalGasDO)
         {
             InitializeComponent();
             _adminDTO = adminDTO;
@@ -59,6 +63,9 @@ namespace SGM_SaleGas
             m_iCurrentPriceGas92 = priceGas92;
             m_iCurrentPriceGas95 = priceGas95;
             m_iCurrentPriceGasDO = priceGasDO;
+            m_iCurrentTotalGas92 = totalGas92;
+            m_iCurrentTotalGas95 = totalGas95;
+            m_iCurrentTotalGasDO = totalGasDO;
             m_jsHelper = new JSonHelper();
             frmMsg = new frmSGMMessage();
             frmCardInfo = new frmSGMCardDetail(_cardDTO, _rechargeDTO);
@@ -104,21 +111,21 @@ namespace SGM_SaleGas
                         m_iCurrentPrice = m_iCurrentPriceGas92;
                         m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGas92Price ? _rechargeDTO.RechargeGas92Price : m_iCurrentPrice;
                         txtPrice.Text = _rechargeDTO.RechargeGas92Price.ToString(MONEY_FORMAT);
-                        m_iCurrentTotal = _adminDTO.SysGas92Total;
+                        m_iCurrentTotal = m_iCurrentTotalGas92;
                         break;
                     case gasTransactType.gas95:
                         txtGasType.Text = SGMText.GAS_95_TEXT;
                         m_iCurrentPrice = m_iCurrentPriceGas95;
                         m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGas95Price ? _rechargeDTO.RechargeGas95Price : m_iCurrentPrice;
                         txtPrice.Text = _rechargeDTO.RechargeGas95Price.ToString(MONEY_FORMAT);
-                        m_iCurrentTotal = _adminDTO.SysGas95Total;
+                        m_iCurrentTotal = m_iCurrentTotalGas95;
                         break;
                     case gasTransactType.gasDO:
                         txtGasType.Text = SGMText.GAS_DO_TEXT;
                         m_iCurrentPrice = m_iCurrentPriceGasDO;
                         m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGasDOPrice ? _rechargeDTO.RechargeGasDOPrice : m_iCurrentPrice;
                         txtPrice.Text = _rechargeDTO.RechargeGasDOPrice.ToString(MONEY_FORMAT);
-                        m_iCurrentTotal = _adminDTO.SysGasDOTotal;
+                        m_iCurrentTotal = m_iCurrentTotalGasDO;
                         break;
                 }
                 calculatePay();

@@ -77,7 +77,43 @@ namespace SGM.ServicesCore.DAL
 
             return dataResult;
         }
+        public DataTransfer GetGasStoreFromGasStation(string stGasStationID)
+        {
+            DataTransfer dataResult = new DataTransfer();
+            try
+            {
+                GasStoreDTO dtoGasStore = null;
+                string query = string.Format("SELECT GAS_STORE.* FROM GAS_STORE, GAS_STATION WHERE GAS_STORE.GASSTORE_ID = GAS_STATION.GASSTORE_ID AND GASSTATION_ID = @GASSTATION_ID");
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+                sqlParameters[0] = new SqlParameter("@GASSTATION_ID", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(stGasStationID);
+                DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
+                if (tblResult.Rows.Count > 0)
+                {
+                    dtoGasStore = new GasStoreDTO();
+                    foreach (DataRow dr in tblResult.Rows)
+                    {
+                        dtoGasStore.GasStoreID = dr["GASSTORE_ID"].ToString();
+                        dtoGasStore.GasStoreName = dr["GASSTORE_NAME"].ToString();
+                        dtoGasStore.GasStoreAddress = dr["GASSTORE_ADDRESS"].ToString();
+                        dtoGasStore.GasStoreDescription = dr["GASSTORE_DESCRIPTION"].ToString();
+                        dtoGasStore.GasStoreMacAddress = dr["GASSTORE_MACADDRESS"].ToString();
+                        dtoGasStore.GasStoreGas92Total = float.Parse(dr["GASSTORE_GAS92_TOTAL"].ToString());
+                        dtoGasStore.GasStoreGas95Total = float.Parse(dr["GASSTORE_GAS95_TOTAL"].ToString());
+                        dtoGasStore.GasStoreGasDOTotal = float.Parse(dr["GASSTORE_GASDO_TOTAL"].ToString());
+                    }
+                }
+                dataResult.ResponseDataGasStoreDTO = dtoGasStore;
+            }
+            catch (Exception ex)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.GASSTORE_GET_GS_ERR;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
 
+            return dataResult;
+        }
         public DataTransfer GetGasStore(string stGasStoreID)
         {
             DataTransfer dataResult = new DataTransfer();

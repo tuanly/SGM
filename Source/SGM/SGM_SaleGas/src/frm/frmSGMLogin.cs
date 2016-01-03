@@ -60,7 +60,7 @@ namespace SGM_SaleGas
                     if (Program.ReaderPort != null)
                         Program.ReaderPort.DataReceived -= serialDatahandler;
 
-                    new frmSGMSaleGas(dataResponse.ResponseDataSystemAdminDTO, dataResponse.ResponseDataGasStationDTO, dataResponse.ResponseCurrentPriceGas92, dataResponse.ResponseCurrentPriceGas95, dataResponse.ResponseCurrentPriceGasDO).ShowDialog();
+                    new frmSGMSaleGas(dataResponse.ResponseDataSystemAdminDTO, dataResponse.ResponseDataGasStationDTO, dataResponse.ResponseCurrentPriceGas92, dataResponse.ResponseCurrentPriceGas95, dataResponse.ResponseCurrentPriceGasDO, dataResponse.ResponseGasStoreGas92Total, dataResponse.ResponseGasStoreGas95Total, dataResponse.ResponseGasStoreGasDOTotal).ShowDialog();
                     this.Close();
                 }
                 else

@@ -234,46 +234,7 @@ namespace SGM.ServicesCore.DAL
             return result;
         }
 
-        public DataTransfer UpdateSystemAdminStore(SystemAdminDTO dtoSysAdmin)
-        {
-            DataTransfer dataResult = new DataTransfer();
-            try
-            {
-                string query = string.Format("UPDATE SYSTEM_ADMIN SET SYS_GAS92_TOTAL = @SYS_GAS92_TOTAL," +
-                                                                    "SYS_GAS95_TOTAL = @SYS_GAS95_TOTAL," +
-                                                                      "SYS_GASDO_TOTAL = @SYS_GASDO_TOTAL" +
-                                                                    " WHERE SYS_ADMIN = @SYS_ADMIN");
-                SqlParameter[] sqlParameters = new SqlParameter[4];
-                sqlParameters[0] = new SqlParameter("@SYS_ADMIN", SqlDbType.NVarChar);
-                sqlParameters[0].Value = Convert.ToString(dtoSysAdmin.SysAdminAccount);
-                sqlParameters[1] = new SqlParameter("@SYS_GAS92_TOTAL", SqlDbType.Float);
-                sqlParameters[1].Value = (dtoSysAdmin.SysGas92Total);
-                sqlParameters[2] = new SqlParameter("@SYS_GAS95_TOTAL", SqlDbType.Float);
-                sqlParameters[2].Value = (dtoSysAdmin.SysGas95Total);
-                sqlParameters[3] = new SqlParameter("@SYS_GASDO_TOTAL", SqlDbType.Float);
-                sqlParameters[3].Value = (dtoSysAdmin.SysGasDOTotal);
-
-                bool result = m_dbConnection.ExecuteUpdateQuery(query, sqlParameters);
-                if (result)
-                {
-                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
-                    dataResult.ResponseErrorMsg = SGMText.ADMIN_UPDATE_TOTAL_SUCCESS;
-                }
-                else
-                {
-                    dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                    dataResult.ResponseErrorMsg = SGMText.ADMIN_UPDATE_TOTAL_ERR;
-                }
-            }
-            catch (Exception ex)
-            {
-                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
-                dataResult.ResponseErrorMsg = SGMText.ADMIN_UPDATE_TOTAL_ERR;
-                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
-            }
-
-            return dataResult;
-        }
+        
 
         public bool DeleteSystemAdmin(string stAdminAcount)
         {

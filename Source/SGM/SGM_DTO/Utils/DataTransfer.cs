@@ -34,6 +34,10 @@ namespace SGM_Core.Utils
         private int m_iCurrentPriceGas92;
         private int m_iCurrentPriceGas95;
         private int m_iCurrentPriceGasDO;
+
+        private float m_fGasStoreGas92Total;   //total gas92 in store
+        private float m_fGasStoreGas95Total;   //total gas95 in store
+        private float m_fGasStoreGasDOTotal;   //total gasDO in store
         
         public DataTransfer()
         {
@@ -55,6 +59,10 @@ namespace SGM_Core.Utils
             m_iCurrentPriceGas92 = 0;
             m_iCurrentPriceGas95 = 0;
             m_iCurrentPriceGasDO = 0;
+
+            m_fGasStoreGas92Total = 0;
+            m_fGasStoreGas95Total = 0;
+            m_fGasStoreGasDOTotal = 0;
         }
         //public DataTransfer(string json)
         //{
@@ -82,6 +90,24 @@ namespace SGM_Core.Utils
         {
             get { return m_iCurrentPriceGasDO; }
             set { m_iCurrentPriceGasDO = value; }
+        }
+
+        public float ResponseGasStoreGas92Total
+        {
+            get { return m_fGasStoreGas92Total; }
+            set { m_fGasStoreGas92Total = value; }
+        }
+
+        public float ResponseGasStoreGas95Total
+        {
+            get { return m_fGasStoreGas95Total; }
+            set { m_fGasStoreGas95Total = value; }
+        }
+
+        public float ResponseGasStoreGasDOTotal
+        {
+            get { return m_fGasStoreGasDOTotal; }
+            set { m_fGasStoreGasDOTotal = value; }
         }
 
         public string ResponseErrorMsg

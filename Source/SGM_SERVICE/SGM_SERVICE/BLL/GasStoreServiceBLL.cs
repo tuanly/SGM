@@ -81,9 +81,7 @@ namespace SGM.ServicesCore.BLL
             m_dataResponse = m_dalGasStore.AddNewGasStoreUpdate(m_dataRequest.ResponseDataGasStoreUpdateDTO);
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
-
-
-        
+   
         
     }
 }

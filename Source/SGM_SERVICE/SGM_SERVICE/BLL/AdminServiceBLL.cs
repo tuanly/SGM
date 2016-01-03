@@ -54,14 +54,6 @@ namespace SGM.ServicesCore.BLL
             return JSonHelper.ConvertObjectToJSon(response);
         }
 
-        public string UpdateSystemStore(String jsonSysAdminDTO)
-        {
-            DataTransfer dataInput = JSonHelper.ConvertJSonToObject(jsonSysAdminDTO);
-            SystemAdminDAL dalSystemAd = new SystemAdminDAL();
-            DataTransfer response = dalSystemAd.UpdateSystemAdminStore(dataInput.ResponseDataSystemAdminDTO);
-            return JSonHelper.ConvertObjectToJSon(response);
-        }
-
         public string GetCurrentPrice(int iGasType)
         {            
             SystemAdminDAL dalSystemAd = new SystemAdminDAL();
