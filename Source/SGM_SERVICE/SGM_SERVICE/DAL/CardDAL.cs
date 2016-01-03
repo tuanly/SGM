@@ -112,7 +112,7 @@ namespace SGM.ServicesCore.DAL
             bool result = true;
             try
             {
-                string query = string.Format("UPDATE CARD SET CARD_MONEY = @CARD_MONEY, CARD_MONEY_EX = @CARD_MONEY_EX WHERE CARD_ID = @CARD_ID");
+                string query = string.Format("UPDATE CARD SET CARD_MONEY = @CARD_MONEY, CARD_MONEY_EX = CARD_MONEY_EX + @CARD_MONEY_EX WHERE CARD_ID = @CARD_ID");
                 SqlParameter[] sqlParameters = new SqlParameter[3];
                 sqlParameters[0] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
                 sqlParameters[0].Value = Convert.ToString(dtoCard.CardID);

@@ -43,6 +43,7 @@ namespace SGM_SaleGas
       
 
         private int m_iApplyPrice = 0;
+        private int m_iSavingMoney = 0;
         private int m_iCurrentPrice = 0;
         private float m_iCurrentTotal = 0;
         private bool m_bBuy = false;
@@ -112,21 +113,53 @@ namespace SGM_SaleGas
                     case gasTransactType.gas92:
                         txtGasType.Text = SGMText.GAS_92_TEXT;
                         m_iCurrentPrice = m_iCurrentPriceGas92;
-                        m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGas92Price ? _rechargeDTO.RechargeGas92Price : m_iCurrentPrice;
+                        //m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGas92Price ? _rechargeDTO.RechargeGas92Price : m_iCurrentPrice;
+                        
+                       
+                        if (_rechargeDTO.RechargeGas92Price < m_iCurrentPrice)
+                        {
+                            m_iApplyPrice = m_iCurrentPrice;
+                            m_iSavingMoney = m_iCurrentPrice - _rechargeDTO.RechargeGas92Price;
+                        }
+                        else
+                        {
+                            m_iApplyPrice = _rechargeDTO.RechargeGas92Price;
+                            m_iSavingMoney = 0;
+                        }
                         txtPrice.Text = _rechargeDTO.RechargeGas92Price.ToString(MONEY_FORMAT);
                         m_iCurrentTotal = m_iCurrentTotalGas92;
                         break;
                     case gasTransactType.gas95:
                         txtGasType.Text = SGMText.GAS_95_TEXT;
                         m_iCurrentPrice = m_iCurrentPriceGas95;
-                        m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGas95Price ? _rechargeDTO.RechargeGas95Price : m_iCurrentPrice;
+                        //m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGas95Price ? _rechargeDTO.RechargeGas95Price : m_iCurrentPrice;
+                        if (_rechargeDTO.RechargeGas95Price < m_iCurrentPrice)
+                        {
+                            m_iApplyPrice = m_iCurrentPrice;
+                            m_iSavingMoney = m_iCurrentPrice - _rechargeDTO.RechargeGas95Price;
+                        }
+                        else
+                        {
+                            m_iApplyPrice = _rechargeDTO.RechargeGas95Price;
+                            m_iSavingMoney = 0;
+                        }
                         txtPrice.Text = _rechargeDTO.RechargeGas95Price.ToString(MONEY_FORMAT);
                         m_iCurrentTotal = m_iCurrentTotalGas95;
                         break;
                     case gasTransactType.gasDO:
                         txtGasType.Text = SGMText.GAS_DO_TEXT;
                         m_iCurrentPrice = m_iCurrentPriceGasDO;
-                        m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGasDOPrice ? _rechargeDTO.RechargeGasDOPrice : m_iCurrentPrice;
+                        //m_iApplyPrice = m_iCurrentPrice > _rechargeDTO.RechargeGasDOPrice ? _rechargeDTO.RechargeGasDOPrice : m_iCurrentPrice;
+                        if (_rechargeDTO.RechargeGasDOPrice < m_iCurrentPrice)
+                        {
+                            m_iApplyPrice = m_iCurrentPrice;
+                            m_iSavingMoney = m_iCurrentPrice - _rechargeDTO.RechargeGasDOPrice;
+                        }
+                        else
+                        {
+                            m_iApplyPrice = _rechargeDTO.RechargeGasDOPrice;
+                            m_iSavingMoney = 0;
+                        }
                         txtPrice.Text = _rechargeDTO.RechargeGasDOPrice.ToString(MONEY_FORMAT);
                         m_iCurrentTotal = m_iCurrentTotalGasDO;
                         break;
@@ -155,6 +188,8 @@ namespace SGM_SaleGas
                             txtMoneyBefore.Text = _cardDTO.CardRemainingMoney.ToString(MONEY_FORMAT);
                             txtGasBuying.Text = Math.Round(_totalBuying, 1).ToString();
                             txtMoneyAfter.Text = moneyAfter.ToString(MONEY_FORMAT);
+
+                            txtMoneySaving.Text = (m_iSavingMoney * _totalBuying).ToString(MONEY_FORMAT);
                             txtMoneyBuying.Text = _moneyRealBuying.ToString(MONEY_FORMAT);
                         }
                         else
@@ -180,6 +215,7 @@ namespace SGM_SaleGas
                 txtGasBuying.Text = "";
                 txtMoneyAfter.Text = "";
                 txtMoneyBuying.Text = "";
+                txtMoneySaving.Text = "";
             }
         }
 
@@ -241,6 +277,7 @@ namespace SGM_SaleGas
                                 _cardDTO.CardRemainingMoney = Int32.Parse(dr["CARD_MONEY"].ToString());
                                 _cardDTO.CardBuyDate = DateTime.Parse(dr["CARD_BUY_DATE"].ToString());
                                 _cardDTO.RechargeID = Int32.Parse(dr["RECHARGE_ID"].ToString());
+                                _cardDTO.CardMoneyEx = Int32.Parse(dr["CARD_MONEY_EX"].ToString());
                                 _cardDTO.CustomerID = dr["CUS_ID"].ToString();
 
                                 _rechargeDTO.RechargeID = Int32.Parse(dr["RECHARGE_ID"].ToString());
@@ -336,6 +373,7 @@ namespace SGM_SaleGas
             dto.SaleGasPriceOnCard = Int32.Parse(txtPrice.Text, System.Globalization.NumberStyles.Currency);
             dto.SaleGasCardMoneyBefore = Int32.Parse(txtMoneyBefore.Text, System.Globalization.NumberStyles.Currency);
             dto.SaleGasCardMoneyAfter = Int32.Parse(txtMoneyAfter.Text, System.Globalization.NumberStyles.Currency);
+            dto.SaleGasCardMoneySaving = Int32.Parse(txtMoneySaving.Text, System.Globalization.NumberStyles.Currency);
             dto.SaleGasCurrentPrice = m_iCurrentPrice;
             dto.GasStoreID = _gasStationDTO.GasStoreID;
             DataTransfer df = new DataTransfer();
@@ -394,17 +432,16 @@ namespace SGM_SaleGas
             txtCardName.Text = "";
             txtCardMoney.Text = 0.ToString(MONEY_FORMAT);
             rbGas92.Checked = true;
-            txtMoney.Text = 0.ToString(MONEY_FORMAT);            
+            txtMoney.Text = 0.ToString(MONEY_FORMAT);
             grBill.Text = SGMText.SALEGAS_MAIN_BILL;
             txtGasBuying.Text = 0.ToString(MONEY_FORMAT);
             txtGasType.Text = "";
             txtPrice.Text = 0.ToString(MONEY_FORMAT);
             txtMoneyBefore.Text = 0.ToString(MONEY_FORMAT);
             txtMoneyBuying.Text = 0.ToString(MONEY_FORMAT);
-            txtMoneyAfter.Text = 0.ToString(MONEY_FORMAT);          
-            
+            txtMoneyAfter.Text = 0.ToString(MONEY_FORMAT);
+            txtMoneySaving.Text = 0.ToString(MONEY_FORMAT);
         }
-
         private void clearForm()
         {            
             //rbGas92.Checked = true;
@@ -416,6 +453,7 @@ namespace SGM_SaleGas
             txtMoneyBefore.Text = 0.ToString(MONEY_FORMAT);
             txtMoneyBuying.Text = 0.ToString(MONEY_FORMAT);
             txtMoneyAfter.Text = 0.ToString(MONEY_FORMAT);
+            txtMoneySaving.Text = 0.ToString(MONEY_FORMAT);
             SGMHelper.Clear();
             grBill.Text = SGMText.SALEGAS_MAIN_BILL;
         }

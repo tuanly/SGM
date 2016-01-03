@@ -33,6 +33,7 @@ namespace SGM_SaleGas
             {
                 txtCardID.Text = m_dtoCard.CardID;
                 txtCardMoney.Text = m_dtoCard.CardRemainingMoney.ToString();
+                txtCardMoneyEx.Text = m_dtoCard.CardMoneyEx.ToString();
                 txtCardStatus.Text = (m_dtoCard.CardUnlockState ? SGMText.SALEGAS_CARDINFO_UNLOCK : SGMText.SALEGAS_CARDINFO_LOCK);
             }
             if (m_dtoRecharge != null)

@@ -67,7 +67,7 @@ namespace SGM.ServicesCore.BLL
             DataTransfer response = GasBuyingAddSaleGas(saleGasDTO);
             if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
             {
-                response = GasBuyingUpdateCard(saleGasDTO.CardID, saleGasDTO.SaleGasCardMoneyAfter);
+                response = GasBuyingUpdateCard(saleGasDTO.CardID, saleGasDTO.SaleGasCardMoneyAfter, saleGasDTO.SaleGasCardMoneySaving);
                 if (response.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
                 {                    
                     response = GasBuyingUpdateGasStore(saleGasDTO);                    
@@ -93,12 +93,13 @@ namespace SGM.ServicesCore.BLL
             SaleGasDAL dal = new SaleGasDAL();
             return dal.AddSaleGas(saleGasDTO);
         }
-        private DataTransfer GasBuyingUpdateCard(string strCardId, int money)
+        private DataTransfer GasBuyingUpdateCard(string strCardId, int money, int moneyEx)
         {
             CardDAL dalCard = new CardDAL();
             CardDTO dtoCard = new CardDTO();
             dtoCard.CardID = strCardId;
             dtoCard.CardRemainingMoney = money;
+            dtoCard.CardMoneyEx = moneyEx;
             return dalCard.UpdateSaleGas(dtoCard);
         }
 

@@ -60,6 +60,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.timeCardReader = new System.Windows.Forms.Timer(this.components);
             this.timeMain = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtMoneySaving = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.grBill.SuspendLayout();
@@ -254,6 +256,8 @@
             // 
             // grBill
             // 
+            this.grBill.Controls.Add(this.txtMoneySaving);
+            this.grBill.Controls.Add(this.label1);
             this.grBill.Controls.Add(this.txtMoneyBefore);
             this.grBill.Controls.Add(this.label9);
             this.grBill.Controls.Add(this.txtPrice);
@@ -298,10 +302,10 @@
             // txtPrice
             // 
             this.txtPrice.Enabled = false;
-            this.txtPrice.Location = new System.Drawing.Point(525, 54);
+            this.txtPrice.Location = new System.Drawing.Point(572, 54);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.ReadOnly = true;
-            this.txtPrice.Size = new System.Drawing.Size(243, 35);
+            this.txtPrice.Size = new System.Drawing.Size(196, 35);
             this.txtPrice.TabIndex = 15;
             this.txtPrice.Text = "50. 000";
             this.txtPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -363,7 +367,7 @@
             this.txtMoneyAfter.Location = new System.Drawing.Point(148, 165);
             this.txtMoneyAfter.Name = "txtMoneyAfter";
             this.txtMoneyAfter.ReadOnly = true;
-            this.txtMoneyAfter.Size = new System.Drawing.Size(620, 35);
+            this.txtMoneyAfter.Size = new System.Drawing.Size(304, 35);
             this.txtMoneyAfter.TabIndex = 9;
             this.txtMoneyAfter.Text = "30. 000";
             this.txtMoneyAfter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -380,10 +384,10 @@
             // txtMoneyBuying
             // 
             this.txtMoneyBuying.Enabled = false;
-            this.txtMoneyBuying.Location = new System.Drawing.Point(525, 113);
+            this.txtMoneyBuying.Location = new System.Drawing.Point(572, 113);
             this.txtMoneyBuying.Name = "txtMoneyBuying";
             this.txtMoneyBuying.ReadOnly = true;
-            this.txtMoneyBuying.Size = new System.Drawing.Size(243, 35);
+            this.txtMoneyBuying.Size = new System.Drawing.Size(196, 35);
             this.txtMoneyBuying.TabIndex = 7;
             this.txtMoneyBuying.Text = "20. 000";
             this.txtMoneyBuying.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -408,6 +412,26 @@
             this.timeMain.Enabled = true;
             this.timeMain.Interval = 500;
             this.timeMain.Tick += new System.EventHandler(this.timeMain_Tick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(458, 168);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 29);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Tích Lũy:";
+            // 
+            // txtMoneySaving
+            // 
+            this.txtMoneySaving.Enabled = false;
+            this.txtMoneySaving.Location = new System.Drawing.Point(572, 162);
+            this.txtMoneySaving.Name = "txtMoneySaving";
+            this.txtMoneySaving.ReadOnly = true;
+            this.txtMoneySaving.Size = new System.Drawing.Size(196, 35);
+            this.txtMoneySaving.TabIndex = 19;
+            this.txtMoneySaving.Text = "20. 000";
+            this.txtMoneySaving.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frmSGMSaleGas
             // 
@@ -469,5 +493,7 @@
         private System.Windows.Forms.Timer timeCardReader;
         private System.Windows.Forms.Timer timeMain;
         private System.Windows.Forms.TextBox txtCardName;
+        private System.Windows.Forms.TextBox txtMoneySaving;
+        private System.Windows.Forms.Label label1;
     }
 }
