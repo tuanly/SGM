@@ -359,7 +359,7 @@ namespace SGM.ServicesCore.DAL
             DataTransfer dataResult = new DataTransfer();
             try
             {
-                string query = string.Format("SELECT GS_UPDATE_ID,GS_GAS92_TOTAL,GS_GAS95_TOTAL,GS_GASDO_TOTAL,GS_GAS92_ADD,GS_GAS95_ADD,GS_GASDO_ADD,GS_UPDATE_DATE,GS_DESCRIPTION"
+                string query = string.Format("SELECT GS_UPDATE_ID as 'LẦN THỨ',GS_GAS92_TOTAL as 'XĂNG 92 CÒN',GS_GAS95_TOTAL as 'XĂNG 95 CÒN',GS_GASDO_TOTAL as 'DẦU DO CÒN',GS_GAS92_ADD as 'NHẬP XĂNG 92',GS_GAS95_ADD as 'NHẬP XĂNG 95',GS_GASDO_ADD as 'NHẬP DẦU DO',GS_UPDATE_DATE as 'NGÀY NHẬP',GS_DESCRIPTION as 'GHI CHÚ'"
                                             + " FROM GAS_STORE_UPDATE WHERE GASSTORE_ID = @GASSTORE_ID AND GS_UPDATE_DATE BETWEEN @STARTDATE AND @ENDDATE");
                 SqlParameter[] sqlParameters = new SqlParameter[3];
                 sqlParameters[0] = new SqlParameter("@GASSTORE_ID", SqlDbType.NVarChar);
