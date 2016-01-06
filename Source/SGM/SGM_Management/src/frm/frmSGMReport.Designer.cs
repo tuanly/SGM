@@ -31,8 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSGMReport));
             this.tabSGMHistory = new System.Windows.Forms.TabControl();
             this.subTabSGMSaleGas = new System.Windows.Forms.TabPage();
-            this.salesReportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.dgvSaleGasHistory = new System.Windows.Forms.DataGridView();
+            this.crvSaleGas = new CrystalDecisions.Windows.Forms.CrystalReportViewer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSaleGasView = new System.Windows.Forms.Button();
             this.txtSaleGasCardID = new System.Windows.Forms.TextBox();
@@ -44,6 +43,7 @@
             this.cboGasStation = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.subTabSGMRechargeCard = new System.Windows.Forms.TabPage();
+            this.cardReportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
             this.dgvRechargeCardHistory = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnRechargeCardView = new System.Windows.Forms.Button();
@@ -55,10 +55,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.cboRechargeCardCustomer = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.cardReportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
             this.tabSGMHistory.SuspendLayout();
             this.subTabSGMSaleGas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSaleGasHistory)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.subTabSGMRechargeCard.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRechargeCardHistory)).BeginInit();
@@ -78,8 +76,7 @@
             // 
             // subTabSGMSaleGas
             // 
-            this.subTabSGMSaleGas.Controls.Add(this.salesReportViewer);
-            this.subTabSGMSaleGas.Controls.Add(this.dgvSaleGasHistory);
+            this.subTabSGMSaleGas.Controls.Add(this.crvSaleGas);
             this.subTabSGMSaleGas.Controls.Add(this.groupBox1);
             this.subTabSGMSaleGas.Location = new System.Drawing.Point(4, 22);
             this.subTabSGMSaleGas.Name = "subTabSGMSaleGas";
@@ -89,27 +86,22 @@
             this.subTabSGMSaleGas.Text = "Bán Xăng";
             this.subTabSGMSaleGas.UseVisualStyleBackColor = true;
             // 
-            // salesReportViewer
+            // crvSaleGas
             // 
-            this.salesReportViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.salesReportViewer.LocalReport.ReportEmbeddedResource = "";
-            this.salesReportViewer.Location = new System.Drawing.Point(3, 399);
-            this.salesReportViewer.Name = "salesReportViewer";
-            this.salesReportViewer.Size = new System.Drawing.Size(747, 231);
-            this.salesReportViewer.TabIndex = 2;
-            // 
-            // dgvSaleGasHistory
-            // 
-            this.dgvSaleGasHistory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvSaleGasHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSaleGasHistory.Location = new System.Drawing.Point(3, 164);
-            this.dgvSaleGasHistory.Name = "dgvSaleGasHistory";
-            this.dgvSaleGasHistory.Size = new System.Drawing.Size(747, 466);
-            this.dgvSaleGasHistory.TabIndex = 1;
+            this.crvSaleGas.ActiveViewIndex = -1;
+            this.crvSaleGas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.crvSaleGas.Cursor = System.Windows.Forms.Cursors.Default;
+            this.crvSaleGas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.crvSaleGas.Location = new System.Drawing.Point(3, 164);
+            this.crvSaleGas.Name = "crvSaleGas";
+            this.crvSaleGas.ReuseParameterValuesOnRefresh = true;
+            this.crvSaleGas.ShowGroupTreeButton = false;
+            this.crvSaleGas.ShowLogo = false;
+            this.crvSaleGas.ShowParameterPanelButton = false;
+            this.crvSaleGas.ShowRefreshButton = false;
+            this.crvSaleGas.Size = new System.Drawing.Size(747, 466);
+            this.crvSaleGas.TabIndex = 1;
+            this.crvSaleGas.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
             // groupBox1
             // 
@@ -224,6 +216,14 @@
             this.subTabSGMRechargeCard.Text = "Bán Thẻ";
             this.subTabSGMRechargeCard.UseVisualStyleBackColor = true;
             // 
+            // cardReportViewer
+            // 
+            this.cardReportViewer.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.cardReportViewer.Location = new System.Drawing.Point(3, 384);
+            this.cardReportViewer.Name = "cardReportViewer";
+            this.cardReportViewer.Size = new System.Drawing.Size(747, 246);
+            this.cardReportViewer.TabIndex = 3;
+            // 
             // dgvRechargeCardHistory
             // 
             this.dgvRechargeCardHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -333,14 +333,6 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Khách hàng:";
             // 
-            // cardReportViewer
-            // 
-            this.cardReportViewer.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cardReportViewer.Location = new System.Drawing.Point(3, 384);
-            this.cardReportViewer.Name = "cardReportViewer";
-            this.cardReportViewer.Size = new System.Drawing.Size(747, 246);
-            this.cardReportViewer.TabIndex = 3;
-            // 
             // frmSGMReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -353,7 +345,6 @@
             this.Load += new System.EventHandler(this.frmSGMReport_Load);
             this.tabSGMHistory.ResumeLayout(false);
             this.subTabSGMSaleGas.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSaleGasHistory)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.subTabSGMRechargeCard.ResumeLayout(false);
@@ -370,7 +361,6 @@
         private System.Windows.Forms.TabPage subTabSGMSaleGas;
         private System.Windows.Forms.TabPage subTabSGMRechargeCard;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dgvSaleGasHistory;
         private System.Windows.Forms.ComboBox cboGasStation;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtSaleGasCardID;
@@ -391,7 +381,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cboRechargeCardCustomer;
         private System.Windows.Forms.Label label8;
-        private Microsoft.Reporting.WinForms.ReportViewer salesReportViewer;
         private Microsoft.Reporting.WinForms.ReportViewer cardReportViewer;
+        private CrystalDecisions.Windows.Forms.CrystalReportViewer crvSaleGas;
     }
 }

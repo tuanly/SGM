@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using Microsoft.Reporting.WinForms;
 using ReportBuilderEntities;
 using DynamicRDLCGenerator;
+using SGM_Management.src.report;
 
 namespace SGM_Management
 {
@@ -34,12 +35,15 @@ namespace SGM_Management
 
         private SGM_Service.ServiceSoapClient m_service = null;
         private frmSGMMessage frmMsg = null;
-   
+        private rptSGMSaleGas rptSaleGasReport = null;
+        private dsSGMSaleGas dsSaleGas = null;
+
         public frmSGMReport()
         {
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
             frmMsg = new frmSGMMessage();
+            
             SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this);
         }
 
@@ -58,7 +62,7 @@ namespace SGM_Management
                 return;
             }
             
-            dgvSaleGasHistory.DataSource = null;
+            
 
             DateTime date_begin = dtpSaleGasBegin.Value;
             DateTime date_end = dtpSaleGasEnd.Value;
@@ -78,51 +82,59 @@ namespace SGM_Management
                     {
                         if (dataResponse.ResponseDataSet != null)
                         {
-                            dgvSaleGasHistory.DataSource = dataResponse.ResponseDataSet.Tables[0];
-                            
-                            salesReportViewer.Reset();
+
+
+
                             String tableName = dataResponse.ResponseDataSet.Tables[0].TableName;
                             DataTable data = dataResponse.ResponseDataSet.Tables[0];
-                            salesReportViewer.LocalReport.DataSources.Add(new ReportDataSource(tableName, data));
+                           
+                            rptSaleGasReport = new rptSGMSaleGas();
+                            dsSaleGas = new dsSGMSaleGas();
+                            DataTable dtSaleGasTable = dsSaleGas.SGMSaleGas;
+                           
+                            for (int i = 0; i < data.Rows.Count; i++)
+                            {
 
-                            ReportBuilder reportBuilder = new ReportBuilder();
-                            reportBuilder.DataSource = dataResponse.ResponseDataSet;
-                            reportBuilder.Page = new ReportPage();
-                            //ReportSections reportFooter = new ReportSections();
-                            //ReportItems reportFooterItems = new ReportItems();
-                            //ReportTextBoxControl[] footerTxt = new ReportTextBoxControl[3];
-                            //footerTxt[0] = new ReportTextBoxControl() { Name = "txtCopyright", ValueOrExpression = new string[] { string.Format("Copyright {0}", DateTime.Now.Year) } };
-                            //footerTxt[1] = new ReportTextBoxControl() { Name = "ExecutionTime", ValueOrExpression = new string[] { "Report Generated On " + DateTime.Now.ToString() } };
-                            //footerTxt[2] = new ReportTextBoxControl() { Name = "PageNumber", ValueOrExpression = new string[] { "Page ", ReportGlobalParameters.CurrentPageNumber, " of ", ReportGlobalParameters.TotalPages } };
-
-                            //reportFooterItems.TextBoxControls = footerTxt;
-                            //reportFooter.ReportControlItems = reportFooterItems;
-                            //reportBuilder.Page.ReportFooter = reportFooter;
-
-                            ReportSections reportHeader = new ReportSections();
-                            reportHeader.Size = new ReportScale();
-                            reportHeader.Size.Height = 0.1;
-
-                            ReportItems reportHeaderItems = new ReportItems();
-                            ReportTextBoxControl[] headerTxt = new ReportTextBoxControl[1];
-                            headerTxt[0] = new ReportTextBoxControl() { Name = "txtReportTitle", ValueOrExpression = new string[] { string.Format("Sales Report: {0}", DateTime.Now) } };
-
-                            reportHeaderItems.TextBoxControls = headerTxt;
-                            reportHeader.ReportControlItems = reportHeaderItems;
-                            reportBuilder.Page.ReportHeader = reportHeader;
-
-                            salesReportViewer.LocalReport.LoadReportDefinition(ReportEngine.GenerateReport(reportBuilder));
+                                DataRow row = dtSaleGasTable.NewRow();
+                                row["ID"] = (i + 1);
+                                row["CUSTOMER_ID"] = data.Rows[i]["CUS_ID"];
+                                row["CUSTOMER_NAME"] = data.Rows[i]["CUS_NAME"];
+                               
+                                row["BUY_MONEY"] = Int32.Parse(data.Rows[i]["SALEGAS_CARD_MONEY_BEFORE"].ToString()) - Int32.Parse(data.Rows[i]["SALEGAS_CARD_MONEY_AFTER"].ToString());
+                                row["BUY_DATE"] = data.Rows[i]["SALEGAS_DATE"];
+                                row["GAS_SATION_NAME"] = data.Rows[i]["GASSTATION_NAME"];
+                                dtSaleGasTable.Rows.Add(row);
+                            }
+                          
+                           // dsSaleGas.Tables.Add(dtSaleGasTable);
+                           
+                            //rptSaleGasReport.SetParameterValue("DateBegin", dtpSaleGasBegin.Value);
+                            //rptSaleGasReport.SetParameterValue("DateEnd", dtpSaleGasEnd.Value);
+                            CrystalDecisions.Shared.ParameterValues p1 = new  CrystalDecisions.Shared.ParameterValues();
+                            CrystalDecisions.Shared.ParameterDiscreteValue p1Value = new CrystalDecisions.Shared.ParameterDiscreteValue();
+                            p1Value.Value = dtpSaleGasBegin.Value;
+                            p1.Add(p1Value);
+                            CrystalDecisions.Shared.ParameterValues p2 = new CrystalDecisions.Shared.ParameterValues();
+                            CrystalDecisions.Shared.ParameterDiscreteValue p2Value = new CrystalDecisions.Shared.ParameterDiscreteValue();
+                            p2Value.Value = dtpSaleGasEnd.Value;
+                            p2.Add(p2Value);
+                            rptSaleGasReport.DataDefinition.ParameterFields[0].ApplyCurrentValues(p1);
+                            rptSaleGasReport.DataDefinition.ParameterFields[1].ApplyCurrentValues(p2);
+                            rptSaleGasReport.SetDataSource(dsSaleGas); rptSaleGasReport.Refresh();
+                            crvSaleGas.ReportSource = rptSaleGasReport;
                             
-                            salesReportViewer.RefreshReport();
+                           
+
+
 
                         }
                         else
                             frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.REPORT_NO_DATA, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
-                        
+
                     }
                     else
                     {
-                        frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);                    
+                        frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                     }
                 }, SynchronizationContext.Current);
             }
