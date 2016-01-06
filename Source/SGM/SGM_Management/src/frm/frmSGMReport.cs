@@ -15,6 +15,7 @@ using Microsoft.Reporting.WinForms;
 using ReportBuilderEntities;
 using DynamicRDLCGenerator;
 using SGM_Management.src.report;
+using CrystalDecisions.Windows.Forms;
 
 namespace SGM_Management
 {
@@ -43,7 +44,7 @@ namespace SGM_Management
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
             frmMsg = new frmSGMMessage();
-            
+            HideTabs(crvSaleGas);
             SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this);
         }
 
@@ -52,6 +53,7 @@ namespace SGM_Management
             InitializeComponent();
             m_service = new SGM_Service.ServiceSoapClient();
             frmMsg = new frmSGMMessage();
+            HideTabs(crvSaleGas);
             SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(parent);
         }
 
@@ -105,28 +107,15 @@ namespace SGM_Management
                                 row["GAS_SATION_NAME"] = data.Rows[i]["GASSTATION_NAME"];
                                 dtSaleGasTable.Rows.Add(row);
                             }
-                          
-                           // dsSaleGas.Tables.Add(dtSaleGasTable);
+                         
+                            rptSaleGasReport.Refresh();
+                            rptSaleGasReport.SetDataSource(dsSaleGas);
                            
-                            //rptSaleGasReport.SetParameterValue("DateBegin", dtpSaleGasBegin.Value);
-                            //rptSaleGasReport.SetParameterValue("DateEnd", dtpSaleGasEnd.Value);
-                            CrystalDecisions.Shared.ParameterValues p1 = new  CrystalDecisions.Shared.ParameterValues();
-                            CrystalDecisions.Shared.ParameterDiscreteValue p1Value = new CrystalDecisions.Shared.ParameterDiscreteValue();
-                            p1Value.Value = dtpSaleGasBegin.Value;
-                            p1.Add(p1Value);
-                            CrystalDecisions.Shared.ParameterValues p2 = new CrystalDecisions.Shared.ParameterValues();
-                            CrystalDecisions.Shared.ParameterDiscreteValue p2Value = new CrystalDecisions.Shared.ParameterDiscreteValue();
-                            p2Value.Value = dtpSaleGasEnd.Value;
-                            p2.Add(p2Value);
-                            rptSaleGasReport.DataDefinition.ParameterFields[0].ApplyCurrentValues(p1);
-                            rptSaleGasReport.DataDefinition.ParameterFields[1].ApplyCurrentValues(p2);
-                            rptSaleGasReport.SetDataSource(dsSaleGas); rptSaleGasReport.Refresh();
+                            rptSaleGasReport.SetParameterValue("DateBegin", dtpSaleGasBegin.Value);
+                            rptSaleGasReport.SetParameterValue("DateEnd", dtpSaleGasEnd.Value);                            
+
                             crvSaleGas.ReportSource = rptSaleGasReport;
-                            
-                           
-
-
-
+                            HideTabs(crvSaleGas);
                         }
                         else
                             frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.REPORT_NO_DATA, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
@@ -320,6 +309,23 @@ namespace SGM_Management
                     frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                 }
             }, SynchronizationContext.Current);
+        }
+
+        public void HideTabs(CrystalDecisions.Windows.Forms.CrystalReportViewer viewer)
+        {
+            foreach (Control control in viewer.Controls)
+            {
+                if (control is PageView)
+                {
+                    if (((PageView)control).Controls.Count > 0)
+                    {
+                        TabControl tab = (TabControl)((PageView)control).Controls[0];
+                        tab.ItemSize = new Size(0, 1);
+                        tab.SizeMode = TabSizeMode.Fixed;
+                        tab.Appearance = TabAppearance.Buttons;
+                    }
+                }
+            }
         }
     }
 }
