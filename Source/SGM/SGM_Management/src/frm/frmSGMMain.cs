@@ -17,7 +17,6 @@ namespace SGM_Management
         private Color BUTTON_COLOR_FOCUS = Color.PowderBlue;
         private Color BUTTON_COLOR_NORMAL = Color.DarkSeaGreen;
         private Color BUTTON_COLOR_SELECTED = Color.SpringGreen;
-        private Button m_btnCurrenButton = null;
         private Form m_frmCurrent = null;
 
         
@@ -35,42 +34,20 @@ namespace SGM_Management
 
         private void frmGSMMain_Load(object sender, EventArgs e)
         {
-            m_btnCurrenButton = btnHome;
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
             frmSGMConfig frmConfig = new frmSGMConfig();
-            showFrom(frmConfig, btnConfig);
+            showFrom(frmConfig);
             if (frmSGMConfig.IsReaderConnected)
             {
                 frmConfig.Close();
-                m_btnCurrenButton.BackColor = BUTTON_COLOR_NORMAL;
-                m_btnCurrenButton = btnHome;
-                m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
             }
             SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this);
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_NORMAL;
-            m_btnCurrenButton = btnHome;
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-            if (m_frmCurrentForm != null)
-            {
-                m_frmCurrentForm.Close();
-                this.panelMain.Panel2.Controls.Clear();
-                System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGSMMain));
-                this.panelMain.Panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelMain.Panel2.BackgroundImage")));
-            }
-        }
-
-        private void showFrom(Form frm, Button button)
+        private void showFrom(Form frm)
         {
             if (m_frmCurrent != null)
                 m_frmCurrent.Close();
             m_frmCurrent = frm;
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_NORMAL;
-            m_btnCurrenButton = button;
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
             this.m_frmCurrentForm = frm;
             this.panelMain.Panel2.AutoScroll = true;
             frm.TopLevel = false;
@@ -109,262 +86,55 @@ namespace SGM_Management
                 this.panelMain.Panel2.Controls.Add(m_frmCurrentForm);
             }
         }
-
-        private void btnCustomer_Click(object sender, EventArgs e)
-        {           
-            showFrom(new frmSGMCustomer(), btnCustomer);
-        }
-
-        private void btnGasStation_Click(object sender, EventArgs e)
-        {            
-            showFrom(new frmGasStation(), btnGasStation);
-        }
-
-        private void btnUpdatePrice_Click(object sender, EventArgs e)
+       
+        private void mainMenu_Click(object sender, OutlookStyleControls.OutlookBar.ButtonClickEventArgs e)
         {
-            showFrom(new frmSGMUpdatePrice(), btnUpdatePrice);
+            int idx = mainMenu.Buttons.IndexOf(e.SelectedButton);
+            switch (idx)
+            {
+                case 0: // home
+                    //ShowPanes("show contacts options here", "show sheet with contacts here");
+                    if (m_frmCurrentForm != null)
+                    {
+                        m_frmCurrentForm.Close();
+                        this.panelMain.Panel2.Controls.Clear();
+                        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGSMMain));
+                        this.panelMain.Panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelMain.Panel2.BackgroundImage")));
+                    }
+                    break;
+                case 1: // quan ly kho
+                    showFrom(new frmSGMStore());
+                    break;
+                case 2: // quan ly tram xang
+                    showFrom(new frmGasStation());
+                    break;
+                case 3: // quan ly khach hang
+                    showFrom(new frmSGMCustomer());
+                    break;
+                case 4: // cap nhat gia xang
+                    showFrom(new frmSGMUpdatePrice());
+                    break;
+                case 5: // bao cao
+                    showFrom(new frmSGMReport(this));
+                    break;
+                case 6: // tai khoan
+                    showFrom(new frmSGMUpdateAccount());
+                    break;
+                case 7: // cau hinh
+                    showFrom(new frmSGMConfig());
+                    break;
+                case 8: // thoat
+                    this.Close();
+                    break;
+
+                default:
+                    break;
+            }   
         }
 
-        private void btnUpdateStore_Click(object sender, EventArgs e)
+        private void mainMenu_Click_1(object sender, OutlookStyleControls.OutlookBar.ButtonClickEventArgs e)
         {
-            showFrom(new frmSGMStore(), btnStore);
-        }
 
-        private void btnAccount_Click(object sender, EventArgs e)
-        {
-            showFrom(new frmSGMUpdateAccount(), btnAccount);
-        }
-
-        
-
-        private void btnReport_Click(object sender, EventArgs e)
-        {
-            showFrom(new frmSGMReport(this), btnReport);
-        }
-
-        private void btnExit_Click_1(object sender, EventArgs e)
-        {
-            showFrom(new frmSGMConfig(), btnConfig);
-        }
-
-        private void btnGasStation_Enter(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnGasStation)
-                btnGasStation.BackColor = BUTTON_COLOR_FOCUS;
-        }
-
-        private void btnGasStation_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (m_btnCurrenButton != btnGasStation)
-                btnGasStation.BackColor = BUTTON_COLOR_FOCUS;
-        }
-
-        private void btnGasStation_MouseLeave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnGasStation)
-                btnGasStation.BackColor = BUTTON_COLOR_NORMAL;
-            //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnGasStation_Leave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnGasStation)
-                btnGasStation.BackColor = BUTTON_COLOR_NORMAL;
-        //    m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnHome_MouseLeave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnHome)
-                btnHome.BackColor = BUTTON_COLOR_NORMAL;
-         //   m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnHome_Leave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnHome)
-                btnHome.BackColor = BUTTON_COLOR_NORMAL;
-           // m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnHome_Enter(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnHome)
-                btnHome.BackColor = BUTTON_COLOR_FOCUS;
-           // m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnHome_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (m_btnCurrenButton != btnHome)
-                btnHome.BackColor = BUTTON_COLOR_FOCUS;
-           // m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnCustomer_Enter(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnCustomer)
-                btnCustomer.BackColor = BUTTON_COLOR_FOCUS;
-            //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnCustomer_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (m_btnCurrenButton != btnCustomer)
-                btnCustomer.BackColor = BUTTON_COLOR_FOCUS;
-            //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnCustomer_MouseLeave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnCustomer)
-                btnCustomer.BackColor = BUTTON_COLOR_NORMAL;
-            //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnCustomer_Leave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnCustomer)
-                btnCustomer.BackColor = BUTTON_COLOR_NORMAL;
-           // m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnUpdatePrice_Enter(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnUpdatePrice)
-                btnUpdatePrice.BackColor = BUTTON_COLOR_FOCUS;
-        }
-
-        private void btnUpdatePrice_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (m_btnCurrenButton != btnUpdatePrice)
-                btnUpdatePrice.BackColor = BUTTON_COLOR_FOCUS;
-        }
-
-        private void btnUpdatePrice_Leave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnUpdatePrice)
-                btnUpdatePrice.BackColor = BUTTON_COLOR_NORMAL;
-            //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnUpdatePrice_MouseLeave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnUpdatePrice)
-                btnUpdatePrice.BackColor = BUTTON_COLOR_NORMAL;
-            //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnUpdateStore_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (m_btnCurrenButton != btnStore)
-                btnStore.BackColor = BUTTON_COLOR_FOCUS;
-        }
-
-        private void btnUpdateStore_Leave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnStore)
-                btnStore.BackColor = BUTTON_COLOR_NORMAL;
-            //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnUpdateStore_Enter(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnStore) 
-                btnStore.BackColor = BUTTON_COLOR_FOCUS;
-        }
-
-        private void btnUpdateStore_MouseLeave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnStore)
-                btnStore.BackColor = BUTTON_COLOR_NORMAL;
-            //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnReport_Enter(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnReport)
-                btnReport.BackColor = BUTTON_COLOR_FOCUS;
-        }
-
-        private void btnReport_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (m_btnCurrenButton != btnReport)
-                btnReport.BackColor = BUTTON_COLOR_FOCUS;
-        }
-
-        private void btnReport_MouseLeave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnReport)
-                btnReport.BackColor = BUTTON_COLOR_NORMAL;
-            //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnReport_Leave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnReport)
-                btnReport.BackColor = BUTTON_COLOR_NORMAL;
-            //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnAccount_Leave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnAccount)
-                btnAccount.BackColor = BUTTON_COLOR_NORMAL;
-            //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnAccount_MouseLeave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnAccount)
-                btnAccount.BackColor = BUTTON_COLOR_NORMAL;
-            //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnAccount_Enter(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnAccount)
-                btnAccount.BackColor = BUTTON_COLOR_FOCUS;
-        }
-
-        private void btnAccount_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (m_btnCurrenButton != btnAccount)
-                btnAccount.BackColor = BUTTON_COLOR_FOCUS;
-        }
-
-        private void btnExit_Leave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnConfig)
-                btnConfig.BackColor = BUTTON_COLOR_NORMAL;
-            //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnExit_MouseLeave(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnConfig)
-                btnConfig.BackColor = BUTTON_COLOR_NORMAL;
-            //m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-        }
-
-        private void btnExit_Enter(object sender, EventArgs e)
-        {
-            if (m_btnCurrenButton != btnConfig)
-                btnConfig.BackColor = BUTTON_COLOR_FOCUS;
-        }
-
-        private void btnExit_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (m_btnCurrenButton != btnConfig)
-                btnConfig.BackColor = BUTTON_COLOR_FOCUS;
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_NORMAL;
-            m_btnCurrenButton = btnExit;
-            m_btnCurrenButton.BackColor = BUTTON_COLOR_SELECTED;
-            this.Close();
         }
         
     }

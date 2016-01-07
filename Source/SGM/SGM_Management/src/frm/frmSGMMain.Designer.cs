@@ -29,17 +29,18 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGSMMain));
+            OutlookStyleControls.OutlookBarButton outlookBarButton1 = new OutlookStyleControls.OutlookBarButton();
+            OutlookStyleControls.OutlookBarButton outlookBarButton2 = new OutlookStyleControls.OutlookBarButton();
+            OutlookStyleControls.OutlookBarButton outlookBarButton3 = new OutlookStyleControls.OutlookBarButton();
+            OutlookStyleControls.OutlookBarButton outlookBarButton4 = new OutlookStyleControls.OutlookBarButton();
+            OutlookStyleControls.OutlookBarButton outlookBarButton5 = new OutlookStyleControls.OutlookBarButton();
+            OutlookStyleControls.OutlookBarButton outlookBarButton6 = new OutlookStyleControls.OutlookBarButton();
+            OutlookStyleControls.OutlookBarButton outlookBarButton7 = new OutlookStyleControls.OutlookBarButton();
+            OutlookStyleControls.OutlookBarButton outlookBarButton8 = new OutlookStyleControls.OutlookBarButton();
+            OutlookStyleControls.OutlookBarButton outlookBarButton9 = new OutlookStyleControls.OutlookBarButton();
             this.panelMain = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.btnGasStation = new System.Windows.Forms.Button();
-            this.btnHome = new System.Windows.Forms.Button();
-            this.btnUpdatePrice = new System.Windows.Forms.Button();
-            this.btnStore = new System.Windows.Forms.Button();
-            this.btnCustomer = new System.Windows.Forms.Button();
-            this.btnConfig = new System.Windows.Forms.Button();
-            this.btnAccount = new System.Windows.Forms.Button();
-            this.btnReport = new System.Windows.Forms.Button();
+            this.mainMenu = new OutlookStyleControls.OutlookBar();
             ((System.ComponentModel.ISupportInitialize)(this.panelMain)).BeginInit();
             this.panelMain.Panel1.SuspendLayout();
             this.panelMain.SuspendLayout();
@@ -63,7 +64,7 @@
             // 
             this.panelMain.Panel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelMain.Panel2.BackgroundImage")));
             this.panelMain.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelMain.Size = new System.Drawing.Size(853, 550);
+            this.panelMain.Size = new System.Drawing.Size(978, 492);
             this.panelMain.SplitterDistance = 244;
             this.panelMain.TabIndex = 0;
             // 
@@ -71,222 +72,97 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.btnExit, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.btnGasStation, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.btnHome, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnUpdatePrice, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.btnStore, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.btnCustomer, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.btnConfig, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.btnAccount, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.btnReport, 0, 5);
+            this.tableLayoutPanel1.Controls.Add(this.mainMenu, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 9;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 453F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 453F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 453F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 453F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 453F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 453F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 453F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 453F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 453F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(244, 453);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // btnExit
+            // mainMenu
             // 
-            this.btnExit.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnExit.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnExit.Location = new System.Drawing.Point(0, 400);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(0);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(244, 50);
-            this.btnExit.TabIndex = 10;
-            this.btnExit.Text = "Thoát >>";
-            this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnGasStation
-            // 
-            this.btnGasStation.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnGasStation.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnGasStation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGasStation.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGasStation.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnGasStation.Location = new System.Drawing.Point(0, 100);
-            this.btnGasStation.Margin = new System.Windows.Forms.Padding(0);
-            this.btnGasStation.Name = "btnGasStation";
-            this.btnGasStation.Size = new System.Drawing.Size(244, 50);
-            this.btnGasStation.TabIndex = 2;
-            this.btnGasStation.Text = "Quản Lý Trạm Xăng >>";
-            this.btnGasStation.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGasStation.UseVisualStyleBackColor = false;
-            this.btnGasStation.Click += new System.EventHandler(this.btnGasStation_Click);
-            this.btnGasStation.Enter += new System.EventHandler(this.btnGasStation_Enter);
-            this.btnGasStation.Leave += new System.EventHandler(this.btnGasStation_Leave);
-            this.btnGasStation.MouseLeave += new System.EventHandler(this.btnGasStation_MouseLeave);
-            this.btnGasStation.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnGasStation_MouseMove);
-            // 
-            // btnHome
-            // 
-            this.btnHome.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnHome.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHome.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnHome.Location = new System.Drawing.Point(0, 0);
-            this.btnHome.Margin = new System.Windows.Forms.Padding(0);
-            this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(244, 50);
-            this.btnHome.TabIndex = 0;
-            this.btnHome.Text = "SGM >>";
-            this.btnHome.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnHome.UseVisualStyleBackColor = false;
-            this.btnHome.Click += new System.EventHandler(this.button3_Click);
-            this.btnHome.Enter += new System.EventHandler(this.btnHome_Enter);
-            this.btnHome.Leave += new System.EventHandler(this.btnHome_Leave);
-            this.btnHome.MouseLeave += new System.EventHandler(this.btnHome_MouseLeave);
-            this.btnHome.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnHome_MouseMove);
-            // 
-            // btnUpdatePrice
-            // 
-            this.btnUpdatePrice.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnUpdatePrice.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnUpdatePrice.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUpdatePrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdatePrice.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnUpdatePrice.Location = new System.Drawing.Point(0, 150);
-            this.btnUpdatePrice.Margin = new System.Windows.Forms.Padding(0);
-            this.btnUpdatePrice.Name = "btnUpdatePrice";
-            this.btnUpdatePrice.Size = new System.Drawing.Size(244, 50);
-            this.btnUpdatePrice.TabIndex = 3;
-            this.btnUpdatePrice.Text = "Cập Nhật Giá Xăng >>";
-            this.btnUpdatePrice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnUpdatePrice.UseVisualStyleBackColor = false;
-            this.btnUpdatePrice.Click += new System.EventHandler(this.btnUpdatePrice_Click);
-            this.btnUpdatePrice.Enter += new System.EventHandler(this.btnUpdatePrice_Enter);
-            this.btnUpdatePrice.Leave += new System.EventHandler(this.btnUpdatePrice_Leave);
-            this.btnUpdatePrice.MouseLeave += new System.EventHandler(this.btnUpdatePrice_MouseLeave);
-            this.btnUpdatePrice.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnUpdatePrice_MouseMove);
-            // 
-            // btnStore
-            // 
-            this.btnStore.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnStore.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnStore.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStore.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStore.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnStore.Location = new System.Drawing.Point(0, 200);
-            this.btnStore.Margin = new System.Windows.Forms.Padding(0);
-            this.btnStore.Name = "btnStore";
-            this.btnStore.Size = new System.Drawing.Size(244, 50);
-            this.btnStore.TabIndex = 4;
-            this.btnStore.Text = "Quản Lý Kho >>";
-            this.btnStore.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnStore.UseVisualStyleBackColor = false;
-            this.btnStore.Click += new System.EventHandler(this.btnUpdateStore_Click);
-            this.btnStore.Enter += new System.EventHandler(this.btnUpdateStore_Enter);
-            this.btnStore.Leave += new System.EventHandler(this.btnUpdateStore_Leave);
-            this.btnStore.MouseLeave += new System.EventHandler(this.btnUpdateStore_MouseLeave);
-            this.btnStore.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnUpdateStore_MouseMove);
-            // 
-            // btnCustomer
-            // 
-            this.btnCustomer.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnCustomer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnCustomer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCustomer.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnCustomer.Location = new System.Drawing.Point(0, 50);
-            this.btnCustomer.Margin = new System.Windows.Forms.Padding(0);
-            this.btnCustomer.Name = "btnCustomer";
-            this.btnCustomer.Size = new System.Drawing.Size(244, 50);
-            this.btnCustomer.TabIndex = 1;
-            this.btnCustomer.Text = "Quản Lý Khách Hàng >>";
-            this.btnCustomer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCustomer.UseVisualStyleBackColor = false;
-            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
-            this.btnCustomer.Enter += new System.EventHandler(this.btnCustomer_Enter);
-            this.btnCustomer.Leave += new System.EventHandler(this.btnCustomer_Leave);
-            this.btnCustomer.MouseLeave += new System.EventHandler(this.btnCustomer_MouseLeave);
-            this.btnCustomer.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnCustomer_MouseMove);
-            // 
-            // btnConfig
-            // 
-            this.btnConfig.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnConfig.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnConfig.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConfig.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConfig.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnConfig.Location = new System.Drawing.Point(0, 350);
-            this.btnConfig.Margin = new System.Windows.Forms.Padding(0);
-            this.btnConfig.Name = "btnConfig";
-            this.btnConfig.Size = new System.Drawing.Size(244, 50);
-            this.btnConfig.TabIndex = 8;
-            this.btnConfig.Text = "Cấu Hình >>";
-            this.btnConfig.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnConfig.UseVisualStyleBackColor = false;
-            this.btnConfig.Click += new System.EventHandler(this.btnExit_Click_1);
-            this.btnConfig.Enter += new System.EventHandler(this.btnExit_Enter);
-            this.btnConfig.Leave += new System.EventHandler(this.btnExit_Leave);
-            this.btnConfig.MouseLeave += new System.EventHandler(this.btnExit_MouseLeave);
-            this.btnConfig.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnExit_MouseMove);
-            // 
-            // btnAccount
-            // 
-            this.btnAccount.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnAccount.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnAccount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAccount.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnAccount.Location = new System.Drawing.Point(0, 300);
-            this.btnAccount.Margin = new System.Windows.Forms.Padding(0);
-            this.btnAccount.Name = "btnAccount";
-            this.btnAccount.Size = new System.Drawing.Size(244, 50);
-            this.btnAccount.TabIndex = 5;
-            this.btnAccount.Text = "Tài Khoản >>";
-            this.btnAccount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAccount.UseVisualStyleBackColor = false;
-            this.btnAccount.Click += new System.EventHandler(this.btnAccount_Click);
-            this.btnAccount.Enter += new System.EventHandler(this.btnAccount_Enter);
-            this.btnAccount.Leave += new System.EventHandler(this.btnAccount_Leave);
-            this.btnAccount.MouseLeave += new System.EventHandler(this.btnAccount_MouseLeave);
-            this.btnAccount.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnAccount_MouseMove);
-            // 
-            // btnReport
-            // 
-            this.btnReport.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnReport.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnReport.ForeColor = System.Drawing.Color.DarkGreen;
-            this.btnReport.Location = new System.Drawing.Point(0, 250);
-            this.btnReport.Margin = new System.Windows.Forms.Padding(0);
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(244, 50);
-            this.btnReport.TabIndex = 9;
-            this.btnReport.Text = "Báo Cáo >>";
-            this.btnReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnReport.UseVisualStyleBackColor = false;
-            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
-            this.btnReport.Enter += new System.EventHandler(this.btnReport_Enter);
-            this.btnReport.Leave += new System.EventHandler(this.btnReport_Leave);
-            this.btnReport.MouseLeave += new System.EventHandler(this.btnReport_MouseLeave);
-            this.btnReport.MouseMove += new System.Windows.Forms.MouseEventHandler(this.btnReport_MouseMove);
+            this.mainMenu.BackColor = System.Drawing.SystemColors.Highlight;
+            this.mainMenu.ButtonHeight = 50;
+            outlookBarButton1.Enabled = true;
+            outlookBarButton1.Image = global::SGM_Management.Properties.Resources.sgm_home;
+            outlookBarButton1.Tag = null;
+            outlookBarButton1.Text = "SGM";
+            outlookBarButton2.Enabled = true;
+            outlookBarButton2.Image = global::SGM_Management.Properties.Resources.sgm_customer;
+            outlookBarButton2.Tag = null;
+            outlookBarButton2.Text = "Quản Lý Kho";
+            outlookBarButton3.Enabled = true;
+            outlookBarButton3.Image = global::SGM_Management.Properties.Resources.sgm_account;
+            outlookBarButton3.Tag = null;
+            outlookBarButton3.Text = "Quản Lý Trạm Xăng";
+            outlookBarButton4.Enabled = true;
+            outlookBarButton4.Image = global::SGM_Management.Properties.Resources.sgm_store1;
+            outlookBarButton4.Tag = null;
+            outlookBarButton4.Text = "Quản Lý Khách Hàng";
+            outlookBarButton5.Enabled = true;
+            outlookBarButton5.Image = global::SGM_Management.Properties.Resources.sgm_price;
+            outlookBarButton5.Tag = null;
+            outlookBarButton5.Text = "Cập Nhật Giá Xăng";
+            outlookBarButton6.Enabled = true;
+            outlookBarButton6.Image = global::SGM_Management.Properties.Resources.sgm_report;
+            outlookBarButton6.Tag = null;
+            outlookBarButton6.Text = "Báo Cáo";
+            outlookBarButton7.Enabled = true;
+            outlookBarButton7.Image = global::SGM_Management.Properties.Resources.sgm_account1;
+            outlookBarButton7.Tag = null;
+            outlookBarButton7.Text = "Tài Khoản";
+            outlookBarButton8.Enabled = true;
+            outlookBarButton8.Image = global::SGM_Management.Properties.Resources.sgm_config;
+            outlookBarButton8.Tag = null;
+            outlookBarButton8.Text = "Cấu Hình";
+            outlookBarButton9.Enabled = true;
+            outlookBarButton9.Image = global::SGM_Management.Properties.Resources.sgm_exit;
+            outlookBarButton9.Tag = null;
+            outlookBarButton9.Text = "Thoát";
+            this.mainMenu.Buttons.Add(outlookBarButton1);
+            this.mainMenu.Buttons.Add(outlookBarButton2);
+            this.mainMenu.Buttons.Add(outlookBarButton3);
+            this.mainMenu.Buttons.Add(outlookBarButton4);
+            this.mainMenu.Buttons.Add(outlookBarButton5);
+            this.mainMenu.Buttons.Add(outlookBarButton6);
+            this.mainMenu.Buttons.Add(outlookBarButton7);
+            this.mainMenu.Buttons.Add(outlookBarButton8);
+            this.mainMenu.Buttons.Add(outlookBarButton9);
+            this.mainMenu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.mainMenu.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainMenu.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mainMenu.GradientButtonHoverDark = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(192)))), ((int)(((byte)(91)))));
+            this.mainMenu.GradientButtonHoverLight = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(220)))));
+            this.mainMenu.GradientButtonNormalDark = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(193)))), ((int)(((byte)(140)))));
+            this.mainMenu.GradientButtonNormalLight = System.Drawing.Color.FromArgb(((int)(((byte)(234)))), ((int)(((byte)(240)))), ((int)(((byte)(207)))));
+            this.mainMenu.GradientButtonSelectedDark = System.Drawing.Color.FromArgb(((int)(((byte)(239)))), ((int)(((byte)(150)))), ((int)(((byte)(21)))));
+            this.mainMenu.GradientButtonSelectedLight = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(230)))), ((int)(((byte)(148)))));
+            this.mainMenu.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.mainMenu.Location = new System.Drawing.Point(4, 4);
+            this.mainMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.mainMenu.MinimumSize = new System.Drawing.Size(236, 445);
+            this.mainMenu.Name = "mainMenu";
+            this.mainMenu.SelectedButton = null;
+            this.mainMenu.Size = new System.Drawing.Size(236, 445);
+            this.mainMenu.TabIndex = 1;
+            this.mainMenu.Click += new OutlookStyleControls.OutlookBar.ButtonClickEventHandler(this.mainMenu_Click);
             // 
             // frmGSMMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(853, 550);
+            this.ClientSize = new System.Drawing.Size(978, 492);
             this.Controls.Add(this.panelMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmGSMMain";
@@ -308,14 +184,6 @@
 
         private System.Windows.Forms.SplitContainer panelMain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button btnGasStation;
-        private System.Windows.Forms.Button btnHome;
-        private System.Windows.Forms.Button btnUpdatePrice;
-        private System.Windows.Forms.Button btnStore;
-        private System.Windows.Forms.Button btnAccount;
-        private System.Windows.Forms.Button btnCustomer;
-        private System.Windows.Forms.Button btnConfig;
-        private System.Windows.Forms.Button btnReport;
-        private System.Windows.Forms.Button btnExit;
+        private OutlookStyleControls.OutlookBar mainMenu;
     }
 }
