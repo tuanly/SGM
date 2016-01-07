@@ -63,11 +63,12 @@ namespace SGM_Management
             {
                 return;
             }
-            
-            
 
-            DateTime date_begin = dtpSaleGasBegin.Value;
-            DateTime date_end = dtpSaleGasEnd.Value;
+
+
+            DateTime date_begin = new DateTime(dtpSaleGasBegin.Value.Year, dtpSaleGasBegin.Value.Month, dtpSaleGasBegin.Value.Day, 0, 0, 0);
+            
+            DateTime date_end = new DateTime (dtpSaleGasEnd.Value.Date.Year, dtpSaleGasEnd.Value.Month, dtpSaleGasEnd.Value.Day, 23,59,59);
             String gasStationId = (cboGasStation.SelectedItem as ComboboxItem).Value.ToString();
             {
                 Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
@@ -138,8 +139,9 @@ namespace SGM_Management
 
             dgvRechargeCardHistory.DataSource = null;
 
-            DateTime date_begin = dtpRechargeCardBegin.Value;
-            DateTime date_end = dtpRechargeCardEnd.Value;
+            DateTime date_begin = new DateTime(dtpSaleGasBegin.Value.Year, dtpSaleGasBegin.Value.Month, dtpSaleGasBegin.Value.Day, 0, 0, 0);
+
+            DateTime date_end = new DateTime(dtpSaleGasEnd.Value.Date.Year, dtpSaleGasEnd.Value.Month, dtpSaleGasEnd.Value.Day, 23, 59, 59);
             String customerId = (cboRechargeCardCustomer.SelectedItem as ComboboxItem).Value.ToString();
 
             Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(

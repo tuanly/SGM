@@ -493,7 +493,7 @@ namespace SGM_SaleGas
 
         private void lblTitle_Click(object sender, EventArgs e)
         {
-            ScanCard("123456");
+            ScanCard("1234567");
         }
         
     }
