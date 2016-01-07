@@ -101,7 +101,7 @@ namespace SGM_Management
                                 row["ID"] = (i + 1);
                                 row["CUSTOMER_ID"] = data.Rows[i]["CUS_ID"];
                                 row["CUSTOMER_NAME"] = data.Rows[i]["CUS_NAME"];
-                               
+                                row["BUY_LIT"] = 
                                 row["BUY_MONEY"] = Int32.Parse(data.Rows[i]["SALEGAS_CARD_MONEY_BEFORE"].ToString()) - Int32.Parse(data.Rows[i]["SALEGAS_CARD_MONEY_AFTER"].ToString());
                                 row["BUY_DATE"] = data.Rows[i]["SALEGAS_DATE"];
                                 row["GAS_SATION_NAME"] = data.Rows[i]["GASSTATION_NAME"];

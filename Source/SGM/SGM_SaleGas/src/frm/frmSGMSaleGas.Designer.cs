@@ -46,6 +46,8 @@
             this.rbGas95 = new System.Windows.Forms.RadioButton();
             this.rbGas92 = new System.Windows.Forms.RadioButton();
             this.grBill = new System.Windows.Forms.GroupBox();
+            this.txtMoneySaving = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.txtMoneyBefore = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtPrice = new System.Windows.Forms.TextBox();
@@ -60,8 +62,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.timeCardReader = new System.Windows.Forms.Timer(this.components);
             this.timeMain = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtMoneySaving = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.grBill.SuspendLayout();
@@ -80,6 +80,7 @@
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "TRẠM XĂNG DẦU HAMACO";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
             // 
             // lblCurrentPrice
             // 
@@ -279,6 +280,26 @@
             this.grBill.TabStop = false;
             this.grBill.Text = "Thanh toán cho thẻ:";
             // 
+            // txtMoneySaving
+            // 
+            this.txtMoneySaving.Enabled = false;
+            this.txtMoneySaving.Location = new System.Drawing.Point(572, 162);
+            this.txtMoneySaving.Name = "txtMoneySaving";
+            this.txtMoneySaving.ReadOnly = true;
+            this.txtMoneySaving.Size = new System.Drawing.Size(196, 35);
+            this.txtMoneySaving.TabIndex = 19;
+            this.txtMoneySaving.Text = "20. 000";
+            this.txtMoneySaving.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(458, 168);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 29);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Tích Lũy:";
+            // 
             // txtMoneyBefore
             // 
             this.txtMoneyBefore.Enabled = false;
@@ -412,26 +433,6 @@
             this.timeMain.Enabled = true;
             this.timeMain.Interval = 500;
             this.timeMain.Tick += new System.EventHandler(this.timeMain_Tick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(458, 168);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 29);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Tích Lũy:";
-            // 
-            // txtMoneySaving
-            // 
-            this.txtMoneySaving.Enabled = false;
-            this.txtMoneySaving.Location = new System.Drawing.Point(572, 162);
-            this.txtMoneySaving.Name = "txtMoneySaving";
-            this.txtMoneySaving.ReadOnly = true;
-            this.txtMoneySaving.Size = new System.Drawing.Size(196, 35);
-            this.txtMoneySaving.TabIndex = 19;
-            this.txtMoneySaving.Text = "20. 000";
-            this.txtMoneySaving.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frmSGMSaleGas
             // 

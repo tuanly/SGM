@@ -375,6 +375,7 @@ namespace SGM_SaleGas
             dto.SaleGasCardMoneyAfter = Int32.Parse(txtMoneyAfter.Text, System.Globalization.NumberStyles.Currency);
             dto.SaleGasCardMoneySaving = Int32.Parse(txtMoneySaving.Text, System.Globalization.NumberStyles.Currency);
             dto.SaleGasCurrentPrice = m_iCurrentPrice;
+            dto.NumberBuyLit = float.Parse(txtGasBuying.Text, System.Globalization.NumberStyles.Currency);
             dto.GasStoreID = _gasStationDTO.GasStoreID;
             DataTransfer df = new DataTransfer();
             df.ResponseDataSaleGasDTO = dto;
@@ -488,6 +489,11 @@ namespace SGM_SaleGas
                     frmCardInfo.Close();
             }
             
+        }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+            ScanCard("123456");
         }
         
     }

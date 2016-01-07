@@ -21,6 +21,7 @@ namespace SGM_Core.DTO
         private string m_stGasStoreID;
         private string m_stCardID;
         private DateTime m_dtSalGasDate;
+        private float m_fNumberBuyLit;
 
         public SaleGasDTO()
         {
@@ -34,6 +35,7 @@ namespace SGM_Core.DTO
             m_stCardID = "";
             m_stGasStoreID = "";
             m_dtSalGasDate = DateTime.Now;
+            m_fNumberBuyLit = 0;
         }
 
         public int SaleGasID
@@ -101,5 +103,13 @@ namespace SGM_Core.DTO
             get { return m_dtSalGasDate; }
             set { m_dtSalGasDate = value; }
         }
+
+        public float NumberBuyLit
+        {
+            get { return m_fNumberBuyLit; }
+            set { m_fNumberBuyLit = value; }
+        }
+
+        
     }
 }

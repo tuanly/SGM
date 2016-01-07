@@ -15,7 +15,8 @@ namespace SGM_GasStoreUpdating
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmSGMConfig());
+           Application.Run(new frmSGMConfig());
+           // Application.Run(new frmSGMLogin());
         }
         public static SerialPort ReaderPort;
     }
