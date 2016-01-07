@@ -34,12 +34,19 @@ namespace SGM.ServicesCore.BLL
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
 
-        public string GetGasStation(string stGasStationID)
+        public string GetGasStation(string stGasStationID, string stGasStoreID)
         {
-            if (stGasStationID == null)
-                m_dataResponse = m_dalGasStation.GetGasStations();
+            if (stGasStoreID == null)
+            {
+                if (stGasStationID == null)
+                    m_dataResponse = m_dalGasStation.GetGasStations();
+                else
+                    m_dataResponse = m_dalGasStation.GetGasStation(stGasStationID);
+            }
             else
-                m_dataResponse = m_dalGasStation.GetGasStation(stGasStationID);
+            {
+                m_dataResponse = m_dalGasStation.GetGasStationsOfStore(stGasStoreID);
+            }
             return JSonHelper.ConvertObjectToJSon(m_dataResponse);
         }
         public string UpdateGasStation(string jsonCustomerDTO, string stGasStationID)

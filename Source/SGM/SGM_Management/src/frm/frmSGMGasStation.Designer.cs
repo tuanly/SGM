@@ -79,7 +79,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(621, 199);
+            this.groupBox1.Size = new System.Drawing.Size(621, 235);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin chi tiết:";
@@ -88,24 +88,25 @@
             // 
             this.cboGasStore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboGasStore.FormattingEnabled = true;
-            this.cboGasStore.Location = new System.Drawing.Point(328, 26);
+            this.cboGasStore.Location = new System.Drawing.Point(97, 25);
             this.cboGasStore.Name = "cboGasStore";
-            this.cboGasStore.Size = new System.Drawing.Size(252, 21);
-            this.cboGasStore.TabIndex = 2;
+            this.cboGasStore.Size = new System.Drawing.Size(483, 21);
+            this.cboGasStore.TabIndex = 1;
+            this.cboGasStore.SelectedIndexChanged += new System.EventHandler(this.cboGasStore_SelectedIndexChanged);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(256, 29);
+            this.label6.Location = new System.Drawing.Point(25, 28);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 13);
+            this.label6.Size = new System.Drawing.Size(29, 13);
             this.label6.TabIndex = 11;
-            this.label6.Text = "Thuộc Kho: ";
+            this.label6.Text = "Kho:";
             // 
             // btnReset
             // 
             this.btnReset.Enabled = false;
-            this.btnReset.Location = new System.Drawing.Point(488, 119);
+            this.btnReset.Location = new System.Drawing.Point(488, 149);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(92, 23);
             this.btnReset.TabIndex = 6;
@@ -116,7 +117,7 @@
             // txtMacAddress
             // 
             this.txtMacAddress.Enabled = false;
-            this.txtMacAddress.Location = new System.Drawing.Point(100, 121);
+            this.txtMacAddress.Location = new System.Drawing.Point(100, 151);
             this.txtMacAddress.Name = "txtMacAddress";
             this.txtMacAddress.Size = new System.Drawing.Size(382, 20);
             this.txtMacAddress.TabIndex = 5;
@@ -124,7 +125,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 123);
+            this.label5.Location = new System.Drawing.Point(25, 153);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 13);
             this.label5.TabIndex = 8;
@@ -133,7 +134,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 164);
+            this.label4.Location = new System.Drawing.Point(25, 194);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 7;
@@ -141,7 +142,7 @@
             // 
             // txtGSDes
             // 
-            this.txtGSDes.Location = new System.Drawing.Point(100, 154);
+            this.txtGSDes.Location = new System.Drawing.Point(100, 184);
             this.txtGSDes.Multiline = true;
             this.txtGSDes.Name = "txtGSDes";
             this.txtGSDes.Size = new System.Drawing.Size(480, 35);
@@ -149,7 +150,7 @@
             // 
             // txtGSAddress
             // 
-            this.txtGSAddress.Location = new System.Drawing.Point(100, 85);
+            this.txtGSAddress.Location = new System.Drawing.Point(100, 115);
             this.txtGSAddress.Name = "txtGSAddress";
             this.txtGSAddress.Size = new System.Drawing.Size(480, 20);
             this.txtGSAddress.TabIndex = 4;
@@ -157,22 +158,22 @@
             // 
             // txtGSName
             // 
-            this.txtGSName.Location = new System.Drawing.Point(100, 56);
+            this.txtGSName.Location = new System.Drawing.Point(100, 86);
             this.txtGSName.Name = "txtGSName";
             this.txtGSName.Size = new System.Drawing.Size(480, 20);
             this.txtGSName.TabIndex = 3;
             // 
             // txtGSCode
             // 
-            this.txtGSCode.Location = new System.Drawing.Point(100, 26);
+            this.txtGSCode.Location = new System.Drawing.Point(100, 56);
             this.txtGSCode.Name = "txtGSCode";
-            this.txtGSCode.Size = new System.Drawing.Size(139, 20);
-            this.txtGSCode.TabIndex = 1;
+            this.txtGSCode.Size = new System.Drawing.Size(122, 20);
+            this.txtGSCode.TabIndex = 2;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 87);
+            this.label3.Location = new System.Drawing.Point(25, 117);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 13);
             this.label3.TabIndex = 2;
@@ -181,7 +182,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 61);
+            this.label2.Location = new System.Drawing.Point(25, 91);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 13);
             this.label2.TabIndex = 1;
@@ -190,7 +191,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 26);
+            this.label1.Location = new System.Drawing.Point(25, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(39, 13);
             this.label1.TabIndex = 0;
@@ -209,12 +210,12 @@
             this.colAddress});
             this.dgvGSList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvGSList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dgvGSList.Location = new System.Drawing.Point(0, 199);
+            this.dgvGSList.Location = new System.Drawing.Point(0, 235);
             this.dgvGSList.MultiSelect = false;
             this.dgvGSList.Name = "dgvGSList";
             this.dgvGSList.RowHeadersVisible = false;
             this.dgvGSList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGSList.Size = new System.Drawing.Size(621, 259);
+            this.dgvGSList.Size = new System.Drawing.Size(621, 223);
             this.dgvGSList.TabIndex = 1;
             this.dgvGSList.SelectionChanged += new System.EventHandler(this.dgvGSList_SelectionChanged);
             // 

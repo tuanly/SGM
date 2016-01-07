@@ -10,6 +10,7 @@ namespace SGM_Core.Utils
         public static string SGM_WARNING = "Lưu ý";
         public static string SGM_QUESTION = "Xác nhận";
         public static string SGM_INFO = "Thông báo";
+        public static string SGM_ALL = "Tất cả";
 
         public static string APP_NO_INTERNET_CONNECTION = "Lỗi, không có kết nối mạng!";
         public static string APP_SERVICE_TIME_OUT = "Lỗi, quá thời gian xử lý!";

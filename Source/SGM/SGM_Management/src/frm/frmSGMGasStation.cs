@@ -43,7 +43,7 @@ namespace SGM_Management
         private void UpdateStateControls(bool isEditMode)
         {          
             dgvGSList.Enabled = !isEditMode;
-            cboGasStore.Enabled = isEditMode;
+            //cboGasStore.Enabled = isEditMode;
             txtGSCode.Enabled = isEditMode;
             txtGSName.Enabled = isEditMode;
             txtGSDes.Enabled = isEditMode;
@@ -57,7 +57,7 @@ namespace SGM_Management
         private void frmGasStation_Load(object sender, EventArgs e)
         {
             LoadGasStoreList();
-            LoadGasStationList();
+            
             UpdateStateControls(false);
         }
         private void LoadGasStoreList()
@@ -78,10 +78,10 @@ namespace SGM_Management
                     DataTable tblResult = ds.Tables[0];
                     if (tblResult.Rows.Count > 0)
                     {
-                        ComboboxItem itemAll = new ComboboxItem();
-                        itemAll.Text = "";
-                        itemAll.Value = "";
-                        cboGasStore.Items.Add(itemAll);
+                        //ComboboxItem itemAll = new ComboboxItem();
+                        //itemAll.Text = SGMText.SGM_ALL;
+                        //itemAll.Value = "";
+                        //cboGasStore.Items.Add(itemAll);
                         foreach (DataRow dr in tblResult.Rows)
                         {
                             ComboboxItem item = new ComboboxItem();
@@ -90,7 +90,12 @@ namespace SGM_Management
                             cboGasStore.Items.Add(item);
                             
                         }
-                        cboGasStore.SelectedIndex = 0;
+                        if (cboGasStore.Items.Count > 0)
+                        {
+                            cboGasStore.SelectedIndex = 0;
+                           
+                            
+                        }
                     }
                 }
                 else
@@ -104,7 +109,10 @@ namespace SGM_Management
             Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
             () =>
             {
-                return m_service.SGMManager_GetGasStation(null);
+                //if (m_stGasStoreID.Equals(""))
+                //    return m_service.SGMManager_GetGasStation(null, null);
+                //else
+                    return m_service.SGMManager_GetGasStation(null, m_stGasStoreID);
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
@@ -171,7 +179,7 @@ namespace SGM_Management
                 }, SynchronizationContext.Current);
 
             }
-            if (cboGasStore.Text.Equals(""))
+            if (cboGasStore.Items.Count <= 0)
             {
                 errProvider.SetError(cboGasStore, SGMText.GASSTATION_DATA_INPUT_GS_GASTORE_ERR);
                 bValidate = false;
@@ -196,7 +204,7 @@ namespace SGM_Management
                 m_iCurrentGSIndex = dgvGSList.SelectedRows[0].Index;
                 if (m_iCurrentGSIndex < m_dsGasStation.Tables[0].Rows.Count)
                 {
-                    updateComboBox(cboGasStore , m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTORE_ID"].ToString());
+                    //updateComboBox(cboGasStore , m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTORE_ID"].ToString());
                     txtGSCode.Text = m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTATION_ID"].ToString();
                     txtGSName.Text = m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTATION_NAME"].ToString();
                     txtGSAddress.Text = m_dsGasStation.Tables[0].Rows[m_iCurrentGSIndex]["GASSTATION_ADDRESS"].ToString();
@@ -236,7 +244,8 @@ namespace SGM_Management
             txtGSAddress.Text = "";
             txtGSDes.Text = "";
             txtMacAddress.Text = "";
-            cboGasStore.SelectedText = "";
+            //if (cboGasStore.Items.Count > 0)
+            //    cboGasStore.SelectedIndex = 0;
         }
 
         private void dgvGSList_SelectionChanged(object sender, EventArgs e)
@@ -449,6 +458,16 @@ namespace SGM_Management
         private void txtGSAddress_TextChanged(object sender, EventArgs e)
         {
 
+        }
+        private string m_stGasStoreID = "";
+        private void cboGasStore_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            m_stGasStoreID = ((ComboboxItem)cboGasStore.SelectedItem).Value.ToString();
+            if (!btnCancel.Enabled)
+            {
+                
+                LoadGasStationList();
+            }
         }
     }
 }

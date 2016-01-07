@@ -197,9 +197,9 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string SGMManager_GetGasStation(string stGasStationID)
+    public string SGMManager_GetGasStation(string stGasStationID, string stGasStoreID)
     {
-        return m_bllGasStationService.GetGasStation(stGasStationID);
+        return m_bllGasStationService.GetGasStation(stGasStationID, stGasStoreID);
     }
 
     [WebMethod]

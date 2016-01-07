@@ -30,6 +30,34 @@ namespace SGM.ServicesCore.DAL
             return ds;
         }
 
+        public DataTransfer GetGasStationsOfStore(string stGasStoreID)
+        {
+
+            DataTransfer dataResult = new DataTransfer();
+            try
+            {
+                string query = string.Format("SELECT * FROM GAS_STATION WHERE GASSTORE_ID = @GASSTORE_ID");
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+                sqlParameters[0] = new SqlParameter("@GASSTORE_ID", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(stGasStoreID);
+                DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
+                if (tblResult.Rows.Count > 0)
+                {
+                    DataSet ds = new DataSet();
+                    ds.Tables.Add(tblResult.Copy());
+                    dataResult.ResponseDataSet = ds;
+                }
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_SUCCESS;
+            }
+            catch (Exception ex)
+            {
+                dataResult.ResponseCode = DataTransfer.RESPONSE_CODE_FAIL;
+                dataResult.ResponseErrorMsg = SGMText.GASSTATION_GET_GS_ERR;
+                dataResult.ResponseErrorMsgDetail = ex.Message + " : " + ex.StackTrace;
+            }
+
+            return dataResult;
+        }
         public DataTransfer GetGasStation(string stGasStationID)
         {
             DataTransfer dataResult = new DataTransfer();
