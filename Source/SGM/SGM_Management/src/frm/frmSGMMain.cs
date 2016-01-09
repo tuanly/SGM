@@ -41,6 +41,7 @@ namespace SGM_Management
                 frmConfig.Close();
             }
             SGM_WaitingIdicator.WaitingForm.waitingFrm.SetParentForm(this);
+            
         }
 
         private void showFrom(Form frm)

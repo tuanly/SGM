@@ -571,7 +571,7 @@ namespace OutlookStyleControls
             br.Dispose();
 
             if (text.Length > 0)
-                graphics.DrawString(this.Text, parent.Font, Brushes.Black, 50, y + this.Height / 2 - parent.Font.Height / 2);
+                graphics.DrawString(this.Text, parent.Font, Brushes.Navy, 50, y + this.Height / 2 - parent.Font.Height / 2);
 
             if (image != null)
             {
