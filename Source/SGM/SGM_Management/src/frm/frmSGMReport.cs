@@ -74,7 +74,7 @@ namespace SGM_Management
                 Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
                 () =>
                 {
-                    return m_service.SGMSaleGas_GetSaleGasReport(gasStationId, date_begin, date_end, txtSaleGasCardID.Text.Trim());
+                    return m_service.SGMSaleGas_GetSaleGasReport(m_stGasStoreID,gasStationId, date_begin, date_end, txtSaleGasCardID.Text.Trim());
                 });
                 
                 SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
@@ -90,11 +90,11 @@ namespace SGM_Management
 
                             String tableName = dataResponse.ResponseDataSet.Tables[0].TableName;
                             DataTable data = dataResponse.ResponseDataSet.Tables[0];
-                           
+
                             rptSaleGasReport = new rptSGMSaleGas();
                             dsSaleGas = new dsSGMSaleGas();
                             DataTable dtSaleGasTable = dsSaleGas.SGMSaleGas;
-                           
+
                             for (int i = 0; i < data.Rows.Count; i++)
                             {
 
@@ -102,30 +102,34 @@ namespace SGM_Management
                                 row["ID"] = (i + 1);
                                 row["CUSTOMER_ID"] = data.Rows[i]["CUS_ID"];
                                 row["CUSTOMER_NAME"] = data.Rows[i]["CUS_NAME"];
-                                row["BUY_LIT"] = 
+                                row["BUY_LIT"] =
                                 row["BUY_MONEY"] = Int32.Parse(data.Rows[i]["SALEGAS_CARD_MONEY_BEFORE"].ToString()) - Int32.Parse(data.Rows[i]["SALEGAS_CARD_MONEY_AFTER"].ToString());
                                 row["BUY_DATE"] = data.Rows[i]["SALEGAS_DATE"];
                                 row["GAS_SATION_NAME"] = data.Rows[i]["GASSTATION_NAME"];
                                 dtSaleGasTable.Rows.Add(row);
                             }
-                         
+
                             rptSaleGasReport.Refresh();
                             rptSaleGasReport.SetDataSource(dsSaleGas);
-                           
+
                             rptSaleGasReport.SetParameterValue("DateBegin", dtpSaleGasBegin.Value);
-                            rptSaleGasReport.SetParameterValue("DateEnd", dtpSaleGasEnd.Value);                            
+                            rptSaleGasReport.SetParameterValue("DateEnd", dtpSaleGasEnd.Value);
 
                             crvSaleGas.ReportSource = rptSaleGasReport;
-                            HideTabs(crvSaleGas);
+                            
                         }
                         else
+                        {
+                            crvSaleGas.ReportSource = null;
                             frmMsg.ShowMsg(SGMText.SGM_INFO, SGMText.REPORT_NO_DATA, SGMMessageType.SGM_MESSAGE_TYPE_INFO);
-
+                        }
                     }
                     else
                     {
+                        crvSaleGas.ReportSource = null;
                         frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsg, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
                     }
+                    HideTabs(crvSaleGas);
                 }, SynchronizationContext.Current);
             }
         }
@@ -227,17 +231,56 @@ namespace SGM_Management
 
         private void frmSGMReport_Load(object sender, EventArgs e)
         {
-            LoadGasStationList();
+            LoadGasStoreList();
+            //LoadGasStationList();
             LoadCustomerList();
         }
 
+        private void LoadGasStoreList()
+        {
+            cboGasStation.Items.Clear();
+            Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
+            () =>
+            {
+                return m_service.SGMManager_GetGasStoreList();
+            });
+            SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
+            {
+                String stResponse = task.Result as String;
+                DataTransfer dataResponse = JSonHelper.ConvertJSonToObject(stResponse);
+                if (dataResponse.ResponseCode == DataTransfer.RESPONSE_CODE_SUCCESS)
+                {
+                    DataSet ds = dataResponse.ResponseDataSet;
+                    DataTable tblResult = ds.Tables[0];
+                    if (tblResult.Rows.Count > 0)
+                    {
+                        ComboboxItem itemAll = new ComboboxItem();
+                        itemAll.Text = SGMText.REPORT_ALL;
+                        itemAll.Value = "";
+                        cboGasStore.Items.Add(itemAll);
+                        foreach (DataRow dr in tblResult.Rows)
+                        {
+                            ComboboxItem item = new ComboboxItem();
+                            item.Text = dr["GASSTORE_NAME"].ToString();
+                            item.Value = dr["GASSTORE_ID"].ToString();
+                            cboGasStore.Items.Add(item);
+                        }
+                        cboGasStore.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    frmMsg.ShowMsg(SGMText.SGM_ERROR, dataResponse.ResponseErrorMsgDetail, SGMMessageType.SGM_MESSAGE_TYPE_ERROR);
+                }
+            }, SynchronizationContext.Current);
+        }
         private void LoadGasStationList()
         {
             cboGasStation.Items.Clear();
             Task<String> task = SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterTask(
             () =>
             {
-                return m_service.SGMSaleGas_GetGasStationList();
+                return m_service.SGMSaleGas_GetGasStationList(m_stGasStoreID);
             });
             SGM_WaitingIdicator.WaitingForm.waitingFrm.progressReporter.RegisterContinuation(task, () =>
             {
@@ -269,7 +312,6 @@ namespace SGM_Management
                 }
             }, SynchronizationContext.Current);
         }
-
         private void LoadCustomerList()
         {
             cboRechargeCardCustomer.Items.Clear();
@@ -328,6 +370,12 @@ namespace SGM_Management
                     }
                 }
             }
+        }
+        private string m_stGasStoreID = "";
+        private void cboGasStore_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            m_stGasStoreID = ((ComboboxItem)cboGasStore.SelectedItem).Value.ToString();
+            LoadGasStationList();
         }
     }
 }

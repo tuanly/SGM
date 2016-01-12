@@ -15,7 +15,7 @@ namespace SGM_Management.SGM_Service {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SGM_Service.ServiceSoap")]
     public interface ServiceSoap {
         
-        // CODEGEN: Generating message contract since element name SGMSaleGas_GetGasStationListResult from namespace http://tempuri.org/ is not marked nillable
+        // CODEGEN: Generating message contract since element name stGasStoreID from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMSaleGas_GetGasStationList", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListResponse SGMSaleGas_GetGasStationList(SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListRequest request);
         
@@ -35,7 +35,7 @@ namespace SGM_Management.SGM_Service {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMSaleGas_GasBuying", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMSaleGas_GasBuyingResponse SGMSaleGas_GasBuying(SGM_Management.SGM_Service.SGMSaleGas_GasBuyingRequest request);
         
-        // CODEGEN: Generating message contract since element name stGasStationID from namespace http://tempuri.org/ is not marked nillable
+        // CODEGEN: Generating message contract since element name stGasStoreID from namespace http://tempuri.org/ is not marked nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SGMSaleGas_GetSaleGasReport", ReplyAction="*")]
         SGM_Management.SGM_Service.SGMSaleGas_GetSaleGasReportResponse SGMSaleGas_GetSaleGasReport(SGM_Management.SGM_Service.SGMSaleGas_GetSaleGasReportRequest request);
         
@@ -188,10 +188,17 @@ namespace SGM_Management.SGM_Service {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute()]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://tempuri.org/")]
     public partial class SGMSaleGas_GetGasStationListRequestBody {
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stGasStoreID;
+        
         public SGMSaleGas_GetGasStationListRequestBody() {
+        }
+        
+        public SGMSaleGas_GetGasStationListRequestBody(string stGasStoreID) {
+            this.stGasStoreID = stGasStoreID;
         }
     }
     
@@ -533,21 +540,25 @@ namespace SGM_Management.SGM_Service {
     public partial class SGMSaleGas_GetSaleGasReportRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string stGasStoreID;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
         public string stGasStationID;
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
         public System.DateTime dateStart;
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
         public System.DateTime dateEnd;
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
         public string stCardID;
         
         public SGMSaleGas_GetSaleGasReportRequestBody() {
         }
         
-        public SGMSaleGas_GetSaleGasReportRequestBody(string stGasStationID, System.DateTime dateStart, System.DateTime dateEnd, string stCardID) {
+        public SGMSaleGas_GetSaleGasReportRequestBody(string stGasStoreID, string stGasStationID, System.DateTime dateStart, System.DateTime dateEnd, string stCardID) {
+            this.stGasStoreID = stGasStoreID;
             this.stGasStationID = stGasStationID;
             this.dateStart = dateStart;
             this.dateEnd = dateEnd;
@@ -2847,9 +2858,10 @@ namespace SGM_Management.SGM_Service {
             return base.Channel.SGMSaleGas_GetGasStationList(request);
         }
         
-        public string SGMSaleGas_GetGasStationList() {
+        public string SGMSaleGas_GetGasStationList(string stGasStoreID) {
             SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListRequest inValue = new SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListRequest();
             inValue.Body = new SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListRequestBody();
+            inValue.Body.stGasStoreID = stGasStoreID;
             SGM_Management.SGM_Service.SGMSaleGas_GetGasStationListResponse retVal = ((SGM_Management.SGM_Service.ServiceSoap)(this)).SGMSaleGas_GetGasStationList(inValue);
             return retVal.Body.SGMSaleGas_GetGasStationListResult;
         }
@@ -2913,9 +2925,10 @@ namespace SGM_Management.SGM_Service {
             return base.Channel.SGMSaleGas_GetSaleGasReport(request);
         }
         
-        public string SGMSaleGas_GetSaleGasReport(string stGasStationID, System.DateTime dateStart, System.DateTime dateEnd, string stCardID) {
+        public string SGMSaleGas_GetSaleGasReport(string stGasStoreID, string stGasStationID, System.DateTime dateStart, System.DateTime dateEnd, string stCardID) {
             SGM_Management.SGM_Service.SGMSaleGas_GetSaleGasReportRequest inValue = new SGM_Management.SGM_Service.SGMSaleGas_GetSaleGasReportRequest();
             inValue.Body = new SGM_Management.SGM_Service.SGMSaleGas_GetSaleGasReportRequestBody();
+            inValue.Body.stGasStoreID = stGasStoreID;
             inValue.Body.stGasStationID = stGasStationID;
             inValue.Body.dateStart = dateStart;
             inValue.Body.dateEnd = dateEnd;

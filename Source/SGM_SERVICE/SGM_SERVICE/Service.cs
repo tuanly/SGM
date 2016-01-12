@@ -33,9 +33,9 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string SGMSaleGas_GetGasStationList()
+    public string SGMSaleGas_GetGasStationList(string stGasStoreID)
     {
-        return m_bllReportService.GetGasStationList();
+        return m_bllReportService.GetGasStationList(stGasStoreID);
     }
       
     [WebMethod]
@@ -63,9 +63,9 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string SGMSaleGas_GetSaleGasReport(string stGasStationID, DateTime dateStart, DateTime dateEnd, string stCardID)
+    public string SGMSaleGas_GetSaleGasReport(string stGasStoreID, string stGasStationID, DateTime dateStart, DateTime dateEnd, string stCardID)
     {
-        return m_bllSaleGasService.GetSaleGasReport(stGasStationID, dateStart, dateEnd, stCardID);
+        return m_bllSaleGasService.GetSaleGasReport(stGasStoreID, stGasStationID, dateStart, dateEnd, stCardID);
     }
 
     [WebMethod]

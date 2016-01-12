@@ -17,11 +17,23 @@ namespace SGM.ServicesCore.DAL
             m_dbConnection = new DBConnetionDAL();
         }
 
-        public DataSet GetGasStationList()
+        public DataSet GetGasStationList(string stGasStoreID)
         {
             DataSet ds = null;
-            string query = string.Format("SELECT GASSTATION_ID, GASSTATION_NAME FROM GAS_STATION");
-            DataTable tblResult = m_dbConnection.ExecuteSelectQuery(query, null);
+            string query = string.Format("SELECT GASSTATION_ID, GASSTATION_NAME FROM GAS_STATION ");
+            DataTable tblResult = null;
+            if (stGasStoreID == null || stGasStoreID.Equals(""))
+            {                
+                tblResult = m_dbConnection.ExecuteSelectQuery(query, null);
+            }
+            else
+            {
+                query += "WHERE GASSTORE_ID = @GASSTORE_ID";
+                SqlParameter[] sqlParameters = new SqlParameter[1];
+                sqlParameters[0] = new SqlParameter("@GASSTORE_ID", SqlDbType.NVarChar);
+                sqlParameters[0].Value = Convert.ToString(stGasStoreID);
+                tblResult = m_dbConnection.ExecuteSelectQuery(query, sqlParameters);
+            }
             if (tblResult.Rows.Count > 0)
             {
                 ds = new DataSet();

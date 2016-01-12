@@ -26,3 +26,13 @@ C:\Users\tuanly\Dropbox\MySoftware\SaleGasManager\trunk\Source\SGM\SGM_WaitingId
 C:\Users\tuanly\Dropbox\MySoftware\SaleGasManager\trunk\Source\SGM\SGM_WaitingIdicator\obj\Debug\SGM_WaitingIdicator.csproj.GenerateResource.Cache
 C:\Users\tuanly\Dropbox\MySoftware\SaleGasManager\trunk\Source\SGM\SGM_WaitingIdicator\obj\Debug\WaitingIdicator.dll
 C:\Users\tuanly\Dropbox\MySoftware\SaleGasManager\trunk\Source\SGM\SGM_WaitingIdicator\obj\Debug\WaitingIdicator.pdb
+F:\New folder\Source\SGM\SGM_WaitingIdicator\bin\Debug\WaitingIdicator.dll
+F:\New folder\Source\SGM\SGM_WaitingIdicator\bin\Debug\WaitingIdicator.pdb
+F:\New folder\Source\SGM\SGM_WaitingIdicator\bin\Debug\SGM_DTO.dll
+F:\New folder\Source\SGM\SGM_WaitingIdicator\bin\Debug\SGM_DTO.pdb
+F:\New folder\Source\SGM\SGM_WaitingIdicator\obj\Debug\SGM_WaitingIdicator.csprojResolveAssemblyReference.cache
+F:\New folder\Source\SGM\SGM_WaitingIdicator\obj\Debug\WaitingIdicator.Properties.Resources.resources
+F:\New folder\Source\SGM\SGM_WaitingIdicator\obj\Debug\SGM_WaitingIdicator.WaitingForm.resources
+F:\New folder\Source\SGM\SGM_WaitingIdicator\obj\Debug\SGM_WaitingIdicator.csproj.GenerateResource.Cache
+F:\New folder\Source\SGM\SGM_WaitingIdicator\obj\Debug\WaitingIdicator.dll
+F:\New folder\Source\SGM\SGM_WaitingIdicator\obj\Debug\WaitingIdicator.pdb

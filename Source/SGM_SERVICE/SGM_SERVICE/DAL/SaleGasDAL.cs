@@ -141,18 +141,23 @@ namespace SGM.ServicesCore.DAL
             return result;
         }
 
-        public DataTransfer GetSaleGasReport(string stGasStationID, DateTime dateStart, DateTime dateEnd, string stCardID)
+        public DataTransfer GetSaleGasReport(string stGasStoreID, string stGasStationID, DateTime dateStart, DateTime dateEnd, string stCardID)
         {
             DataTransfer res = new DataTransfer();
             try
             {
                 int numParam = 2;
                 string query = string.Format("SELECT * FROM SALE_GAS, GAS_STATION, CARD, CUSTOMER WHERE SALEGAS_DATE BETWEEN @STARTDATE AND @ENDDATE AND GAS_STATION.GASSTATION_ID = SALE_GAS.GASSTATION_ID AND SALE_GAS.CARD_ID = CARD.CARD_ID AND CARD.CUS_ID = CUSTOMER.CUS_ID ");
-                
+
                 if (!stGasStationID.Equals(""))
                 {
                     numParam++;
                     query += string.Format(" AND GAS_STATION.GASSTATION_ID = @GASSTATION_ID");
+                }
+                else if (!stGasStoreID.Equals(""))
+                {
+                    numParam++;
+                    query += string.Format(" AND GAS_STATION.GASSTORE_ID = @GASSTORE_ID");
                 }
                 if (!stCardID.Trim().Equals(""))
                 {
@@ -172,6 +177,11 @@ namespace SGM.ServicesCore.DAL
                         sqlParameters[2] = new SqlParameter("@GASSTATION_ID", SqlDbType.NVarChar);
                         sqlParameters[2].Value = stGasStationID;
                     }
+                    else if (!stGasStoreID.Equals(""))
+                    {
+                        sqlParameters[2] = new SqlParameter("@GASSTORE_ID", SqlDbType.NVarChar);
+                        sqlParameters[2].Value = stGasStoreID;
+                    }
                     else
                     {
                         sqlParameters[2] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
@@ -180,8 +190,16 @@ namespace SGM.ServicesCore.DAL
                 }
                 else if (numParam == 4)
                 {
-                    sqlParameters[2] = new SqlParameter("@GASSTATION_ID", SqlDbType.NVarChar);
-                    sqlParameters[2].Value = stGasStationID;
+                    if (!stGasStationID.Equals(""))
+                    {
+                        sqlParameters[2] = new SqlParameter("@GASSTATION_ID", SqlDbType.NVarChar);
+                        sqlParameters[2].Value = stGasStationID;
+                    }
+                    else
+                    {
+                        sqlParameters[2] = new SqlParameter("@GASSTORE_ID", SqlDbType.NVarChar);
+                        sqlParameters[2].Value = stGasStoreID;
+                    }
                     sqlParameters[3] = new SqlParameter("@CARD_ID", SqlDbType.NVarChar);
                     sqlParameters[3].Value = stCardID;
                 }

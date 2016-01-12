@@ -11,11 +11,11 @@ namespace SGM.ServicesCore.BLL
 {
     public class ReportServiceBLL
     {
-        public string GetGasStationList()
+        public string GetGasStationList(string stGasStoreID)
         {
             GasStationDAL dalGasStation = new GasStationDAL();
             DataTransfer response = new DataTransfer();
-            DataSet ds = dalGasStation.GetGasStationList();
+            DataSet ds = dalGasStation.GetGasStationList(stGasStoreID);
             if (ds != null)
             {
                 response.ResponseDataSet = ds;

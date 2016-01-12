@@ -55,6 +55,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.cboRechargeCardCustomer = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cboGasStore = new System.Windows.Forms.ComboBox();
             this.tabSGMHistory.SuspendLayout();
             this.subTabSGMSaleGas.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -92,19 +94,21 @@
             this.crvSaleGas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.crvSaleGas.Cursor = System.Windows.Forms.Cursors.Default;
             this.crvSaleGas.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.crvSaleGas.Location = new System.Drawing.Point(3, 164);
+            this.crvSaleGas.Location = new System.Drawing.Point(3, 206);
             this.crvSaleGas.Name = "crvSaleGas";
             this.crvSaleGas.ReuseParameterValuesOnRefresh = true;
             this.crvSaleGas.ShowGroupTreeButton = false;
             this.crvSaleGas.ShowLogo = false;
             this.crvSaleGas.ShowParameterPanelButton = false;
             this.crvSaleGas.ShowRefreshButton = false;
-            this.crvSaleGas.Size = new System.Drawing.Size(747, 466);
+            this.crvSaleGas.Size = new System.Drawing.Size(747, 424);
             this.crvSaleGas.TabIndex = 1;
             this.crvSaleGas.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cboGasStore);
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.btnSaleGasView);
             this.groupBox1.Controls.Add(this.txtSaleGasCardID);
             this.groupBox1.Controls.Add(this.label4);
@@ -117,14 +121,14 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(747, 161);
+            this.groupBox1.Size = new System.Drawing.Size(747, 203);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Xem giao dịch: ";
             // 
             // btnSaleGasView
             // 
-            this.btnSaleGasView.Location = new System.Drawing.Point(336, 126);
+            this.btnSaleGasView.Location = new System.Drawing.Point(336, 165);
             this.btnSaleGasView.Name = "btnSaleGasView";
             this.btnSaleGasView.Size = new System.Drawing.Size(75, 23);
             this.btnSaleGasView.TabIndex = 8;
@@ -134,7 +138,7 @@
             // 
             // txtSaleGasCardID
             // 
-            this.txtSaleGasCardID.Location = new System.Drawing.Point(90, 94);
+            this.txtSaleGasCardID.Location = new System.Drawing.Point(90, 133);
             this.txtSaleGasCardID.Name = "txtSaleGasCardID";
             this.txtSaleGasCardID.Size = new System.Drawing.Size(264, 20);
             this.txtSaleGasCardID.TabIndex = 7;
@@ -143,7 +147,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 97);
+            this.label4.Location = new System.Drawing.Point(23, 136);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 6;
@@ -153,7 +157,7 @@
             // 
             this.dtpSaleGasEnd.CustomFormat = "dd/MM/yyyy";
             this.dtpSaleGasEnd.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpSaleGasEnd.Location = new System.Drawing.Point(256, 61);
+            this.dtpSaleGasEnd.Location = new System.Drawing.Point(256, 100);
             this.dtpSaleGasEnd.Name = "dtpSaleGasEnd";
             this.dtpSaleGasEnd.Size = new System.Drawing.Size(98, 20);
             this.dtpSaleGasEnd.TabIndex = 5;
@@ -161,7 +165,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(194, 64);
+            this.label3.Location = new System.Drawing.Point(194, 103);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 4;
@@ -171,7 +175,7 @@
             // 
             this.dtpSaleGasBegin.CustomFormat = "dd/MM/yyyy";
             this.dtpSaleGasBegin.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpSaleGasBegin.Location = new System.Drawing.Point(90, 61);
+            this.dtpSaleGasBegin.Location = new System.Drawing.Point(90, 100);
             this.dtpSaleGasBegin.Name = "dtpSaleGasBegin";
             this.dtpSaleGasBegin.Size = new System.Drawing.Size(98, 20);
             this.dtpSaleGasBegin.TabIndex = 3;
@@ -179,7 +183,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 64);
+            this.label2.Location = new System.Drawing.Point(23, 103);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 13);
             this.label2.TabIndex = 2;
@@ -189,7 +193,7 @@
             // 
             this.cboGasStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboGasStation.FormattingEnabled = true;
-            this.cboGasStation.Location = new System.Drawing.Point(90, 23);
+            this.cboGasStation.Location = new System.Drawing.Point(90, 62);
             this.cboGasStation.Name = "cboGasStation";
             this.cboGasStation.Size = new System.Drawing.Size(639, 21);
             this.cboGasStation.TabIndex = 1;
@@ -197,7 +201,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 26);
+            this.label1.Location = new System.Drawing.Point(22, 65);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 0;
@@ -333,6 +337,25 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Khách hàng:";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(23, 30);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(32, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Kho :";
+            // 
+            // cboGasStore
+            // 
+            this.cboGasStore.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboGasStore.FormattingEnabled = true;
+            this.cboGasStore.Location = new System.Drawing.Point(89, 27);
+            this.cboGasStore.Name = "cboGasStore";
+            this.cboGasStore.Size = new System.Drawing.Size(639, 21);
+            this.cboGasStore.TabIndex = 10;
+            this.cboGasStore.SelectedIndexChanged += new System.EventHandler(this.cboGasStore_SelectedIndexChanged);
+            // 
             // frmSGMReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -383,5 +406,7 @@
         private System.Windows.Forms.Label label8;
         private Microsoft.Reporting.WinForms.ReportViewer cardReportViewer;
         private CrystalDecisions.Windows.Forms.CrystalReportViewer crvSaleGas;
+        private System.Windows.Forms.ComboBox cboGasStore;
+        private System.Windows.Forms.Label label9;
     }
 }
