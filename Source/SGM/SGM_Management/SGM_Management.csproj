@@ -50,6 +50,79 @@
     <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
       <Private>True</Private>
     </Reference>
+    <Reference Include="DevExpress.BonusSkins.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.BonusSkins.v15.1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Charts.v15.1.Core, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.Charts.v15.1.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.Data.v15.1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.DevAV.v15.1.Data, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.DevAV.v15.1.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.DXCore.Controls.Data.v6.3, Version=15.1.5.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.DXCore.Controls.Data.v6.3.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.DXCore.Controls.Utils.v6.3, Version=15.1.5.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.DXCore.Controls.Utils.v6.3.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Images.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.Images.v15.1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Map.v15.1.Core, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.Map.v15.1.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.Mvvm.v15.1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.Utils.v15.1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraBars.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.XtraBars.v15.1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.XtraEditors.v15.1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraLayout.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.XtraLayout.v15.1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraMap.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.XtraMap.v15.1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraNavBar.v15.1, Version=15.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\DevExpress.XtraNavBar.v15.1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304">
       <Private>True</Private>
     </Reference>
@@ -159,6 +232,12 @@
     <Compile Include="src\frm\frmSGMUpdatePrice.Designer.cs">
       <DependentUpon>frmSGMUpdatePrice.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\frm\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\frm\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\report\dsSGMSaleGas.cs">
       <DependentUpon>dsSGMSaleGas.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -175,6 +254,7 @@
       <SubType>Component</SubType>
     </Compile>
     <EmbeddedResource Include="customer_report.rdlc" />
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -219,6 +299,9 @@
     <EmbeddedResource Include="src\frm\frmSGMUpdatePrice.resx">
       <DependentUpon>frmSGMUpdatePrice.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="src\frm\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\report\rptSGMSaleGas.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptSGMSaleGas.cs</LastGenOutput>
@@ -234,6 +317,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Service References\SGM_Service\Service.wsdl" />
+    <EmbeddedResource Include="SkinData\hybridapp.blob" />
     <None Include="src\report\dsSGMSaleGas.xsc">
       <DependentUpon>dsSGMSaleGas.xsd</DependentUpon>
     </None>
@@ -293,6 +377,7 @@
     <None Include="app_data\sgm_warning.png" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="SkinData\hybridapp.skin.xml" />
     <None Include="Resources\sgm_error.png" />
     <None Include="Resources\sgm_info.png" />
     <None Include="Resources\sgm_question.png" />
